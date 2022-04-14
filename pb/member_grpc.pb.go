@@ -25,8 +25,17 @@ type MemberServiceClient interface {
 	CreateAvatar(ctx context.Context, in *CreateAvatarPost, opts ...grpc.CallOption) (*AvatarResponse, error)
 	UpdateAvatar(ctx context.Context, in *UpdateAvatarPost, opts ...grpc.CallOption) (*AvatarResponse, error)
 	ChangeAvatarStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*AvatarResponse, error)
+	// 会员
+	Member(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberResponse, error)
+	MemberCards(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*Response, error)
+	MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error)
 	// 会员卡
 	Card(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CardResponse, error)
+	Cards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
+	CardPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*CardPaginationResponse, error)
+	CreateCard(ctx context.Context, in *CreateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
+	UpdateCard(ctx context.Context, in *UpdateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
+	ChangeCardStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CardResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberActivityResponse, error)
 	MemberActivityPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberActivityPaginationResponse, error)
@@ -35,8 +44,10 @@ type MemberServiceClient interface {
 	RefreshMemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MessageResponse, error)
 	DeleteMemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MessageResponse, error)
 	// 活动白名单
+	MemberPreSaleWhiteAddress(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberPreSaleWhiteAddressResponse, error)
 	MemberPreSaleWhiteAddressList(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberPreSaleWhiteAddressListResponse, error)
 	CreateMemberPreSaleWhiteAddress(ctx context.Context, in *CreateMemberPreSaleWhiteAddressPost, opts ...grpc.CallOption) (*MessageResponse, error)
+	UpdateMemberPreSaleWhiteAddress(ctx context.Context, in *UpdateMemberPreSaleWhiteAddressPost, opts ...grpc.CallOption) (*MessageResponse, error)
 }
 
 type memberServiceClient struct {
@@ -101,9 +112,81 @@ func (c *memberServiceClient) ChangeAvatarStatus(ctx context.Context, in *Change
 	return out, nil
 }
 
+func (c *memberServiceClient) Member(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberResponse, error) {
+	out := new(MemberResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/Member", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberCards(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberCards", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error) {
+	out := new(MemberPaginationResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) Card(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CardResponse, error) {
 	out := new(CardResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/Card", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) Cards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error) {
+	out := new(CardsResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/Cards", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) CardPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*CardPaginationResponse, error) {
+	out := new(CardPaginationResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/CardPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) CreateCard(ctx context.Context, in *CreateCardPost, opts ...grpc.CallOption) (*CardResponse, error) {
+	out := new(CardResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/CreateCard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) UpdateCard(ctx context.Context, in *UpdateCardPost, opts ...grpc.CallOption) (*CardResponse, error) {
+	out := new(CardResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/UpdateCard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) ChangeCardStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CardResponse, error) {
+	out := new(CardResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/ChangeCardStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -164,6 +247,15 @@ func (c *memberServiceClient) DeleteMemberActivity(ctx context.Context, in *Info
 	return out, nil
 }
 
+func (c *memberServiceClient) MemberPreSaleWhiteAddress(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberPreSaleWhiteAddressResponse, error) {
+	out := new(MemberPreSaleWhiteAddressResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberPreSaleWhiteAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) MemberPreSaleWhiteAddressList(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberPreSaleWhiteAddressListResponse, error) {
 	out := new(MemberPreSaleWhiteAddressListResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberPreSaleWhiteAddressList", in, out, opts...)
@@ -182,6 +274,15 @@ func (c *memberServiceClient) CreateMemberPreSaleWhiteAddress(ctx context.Contex
 	return out, nil
 }
 
+func (c *memberServiceClient) UpdateMemberPreSaleWhiteAddress(ctx context.Context, in *UpdateMemberPreSaleWhiteAddressPost, opts ...grpc.CallOption) (*MessageResponse, error) {
+	out := new(MessageResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/UpdateMemberPreSaleWhiteAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MemberServiceServer is the server API for MemberService service.
 // All implementations must embed UnimplementedMemberServiceServer
 // for forward compatibility
@@ -193,8 +294,17 @@ type MemberServiceServer interface {
 	CreateAvatar(context.Context, *CreateAvatarPost) (*AvatarResponse, error)
 	UpdateAvatar(context.Context, *UpdateAvatarPost) (*AvatarResponse, error)
 	ChangeAvatarStatus(context.Context, *ChangeStatusPost) (*AvatarResponse, error)
+	// 会员
+	Member(context.Context, *InfoPost) (*MemberResponse, error)
+	MemberCards(context.Context, *InfoPost) (*Response, error)
+	MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error)
 	// 会员卡
 	Card(context.Context, *InfoPost) (*CardResponse, error)
+	Cards(context.Context, *EmptyPost) (*CardsResponse, error)
+	CardPagination(context.Context, *PaginationPost) (*CardPaginationResponse, error)
+	CreateCard(context.Context, *CreateCardPost) (*CardResponse, error)
+	UpdateCard(context.Context, *UpdateCardPost) (*CardResponse, error)
+	ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(context.Context, *InfoPost) (*MemberActivityResponse, error)
 	MemberActivityPagination(context.Context, *PaginationPost) (*MemberActivityPaginationResponse, error)
@@ -203,8 +313,10 @@ type MemberServiceServer interface {
 	RefreshMemberActivity(context.Context, *InfoPost) (*MessageResponse, error)
 	DeleteMemberActivity(context.Context, *InfoPost) (*MessageResponse, error)
 	// 活动白名单
+	MemberPreSaleWhiteAddress(context.Context, *InfoPost) (*MemberPreSaleWhiteAddressResponse, error)
 	MemberPreSaleWhiteAddressList(context.Context, *InfoPost) (*MemberPreSaleWhiteAddressListResponse, error)
 	CreateMemberPreSaleWhiteAddress(context.Context, *CreateMemberPreSaleWhiteAddressPost) (*MessageResponse, error)
+	UpdateMemberPreSaleWhiteAddress(context.Context, *UpdateMemberPreSaleWhiteAddressPost) (*MessageResponse, error)
 	mustEmbedUnimplementedMemberServiceServer()
 }
 
@@ -230,8 +342,32 @@ func (UnimplementedMemberServiceServer) UpdateAvatar(context.Context, *UpdateAva
 func (UnimplementedMemberServiceServer) ChangeAvatarStatus(context.Context, *ChangeStatusPost) (*AvatarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeAvatarStatus not implemented")
 }
+func (UnimplementedMemberServiceServer) Member(context.Context, *InfoPost) (*MemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Member not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberCards(context.Context, *InfoPost) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberCards not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPagination not implemented")
+}
 func (UnimplementedMemberServiceServer) Card(context.Context, *InfoPost) (*CardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Card not implemented")
+}
+func (UnimplementedMemberServiceServer) Cards(context.Context, *EmptyPost) (*CardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cards not implemented")
+}
+func (UnimplementedMemberServiceServer) CardPagination(context.Context, *PaginationPost) (*CardPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CardPagination not implemented")
+}
+func (UnimplementedMemberServiceServer) CreateCard(context.Context, *CreateCardPost) (*CardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCard not implemented")
+}
+func (UnimplementedMemberServiceServer) UpdateCard(context.Context, *UpdateCardPost) (*CardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCard not implemented")
+}
+func (UnimplementedMemberServiceServer) ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeCardStatus not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberActivity(context.Context, *InfoPost) (*MemberActivityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberActivity not implemented")
@@ -251,11 +387,17 @@ func (UnimplementedMemberServiceServer) RefreshMemberActivity(context.Context, *
 func (UnimplementedMemberServiceServer) DeleteMemberActivity(context.Context, *InfoPost) (*MessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberActivity not implemented")
 }
+func (UnimplementedMemberServiceServer) MemberPreSaleWhiteAddress(context.Context, *InfoPost) (*MemberPreSaleWhiteAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPreSaleWhiteAddress not implemented")
+}
 func (UnimplementedMemberServiceServer) MemberPreSaleWhiteAddressList(context.Context, *InfoPost) (*MemberPreSaleWhiteAddressListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberPreSaleWhiteAddressList not implemented")
 }
 func (UnimplementedMemberServiceServer) CreateMemberPreSaleWhiteAddress(context.Context, *CreateMemberPreSaleWhiteAddressPost) (*MessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMemberPreSaleWhiteAddress not implemented")
+}
+func (UnimplementedMemberServiceServer) UpdateMemberPreSaleWhiteAddress(context.Context, *UpdateMemberPreSaleWhiteAddressPost) (*MessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberPreSaleWhiteAddress not implemented")
 }
 func (UnimplementedMemberServiceServer) mustEmbedUnimplementedMemberServiceServer() {}
 
@@ -378,6 +520,60 @@ func _MemberService_ChangeAvatarStatus_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_Member_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).Member(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/Member",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).Member(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberCards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberCards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberCards",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberCards(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MemberService_Card_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
@@ -392,6 +588,96 @@ func _MemberService_Card_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).Card(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_Cards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).Cards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/Cards",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).Cards(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_CardPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).CardPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/CardPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).CardPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_CreateCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCardPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).CreateCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/CreateCard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).CreateCard(ctx, req.(*CreateCardPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_UpdateCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCardPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).UpdateCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/UpdateCard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).UpdateCard(ctx, req.(*UpdateCardPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_ChangeCardStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).ChangeCardStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/ChangeCardStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).ChangeCardStatus(ctx, req.(*ChangeStatusPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -504,6 +790,24 @@ func _MemberService_DeleteMemberActivity_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_MemberPreSaleWhiteAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberPreSaleWhiteAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberPreSaleWhiteAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberPreSaleWhiteAddress(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MemberService_MemberPreSaleWhiteAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
@@ -540,6 +844,24 @@ func _MemberService_CreateMemberPreSaleWhiteAddress_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_UpdateMemberPreSaleWhiteAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberPreSaleWhiteAddressPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).UpdateMemberPreSaleWhiteAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/UpdateMemberPreSaleWhiteAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).UpdateMemberPreSaleWhiteAddress(ctx, req.(*UpdateMemberPreSaleWhiteAddressPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MemberService_ServiceDesc is the grpc.ServiceDesc for MemberService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -572,8 +894,40 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MemberService_ChangeAvatarStatus_Handler,
 		},
 		{
+			MethodName: "Member",
+			Handler:    _MemberService_Member_Handler,
+		},
+		{
+			MethodName: "MemberCards",
+			Handler:    _MemberService_MemberCards_Handler,
+		},
+		{
+			MethodName: "MemberPagination",
+			Handler:    _MemberService_MemberPagination_Handler,
+		},
+		{
 			MethodName: "Card",
 			Handler:    _MemberService_Card_Handler,
+		},
+		{
+			MethodName: "Cards",
+			Handler:    _MemberService_Cards_Handler,
+		},
+		{
+			MethodName: "CardPagination",
+			Handler:    _MemberService_CardPagination_Handler,
+		},
+		{
+			MethodName: "CreateCard",
+			Handler:    _MemberService_CreateCard_Handler,
+		},
+		{
+			MethodName: "UpdateCard",
+			Handler:    _MemberService_UpdateCard_Handler,
+		},
+		{
+			MethodName: "ChangeCardStatus",
+			Handler:    _MemberService_ChangeCardStatus_Handler,
 		},
 		{
 			MethodName: "MemberActivity",
@@ -600,12 +954,20 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MemberService_DeleteMemberActivity_Handler,
 		},
 		{
+			MethodName: "MemberPreSaleWhiteAddress",
+			Handler:    _MemberService_MemberPreSaleWhiteAddress_Handler,
+		},
+		{
 			MethodName: "MemberPreSaleWhiteAddressList",
 			Handler:    _MemberService_MemberPreSaleWhiteAddressList_Handler,
 		},
 		{
 			MethodName: "CreateMemberPreSaleWhiteAddress",
 			Handler:    _MemberService_CreateMemberPreSaleWhiteAddress_Handler,
+		},
+		{
+			MethodName: "UpdateMemberPreSaleWhiteAddress",
+			Handler:    _MemberService_UpdateMemberPreSaleWhiteAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

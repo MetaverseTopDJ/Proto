@@ -10,11 +10,12 @@ option go_package = "./pb;pb";
 message MemberPreSaleWhiteAddress {
   uint64 id          = 1;
   uint64 activity_id = 2;
-  string sign        = 3;
-  string address     = 4;
-  uint64 deleted_at  = 5;
-  uint64 created_at  = 6;
-  uint64 updated_at  = 7;
+  uint64 card_id     = 3;
+  string sign        = 4;
+  string address     = 5;
+  uint64 status      = 6;
+  uint64 created_at  = 7;
+  uint64 updated_at  = 8;
 }
 
 /**************** 请求结构 ****************/
@@ -22,13 +23,38 @@ message MemberPreSaleWhiteAddress {
 // CreateMemberPreSaleWhiteAddressPost 创建预售白名单
 message CreateMemberPreSaleWhiteAddressPost {
   uint64   activity_id      = 1;
-  repeated string addresses = 2;
+  repeated uint64 card_id   = 2;
+  repeated string addresses = 3;
+}
+
+// UpdateMemberPreSaleWhiteAddressPost 更新预售白名单
+message UpdateMemberPreSaleWhiteAddressPost {
+  uint64   id             = 1;
+  uint64   activity_id    = 2;
+  repeated uint64 card_id = 3;
+  string   address        = 5;
 }
 
 /**************** 返回结构 ****************/
 
 // MemberPreSaleWhiteAddressListResponse 返回白名单列表
+message MemberPreSaleWhiteAddressResponse {
+  string                    message = 1;
+  MemberPreSaleWhiteAddress data    = 2;
+}
+
+// MemberPreSaleWhiteAddressListResponse 返回白名单列表
 message MemberPreSaleWhiteAddressListResponse {
   string   message                        = 1;
   repeated MemberPreSaleWhiteAddress data = 2;
+}
+
+// MemberPreSaleWhiteAddressPaginationResponse 返回白名单分页
+message MemberPreSaleWhiteAddressPaginationResponse {
+  message Addresses {
+    repeated MemberPreSaleWhiteAddress list = 1;
+    int64    total                          = 2;
+  }
+  string    message = 1;
+  Addresses data    = 2;
 }

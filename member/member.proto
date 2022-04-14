@@ -13,11 +13,38 @@ import "member/member_pre_sale_white_address.proto";
 
 /**************** 数据结构 ****************/
 
+message Member {
+  uint64 id          = 1;
+  string name        = 2;
+  string description = 3;
+  uint64 avatar_id   = 4;
+  string address     = 5;
+  string invite_code = 6;
+  string email       = 7;
+  string facebook    = 8;
+  string twitter     = 9;
+  string created_at  = 10;
+  string updated_at  = 11;
+}
 
 /**************** 请求结构 ****************/
 
 
 /**************** 返回结构 ****************/
+
+message MemberResponse {
+  Member data    = 1;
+  string message = 2;
+}
+
+message MemberPaginationResponse {
+  message Members {
+    repeated Member list = 1;
+    int64    total       = 2;
+  }
+  Members data    = 1;
+  string  message = 2;
+}
 
 service MemberService {
   // 头像
@@ -27,9 +54,19 @@ service MemberService {
   rpc CreateAvatar (CreateAvatarPost) returns (AvatarResponse) {}
   rpc UpdateAvatar (UpdateAvatarPost) returns (AvatarResponse) {}
   rpc ChangeAvatarStatus (global.ChangeStatusPost) returns (AvatarResponse) {}
+
+  // 会员
+  rpc Member (global.InfoPost) returns (MemberResponse) {}
+  rpc MemberCards (global.InfoPost) returns (global.Response) {}
+  rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
   
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
+  rpc Cards (global.EmptyPost) returns (CardsResponse) {}
+  rpc CardPagination (global.PaginationPost) returns (CardPaginationResponse) {}
+  rpc CreateCard (CreateCardPost) returns (CardResponse) {}
+  rpc UpdateCard (UpdateCardPost) returns (CardResponse) {}
+  rpc ChangeCardStatus (global.ChangeStatusPost) returns (CardResponse) {}
 
   // 会员卡 活动（Console）
   rpc MemberActivity (global.InfoPost) returns (MemberActivityResponse) {} // 获取会员活动信息
@@ -42,6 +79,8 @@ service MemberService {
   // 会员卡 活动（App）
 
   // 活动白名单
+  rpc MemberPreSaleWhiteAddress (global.InfoPost) returns (MemberPreSaleWhiteAddressResponse) {} // 获取白名单列表
   rpc MemberPreSaleWhiteAddressList (global.InfoPost) returns (MemberPreSaleWhiteAddressListResponse) {} // 获取白名单列表
   rpc CreateMemberPreSaleWhiteAddress (CreateMemberPreSaleWhiteAddressPost) returns (global.MessageResponse) {} // 添加白名单
+  rpc UpdateMemberPreSaleWhiteAddress (UpdateMemberPreSaleWhiteAddressPost) returns (global.MessageResponse) {} // 更新白名单
 }

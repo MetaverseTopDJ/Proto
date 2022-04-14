@@ -8,23 +8,71 @@ option go_package = "./pb;pb";
 
 // Card 会员卡
 message Card {
-  uint64 id         = 1;
-  string name       = 2;
-  uint64 type       = 3;
-  string icon       = 4;
-  string cover      = 5;
-  string desription = 6;
-  uint64 num        = 7;
-  uint64 remain_num = 8;
-  uint64 price      = 9;
+  uint64 id            = 1;
+  uint64 activity_id   = 2;
+  string name          = 3;
+  uint64 type          = 4;
+  string icon          = 5;
+  string cover         = 6;
+  string desription    = 7;
+  uint64 num           = 8;
+  uint64 remain_num    = 9;
+  uint64 price         = 10;
+  uint64 status        = 11;
+  string created_at    = 12;
+  uint64 created_stamp = 13;
+  string updated_at    = 14;
+  uint64 updated_stamp = 15;
 }
 
 /**************** 请求结构 ****************/
 
+// CreateCardPost 创建卡片请求
+message CreateCardPost {
+  uint64 activity_id = 2;
+  string name        = 3;
+  uint64 type        = 4;
+  string icon        = 5;
+  string cover       = 6;
+  string desription  = 7;
+  uint64 num         = 8;
+  uint64 price       = 9;
+}
+
+// UpdateCardPost 更新卡片请求
+message UpdateCardPost {
+  uint64 id          = 1;
+  uint64 activity_id = 2;
+  string name        = 3;
+  uint64 type        = 4;
+  string icon        = 5;
+  string cover       = 6;
+  string desription  = 7;
+  uint64 num         = 8;
+  uint64 remain_num  = 9;
+  uint64 price       = 10;
+}
 
 /**************** 返回结构 ****************/
 
 // CardResponse 返回会员卡
 message CardResponse {
+  string message = 1;
+  Card   data    = 2;
+}
 
+// CardsResponse 返回卡片列表
+message CardsResponse {
+  string   message     = 1;
+  repeated Card   data = 2;
+}
+
+// CardPaginationResponse 卡片分页
+message CardPaginationResponse {
+  message Cards {
+    repeated Card list = 1;
+    int64    total     = 2;
+  }
+  string message = 1;
+  Cards  data    = 2;
 }
