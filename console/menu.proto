@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+message TopMenu {
+  uint64 id = 1;
+  uint64 menu_id = 2;
+  string name = 3;
+  string en_name = 4;
+  uint64 status = 5;
+}
+
+message MenuRule {
+  uint64 menu_id = 1;
+  string key = 2;
+  string code = 3;
+  string name = 4;
+  uint64 sort = 5;
+  string value = 6;
+  string label = 7;
+}
+
+message Menu {
+  uint64 id = 1;
+  uint64 menu_id = 2;
+  uint64 sort = 3;
+  string name = 4;
+  string en_name = 5;
+  uint64 status = 6;
+  bool checked = 7;
+  string remark = 8;
+  string created_at = 9;
+  string updated_at = 10;
+  TopMenu top_menu = 11;
+  repeated MenuRule rules = 12;
+}
+
+/**************** 请求结构 ****************/
+
+message CreateMenuPost {
+  uint64 menu_id = 2;
+  uint64 sort = 3;
+  string name = 4;
+  string en_name = 5;
+  string remark = 6;
+}
+
+message UpdateMenuPost {
+  uint64 id = 1;
+  uint64 menu_id = 2;
+  uint64 sort = 3;
+  string name = 4;
+  string en_name = 5;
+  string remark = 6;
+}
+
+/**************** 返回结构 ****************/
+
+
+/* 返回单条数据 */
+message MenuResponse {
+  string Message = 1;
+  Menu Data = 2;
+}
+
+/* 返回列表数据 */
+message MenusResponse {
+  string Message = 1;
+  repeated Menu Data = 2;
+}
+
+/* 菜单 包含权限 */
+message MenuRulesResponse {
+  string Message = 1;
+  repeated Menu Data = 2;
+}
+
+/* 返回分页数据 */
+message MenuPaginationResponse {
+  message Menus {
+    repeated Menu list = 1;
+    int64 total = 2;
+  }
+  string Message = 1;
+  Menus Data = 2;
+}

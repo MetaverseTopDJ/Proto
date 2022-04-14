@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+message Rule {
+  uint64 menu_id    = 1;
+  string key        = 2;
+  string code       = 3;
+  string name       = 4;
+  string urls       = 5;
+  uint64 sort       = 6;
+  uint64 status     = 7;
+  string remark     = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+/**************** 请求结构 ****************/
+
+message CreateRulePost {
+  uint64 menu_id = 2;
+  string code    = 3;
+  string name    = 4;
+  string urls    = 5;
+  uint64 sort    = 6;
+  string remark  = 7;
+}
+
+message UpdateRulePost {
+  string key     = 1;
+  uint64 menu_id = 2;
+  string code    = 3;
+  string name    = 4;
+  string urls    = 5;
+  uint64 sort    = 6;
+  string remark  = 7;
+}
+
+/**************** 返回结构 ****************/
+
+
+/* 返回单条数据 */
+message RuleResponse {
+  string Message = 1;
+  Rule   Data    = 2;
+}
+
+/* 返回列表数据 */
+message RulesResponse {
+  string   Message   = 1;
+  repeated Rule Data = 2;
+}
+
+/* 返回分页数据 */
+message RulePaginationResponse {
+  message Rules {
+    repeated Rule list = 1;
+    int64    total     = 2;
+  }
+  string Message = 1;
+  Rules  Data    = 2;
+}

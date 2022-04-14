@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+import "global/global.proto";
+import "console/menu.proto";
+import "console/rule.proto";
+import "console/role.proto";
+import "console/user.proto";
+import "console/login.proto";
+
+service ConsoleService {
+  /* 菜单管理 */
+  rpc Menu (global.InfoPost) returns (MenuResponse) {} // 获取 单个 菜单信息
+  rpc Menus (global.EmptyPost) returns (MenusResponse) {} // 获取 菜单列表
+  rpc TopMenus (global.EmptyPost) returns (MenusResponse) {} // 获取 顶级菜单 列表
+  rpc MenuRules (global.EmptyPost) returns (MenuRulesResponse) {} // 获取 菜单包含权限
+  rpc MenuPagination (global.PaginationPost) returns (MenuPaginationResponse) {} // 获取菜单分页
+  rpc CreateMenu (CreateMenuPost) returns (MenuResponse) {} // 创建菜单
+  rpc UpdateMenu (UpdateMenuPost) returns (MenuResponse) {} // 更新菜单
+  rpc ChangeMenuStatus (global.ChangeStatusPost) returns (MenuResponse) {} // 修改菜单状态
+  /* 权限管理 */
+  rpc Rule (global.InfoKeyPost) returns (RuleResponse) {} // 获取 单个 权限信息
+  //  rpc Rules (global.EmptyPost) returns (RulesResponse) {} // 获取 权限列表
+  //  rpc RulePagination (global.PaginationPost) returns (RulePaginationResponse) {} // 获取权限分页
+  rpc CreateRule (CreateRulePost) returns (RuleResponse) {} // 创建权限
+  rpc UpdateRule (UpdateRulePost) returns (RuleResponse) {} // 更新权限
+  //  rpc ChangeRuleStatus (global.ChangeStatusPost) returns (RuleResponse) {} // 修改权限状态
+  rpc RemoveRule (global.InfoKeyPost) returns (RuleResponse) {} // 删除权限
+  /* 角色管理 */
+  rpc Role (global.InfoKeyPost) returns (RoleResponse) {} // 获取 单个 角色信息
+  rpc Roles (global.EmptyPost) returns (RolesResponse) {} // 获取 角色列表
+  rpc RolePagination (global.PaginationPost) returns (RolePaginationResponse) {} // 获取角色分页
+  rpc CreateRole (CreateRolePost) returns (RoleResponse) {} // 创建角色
+  rpc UpdateRole (UpdateRolePost) returns (RoleResponse) {} // 更新角色
+  rpc ChangeRoleStatus (global.ChangeStatusByKeyPost) returns (RoleResponse) {} // 修改角色状态
+  rpc RemoveRole (global.InfoKeyPost) returns (RoleResponse) {} // 删除角色
+  // 管理员
+  rpc User (global.InfoKeyPost) returns (UserResponse) {} // 获取 单个 管理员信息
+  rpc Users (global.EmptyPost) returns (UsersResponse) {} // 获取 管理员列表
+  rpc UserPagination (global.PaginationPost) returns (UserPaginationResponse) {} // 管理员分页
+  rpc CreateUser (CreateUserPost) returns (UserResponse) {} // 创建管理员
+  rpc UpdateUser (UpdateUserPost) returns (UserResponse) {} // 更新管理员
+  rpc ChangeUserPassword (ChangeUserPasswordPost) returns (UserResponse) {} // 修改 管理员密码
+  rpc ChangeUserStatus (global.ChangeStatusByKeyPost) returns (UserResponse) {} // 修改管理员状态
+  // 登录模块
+  rpc Login (LoginPost) returns (LoginResponse) {} // 登录
+  rpc LoginLogPagination (global.PaginationPost) returns (LoginLogPaginationResponse) {} // 登录日志
+  rpc Scopes (global.EmptyPost) returns (ScopesResponse) {} // 获取 用户权限
+  rpc LogOut (global.EmptyPost) returns (global.Response) {} // 退出登录
+}

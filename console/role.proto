@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+message Role {
+  string key = 1;
+  string name = 2;
+  string en_name = 3;
+  string value = 4;
+  string label = 5;
+  uint64 sort = 6;
+  uint64 status = 7;
+  bool checked = 8;
+  string remark = 9;
+  string created_at = 10;
+  string updated_at = 11;
+  repeated string rules = 12;
+}
+
+message RoleRule {
+  string role_key = 1;
+  string rule_key = 2;
+}
+
+/**************** 请求结构 ****************/
+
+message CreateRolePost {
+  string name = 2;
+  string en_name = 3;
+  repeated string rules = 4;
+  uint64 sort = 5;
+  string remark = 6;
+}
+
+message UpdateRolePost {
+  string key = 1;
+  string name = 2;
+  string en_name = 3;
+  repeated string rules = 4;
+  uint64 sort = 5;
+  string remark = 6;
+}
+
+/**************** 返回结构 ****************/
+
+
+/* 返回单条数据 */
+message RoleResponse {
+  string Message = 1;
+  Role Data = 2;
+}
+
+/* 返回列表数据 */
+message RolesResponse {
+  string Message = 1;
+  repeated Role Data = 2;
+}
+
+/* 返回分页数据 */
+message RolePaginationResponse {
+  message Roles {
+    repeated Role list = 1;
+    int64 total = 2;
+  }
+  string Message = 1;
+  Roles Data = 2;
+}

@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// MemberActivity 会员活动
+message MemberActivity {
+  uint64 id                  = 1;
+  string name                = 2;
+  string description         = 3;
+  uint64 pre_sale_limit      = 4;
+  uint64 pre_sale_start_time = 5;
+  uint64 pre_sale_end_time   = 6;
+  uint64 sale_limit          = 7;
+  uint64 sale_start_time     = 8;
+  uint64 sale_end_time       = 9;
+  uint64 deleted_at          = 10;
+  uint64 created_at          = 11;
+  uint64 updated_at          = 12;
+}
+
+
+/**************** 请求结构 ****************/
+
+// CreateMemberActivityPost 创建会员活动参数
+message CreateMemberActivityPost {
+  string name                = 2;
+  string description         = 3;
+  uint64 pre_sale_limit      = 4;
+  uint64 pre_sale_start_time = 5;
+  uint64 pre_sale_end_time   = 6;
+  uint64 sale_limit          = 7;
+  uint64 sale_start_time     = 8;
+  uint64 sale_end_time       = 9;
+}
+
+// UpdateMemberActivityPost 更逊会员活动参数
+message UpdateMemberActivityPost {
+  string name                = 2;
+  string description         = 3;
+  uint64 pre_sale_limit      = 4;
+  uint64 pre_sale_start_time = 5;
+  uint64 pre_sale_end_time   = 6;
+  uint64 sale_limit          = 7;
+  uint64 sale_start_time     = 8;
+  uint64 sale_end_time       = 9;
+}
+
+/**************** 返回结构 ****************/
+
+// MemberActivityResponse 返回 会员活动
+message MemberActivityResponse {
+  string         message = 1;
+  MemberActivity data    = 2;
+}
+
+// MemberActivityPaginationResponse 返回 会员活动分页
+message MemberActivityPaginationResponse {
+  message MemberActivities {
+    repeated MemberActivity list = 1;
+    uint64 total = 2;
+  }
+  string           message = 1;
+  MemberActivities data    = 2;
+}

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+import "console/user.proto";
+
+/**************** 数据结构 ****************/
+
+message LoginLog {
+    string user_key     = 1;
+    uint64 login_type   = 2;
+    string login_ip     = 3;
+    string login_at     = 4;
+    string login_date   = 5;
+    string login_result = 6;
+}
+
+
+/**************** 请求结构 ****************/
+
+message LoginPost {
+  string username = 1;
+  string password = 2;
+}
+
+/**************** 返回结构 ****************/
+
+message LoginResponse {
+    message Login {
+      User   user    = 1;
+      string token   = 2;
+      string scopes  = 3;
+      uint64 expired = 4;
+    }
+    string message = 1;
+    Login  data    = 2;
+}
+
+message LoginLogPaginationResponse {
+    message Logs {
+        repeated LoginLog list = 1;
+        uint64 total = 2;
+    }
+    string message = 1;
+    Logs data = 2;
+}

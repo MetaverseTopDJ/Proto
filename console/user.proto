@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+message User {
+  string   key          = 1;
+  string   username     = 2;
+  string   phone        = 3;
+  string   email        = 4;
+  string   language     = 5;
+  repeated string roles = 6;
+  uint64   status       = 7;
+  bool     checked      = 8;
+  string   remark       = 9;
+  string   login_at     = 10;
+  string   created_at   = 11;
+  string   updated_at   = 12;
+}
+
+/**************** 请求结构 ****************/
+
+message CreateUserPost {
+  string   username     = 2;
+  string   password     = 3;
+  string   phone        = 4;
+  string   email        = 5;
+  string   language     = 6;
+  string   remark       = 7;
+  repeated string roles = 8;
+}
+
+message UpdateUserPost {
+  string   key          = 1;
+  string   username     = 2;
+  string   password     = 3;
+  string   phone        = 4;
+  string   email        = 5;
+  string   language     = 6;
+  string   remark       = 7;
+  repeated string roles = 8;
+}
+
+message ChangeUserPasswordPost {
+  string key      = 1;
+  string origin   = 2;
+  string password = 3;
+}
+
+/**************** 返回结构 ****************/
+
+message ScopesResponse {
+  string message = 1;
+  string data    = 2;
+}
+
+/* 返回单条数据 */
+message UserResponse {
+  string message = 1;
+  User   data    = 2;
+}
+
+/* 返回列表数据 */
+message UsersResponse {
+  string   message   = 1;
+  repeated User data = 2;
+}
+
+/* 返回分页数据 */
+message UserPaginationResponse {
+  message Users {
+    repeated User list = 1;
+    int64    total     = 2;
+  }
+  string message = 1;
+  Users  data    = 2;
+}

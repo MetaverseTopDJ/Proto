@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package console;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// Card 会员卡
+message Card {
+  uint64 id         = 1;
+  string name       = 2;
+  uint64 type       = 3;
+  string icon       = 4;
+  string cover      = 5;
+  string desription = 6;
+  uint64 num        = 7;
+  uint64 remain_num = 8;
+  uint64 price      = 9;
+}
+
+/**************** 请求结构 ****************/
+
+
+/**************** 返回结构 ****************/
+
+// CardResponse 返回会员卡
+message CardResponse {
+
+}
