@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package member;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// Avatar 头像
+message Avatar {
+  uint64 id         = 1;
+  string path       = 2;
+  uint64 status     = 3;
+  bool   checked    = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateAvatarPost 创建头像
+message CreateAvatarPost {
+  string path = 2;
+}
+
+message UpdateAvatarPost {
+  uint64 id   = 1;
+  string path = 2;
+}
+
+/**************** 返回结构 ****************/
+
+// AvatarResponse 返回单个
+message AvatarResponse {
+  Avatar data    = 1;
+  string message = 2;
+}
+
+// AvatarsResponse 返回多个
+message AvatarsResponse {
+  repeated Avatar data = 1;
+  string   message     = 2;
+}
+
+// AvatarPaginationResponse 头像分页
+message AvatarPaginationResponse {
+  message Avatars {
+    repeated Avatar list = 1;
+    int64   total       = 2;
+  }
+  Avatars data    = 1;
+  string  message = 2;
+}

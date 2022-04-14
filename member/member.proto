@@ -1,15 +1,33 @@
 syntax = "proto3";
 
-package console;
+package member;
 
 option go_package = "./pb;pb";
 
 import "global/global.proto";
+import "member/avatar.proto";
 import "member/card.proto";
 import "member/member_activity.proto";
 import "member/member_pre_sale_white_address.proto";
 
+
+/**************** 数据结构 ****************/
+
+
+/**************** 请求结构 ****************/
+
+
+/**************** 返回结构 ****************/
+
 service MemberService {
+  // 头像
+  rpc Avatar (global.InfoPost) returns (AvatarResponse) {}
+  rpc Avatars (global.EmptyPost) returns (AvatarsResponse) {}
+  rpc AvatarPagination (global.PaginationPost) returns (AvatarPaginationResponse) {}
+  rpc CreateAvatar (CreateAvatarPost) returns (AvatarResponse) {}
+  rpc UpdateAvatar (UpdateAvatarPost) returns (AvatarResponse) {}
+  rpc ChangeAvatarStatus (global.ChangeStatusPost) returns (AvatarResponse) {}
+  
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
 
@@ -26,6 +44,4 @@ service MemberService {
   // 活动白名单
   rpc MemberPreSaleWhiteAddressList (global.InfoPost) returns (MemberPreSaleWhiteAddressListResponse) {} // 获取白名单列表
   rpc CreateMemberPreSaleWhiteAddress (CreateMemberPreSaleWhiteAddressPost) returns (global.MessageResponse) {} // 添加白名单
-
-
 }
