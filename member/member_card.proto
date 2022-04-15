@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package member;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// MemberCard 会员拥有的卡片
+message MemberCard {
+  uint64 id          = 1;
+  uint64 activity_id = 2;
+  uint64 creator_id  = 3;
+  uint64 owner_id    = 4;
+  uint64 card_id     = 5;
+  uint64 nft_id      = 6;
+  uint64 version     = 7;
+  uint64 status      = 8;
+  string created_at  = 9;
+  string updated_at  = 10;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateMemberCardPost 新增会员卡
+message CreateMemberCardPost {
+  uint64 nft_id      = 1;
+}
+
+// UpdateMemberCardPost 更新会员卡
+message UpdateMemberCardPost {}
+
+/**************** 返回结构 ****************/
+
+// MemberCardResponse 会员卡返回
+message MemberCardResponse {}

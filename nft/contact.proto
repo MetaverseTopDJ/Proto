@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// Contact 智能合约
+message Contact {
+  uint64 id         = 1;
+  uint64 type       = 2;
+  string address    = 3;
+  string key        = 4;
+  string encode_key = 5;
+  string node       = 6;
+  uint64 status     = 7;
+  bool   checked    = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateContactPost 创建合约
+message CreateContactPost {
+  uint64 type       = 2;
+  string address    = 3;
+  string key        = 4;
+  string encode_key = 5;
+  string node       = 6;
+}
+
+// UpdateContactPost 更新合约
+message UpdateContactPost {
+  uint64 id         = 1;
+  uint64 type       = 2;
+  string address    = 3;
+  string key        = 4;
+  string encode_key = 5;
+  string node       = 6;
+}
+
+/**************** 返回结构 ****************/
+
+// ContactResponse 返回合约
+message ContactResponse {
+  string  message = 1;
+  Contact data    = 2;
+}
+
+// ContactPaginationResponse 返回 合约分页
+message ContactPaginationResponse {
+  message Contacts {
+    repeated Contact list = 1;
+    int64    total        = 2;
+  }
+}

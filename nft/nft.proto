@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+import "global/global.proto";
+import "nft/contact.proto";
+
+service NFTService {
+  // 智能合约
+  rpc Contact (global.InfoPost) returns (ContactResponse) {}
+  rpc ContactPagination (global.PaginationPost) returns (ContactPaginationResponse) {}
+  rpc CreateContact (CreateContactPost) returns (ContactResponse) {}
+  rpc UpdateContact (UpdateContactPost) returns (ContactResponse) {}
+  rpc ChangeContactStatus (global.ChangeStatusPost) returns (ContactResponse) {}
+}
