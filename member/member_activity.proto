@@ -17,9 +17,10 @@ message MemberActivity {
   uint64 sale_limit          = 7;
   uint64 sale_start_time     = 8;
   uint64 sale_end_time       = 9;
-  uint64 deleted_at          = 10;
-  uint64 created_at          = 11;
-  uint64 updated_at          = 12;
+  uint64 status              = 10;
+  bool   checked             = 11;
+  uint64 created_at          = 12;
+  uint64 updated_at          = 13;
 }
 
 

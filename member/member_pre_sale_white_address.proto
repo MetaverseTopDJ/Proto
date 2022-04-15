@@ -14,8 +14,9 @@ message MemberPreSaleWhiteAddress {
   string sign        = 4;
   string address     = 5;
   uint64 status      = 6;
-  uint64 created_at  = 7;
-  uint64 updated_at  = 8;
+  bool   checked     = 7;
+  uint64 created_at  = 8;
+  uint64 updated_at  = 9;
 }
 
 /**************** 请求结构 ****************/

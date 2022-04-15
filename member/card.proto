@@ -19,10 +19,11 @@ message Card {
   uint64 remain_num    = 9;
   uint64 price         = 10;
   uint64 status        = 11;
-  string created_at    = 12;
-  uint64 created_stamp = 13;
-  string updated_at    = 14;
-  uint64 updated_stamp = 15;
+  bool   checked       = 12;
+  string created_at    = 13;
+  uint64 created_stamp = 14;
+  string updated_at    = 15;
+  uint64 updated_stamp = 16;
 }
 
 /**************** 请求结构 ****************/
