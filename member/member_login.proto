@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package member;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// SimpleMember 会员信息
+message SimpleMember {
+  uint64 id             = 1;
+  string name           = 2;
+  string description    = 3;
+  uint64 avatar_path    = 4;
+  uint64 avatar_url     = 5;
+  string address        = 6;
+  string invite_code    = 7;
+  string invite_address = 8;
+  string email          = 9;
+  string facebook       = 10;
+  string twitter        = 11;
+}
+
+/**************** 请求结构 ****************/
+
+// MemberHashPost 获取 hash
+message MemberHashPost {
+  string address = 1;
+}
+
+// MemberLoginPost 会员登录
+message MemberLoginPost {
+  string hash        = 1;
+  string signature   = 2;
+  string invite_code = 3;
+}
+
+/**************** 返回结构 ****************/
+
+// MemberHashResponse 返回 Hash
+message MemberHashResponse {
+  string message = 1;
+  string data    = 2;
+}
+
+// MemberLoginResponse 会员登录返回
+message MemberLoginResponse {
+  message Login {
+    SimpleMember member  = 1;
+    string       token   = 2;
+    uint64       expired = 3;
+  }
+  string message = 1;
+  Login  data    = 2;
+}
+
