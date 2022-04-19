@@ -6,12 +6,12 @@ option go_package = "./pb;pb";
 
 /**************** 数据结构 ****************/
 
-// Contact 智能合约
-message Contact {
+// Contract 智能合约
+message Contract {
   uint64 id         = 1;
   uint64 type       = 2;
   string address    = 3;
-  string key        = 4;
+  string noise      = 4;
   string encode_key = 5;
   string node       = 6;
   uint64 status     = 7;
@@ -22,37 +22,45 @@ message Contact {
 
 /**************** 请求结构 ****************/
 
-// CreateContactPost 创建合约
-message CreateContactPost {
+// CreateContractPost 创建合约
+message CreateContractPost {
   uint64 type       = 2;
   string address    = 3;
-  string key        = 4;
+  string noise      = 4;
   string encode_key = 5;
   string node       = 6;
 }
 
-// UpdateContactPost 更新合约
-message UpdateContactPost {
+// UpdateContractPost 更新合约
+message UpdateContractPost {
   uint64 id         = 1;
   uint64 type       = 2;
   string address    = 3;
-  string key        = 4;
+  string noise      = 4;
   string encode_key = 5;
   string node       = 6;
 }
 
 /**************** 返回结构 ****************/
 
-// ContactResponse 返回合约
-message ContactResponse {
+// ContractResponse 返回合约
+message ContractResponse {
   string  message = 1;
-  Contact data    = 2;
+  Contract data    = 2;
 }
 
-// ContactPaginationResponse 返回 合约分页
-message ContactPaginationResponse {
-  message Contacts {
-    repeated Contact list = 1;
+// ContractsResponse 返回 合约列表
+message ContractsResponse {
+  string   message       = 1;
+  repeated Contract data = 2;
+}
+
+// ContractPaginationResponse 返回 合约分页
+message ContractPaginationResponse {
+  message Contracts {
+    repeated Contract list = 1;
     int64    total        = 2;
   }
+  string   message = 1;
+  Contracts data    = 2;
 }

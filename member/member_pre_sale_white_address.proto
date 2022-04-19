@@ -15,8 +15,8 @@ message MemberPreSaleWhiteAddress {
   string address     = 5;
   uint64 status      = 6;
   bool   checked     = 7;
-  uint64 created_at  = 8;
-  uint64 updated_at  = 9;
+  string created_at  = 8;
+  string updated_at  = 9;
 }
 
 /**************** 请求结构 ****************/
@@ -30,10 +30,10 @@ message CreateMemberPreSaleWhiteAddressPost {
 
 // UpdateMemberPreSaleWhiteAddressPost 更新预售白名单
 message UpdateMemberPreSaleWhiteAddressPost {
-  uint64   id             = 1;
-  uint64   activity_id    = 2;
-  repeated uint64 card_id = 3;
-  string   address        = 5;
+  uint64 id          = 1;
+  uint64 activity_id = 2;
+  uint64 card_id     = 3;
+  string address     = 5;
 }
 
 /**************** 返回结构 ****************/

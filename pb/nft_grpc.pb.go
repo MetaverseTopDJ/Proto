@@ -18,12 +18,19 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NFTServiceClient interface {
-	// 智能合约
-	Contact(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContactResponse, error)
-	ContactPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContactPaginationResponse, error)
-	CreateContact(ctx context.Context, in *CreateContactPost, opts ...grpc.CallOption) (*ContactResponse, error)
-	UpdateContact(ctx context.Context, in *UpdateContactPost, opts ...grpc.CallOption) (*ContactResponse, error)
-	ChangeContactStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContactResponse, error)
+	// Token 通证
+	NftToken(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
+	NftTokenPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*NFTTokenPaginationResponse, error)
+	CreateNftToken(ctx context.Context, in *CreateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
+	UpdateNftToken(ctx context.Context, in *UpdateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
+	ChangeNftTokenStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
+	// Contract 智能合约
+	Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	Contracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error)
+	ContractPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContractPaginationResponse, error)
+	CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	UpdateContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	ChangeContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
 }
 
 type nFTServiceClient struct {
@@ -34,45 +41,99 @@ func NewNFTServiceClient(cc grpc.ClientConnInterface) NFTServiceClient {
 	return &nFTServiceClient{cc}
 }
 
-func (c *nFTServiceClient) Contact(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContactResponse, error) {
-	out := new(ContactResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/Contact", in, out, opts...)
+func (c *nFTServiceClient) NftToken(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
+	out := new(NFTTokenResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NftToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) ContactPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContactPaginationResponse, error) {
-	out := new(ContactPaginationResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ContactPagination", in, out, opts...)
+func (c *nFTServiceClient) NftTokenPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*NFTTokenPaginationResponse, error) {
+	out := new(NFTTokenPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NftTokenPagination", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) CreateContact(ctx context.Context, in *CreateContactPost, opts ...grpc.CallOption) (*ContactResponse, error) {
-	out := new(ContactResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateContact", in, out, opts...)
+func (c *nFTServiceClient) CreateNftToken(ctx context.Context, in *CreateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
+	out := new(NFTTokenResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateNftToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) UpdateContact(ctx context.Context, in *UpdateContactPost, opts ...grpc.CallOption) (*ContactResponse, error) {
-	out := new(ContactResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateContact", in, out, opts...)
+func (c *nFTServiceClient) UpdateNftToken(ctx context.Context, in *UpdateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
+	out := new(NFTTokenResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateNftToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) ChangeContactStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContactResponse, error) {
-	out := new(ContactResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeContactStatus", in, out, opts...)
+func (c *nFTServiceClient) ChangeNftTokenStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
+	out := new(NFTTokenResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeNftTokenStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Contract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Contracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error) {
+	out := new(ContractsResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Contracts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ContractPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContractPaginationResponse, error) {
+	out := new(ContractPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ContractPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ChangeContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeContractStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,12 +144,19 @@ func (c *nFTServiceClient) ChangeContactStatus(ctx context.Context, in *ChangeSt
 // All implementations must embed UnimplementedNFTServiceServer
 // for forward compatibility
 type NFTServiceServer interface {
-	// 智能合约
-	Contact(context.Context, *InfoPost) (*ContactResponse, error)
-	ContactPagination(context.Context, *PaginationPost) (*ContactPaginationResponse, error)
-	CreateContact(context.Context, *CreateContactPost) (*ContactResponse, error)
-	UpdateContact(context.Context, *UpdateContactPost) (*ContactResponse, error)
-	ChangeContactStatus(context.Context, *ChangeStatusPost) (*ContactResponse, error)
+	// Token 通证
+	NftToken(context.Context, *InfoPost) (*NFTTokenResponse, error)
+	NftTokenPagination(context.Context, *PaginationPost) (*NFTTokenPaginationResponse, error)
+	CreateNftToken(context.Context, *CreateNFTTokenPost) (*NFTTokenResponse, error)
+	UpdateNftToken(context.Context, *UpdateNFTTokenPost) (*NFTTokenResponse, error)
+	ChangeNftTokenStatus(context.Context, *ChangeStatusPost) (*NFTTokenResponse, error)
+	// Contract 智能合约
+	Contract(context.Context, *InfoPost) (*ContractResponse, error)
+	Contracts(context.Context, *EmptyPost) (*ContractsResponse, error)
+	ContractPagination(context.Context, *PaginationPost) (*ContractPaginationResponse, error)
+	CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error)
+	UpdateContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
+	ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
 	mustEmbedUnimplementedNFTServiceServer()
 }
 
@@ -96,20 +164,38 @@ type NFTServiceServer interface {
 type UnimplementedNFTServiceServer struct {
 }
 
-func (UnimplementedNFTServiceServer) Contact(context.Context, *InfoPost) (*ContactResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Contact not implemented")
+func (UnimplementedNFTServiceServer) NftToken(context.Context, *InfoPost) (*NFTTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NftToken not implemented")
 }
-func (UnimplementedNFTServiceServer) ContactPagination(context.Context, *PaginationPost) (*ContactPaginationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ContactPagination not implemented")
+func (UnimplementedNFTServiceServer) NftTokenPagination(context.Context, *PaginationPost) (*NFTTokenPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NftTokenPagination not implemented")
 }
-func (UnimplementedNFTServiceServer) CreateContact(context.Context, *CreateContactPost) (*ContactResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateContact not implemented")
+func (UnimplementedNFTServiceServer) CreateNftToken(context.Context, *CreateNFTTokenPost) (*NFTTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateNftToken not implemented")
 }
-func (UnimplementedNFTServiceServer) UpdateContact(context.Context, *UpdateContactPost) (*ContactResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateContact not implemented")
+func (UnimplementedNFTServiceServer) UpdateNftToken(context.Context, *UpdateNFTTokenPost) (*NFTTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNftToken not implemented")
 }
-func (UnimplementedNFTServiceServer) ChangeContactStatus(context.Context, *ChangeStatusPost) (*ContactResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeContactStatus not implemented")
+func (UnimplementedNFTServiceServer) ChangeNftTokenStatus(context.Context, *ChangeStatusPost) (*NFTTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeNftTokenStatus not implemented")
+}
+func (UnimplementedNFTServiceServer) Contract(context.Context, *InfoPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Contract not implemented")
+}
+func (UnimplementedNFTServiceServer) Contracts(context.Context, *EmptyPost) (*ContractsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Contracts not implemented")
+}
+func (UnimplementedNFTServiceServer) ContractPagination(context.Context, *PaginationPost) (*ContractPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ContractPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContract not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateContract(context.Context, *UpdateContractPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContract not implemented")
+}
+func (UnimplementedNFTServiceServer) ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeContractStatus not implemented")
 }
 func (UnimplementedNFTServiceServer) mustEmbedUnimplementedNFTServiceServer() {}
 
@@ -124,92 +210,200 @@ func RegisterNFTServiceServer(s grpc.ServiceRegistrar, srv NFTServiceServer) {
 	s.RegisterService(&NFTService_ServiceDesc, srv)
 }
 
-func _NFTService_Contact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_NftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).Contact(ctx, in)
+		return srv.(NFTServiceServer).NftToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/Contact",
+		FullMethod: "/nft.NFTService/NftToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).Contact(ctx, req.(*InfoPost))
+		return srv.(NFTServiceServer).NftToken(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_ContactPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_NftTokenPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PaginationPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).ContactPagination(ctx, in)
+		return srv.(NFTServiceServer).NftTokenPagination(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/ContactPagination",
+		FullMethod: "/nft.NFTService/NftTokenPagination",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ContactPagination(ctx, req.(*PaginationPost))
+		return srv.(NFTServiceServer).NftTokenPagination(ctx, req.(*PaginationPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_CreateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateContactPost)
+func _NFTService_CreateNftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNFTTokenPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).CreateContact(ctx, in)
+		return srv.(NFTServiceServer).CreateNftToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/CreateContact",
+		FullMethod: "/nft.NFTService/CreateNftToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).CreateContact(ctx, req.(*CreateContactPost))
+		return srv.(NFTServiceServer).CreateNftToken(ctx, req.(*CreateNFTTokenPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_UpdateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateContactPost)
+func _NFTService_UpdateNftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNFTTokenPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).UpdateContact(ctx, in)
+		return srv.(NFTServiceServer).UpdateNftToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/UpdateContact",
+		FullMethod: "/nft.NFTService/UpdateNftToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).UpdateContact(ctx, req.(*UpdateContactPost))
+		return srv.(NFTServiceServer).UpdateNftToken(ctx, req.(*UpdateNFTTokenPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_ChangeContactStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_ChangeNftTokenStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeStatusPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).ChangeContactStatus(ctx, in)
+		return srv.(NFTServiceServer).ChangeNftTokenStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/ChangeContactStatus",
+		FullMethod: "/nft.NFTService/ChangeNftTokenStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ChangeContactStatus(ctx, req.(*ChangeStatusPost))
+		return srv.(NFTServiceServer).ChangeNftTokenStatus(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_Contract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Contract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Contract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Contract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_Contracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Contracts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Contracts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Contracts(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ContractPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ContractPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ContractPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ContractPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContractPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateContract(ctx, req.(*CreateContractPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContractPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateContract(ctx, req.(*UpdateContractPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ChangeContractStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ChangeContractStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ChangeContractStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ChangeContractStatus(ctx, req.(*ChangeStatusPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -222,24 +416,48 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NFTServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Contact",
-			Handler:    _NFTService_Contact_Handler,
+			MethodName: "NftToken",
+			Handler:    _NFTService_NftToken_Handler,
 		},
 		{
-			MethodName: "ContactPagination",
-			Handler:    _NFTService_ContactPagination_Handler,
+			MethodName: "NftTokenPagination",
+			Handler:    _NFTService_NftTokenPagination_Handler,
 		},
 		{
-			MethodName: "CreateContact",
-			Handler:    _NFTService_CreateContact_Handler,
+			MethodName: "CreateNftToken",
+			Handler:    _NFTService_CreateNftToken_Handler,
 		},
 		{
-			MethodName: "UpdateContact",
-			Handler:    _NFTService_UpdateContact_Handler,
+			MethodName: "UpdateNftToken",
+			Handler:    _NFTService_UpdateNftToken_Handler,
 		},
 		{
-			MethodName: "ChangeContactStatus",
-			Handler:    _NFTService_ChangeContactStatus_Handler,
+			MethodName: "ChangeNftTokenStatus",
+			Handler:    _NFTService_ChangeNftTokenStatus_Handler,
+		},
+		{
+			MethodName: "Contract",
+			Handler:    _NFTService_Contract_Handler,
+		},
+		{
+			MethodName: "Contracts",
+			Handler:    _NFTService_Contracts_Handler,
+		},
+		{
+			MethodName: "ContractPagination",
+			Handler:    _NFTService_ContractPagination_Handler,
+		},
+		{
+			MethodName: "CreateContract",
+			Handler:    _NFTService_CreateContract_Handler,
+		},
+		{
+			MethodName: "UpdateContract",
+			Handler:    _NFTService_UpdateContract_Handler,
+		},
+		{
+			MethodName: "ChangeContractStatus",
+			Handler:    _NFTService_ChangeContractStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

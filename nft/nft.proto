@@ -5,13 +5,22 @@ package nft;
 option go_package = "./pb;pb";
 
 import "global/global.proto";
-import "nft/contact.proto";
+import "nft/nft_token.proto";
+import "nft/contract.proto";
 
 service NFTService {
-  // 智能合约
-  rpc Contact (global.InfoPost) returns (ContactResponse) {}
-  rpc ContactPagination (global.PaginationPost) returns (ContactPaginationResponse) {}
-  rpc CreateContact (CreateContactPost) returns (ContactResponse) {}
-  rpc UpdateContact (UpdateContactPost) returns (ContactResponse) {}
-  rpc ChangeContactStatus (global.ChangeStatusPost) returns (ContactResponse) {}
+  // Token 通证
+  rpc NftToken (global.InfoPost) returns (NFTTokenResponse) {}
+  rpc NftTokenPagination (global.PaginationPost) returns (NFTTokenPaginationResponse) {}
+  rpc CreateNftToken (CreateNFTTokenPost) returns (NFTTokenResponse) {}
+  rpc UpdateNftToken (UpdateNFTTokenPost) returns (NFTTokenResponse) {}
+  rpc ChangeNftTokenStatus (global.ChangeStatusPost) returns (NFTTokenResponse) {}
+
+  // Contract 智能合约
+  rpc Contract (global.InfoPost) returns (ContractResponse) {}
+  rpc Contracts (global.EmptyPost) returns (ContractsResponse) {}
+  rpc ContractPagination (global.PaginationPost) returns (ContractPaginationResponse) {}
+  rpc CreateContract (CreateContractPost) returns (ContractResponse) {}
+  rpc UpdateContract (UpdateContractPost) returns (ContractResponse) {}
+  rpc ChangeContractStatus (global.ChangeStatusPost) returns (ContractResponse) {}
 }

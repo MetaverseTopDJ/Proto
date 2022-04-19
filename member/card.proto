@@ -10,21 +10,22 @@ option go_package = "./pb;pb";
 message Card {
   uint64 id            = 1;
   uint64 activity_id   = 2;
-  string name          = 3;
-  uint64 type          = 4;
-  string icon          = 5;
-  string cover         = 6;
-  string desription    = 7;
-  uint64 total         = 8;
-  uint64 remain        = 9;
-  uint64 price         = 10;
-  uint64 decimal       = 11;
-  uint64 status        = 12;
-  bool   checked       = 13;
-  string created_at    = 14;
-  uint64 created_stamp = 15;
-  string updated_at    = 16;
-  uint64 updated_stamp = 17;
+  uint64 contract_id   = 3;
+  uint64 token_id      = 4;
+  string name          = 5;
+  string icon          = 6;
+  string cover         = 7;
+  string desription    = 8;
+  uint64 total         = 9;
+  uint64 remain        = 10;
+  uint64 price         = 11;
+  uint64 decimal       = 12;
+  uint64 status        = 13;
+  bool   checked       = 14;
+  string created_at    = 15;
+  uint64 created_stamp = 16;
+  string updated_at    = 17;
+  uint64 updated_stamp = 18;
 }
 
 /**************** 请求结构 ****************/
@@ -32,29 +33,31 @@ message Card {
 // CreateCardPost 创建卡片请求
 message CreateCardPost {
   uint64 activity_id = 2;
-  string name        = 3;
-  uint64 type        = 4;
-  string icon        = 5;
-  string cover       = 6;
-  string desription  = 7;
-  uint64 total       = 8;
-  uint64 price       = 9;
-  uint64 decimal     = 10;
+  uint64 contract_id = 3;
+  uint64 token_id    = 4;
+  string name        = 5;
+  string icon        = 6;
+  string cover       = 7;
+  string desription  = 8;
+  uint64 total       = 9;
+  uint64 price       = 10;
+  uint64 decimal     = 11;
 }
 
 // UpdateCardPost 更新卡片请求
 message UpdateCardPost {
   uint64 id          = 1;
   uint64 activity_id = 2;
-  string name        = 3;
-  uint64 type        = 4;
-  string icon        = 5;
-  string cover       = 6;
-  string desription  = 7;
-  uint64 total       = 8;
-  uint64 remain      = 9;
+  uint64 contract_id = 3;
+  uint64 token_id    = 4;
+  string name        = 5;
+  string icon        = 6;
+  string cover       = 7;
+  string desription  = 8;
+  uint64 total       = 9;
   uint64 price       = 10;
   uint64 decimal     = 11;
+  uint64 remain      = 12;
 }
 
 /**************** 返回结构 ****************/
