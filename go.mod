@@ -1,4 +1,4 @@
-module github.com/Metaverse/Proto
+module github.com/MetaverseTopDJ/Proto
 
 go 1.18
 
