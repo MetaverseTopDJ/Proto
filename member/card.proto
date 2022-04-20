@@ -28,6 +28,19 @@ message Card {
   uint64 updated_stamp = 18;
 }
 
+// SimpleCard 会员卡
+message SimpleCard {
+  uint64 id            = 1;
+  string name          = 5;
+  string icon          = 6;
+  string cover         = 7;
+  string desription    = 8;
+  uint64 total         = 9;
+  uint64 remain        = 10;
+  uint64 price         = 11;
+  uint64 decimal       = 12;
+}
+
 /**************** 请求结构 ****************/
 
 // CreateCardPost 创建卡片请求

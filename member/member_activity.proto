@@ -4,6 +4,8 @@ package member;
 
 option go_package = "./pb;pb";
 
+import "member/card.proto";
+
 /**************** 数据结构 ****************/
 
 // MemberActivity 会员活动
@@ -26,6 +28,22 @@ message MemberActivity {
   string updated_at  = 16;
 }
 
+// MemberActivityDetail 会员活动明细
+message MemberActivityDetail {
+  uint64   id               = 1;
+  string   name             = 2;
+  string   description      = 3;
+  uint64   limit            = 4;
+  string   stage            = 5;
+  uint64   vip_start        = 6;
+  uint64   vip_end          = 7;
+  uint64   pre_start        = 8;
+  uint64   pre_end          = 9;
+  uint64   sale_start       = 10;
+  uint64   sale_end         = 11;
+  uint64   status           = 12;
+  repeated SimpleCard cards = 13;
+}
 
 /**************** 请求结构 ****************/
 
@@ -66,6 +84,12 @@ message UpdateMemberActivityPost {
 message MemberActivityResponse {
   string         message = 1;
   MemberActivity data    = 2;
+}
+
+// MemberActivityDetailResponse 返回 活动明细
+message MemberActivityDetailResponse {
+  string               message = 1;
+  MemberActivityDetail data    = 2;
 }
 
 // MemberActivitiesResponse 返回 会员活动 列表

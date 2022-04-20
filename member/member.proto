@@ -7,6 +7,7 @@ option go_package = "./pb;pb";
 import "global/global.proto";
 import "member/avatar.proto";
 import "member/card.proto";
+import "member/member_login.proto";
 import "member/member_activity.proto";
 import "member/member_pre_sale_white_address.proto";
 
@@ -28,6 +29,11 @@ message Member {
 }
 
 /**************** 请求结构 ****************/
+
+// MemberByAddressPost 根据钱包地址，获取会员数据
+message MemberByAddressPost {
+  string address = 1;
+}
 
 /**************** 返回结构 ****************/
 
@@ -57,8 +63,12 @@ service MemberService {
 
   // 会员
   rpc Member (global.InfoPost) returns (MemberResponse) {}
+  rpc MemberByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据钱包地址获取会员数据，没有则创建会员
   rpc MemberCards (global.InfoPost) returns (global.Response) {}
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
+
+  // 登录
+  rpc MemberHash (MemberHashPost) returns (MemberHashResponse) {}
   
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
@@ -70,6 +80,7 @@ service MemberService {
 
   // 会员卡 活动（Console）
   rpc MemberActivity (global.InfoPost) returns (MemberActivityResponse) {} // 获取会员活动信息
+  rpc MemberActivityDetail (global.InfoPost) returns (MemberActivityDetailResponse) {} // 获取会员活动明细
   rpc MemberActivities (global.EmptyPost) returns (MemberActivitiesResponse) {} // 获取会员活动列表
   rpc MemberActivityPagination (global.PaginationPost) returns (MemberActivityPaginationResponse) {} // 会员活动分页
   rpc CreateMemberActivity (CreateMemberActivityPost) returns (MemberActivityResponse) {} // 创建会员活动
