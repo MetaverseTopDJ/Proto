@@ -1,4 +1,4 @@
-module proto
+module Metaverse/Proto
 
 go 1.18
 
