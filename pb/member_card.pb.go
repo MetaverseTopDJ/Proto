@@ -140,19 +140,193 @@ func (x *MemberCard) GetUpdatedAt() string {
 	return ""
 }
 
+// MemberCardCreatePost 会员卡 铸造参数
+type MemberCardCreatePost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ContractId  uint64 `protobuf:"varint,1,opt,name=contract_id,json=contractId,proto3" json:"contract_id"`
+	TokenId     uint64 `protobuf:"varint,2,opt,name=token_id,json=tokenId,proto3" json:"token_id"`
+	BlockNumber uint64 `protobuf:"varint,3,opt,name=block_number,json=blockNumber,proto3" json:"block_number"`
+	Hash        string `protobuf:"bytes,4,opt,name=hash,proto3" json:"hash"`
+	Address     string `protobuf:"bytes,5,opt,name=address,proto3" json:"address"`
+	Timestamp   uint64 `protobuf:"varint,6,opt,name=timestamp,proto3" json:"timestamp"`
+}
+
+func (x *MemberCardCreatePost) Reset() {
+	*x = MemberCardCreatePost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_member_member_card_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MemberCardCreatePost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemberCardCreatePost) ProtoMessage() {}
+
+func (x *MemberCardCreatePost) ProtoReflect() protoreflect.Message {
+	mi := &file_member_member_card_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemberCardCreatePost.ProtoReflect.Descriptor instead.
+func (*MemberCardCreatePost) Descriptor() ([]byte, []int) {
+	return file_member_member_card_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MemberCardCreatePost) GetContractId() uint64 {
+	if x != nil {
+		return x.ContractId
+	}
+	return 0
+}
+
+func (x *MemberCardCreatePost) GetTokenId() uint64 {
+	if x != nil {
+		return x.TokenId
+	}
+	return 0
+}
+
+func (x *MemberCardCreatePost) GetBlockNumber() uint64 {
+	if x != nil {
+		return x.BlockNumber
+	}
+	return 0
+}
+
+func (x *MemberCardCreatePost) GetHash() string {
+	if x != nil {
+		return x.Hash
+	}
+	return ""
+}
+
+func (x *MemberCardCreatePost) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *MemberCardCreatePost) GetTimestamp() uint64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+// MemberCardTransferPost 会员卡 交易参数
+type MemberCardTransferPost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ContractId  uint64 `protobuf:"varint,1,opt,name=contract_id,json=contractId,proto3" json:"contract_id"`
+	TokenId     uint64 `protobuf:"varint,2,opt,name=token_id,json=tokenId,proto3" json:"token_id"`
+	BlockNumber uint64 `protobuf:"varint,3,opt,name=block_number,json=blockNumber,proto3" json:"block_number"`
+	Hash        string `protobuf:"bytes,4,opt,name=hash,proto3" json:"hash"`
+	From        string `protobuf:"bytes,5,opt,name=from,proto3" json:"from"`
+	To          string `protobuf:"bytes,6,opt,name=to,proto3" json:"to"`
+}
+
+func (x *MemberCardTransferPost) Reset() {
+	*x = MemberCardTransferPost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_member_member_card_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MemberCardTransferPost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemberCardTransferPost) ProtoMessage() {}
+
+func (x *MemberCardTransferPost) ProtoReflect() protoreflect.Message {
+	mi := &file_member_member_card_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemberCardTransferPost.ProtoReflect.Descriptor instead.
+func (*MemberCardTransferPost) Descriptor() ([]byte, []int) {
+	return file_member_member_card_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MemberCardTransferPost) GetContractId() uint64 {
+	if x != nil {
+		return x.ContractId
+	}
+	return 0
+}
+
+func (x *MemberCardTransferPost) GetTokenId() uint64 {
+	if x != nil {
+		return x.TokenId
+	}
+	return 0
+}
+
+func (x *MemberCardTransferPost) GetBlockNumber() uint64 {
+	if x != nil {
+		return x.BlockNumber
+	}
+	return 0
+}
+
+func (x *MemberCardTransferPost) GetHash() string {
+	if x != nil {
+		return x.Hash
+	}
+	return ""
+}
+
+func (x *MemberCardTransferPost) GetFrom() string {
+	if x != nil {
+		return x.From
+	}
+	return ""
+}
+
+func (x *MemberCardTransferPost) GetTo() string {
+	if x != nil {
+		return x.To
+	}
+	return ""
+}
+
 // CreateMemberCardPost 新增会员卡
 type CreateMemberCardPost struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
-	NftId uint64 `protobuf:"varint,1,opt,name=nft_id,json=nftId,proto3" json:"nft_id"`
 }
 
 func (x *CreateMemberCardPost) Reset() {
 	*x = CreateMemberCardPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_member_member_card_proto_msgTypes[1]
+		mi := &file_member_member_card_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -165,7 +339,7 @@ func (x *CreateMemberCardPost) String() string {
 func (*CreateMemberCardPost) ProtoMessage() {}
 
 func (x *CreateMemberCardPost) ProtoReflect() protoreflect.Message {
-	mi := &file_member_member_card_proto_msgTypes[1]
+	mi := &file_member_member_card_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -178,14 +352,7 @@ func (x *CreateMemberCardPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMemberCardPost.ProtoReflect.Descriptor instead.
 func (*CreateMemberCardPost) Descriptor() ([]byte, []int) {
-	return file_member_member_card_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateMemberCardPost) GetNftId() uint64 {
-	if x != nil {
-		return x.NftId
-	}
-	return 0
+	return file_member_member_card_proto_rawDescGZIP(), []int{3}
 }
 
 // UpdateMemberCardPost 更新会员卡
@@ -198,7 +365,7 @@ type UpdateMemberCardPost struct {
 func (x *UpdateMemberCardPost) Reset() {
 	*x = UpdateMemberCardPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_member_member_card_proto_msgTypes[2]
+		mi := &file_member_member_card_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -211,7 +378,7 @@ func (x *UpdateMemberCardPost) String() string {
 func (*UpdateMemberCardPost) ProtoMessage() {}
 
 func (x *UpdateMemberCardPost) ProtoReflect() protoreflect.Message {
-	mi := &file_member_member_card_proto_msgTypes[2]
+	mi := &file_member_member_card_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -224,7 +391,7 @@ func (x *UpdateMemberCardPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMemberCardPost.ProtoReflect.Descriptor instead.
 func (*UpdateMemberCardPost) Descriptor() ([]byte, []int) {
-	return file_member_member_card_proto_rawDescGZIP(), []int{2}
+	return file_member_member_card_proto_rawDescGZIP(), []int{4}
 }
 
 // MemberCardResponse 会员卡返回
@@ -237,7 +404,7 @@ type MemberCardResponse struct {
 func (x *MemberCardResponse) Reset() {
 	*x = MemberCardResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_member_member_card_proto_msgTypes[3]
+		mi := &file_member_member_card_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -250,7 +417,7 @@ func (x *MemberCardResponse) String() string {
 func (*MemberCardResponse) ProtoMessage() {}
 
 func (x *MemberCardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_member_member_card_proto_msgTypes[3]
+	mi := &file_member_member_card_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,7 +430,7 @@ func (x *MemberCardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberCardResponse.ProtoReflect.Descriptor instead.
 func (*MemberCardResponse) Descriptor() ([]byte, []int) {
-	return file_member_member_card_proto_rawDescGZIP(), []int{3}
+	return file_member_member_card_proto_rawDescGZIP(), []int{5}
 }
 
 var File_member_member_card_proto protoreflect.FileDescriptor
@@ -288,14 +455,36 @@ var file_member_member_card_proto_rawDesc = []byte{
 	0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a,
 	0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x2d, 0x0a, 0x14,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64,
-	0x50, 0x6f, 0x73, 0x74, 0x12, 0x15, 0x0a, 0x06, 0x6e, 0x66, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x6e, 0x66, 0x74, 0x49, 0x64, 0x22, 0x16, 0x0a, 0x14, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64, 0x50,
-	0x6f, 0x73, 0x74, 0x22, 0x14, 0x0a, 0x12, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72,
-	0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70,
-	0x62, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xc1, 0x01, 0x0a,
+	0x14, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x63, 0x6f, 0x6e, 0x74,
+	0x72, 0x61, 0x63, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x49,
+	0x64, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x4e, 0x75,
+	0x6d, 0x62, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x61, 0x73, 0x68, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x68, 0x61, 0x73, 0x68, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
+	0x22, 0xaf, 0x01, 0x0a, 0x16, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64, 0x54,
+	0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63,
+	0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x0a, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08,
+	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07,
+	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
+	0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x62,
+	0x6c, 0x6f, 0x63, 0x6b, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x61,
+	0x73, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x61, 0x73, 0x68, 0x12, 0x12,
+	0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66, 0x72,
+	0x6f, 0x6d, 0x12, 0x0e, 0x0a, 0x02, 0x74, 0x6f, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x74, 0x6f, 0x22, 0x16, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62,
+	0x65, 0x72, 0x43, 0x61, 0x72, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x22, 0x16, 0x0a, 0x14, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64, 0x50, 0x6f,
+	0x73, 0x74, 0x22, 0x14, 0x0a, 0x12, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x61, 0x72, 0x64,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62,
+	0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -310,12 +499,14 @@ func file_member_member_card_proto_rawDescGZIP() []byte {
 	return file_member_member_card_proto_rawDescData
 }
 
-var file_member_member_card_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_member_member_card_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_member_member_card_proto_goTypes = []interface{}{
-	(*MemberCard)(nil),           // 0: member.MemberCard
-	(*CreateMemberCardPost)(nil), // 1: member.CreateMemberCardPost
-	(*UpdateMemberCardPost)(nil), // 2: member.UpdateMemberCardPost
-	(*MemberCardResponse)(nil),   // 3: member.MemberCardResponse
+	(*MemberCard)(nil),             // 0: member.MemberCard
+	(*MemberCardCreatePost)(nil),   // 1: member.MemberCardCreatePost
+	(*MemberCardTransferPost)(nil), // 2: member.MemberCardTransferPost
+	(*CreateMemberCardPost)(nil),   // 3: member.CreateMemberCardPost
+	(*UpdateMemberCardPost)(nil),   // 4: member.UpdateMemberCardPost
+	(*MemberCardResponse)(nil),     // 5: member.MemberCardResponse
 }
 var file_member_member_card_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -344,7 +535,7 @@ func file_member_member_card_proto_init() {
 			}
 		}
 		file_member_member_card_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMemberCardPost); i {
+			switch v := v.(*MemberCardCreatePost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -356,7 +547,7 @@ func file_member_member_card_proto_init() {
 			}
 		}
 		file_member_member_card_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateMemberCardPost); i {
+			switch v := v.(*MemberCardTransferPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -368,6 +559,30 @@ func file_member_member_card_proto_init() {
 			}
 		}
 		file_member_member_card_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateMemberCardPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_member_member_card_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateMemberCardPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_member_member_card_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MemberCardResponse); i {
 			case 0:
 				return &v.state
@@ -386,7 +601,7 @@ func file_member_member_card_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_member_member_card_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

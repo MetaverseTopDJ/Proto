@@ -22,9 +22,28 @@ message MemberCard {
 
 /**************** 请求结构 ****************/
 
+// MemberCardCreatePost 会员卡 铸造参数
+message MemberCardCreatePost {
+  uint64 contract_id  = 1;
+  uint64 token_id     = 2;
+  uint64 block_number = 3;
+  string hash         = 4;
+  string address      = 5;
+  uint64 timestamp    = 6;
+}
+
+// MemberCardTransferPost 会员卡 交易参数
+message MemberCardTransferPost {
+  uint64 contract_id  = 1;
+  uint64 token_id     = 2;
+  uint64 block_number = 3;
+  string hash         = 4;
+  string from         = 5;
+  string to           = 6;
+}
+
 // CreateMemberCardPost 新增会员卡
 message CreateMemberCardPost {
-  uint64 nft_id      = 1;
 }
 
 // UpdateMemberCardPost 更新会员卡

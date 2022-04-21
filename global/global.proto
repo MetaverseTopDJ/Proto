@@ -20,6 +20,10 @@ message InfoKeyPost {
   string Key = 1;
 }
 
+message InfoCodePost {
+  string Code = 1;
+}
+
 message KeywordPost {
   string Keyword = 1;
 }
@@ -56,11 +60,22 @@ message ChangeStatusByKeyPost {
   uint64 Status = 2;
 }
 
+message ChangeStatusByCodePost {
+  string Code = 1;
+  uint64 Status = 2;
+}
+
 /** ************** 全局返回数据 ************** **/
 
 message Response {
   string Message = 1;
   map<string, string> Data = 2;
+}
+
+// ResultResponse 返回执行结果
+message ResultResponse {
+  string Message = 1;
+  bool   result  = 2;
 }
 
 // MessageResponse 仅返回成功失败消息

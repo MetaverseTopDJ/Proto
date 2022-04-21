@@ -8,6 +8,7 @@ import "global/global.proto";
 import "member/avatar.proto";
 import "member/card.proto";
 import "member/member_login.proto";
+import "member/member_card.proto";
 import "member/member_activity.proto";
 import "member/member_pre_sale_white_address.proto";
 
@@ -53,6 +54,9 @@ message MemberPaginationResponse {
 }
 
 service MemberService {
+  // 登录
+  rpc MemberHash (MemberHashPost) returns (MemberHashResponse) {}
+
   // 头像
   rpc Avatar (global.InfoPost) returns (AvatarResponse) {}
   rpc Avatars (global.EmptyPost) returns (AvatarsResponse) {}
@@ -66,9 +70,6 @@ service MemberService {
   rpc MemberByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据钱包地址获取会员数据，没有则创建会员
   rpc MemberCards (global.InfoPost) returns (global.Response) {}
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
-
-  // 登录
-  rpc MemberHash (MemberHashPost) returns (MemberHashResponse) {}
   
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
@@ -87,6 +88,10 @@ service MemberService {
   rpc UpdateMemberActivity (UpdateMemberActivityPost) returns (MemberActivityResponse) {} // 更新会员活动
   rpc RefreshMemberActivity (global.InfoPost) returns (global.MessageResponse) {} // 刷新会员活动
   rpc DeleteMemberActivity (global.InfoPost) returns (global.MessageResponse) {} // 删除会员活动
+
+  // 会员卡 操作
+  rpc MemberCardCreate (MemberCardCreatePost) returns (global.ResultResponse) {} // 会员卡铸造
+  rpc MemberCardTransfer (MemberCardTransferPost) returns (global.ResultResponse) {} // 会员卡 交易
 
   // 会员卡 活动（App）
   rpc CurrentActivity (global.EmptyPost) returns (CardsResponse) {} // 获取当前活动

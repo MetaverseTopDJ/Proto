@@ -7,6 +7,7 @@ option go_package = "./pb;pb";
 import "global/global.proto";
 import "nft/nft_token.proto";
 import "nft/contract.proto";
+import "nft/block_crontab.proto";
 
 service NFTService {
   // Token 通证
@@ -23,4 +24,12 @@ service NFTService {
   rpc CreateContract (CreateContractPost) returns (ContractResponse) {}
   rpc UpdateContract (UpdateContractPost) returns (ContractResponse) {}
   rpc ChangeContractStatus (global.ChangeStatusPost) returns (ContractResponse) {}
+
+  // BlockCrontab 区块扫描 计划任务
+  rpc BlockCrontab (global.InfoCodePost) returns (BlockCrontabResponse) {}
+  rpc BlockContracts (global.EmptyPost) returns (BlockCrontabsResponse) {}
+  rpc BlockCrontabPagination (global.PaginationPost) returns (BlockCrontabPaginationResponse) {}
+  rpc CreateBlockCrontab (ModifyBlockCrontabPost) returns (BlockCrontabResponse) {}
+  rpc UpdateBlockCrontab (ModifyBlockCrontabPost) returns (BlockCrontabResponse) {}
+  rpc ChangeBlockCrontabStatus (global.ChangeStatusByCodePost) returns (BlockCrontabResponse) {}
 }

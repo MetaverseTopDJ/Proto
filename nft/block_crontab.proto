@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// BlockCrontab 区块扫描 计划任务
+message BlockCrontab {
+  uint64 contract_id = 1;
+  string code        = 2;
+  uint64 current     = 3;
+  uint64 next        = 4;
+  uint64 exec        = 5;
+  uint64 interval    = 6;
+  uint64 check       = 7;
+  uint64 status      = 8;
+  bool   checked     = 9;
+  string created_at  = 10;
+  string updated_at  = 11;
+}
+
+/**************** 请求结构 ****************/
+
+// ModifyBlockCrontabPost 编辑计划任务
+message ModifyBlockCrontabPost {
+  uint64 contract_id = 1;
+  string code        = 2;
+  uint64 current     = 3;
+  uint64 next        = 4;
+  uint64 exec        = 5;
+  uint64 interval    = 6;
+  uint64 check       = 7;
+}
+
+/**************** 返回结构 ****************/
+
+message BlockCrontabResponse {
+  string       message = 1;
+  BlockCrontab data    = 2;
+}
+
+message BlockCrontabsResponse {
+  string   message           = 1;
+  repeated BlockCrontab data = 2;
+}
+
+message BlockCrontabPaginationResponse {
+  message BlockCrontabs {
+    repeated BlockCrontab list = 1;
+    int64    total             = 2;
+  }
+  string        message = 1;
+  BlockCrontabs data    = 2;
+}

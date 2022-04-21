@@ -31,6 +31,13 @@ type NFTServiceClient interface {
 	CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	UpdateContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	ChangeContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	// BlockCrontab 区块扫描 计划任务
+	BlockCrontab(ctx context.Context, in *InfoCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
+	BlockContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlockCrontabsResponse, error)
+	BlockCrontabPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlockCrontabPaginationResponse, error)
+	CreateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
+	UpdateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
+	ChangeBlockCrontabStatus(ctx context.Context, in *ChangeStatusByCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
 }
 
 type nFTServiceClient struct {
@@ -140,6 +147,60 @@ func (c *nFTServiceClient) ChangeContractStatus(ctx context.Context, in *ChangeS
 	return out, nil
 }
 
+func (c *nFTServiceClient) BlockCrontab(ctx context.Context, in *InfoCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
+	out := new(BlockCrontabResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockCrontab", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlockContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlockCrontabsResponse, error) {
+	out := new(BlockCrontabsResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockContracts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlockCrontabPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlockCrontabPaginationResponse, error) {
+	out := new(BlockCrontabPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockCrontabPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
+	out := new(BlockCrontabResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateBlockCrontab", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
+	out := new(BlockCrontabResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateBlockCrontab", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ChangeBlockCrontabStatus(ctx context.Context, in *ChangeStatusByCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
+	out := new(BlockCrontabResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeBlockCrontabStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NFTServiceServer is the server API for NFTService service.
 // All implementations must embed UnimplementedNFTServiceServer
 // for forward compatibility
@@ -157,6 +218,13 @@ type NFTServiceServer interface {
 	CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error)
 	UpdateContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
 	ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
+	// BlockCrontab 区块扫描 计划任务
+	BlockCrontab(context.Context, *InfoCodePost) (*BlockCrontabResponse, error)
+	BlockContracts(context.Context, *EmptyPost) (*BlockCrontabsResponse, error)
+	BlockCrontabPagination(context.Context, *PaginationPost) (*BlockCrontabPaginationResponse, error)
+	CreateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error)
+	UpdateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error)
+	ChangeBlockCrontabStatus(context.Context, *ChangeStatusByCodePost) (*BlockCrontabResponse, error)
 	mustEmbedUnimplementedNFTServiceServer()
 }
 
@@ -196,6 +264,24 @@ func (UnimplementedNFTServiceServer) UpdateContract(context.Context, *UpdateCont
 }
 func (UnimplementedNFTServiceServer) ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeContractStatus not implemented")
+}
+func (UnimplementedNFTServiceServer) BlockCrontab(context.Context, *InfoCodePost) (*BlockCrontabResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlockCrontab not implemented")
+}
+func (UnimplementedNFTServiceServer) BlockContracts(context.Context, *EmptyPost) (*BlockCrontabsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlockContracts not implemented")
+}
+func (UnimplementedNFTServiceServer) BlockCrontabPagination(context.Context, *PaginationPost) (*BlockCrontabPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlockCrontabPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBlockCrontab not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBlockCrontab not implemented")
+}
+func (UnimplementedNFTServiceServer) ChangeBlockCrontabStatus(context.Context, *ChangeStatusByCodePost) (*BlockCrontabResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeBlockCrontabStatus not implemented")
 }
 func (UnimplementedNFTServiceServer) mustEmbedUnimplementedNFTServiceServer() {}
 
@@ -408,6 +494,114 @@ func _NFTService_ChangeContractStatus_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_BlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoCodePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlockCrontab(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlockCrontab",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlockCrontab(ctx, req.(*InfoCodePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlockContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlockContracts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlockContracts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlockContracts(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlockCrontabPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlockCrontabPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlockCrontabPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlockCrontabPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateBlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyBlockCrontabPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateBlockCrontab(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateBlockCrontab",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateBlockCrontab(ctx, req.(*ModifyBlockCrontabPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateBlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyBlockCrontabPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateBlockCrontab(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateBlockCrontab",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateBlockCrontab(ctx, req.(*ModifyBlockCrontabPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ChangeBlockCrontabStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusByCodePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ChangeBlockCrontabStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ChangeBlockCrontabStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ChangeBlockCrontabStatus(ctx, req.(*ChangeStatusByCodePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NFTService_ServiceDesc is the grpc.ServiceDesc for NFTService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -458,6 +652,30 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeContractStatus",
 			Handler:    _NFTService_ChangeContractStatus_Handler,
+		},
+		{
+			MethodName: "BlockCrontab",
+			Handler:    _NFTService_BlockCrontab_Handler,
+		},
+		{
+			MethodName: "BlockContracts",
+			Handler:    _NFTService_BlockContracts_Handler,
+		},
+		{
+			MethodName: "BlockCrontabPagination",
+			Handler:    _NFTService_BlockCrontabPagination_Handler,
+		},
+		{
+			MethodName: "CreateBlockCrontab",
+			Handler:    _NFTService_CreateBlockCrontab_Handler,
+		},
+		{
+			MethodName: "UpdateBlockCrontab",
+			Handler:    _NFTService_UpdateBlockCrontab_Handler,
+		},
+		{
+			MethodName: "ChangeBlockCrontabStatus",
+			Handler:    _NFTService_ChangeBlockCrontabStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

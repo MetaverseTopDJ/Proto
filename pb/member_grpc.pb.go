@@ -18,6 +18,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberServiceClient interface {
+	// 登录
+	MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error)
 	// 头像
 	Avatar(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AvatarResponse, error)
 	Avatars(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*AvatarsResponse, error)
@@ -30,8 +32,6 @@ type MemberServiceClient interface {
 	MemberByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error)
 	MemberCards(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*Response, error)
 	MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error)
-	// 登录
-	MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error)
 	// 会员卡
 	Card(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CardResponse, error)
 	Cards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
@@ -48,6 +48,9 @@ type MemberServiceClient interface {
 	UpdateMemberActivity(ctx context.Context, in *UpdateMemberActivityPost, opts ...grpc.CallOption) (*MemberActivityResponse, error)
 	RefreshMemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MessageResponse, error)
 	DeleteMemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MessageResponse, error)
+	// 会员卡 操作
+	MemberCardCreate(ctx context.Context, in *MemberCardCreatePost, opts ...grpc.CallOption) (*ResultResponse, error)
+	MemberCardTransfer(ctx context.Context, in *MemberCardTransferPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	// 会员卡 活动（App）
 	CurrentActivity(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
 	// 活动白名单
@@ -64,6 +67,15 @@ type memberServiceClient struct {
 
 func NewMemberServiceClient(cc grpc.ClientConnInterface) MemberServiceClient {
 	return &memberServiceClient{cc}
+}
+
+func (c *memberServiceClient) MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error) {
+	out := new(MemberHashResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *memberServiceClient) Avatar(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AvatarResponse, error) {
@@ -150,15 +162,6 @@ func (c *memberServiceClient) MemberCards(ctx context.Context, in *InfoPost, opt
 func (c *memberServiceClient) MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error) {
 	out := new(MemberPaginationResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberPagination", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberServiceClient) MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error) {
-	out := new(MemberHashResponse)
-	err := c.cc.Invoke(ctx, "/member.MemberService/MemberHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -291,6 +294,24 @@ func (c *memberServiceClient) DeleteMemberActivity(ctx context.Context, in *Info
 	return out, nil
 }
 
+func (c *memberServiceClient) MemberCardCreate(ctx context.Context, in *MemberCardCreatePost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberCardCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberCardTransfer(ctx context.Context, in *MemberCardTransferPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberCardTransfer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) CurrentActivity(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error) {
 	out := new(CardsResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/CurrentActivity", in, out, opts...)
@@ -349,6 +370,8 @@ func (c *memberServiceClient) UpdateMemberPreSaleWhiteAddress(ctx context.Contex
 // All implementations must embed UnimplementedMemberServiceServer
 // for forward compatibility
 type MemberServiceServer interface {
+	// 登录
+	MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error)
 	// 头像
 	Avatar(context.Context, *InfoPost) (*AvatarResponse, error)
 	Avatars(context.Context, *EmptyPost) (*AvatarsResponse, error)
@@ -361,8 +384,6 @@ type MemberServiceServer interface {
 	MemberByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error)
 	MemberCards(context.Context, *InfoPost) (*Response, error)
 	MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error)
-	// 登录
-	MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error)
 	// 会员卡
 	Card(context.Context, *InfoPost) (*CardResponse, error)
 	Cards(context.Context, *EmptyPost) (*CardsResponse, error)
@@ -379,6 +400,9 @@ type MemberServiceServer interface {
 	UpdateMemberActivity(context.Context, *UpdateMemberActivityPost) (*MemberActivityResponse, error)
 	RefreshMemberActivity(context.Context, *InfoPost) (*MessageResponse, error)
 	DeleteMemberActivity(context.Context, *InfoPost) (*MessageResponse, error)
+	// 会员卡 操作
+	MemberCardCreate(context.Context, *MemberCardCreatePost) (*ResultResponse, error)
+	MemberCardTransfer(context.Context, *MemberCardTransferPost) (*ResultResponse, error)
 	// 会员卡 活动（App）
 	CurrentActivity(context.Context, *EmptyPost) (*CardsResponse, error)
 	// 活动白名单
@@ -394,6 +418,9 @@ type MemberServiceServer interface {
 type UnimplementedMemberServiceServer struct {
 }
 
+func (UnimplementedMemberServiceServer) MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberHash not implemented")
+}
 func (UnimplementedMemberServiceServer) Avatar(context.Context, *InfoPost) (*AvatarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Avatar not implemented")
 }
@@ -423,9 +450,6 @@ func (UnimplementedMemberServiceServer) MemberCards(context.Context, *InfoPost) 
 }
 func (UnimplementedMemberServiceServer) MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberPagination not implemented")
-}
-func (UnimplementedMemberServiceServer) MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberHash not implemented")
 }
 func (UnimplementedMemberServiceServer) Card(context.Context, *InfoPost) (*CardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Card not implemented")
@@ -469,6 +493,12 @@ func (UnimplementedMemberServiceServer) RefreshMemberActivity(context.Context, *
 func (UnimplementedMemberServiceServer) DeleteMemberActivity(context.Context, *InfoPost) (*MessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberActivity not implemented")
 }
+func (UnimplementedMemberServiceServer) MemberCardCreate(context.Context, *MemberCardCreatePost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberCardCreate not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberCardTransfer(context.Context, *MemberCardTransferPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberCardTransfer not implemented")
+}
 func (UnimplementedMemberServiceServer) CurrentActivity(context.Context, *EmptyPost) (*CardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CurrentActivity not implemented")
 }
@@ -498,6 +528,24 @@ type UnsafeMemberServiceServer interface {
 
 func RegisterMemberServiceServer(s grpc.ServiceRegistrar, srv MemberServiceServer) {
 	s.RegisterService(&MemberService_ServiceDesc, srv)
+}
+
+func _MemberService_MemberHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberHashPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberHash",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberHash(ctx, req.(*MemberHashPost))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _MemberService_Avatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -676,24 +724,6 @@ func _MemberService_MemberPagination_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).MemberPagination(ctx, req.(*PaginationPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberService_MemberHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MemberHashPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberServiceServer).MemberHash(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/member.MemberService/MemberHash",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).MemberHash(ctx, req.(*MemberHashPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -950,6 +980,42 @@ func _MemberService_DeleteMemberActivity_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_MemberCardCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberCardCreatePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberCardCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberCardCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberCardCreate(ctx, req.(*MemberCardCreatePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberCardTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberCardTransferPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberCardTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberCardTransfer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberCardTransfer(ctx, req.(*MemberCardTransferPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MemberService_CurrentActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmptyPost)
 	if err := dec(in); err != nil {
@@ -1066,6 +1132,10 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MemberServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "MemberHash",
+			Handler:    _MemberService_MemberHash_Handler,
+		},
+		{
 			MethodName: "Avatar",
 			Handler:    _MemberService_Avatar_Handler,
 		},
@@ -1104,10 +1174,6 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberPagination",
 			Handler:    _MemberService_MemberPagination_Handler,
-		},
-		{
-			MethodName: "MemberHash",
-			Handler:    _MemberService_MemberHash_Handler,
 		},
 		{
 			MethodName: "Card",
@@ -1164,6 +1230,14 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteMemberActivity",
 			Handler:    _MemberService_DeleteMemberActivity_Handler,
+		},
+		{
+			MethodName: "MemberCardCreate",
+			Handler:    _MemberService_MemberCardCreate_Handler,
+		},
+		{
+			MethodName: "MemberCardTransfer",
+			Handler:    _MemberService_MemberCardTransfer_Handler,
 		},
 		{
 			MethodName: "CurrentActivity",
