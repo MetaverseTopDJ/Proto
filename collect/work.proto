@@ -1,0 +1,148 @@
+syntax = "proto3";
+
+package collect;
+
+option go_package = "./pb;pb";
+
+import "collect/author.proto";
+/**************** 数据结构 ****************/
+
+// Work 作品
+message Work {
+  uint64 id             = 1;
+  uint64 author_id      = 2;
+  uint64 type           = 3;
+  string title          = 4;
+  string sub_title      = 5;
+  string description    = 6;
+  string published_date = 7;
+  string serial_num     = 8;
+  string series         = 9;
+  uint64 rarity         = 10;
+  string introduction   = 11;
+  string path           = 12;
+  uint64 sort           = 13;
+  uint64 cover          = 14;
+  uint64 status         = 15;
+  bool   checked        = 16;
+  string created_at     = 17;
+  string updated_at     = 18;
+}
+
+// SimpleWorkDetail 简单的 作品明细
+message SimpleWorkDetail {
+  uint64             id             = 1;
+  string             title          = 2;
+  string             description    = 3;
+  string             published_date = 4;
+  string             serial_num     = 5;
+  string             created_at     = 6;
+  SimpleWorkResource resource       = 7;
+}
+
+// SimpleWorkIntroduction 简单的介绍
+message SimpleWorkIntroduction {
+}
+
+// SimpleWorkResource 作品资源
+message SimpleWorkResource {
+  uint64 type      = 1;
+  string url       = 2;
+  uint64 order_num = 3;
+}
+
+// WorkIntroduction 作品介绍
+message WorkIntroduction {
+  uint64 work_id    = 1;
+  string content    = 2;
+  uint64 status     = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}
+
+// WorkResource 作品资源
+message WorkResource {
+  uint64 work_id = 1;
+  uint64 sort    = 2;
+}
+
+// SimpleWork 返回前端的数据结构
+message SimpleWork {
+  uint64       id             = 1;
+  uint64       type           = 2;
+  string       title          = 3;
+  string       sub_title      = 4;
+  string       description    = 5;
+  string       published_date = 6;
+  string       serial_num     = 7;
+  string       series         = 8;
+  uint64       rarity         = 9;
+  uint64       status         = 10;
+  SimpleAuthor author         = 11;
+}
+
+/**************** 请求结构 ****************/
+
+// RecommendWorksPost 获取推荐作品
+message RecommendWorksPost {
+  uint64 num = 1; // 数量
+}
+
+// CreateWorkPost 创建作品
+message CreateWorkPost {
+  uint64 author_id      = 2;
+  uint64 type           = 3;
+  string title          = 4;
+  string sub_title      = 5;
+  string description    = 6;
+  string published_date = 7;
+  string serial_num     = 8;
+  string series         = 9;
+  uint64 rarity         = 10;
+  string introduction   = 11;
+  string path           = 12;
+  uint64 sort           = 13;
+  uint64 cover          = 14;
+}
+
+// UpdateWorkPost 更新作品
+message UpdateWorkPost {
+  uint64 id             = 1;
+  uint64 author_id      = 2;
+  uint64 type           = 3;
+  string title          = 4;
+  string sub_title      = 5;
+  string description    = 6;
+  string published_date = 7;
+  string serial_num     = 8;
+  string series         = 9;
+  uint64 rarity         = 10;
+  string introduction   = 11;
+  string path           = 12;
+  uint64 sort           = 13;
+  uint64 cover          = 14;
+}
+
+/**************** 返回结构 ****************/
+
+// WorkResponse 返回
+message WorkResponse {
+  string message = 1;
+  Work   data    = 2;
+}
+
+// RecommendWorksResponse 返回推荐的作品
+message RecommendWorksResponse {
+  string   message               = 1;
+  repeated SimpleWorkDetail data = 2;
+}
+
+// WorkPaginationResponse 返回 分页
+message WorkPaginationResponse {
+  message Works {
+    repeated Work list = 1;
+    int64    total     = 2;
+  }
+  string message = 1;
+  Works  data    = 2;
+}

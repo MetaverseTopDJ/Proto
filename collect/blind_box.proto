@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package collect;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// BlindBox 盲盒
+message BlindBox {
+  uint64 id          = 1;
+  string title       = 2;
+  string sub_title   = 3;
+  string description = 4;
+  string cover       = 5;
+  string series      = 6;
+  uint64 price       = 7;
+  uint64 decimal     = 8;
+  string start_at    = 9;
+  string end_at      = 10;
+  uint64 top         = 11;
+  uint64 status      = 12;
+  bool   checked     = 13;
+  string created_at  = 14;
+  string updated_at  = 15;
+}
+
+// BlindBoxContent 盲盒内容
+message BlindBoxContent {
+  uint64 blind_box_id = 1;
+  uint64 work_id      = 2;
+  uint64 rarity       = 3;
+  uint64 probability  = 4;
+  uint64 total        = 5;
+  uint64 remain       = 6;
+  uint64 status       = 7;
+  string created_at   = 8;
+  string updated_at   = 9;
+}
+
+// BlindBoxIntroduction 盲盒介绍
+message BlindBoxIntroduction {
+  uint64 blind_box_id = 1;
+  string content      = 2;
+  uint64 status       = 3;
+  string created_at   = 4;
+  string updated_at   = 5;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateBlindBoxPost 创建盲盒
+message CreateBlindBoxPost {
+  string title       = 2;
+  string sub_title   = 3;
+  string description = 4;
+  string cover       = 5;
+  string series      = 6;
+  uint64 price       = 7;
+  uint64 decimal     = 8;
+  string start_at    = 9;
+  string end_at      = 10;
+}
+
+// UpdateBlindBoxPost 更新盲盒
+message UpdateBlindBoxPost {
+  uint64 id          = 1;
+  string title       = 2;
+  string sub_title   = 3;
+  string description = 4;
+  string cover       = 5;
+  string series      = 6;
+  uint64 price       = 7;
+  uint64 decimal     = 8;
+  string start_at    = 9;
+  string end_at      = 10;
+}
+
+/**************** 返回结构 ****************/
+
+// BlindBoxResponse 返回 盲盒基础信息
+message BlindBoxResponse {
+  string   message = 1;
+  BlindBox data    = 2;
+}
+
+// BlindBoxDetailResponse 
+message BlindBoxDetailResponse {}
+
+message BlindBoxPaginationResponse {}

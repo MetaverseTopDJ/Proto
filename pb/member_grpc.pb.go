@@ -20,6 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 type MemberServiceClient interface {
 	// 登录
 	MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error)
+	MemberLogin(ctx context.Context, in *MemberLoginPost, opts ...grpc.CallOption) (*MemberLoginResponse, error)
+	MemberLogout(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*Response, error)
 	// 头像
 	Avatar(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AvatarResponse, error)
 	Avatars(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*AvatarsResponse, error)
@@ -29,7 +31,9 @@ type MemberServiceClient interface {
 	ChangeAvatarStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*AvatarResponse, error)
 	// 会员
 	Member(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberResponse, error)
+	MemberInfo(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
 	MemberByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error)
+	TopMemberInvitors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*TopMemberInvitorsResponse, error)
 	MemberCards(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*Response, error)
 	MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error)
 	// 会员卡
@@ -72,6 +76,24 @@ func NewMemberServiceClient(cc grpc.ClientConnInterface) MemberServiceClient {
 func (c *memberServiceClient) MemberHash(ctx context.Context, in *MemberHashPost, opts ...grpc.CallOption) (*MemberHashResponse, error) {
 	out := new(MemberHashResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberLogin(ctx context.Context, in *MemberLoginPost, opts ...grpc.CallOption) (*MemberLoginResponse, error) {
+	out := new(MemberLoginResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberLogout(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberLogout", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -141,9 +163,27 @@ func (c *memberServiceClient) Member(ctx context.Context, in *InfoPost, opts ...
 	return out, nil
 }
 
+func (c *memberServiceClient) MemberInfo(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error) {
+	out := new(SimpleMemberResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) MemberByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error) {
 	out := new(MemberResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberByAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) TopMemberInvitors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*TopMemberInvitorsResponse, error) {
+	out := new(TopMemberInvitorsResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/TopMemberInvitors", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -372,6 +412,8 @@ func (c *memberServiceClient) UpdateMemberPreSaleWhiteAddress(ctx context.Contex
 type MemberServiceServer interface {
 	// 登录
 	MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error)
+	MemberLogin(context.Context, *MemberLoginPost) (*MemberLoginResponse, error)
+	MemberLogout(context.Context, *EmptyPost) (*Response, error)
 	// 头像
 	Avatar(context.Context, *InfoPost) (*AvatarResponse, error)
 	Avatars(context.Context, *EmptyPost) (*AvatarsResponse, error)
@@ -381,7 +423,9 @@ type MemberServiceServer interface {
 	ChangeAvatarStatus(context.Context, *ChangeStatusPost) (*AvatarResponse, error)
 	// 会员
 	Member(context.Context, *InfoPost) (*MemberResponse, error)
+	MemberInfo(context.Context, *EmptyPost) (*SimpleMemberResponse, error)
 	MemberByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error)
+	TopMemberInvitors(context.Context, *EmptyPost) (*TopMemberInvitorsResponse, error)
 	MemberCards(context.Context, *InfoPost) (*Response, error)
 	MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error)
 	// 会员卡
@@ -421,6 +465,12 @@ type UnimplementedMemberServiceServer struct {
 func (UnimplementedMemberServiceServer) MemberHash(context.Context, *MemberHashPost) (*MemberHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberHash not implemented")
 }
+func (UnimplementedMemberServiceServer) MemberLogin(context.Context, *MemberLoginPost) (*MemberLoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberLogin not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberLogout(context.Context, *EmptyPost) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberLogout not implemented")
+}
 func (UnimplementedMemberServiceServer) Avatar(context.Context, *InfoPost) (*AvatarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Avatar not implemented")
 }
@@ -442,8 +492,14 @@ func (UnimplementedMemberServiceServer) ChangeAvatarStatus(context.Context, *Cha
 func (UnimplementedMemberServiceServer) Member(context.Context, *InfoPost) (*MemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Member not implemented")
 }
+func (UnimplementedMemberServiceServer) MemberInfo(context.Context, *EmptyPost) (*SimpleMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberInfo not implemented")
+}
 func (UnimplementedMemberServiceServer) MemberByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberByAddress not implemented")
+}
+func (UnimplementedMemberServiceServer) TopMemberInvitors(context.Context, *EmptyPost) (*TopMemberInvitorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TopMemberInvitors not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberCards(context.Context, *InfoPost) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberCards not implemented")
@@ -544,6 +600,42 @@ func _MemberService_MemberHash_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).MemberHash(ctx, req.(*MemberHashPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberLoginPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberLogin(ctx, req.(*MemberLoginPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberLogout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberLogout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberLogout",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberLogout(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -674,6 +766,24 @@ func _MemberService_Member_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_MemberInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberInfo(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MemberService_MemberByAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberByAddressPost)
 	if err := dec(in); err != nil {
@@ -688,6 +798,24 @@ func _MemberService_MemberByAddress_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).MemberByAddress(ctx, req.(*MemberByAddressPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_TopMemberInvitors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).TopMemberInvitors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/TopMemberInvitors",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).TopMemberInvitors(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1136,6 +1264,14 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MemberService_MemberHash_Handler,
 		},
 		{
+			MethodName: "MemberLogin",
+			Handler:    _MemberService_MemberLogin_Handler,
+		},
+		{
+			MethodName: "MemberLogout",
+			Handler:    _MemberService_MemberLogout_Handler,
+		},
+		{
 			MethodName: "Avatar",
 			Handler:    _MemberService_Avatar_Handler,
 		},
@@ -1164,8 +1300,16 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MemberService_Member_Handler,
 		},
 		{
+			MethodName: "MemberInfo",
+			Handler:    _MemberService_MemberInfo_Handler,
+		},
+		{
 			MethodName: "MemberByAddress",
 			Handler:    _MemberService_MemberByAddress_Handler,
+		},
+		{
+			MethodName: "TopMemberInvitors",
+			Handler:    _MemberService_TopMemberInvitors_Handler,
 		},
 		{
 			MethodName: "MemberCards",

@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package collect;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// Author 作者数据结构
+message Author {
+  uint64 id               = 1;
+  uint64 avatar_id        = 2;
+  string first_name       = 3;
+  string last_name        = 4;
+  string title            = 5;
+  string background_out   = 6;
+  string background_inner = 7;
+  uint64 hot              = 8;
+  string facebook         = 9;
+  string twitter          = 10;
+  uint64 follower         = 11;
+  uint64 status           = 12;
+  bool   checked          = 13;
+  string created_at       = 14;
+  string updated_at       = 15;
+}
+
+// SimpleAuthor 返回前端的作者数据
+message SimpleAuthor {
+  uint64 id               = 1;
+  string avatar_url       = 2;
+  string first_name       = 3;
+  string last_name        = 4;
+  string title            = 5;
+  string background_out   = 6;
+  string background_inner = 7;
+  uint64 hot              = 8;
+  string facebook         = 9;
+  string twitter          = 10;
+  uint64 follower         = 11;
+  uint64 status           = 12;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateAuthorPost 创建作者
+message CreateAuthorPost {
+  uint64 avatar_id        = 2;
+  string first_name       = 3;
+  string last_name        = 4;
+  string title            = 5;
+  string background_out   = 6;
+  string background_inner = 7;
+  uint64 hot              = 8;
+  string facebook         = 9;
+  string twitter          = 10;
+  uint64 follower         = 11;
+}
+
+// UpdateAuthorPost 更新作者
+message UpdateAuthorPost {
+  uint64 id               = 1;
+  uint64 avatar_id        = 2;
+  string first_name       = 3;
+  string last_name        = 4;
+  string title            = 5;
+  string background_out   = 6;
+  string background_inner = 7;
+  uint64 hot              = 8;
+  string facebook         = 9;
+  string twitter          = 10;
+  uint64 follower         = 11;
+}
+
+/**************** 返回结构 ****************/
+
+// AuthorResponse 返回
+message AuthorResponse {
+  string message = 1;
+  Author data    = 2;
+}
+
+// HotAuthorsResponse 返回 热门艺术家
+message HotAuthorsResponse {
+  string   message           = 1;
+  repeated SimpleAuthor data = 2;
+}
+
+// AuthorPaginationResponse 返回 分页
+message AuthorPaginationResponse {
+  message Authors {
+    repeated Author list = 1;
+    int64    total       = 2;
+  }
+  string  message = 1;
+  Authors data    = 2;
+}

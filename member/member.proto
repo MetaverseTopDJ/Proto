@@ -15,6 +15,7 @@ import "member/member_pre_sale_white_address.proto";
 
 /**************** 数据结构 ****************/
 
+// Member 会员
 message Member {
   uint64 id          = 1;
   string name        = 2;
@@ -39,8 +40,26 @@ message MemberByAddressPost {
 /**************** 返回结构 ****************/
 
 message MemberResponse {
-  Member data    = 1;
-  string message = 2;
+  string message = 1;
+  Member data    = 2;
+}
+
+// SimpleMemberResponse 返回会员信息
+message SimpleMemberResponse {
+  string       message = 1;
+  SimpleMember data    = 2;
+}
+
+// TopMemberInvitorsResponse 返回 前十 邀请者
+message TopMemberInvitorsResponse {
+  message TopInvitor {
+    string name       = 1;
+    string avatar     = 2;
+    uint64 invite_num = 3;
+    string created_at = 4;
+  }
+  string   message         = 1;
+  repeated TopInvitor data = 2;
 }
 
 // MemberPaginationResponse 会员分页
@@ -56,6 +75,8 @@ message MemberPaginationResponse {
 service MemberService {
   // 登录
   rpc MemberHash (MemberHashPost) returns (MemberHashResponse) {}
+  rpc MemberLogin (MemberLoginPost) returns (MemberLoginResponse) {}
+  rpc MemberLogout (global.EmptyPost) returns (global.Response) {}
 
   // 头像
   rpc Avatar (global.InfoPost) returns (AvatarResponse) {}
@@ -67,8 +88,10 @@ service MemberService {
 
   // 会员
   rpc Member (global.InfoPost) returns (MemberResponse) {}
+  rpc MemberInfo (global.EmptyPost) returns (SimpleMemberResponse) {} // 前端获取会员信息
   rpc MemberByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据钱包地址获取会员数据，没有则创建会员
-  rpc MemberCards (global.InfoPost) returns (global.Response) {}
+  rpc TopMemberInvitors (global.EmptyPost) returns (TopMemberInvitorsResponse) {} // 返回 前十邀请
+  rpc MemberCards (global.InfoPost) returns (global.Response) {} // 
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
   
   // 会员卡

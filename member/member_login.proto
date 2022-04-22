@@ -8,7 +8,6 @@ option go_package = "./pb;pb";
 
 // SimpleMember 会员信息
 message SimpleMember {
-  uint64 id             = 1;
   string name           = 2;
   string description    = 3;
   uint64 avatar_path    = 4;
