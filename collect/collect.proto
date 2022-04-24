@@ -13,6 +13,7 @@ import "collect/blind_box.proto";
 service CollectService {
   // 作者
   rpc Author (global.InfoPost) returns (AuthorResponse) {}
+  rpc AuthorDetail (global.InfoPost) returns (SimpleAuthorResponse);
   rpc HotAuthors (global.EmptyPost) returns (HotAuthorsResponse) {}
   rpc AuthorPagination (global.PaginationPost) returns (AuthorPaginationResponse) {}
   rpc CreateAuthor (CreateAuthorPost) returns (AuthorResponse) {}

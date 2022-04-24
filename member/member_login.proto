@@ -11,7 +11,7 @@ message SimpleMember {
   string name           = 2;
   string description    = 3;
   uint64 avatar_path    = 4;
-  uint64 avatar_url     = 5;
+  string avatar_url     = 5;
   string address        = 6;
   string invite_code    = 7;
   string invite_address = 8;

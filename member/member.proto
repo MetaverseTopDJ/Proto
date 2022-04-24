@@ -26,8 +26,10 @@ message Member {
   string email       = 7;
   string facebook    = 8;
   string twitter     = 9;
-  string created_at  = 10;
-  string updated_at  = 11;
+  uint64 status      = 10;
+  bool   checked     = 11;
+  string created_at  = 12;
+  string updated_at  = 13;
 }
 
 /**************** 请求结构 ****************/
@@ -81,6 +83,7 @@ service MemberService {
   // 头像
   rpc Avatar (global.InfoPost) returns (AvatarResponse) {}
   rpc Avatars (global.EmptyPost) returns (AvatarsResponse) {}
+  rpc CacheAvatars (global.EmptyPost) returns (AvatarsResponse) {} // 从缓存中获取头像列表
   rpc AvatarPagination (global.PaginationPost) returns (AvatarPaginationResponse) {}
   rpc CreateAvatar (CreateAvatarPost) returns (AvatarResponse) {}
   rpc UpdateAvatar (UpdateAvatarPost) returns (AvatarResponse) {}
@@ -91,7 +94,7 @@ service MemberService {
   rpc MemberInfo (global.EmptyPost) returns (SimpleMemberResponse) {} // 前端获取会员信息
   rpc MemberByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据钱包地址获取会员数据，没有则创建会员
   rpc TopMemberInvitors (global.EmptyPost) returns (TopMemberInvitorsResponse) {} // 返回 前十邀请
-  rpc MemberCards (global.InfoPost) returns (global.Response) {} // 
+  rpc MemberCards (global.EmptyPost) returns (SimpleMemberCardsResponse) {} // 会员拥有的会员卡
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
   
   // 会员卡

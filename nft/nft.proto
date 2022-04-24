@@ -19,6 +19,8 @@ service NFTService {
 
   // Contract 智能合约
   rpc Contract (global.InfoPost) returns (ContractResponse) {}
+  rpc MemberContractAddress (global.EmptyPost) returns (ContractAddressResponse) {} // 会员合约地址
+  rpc WorkContractAddress (global.EmptyPost) returns (ContractAddressResponse) {} // 作品合约地址
   rpc Contracts (global.EmptyPost) returns (ContractsResponse) {}
   rpc ContractPagination (global.PaginationPost) returns (ContractPaginationResponse) {}
   rpc CreateContract (CreateContractPost) returns (ContractResponse) {}

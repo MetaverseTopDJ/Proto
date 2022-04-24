@@ -18,11 +18,10 @@ message BlindBox {
   uint64 decimal     = 8;
   string start_at    = 9;
   string end_at      = 10;
-  uint64 top         = 11;
+  bool   top         = 11;
   uint64 status      = 12;
-  bool   checked     = 13;
-  string created_at  = 14;
-  string updated_at  = 15;
+  string created_at  = 13;
+  string updated_at  = 14;
 }
 
 // BlindBoxContent 盲盒内容
@@ -42,7 +41,6 @@ message BlindBoxContent {
 message BlindBoxIntroduction {
   uint64 blind_box_id = 1;
   string content      = 2;
-  uint64 status       = 3;
   string created_at   = 4;
   string updated_at   = 5;
 }
@@ -51,29 +49,31 @@ message BlindBoxIntroduction {
 
 // CreateBlindBoxPost 创建盲盒
 message CreateBlindBoxPost {
-  string title       = 2;
-  string sub_title   = 3;
-  string description = 4;
-  string cover       = 5;
-  string series      = 6;
-  uint64 price       = 7;
-  uint64 decimal     = 8;
-  string start_at    = 9;
-  string end_at      = 10;
+  string title        = 2;
+  string sub_title    = 3;
+  string description  = 4;
+  string cover        = 5;
+  string series       = 6;
+  uint64 price        = 7;
+  uint64 decimal      = 8;
+  string start_at     = 9;
+  string end_at       = 10;
+  string introduction = 11;
 }
 
 // UpdateBlindBoxPost 更新盲盒
 message UpdateBlindBoxPost {
-  uint64 id          = 1;
-  string title       = 2;
-  string sub_title   = 3;
-  string description = 4;
-  string cover       = 5;
-  string series      = 6;
-  uint64 price       = 7;
-  uint64 decimal     = 8;
-  string start_at    = 9;
-  string end_at      = 10;
+  uint64 id           = 1;
+  string title        = 2;
+  string sub_title    = 3;
+  string description  = 4;
+  string cover        = 5;
+  string series       = 6;
+  uint64 price        = 7;
+  uint64 decimal      = 8;
+  string start_at     = 9;
+  string end_at       = 10;
+  string introduction = 11;
 }
 
 /**************** 返回结构 ****************/
@@ -87,4 +87,12 @@ message BlindBoxResponse {
 // BlindBoxDetailResponse 
 message BlindBoxDetailResponse {}
 
-message BlindBoxPaginationResponse {}
+// BlindBoxPaginationResponse 返回 分页
+message BlindBoxPaginationResponse {
+  message BlindBoxs {
+    repeated BlindBox list = 1;
+    int64    total         = 2;
+  }
+  string    message = 1;
+  BlindBoxs data    = 2;
+}

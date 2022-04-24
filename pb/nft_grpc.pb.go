@@ -26,6 +26,8 @@ type NFTServiceClient interface {
 	ChangeNftTokenStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
 	// Contract 智能合约
 	Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
+	WorkContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
 	Contracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error)
 	ContractPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContractPaginationResponse, error)
 	CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
@@ -96,6 +98,24 @@ func (c *nFTServiceClient) ChangeNftTokenStatus(ctx context.Context, in *ChangeS
 func (c *nFTServiceClient) Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/Contract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
+	out := new(ContractAddressResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/MemberContractAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) WorkContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
+	out := new(ContractAddressResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/WorkContractAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -213,6 +233,8 @@ type NFTServiceServer interface {
 	ChangeNftTokenStatus(context.Context, *ChangeStatusPost) (*NFTTokenResponse, error)
 	// Contract 智能合约
 	Contract(context.Context, *InfoPost) (*ContractResponse, error)
+	MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
+	WorkContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
 	Contracts(context.Context, *EmptyPost) (*ContractsResponse, error)
 	ContractPagination(context.Context, *PaginationPost) (*ContractPaginationResponse, error)
 	CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error)
@@ -249,6 +271,12 @@ func (UnimplementedNFTServiceServer) ChangeNftTokenStatus(context.Context, *Chan
 }
 func (UnimplementedNFTServiceServer) Contract(context.Context, *InfoPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Contract not implemented")
+}
+func (UnimplementedNFTServiceServer) MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberContractAddress not implemented")
+}
+func (UnimplementedNFTServiceServer) WorkContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WorkContractAddress not implemented")
 }
 func (UnimplementedNFTServiceServer) Contracts(context.Context, *EmptyPost) (*ContractsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Contracts not implemented")
@@ -400,6 +428,42 @@ func _NFTService_Contract_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).Contract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_MemberContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).MemberContractAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/MemberContractAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).MemberContractAddress(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_WorkContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).WorkContractAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/WorkContractAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).WorkContractAddress(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -632,6 +696,14 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Contract",
 			Handler:    _NFTService_Contract_Handler,
+		},
+		{
+			MethodName: "MemberContractAddress",
+			Handler:    _NFTService_MemberContractAddress_Handler,
+		},
+		{
+			MethodName: "WorkContractAddress",
+			Handler:    _NFTService_WorkContractAddress_Handler,
 		},
 		{
 			MethodName: "Contracts",

@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type CollectServiceClient interface {
 	// 作者
 	Author(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AuthorResponse, error)
+	AuthorDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*SimpleAuthorResponse, error)
 	HotAuthors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*HotAuthorsResponse, error)
 	AuthorPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*AuthorPaginationResponse, error)
 	CreateAuthor(ctx context.Context, in *CreateAuthorPost, opts ...grpc.CallOption) (*AuthorResponse, error)
@@ -51,6 +52,15 @@ func NewCollectServiceClient(cc grpc.ClientConnInterface) CollectServiceClient {
 func (c *collectServiceClient) Author(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AuthorResponse, error) {
 	out := new(AuthorResponse)
 	err := c.cc.Invoke(ctx, "/collect.CollectService/Author", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *collectServiceClient) AuthorDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*SimpleAuthorResponse, error) {
+	out := new(SimpleAuthorResponse)
+	err := c.cc.Invoke(ctx, "/collect.CollectService/AuthorDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -207,6 +217,7 @@ func (c *collectServiceClient) StartBlindBox(ctx context.Context, in *ChangeStat
 type CollectServiceServer interface {
 	// 作者
 	Author(context.Context, *InfoPost) (*AuthorResponse, error)
+	AuthorDetail(context.Context, *InfoPost) (*SimpleAuthorResponse, error)
 	HotAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error)
 	AuthorPagination(context.Context, *PaginationPost) (*AuthorPaginationResponse, error)
 	CreateAuthor(context.Context, *CreateAuthorPost) (*AuthorResponse, error)
@@ -234,6 +245,9 @@ type UnimplementedCollectServiceServer struct {
 
 func (UnimplementedCollectServiceServer) Author(context.Context, *InfoPost) (*AuthorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Author not implemented")
+}
+func (UnimplementedCollectServiceServer) AuthorDetail(context.Context, *InfoPost) (*SimpleAuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthorDetail not implemented")
 }
 func (UnimplementedCollectServiceServer) HotAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HotAuthors not implemented")
@@ -310,6 +324,24 @@ func _CollectService_Author_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CollectServiceServer).Author(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CollectService_AuthorDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CollectServiceServer).AuthorDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/collect.CollectService/AuthorDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CollectServiceServer).AuthorDetail(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -612,6 +644,10 @@ var CollectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Author",
 			Handler:    _CollectService_Author_Handler,
+		},
+		{
+			MethodName: "AuthorDetail",
+			Handler:    _CollectService_AuthorDetail_Handler,
 		},
 		{
 			MethodName: "HotAuthors",

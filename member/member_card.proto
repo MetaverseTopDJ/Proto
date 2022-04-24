@@ -20,6 +20,16 @@ message MemberCard {
   string updated_at  = 10;
 }
 
+// SimpleMemberCard 简单的会员卡数据
+message SimpleMemberCard {
+  string Name        = 1;
+  string description = 2;
+  uint64 token_id    = 3;
+  string icon        = 4;
+  string cover       = 5;
+  uint64 total       = 6;
+}
+
 /**************** 请求结构 ****************/
 
 // MemberCardCreatePost 会员卡 铸造参数
@@ -42,7 +52,7 @@ message MemberCardTransferPost {
   string to           = 6;
 }
 
-// CreateMemberCardPost 新增会员卡
+// CreateMemberCardPost 创建会员卡
 message CreateMemberCardPost {
 }
 
@@ -53,3 +63,9 @@ message UpdateMemberCardPost {}
 
 // MemberCardResponse 会员卡返回
 message MemberCardResponse {}
+
+// SimpleMemberCardsResponse 返回 会员拥有的会员卡
+message SimpleMemberCardsResponse {
+  string   message               = 1;
+  repeated SimpleMemberCard data = 2;
+}

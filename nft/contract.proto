@@ -48,8 +48,14 @@ message UpdateContractPost {
 
 // ContractResponse 返回合约
 message ContractResponse {
-  string  message = 1;
+  string   message = 1;
   Contract data    = 2;
+}
+
+// ContractAddressResponse 仅返回 合约地址
+message ContractAddressResponse {
+  string message = 1;
+  string data    = 2;
 }
 
 // ContractsResponse 返回 合约列表
