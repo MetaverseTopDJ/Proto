@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package member;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// MemberContractEventLog 会员合约日志
+message MemberContractEventLog {
+  uint64 id           = 1;
+  uint64 contract_id  = 2;
+  string hash         = 3;
+  uint64 block_number = 4;
+  string block_at     = 5;
+  uint64 retry        = 6;
+  bool   removed      = 7;
+  string error        = 8;
+  uint64 status       = 9;
+  string created_at   = 10;
+  string updated_at   = 11;
+}
+
+/**************** 请求结构 ****************/
+
+
+/**************** 返回结构 ****************/
+
+// MemberContractEventLogResponse 返回
+message MemberContractEventLogResponse {
+  string                 message = 1;
+  MemberContractEventLog data    = 2;
+}
+
+// MemberContractEventLogPaginationResponse 分页
+message MemberContractEventLogPaginationResponse {
+  message Logs {
+    repeated MemberContractEventLog list = 1;
+    int64    total                       = 2;
+  }
+  string message = 1;
+  Logs   data    = 2;
+}

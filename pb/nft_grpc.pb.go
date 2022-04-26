@@ -18,28 +18,34 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NFTServiceClient interface {
-	// Token 通证
-	NftToken(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
-	NftTokenPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*NFTTokenPaginationResponse, error)
-	CreateNftToken(ctx context.Context, in *CreateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
-	UpdateNftToken(ctx context.Context, in *UpdateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
-	ChangeNftTokenStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*NFTTokenResponse, error)
-	// Contract 智能合约
-	Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
-	MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
-	WorkContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
-	Contracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error)
-	ContractPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContractPaginationResponse, error)
-	CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
-	UpdateContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
-	ChangeContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
-	// BlockCrontab 区块扫描 计划任务
-	BlockCrontab(ctx context.Context, in *InfoCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
-	BlockContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlockCrontabsResponse, error)
-	BlockCrontabPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlockCrontabPaginationResponse, error)
-	CreateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
-	UpdateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
-	ChangeBlockCrontabStatus(ctx context.Context, in *ChangeStatusByCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error)
+	// 作者
+	Author(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AuthorResponse, error)
+	AuthorDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*SimpleAuthorResponse, error)
+	HotAuthors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*HotAuthorsResponse, error)
+	CacheAllAuthors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*HotAuthorsResponse, error)
+	AuthorPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*AuthorPaginationResponse, error)
+	CreateAuthor(ctx context.Context, in *CreateAuthorPost, opts ...grpc.CallOption) (*AuthorResponse, error)
+	UpdateAuthor(ctx context.Context, in *UpdateAuthorPost, opts ...grpc.CallOption) (*AuthorResponse, error)
+	ChangeAuthorStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*AuthorResponse, error)
+	// 作品
+	Work(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*WorkResponse, error)
+	RecommendWorks(ctx context.Context, in *RecommendWorksPost, opts ...grpc.CallOption) (*RecommendWorksResponse, error)
+	WorkPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*WorkPaginationResponse, error)
+	CreateWork(ctx context.Context, in *CreateWorkPost, opts ...grpc.CallOption) (*WorkResponse, error)
+	UpdateWork(ctx context.Context, in *UpdateWorkPost, opts ...grpc.CallOption) (*WorkResponse, error)
+	ChangeWorkStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*WorkResponse, error)
+	// 盲盒
+	BlindBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	BlindBoxPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlindBoxPaginationResponse, error)
+	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	// 合约
+	NFTContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	NFTContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
+	CreateNFTContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	UpdateNFTContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	ChangeNFTContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
 }
 
 type nFTServiceClient struct {
@@ -50,171 +56,216 @@ func NewNFTServiceClient(cc grpc.ClientConnInterface) NFTServiceClient {
 	return &nFTServiceClient{cc}
 }
 
-func (c *nFTServiceClient) NftToken(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
-	out := new(NFTTokenResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/NftToken", in, out, opts...)
+func (c *nFTServiceClient) Author(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*AuthorResponse, error) {
+	out := new(AuthorResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Author", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) NftTokenPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*NFTTokenPaginationResponse, error) {
-	out := new(NFTTokenPaginationResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/NftTokenPagination", in, out, opts...)
+func (c *nFTServiceClient) AuthorDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*SimpleAuthorResponse, error) {
+	out := new(SimpleAuthorResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/AuthorDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) CreateNftToken(ctx context.Context, in *CreateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
-	out := new(NFTTokenResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateNftToken", in, out, opts...)
+func (c *nFTServiceClient) HotAuthors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*HotAuthorsResponse, error) {
+	out := new(HotAuthorsResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/HotAuthors", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) UpdateNftToken(ctx context.Context, in *UpdateNFTTokenPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
-	out := new(NFTTokenResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateNftToken", in, out, opts...)
+func (c *nFTServiceClient) CacheAllAuthors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*HotAuthorsResponse, error) {
+	out := new(HotAuthorsResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CacheAllAuthors", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) ChangeNftTokenStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*NFTTokenResponse, error) {
-	out := new(NFTTokenResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeNftTokenStatus", in, out, opts...)
+func (c *nFTServiceClient) AuthorPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*AuthorPaginationResponse, error) {
+	out := new(AuthorPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/AuthorPagination", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) Contract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+func (c *nFTServiceClient) CreateAuthor(ctx context.Context, in *CreateAuthorPost, opts ...grpc.CallOption) (*AuthorResponse, error) {
+	out := new(AuthorResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateAuthor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateAuthor(ctx context.Context, in *UpdateAuthorPost, opts ...grpc.CallOption) (*AuthorResponse, error) {
+	out := new(AuthorResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateAuthor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ChangeAuthorStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*AuthorResponse, error) {
+	out := new(AuthorResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeAuthorStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Work(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*WorkResponse, error) {
+	out := new(WorkResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Work", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) RecommendWorks(ctx context.Context, in *RecommendWorksPost, opts ...grpc.CallOption) (*RecommendWorksResponse, error) {
+	out := new(RecommendWorksResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/RecommendWorks", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) WorkPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*WorkPaginationResponse, error) {
+	out := new(WorkPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/WorkPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateWork(ctx context.Context, in *CreateWorkPost, opts ...grpc.CallOption) (*WorkResponse, error) {
+	out := new(WorkResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateWork", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateWork(ctx context.Context, in *UpdateWorkPost, opts ...grpc.CallOption) (*WorkResponse, error) {
+	out := new(WorkResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateWork", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ChangeWorkStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*WorkResponse, error) {
+	out := new(WorkResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeWorkStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
+	out := new(BlindBoxResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlindBoxPaginationResponse, error) {
+	out := new(BlindBoxPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
+	out := new(BlindBoxResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
+	out := new(BlindBoxResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
+	out := new(BlindBoxResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StartBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) NFTContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/Contract", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NFTContract", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
+func (c *nFTServiceClient) NFTContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
 	out := new(ContractAddressResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/MemberContractAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NFTContractAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) WorkContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
-	out := new(ContractAddressResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/WorkContractAddress", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) Contracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error) {
-	out := new(ContractsResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/Contracts", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) ContractPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*ContractPaginationResponse, error) {
-	out := new(ContractPaginationResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ContractPagination", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) CreateContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+func (c *nFTServiceClient) CreateNFTContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateContract", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateNFTContract", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) UpdateContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+func (c *nFTServiceClient) UpdateNFTContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateContract", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateNFTContract", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nFTServiceClient) ChangeContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+func (c *nFTServiceClient) ChangeNFTContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeContractStatus", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) BlockCrontab(ctx context.Context, in *InfoCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
-	out := new(BlockCrontabResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockCrontab", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) BlockContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlockCrontabsResponse, error) {
-	out := new(BlockCrontabsResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockContracts", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) BlockCrontabPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlockCrontabPaginationResponse, error) {
-	out := new(BlockCrontabPaginationResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/BlockCrontabPagination", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) CreateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
-	out := new(BlockCrontabResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateBlockCrontab", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) UpdateBlockCrontab(ctx context.Context, in *ModifyBlockCrontabPost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
-	out := new(BlockCrontabResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateBlockCrontab", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) ChangeBlockCrontabStatus(ctx context.Context, in *ChangeStatusByCodePost, opts ...grpc.CallOption) (*BlockCrontabResponse, error) {
-	out := new(BlockCrontabResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeBlockCrontabStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeNFTContractStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -225,28 +276,34 @@ func (c *nFTServiceClient) ChangeBlockCrontabStatus(ctx context.Context, in *Cha
 // All implementations must embed UnimplementedNFTServiceServer
 // for forward compatibility
 type NFTServiceServer interface {
-	// Token 通证
-	NftToken(context.Context, *InfoPost) (*NFTTokenResponse, error)
-	NftTokenPagination(context.Context, *PaginationPost) (*NFTTokenPaginationResponse, error)
-	CreateNftToken(context.Context, *CreateNFTTokenPost) (*NFTTokenResponse, error)
-	UpdateNftToken(context.Context, *UpdateNFTTokenPost) (*NFTTokenResponse, error)
-	ChangeNftTokenStatus(context.Context, *ChangeStatusPost) (*NFTTokenResponse, error)
-	// Contract 智能合约
-	Contract(context.Context, *InfoPost) (*ContractResponse, error)
-	MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
-	WorkContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
-	Contracts(context.Context, *EmptyPost) (*ContractsResponse, error)
-	ContractPagination(context.Context, *PaginationPost) (*ContractPaginationResponse, error)
-	CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error)
-	UpdateContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
-	ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
-	// BlockCrontab 区块扫描 计划任务
-	BlockCrontab(context.Context, *InfoCodePost) (*BlockCrontabResponse, error)
-	BlockContracts(context.Context, *EmptyPost) (*BlockCrontabsResponse, error)
-	BlockCrontabPagination(context.Context, *PaginationPost) (*BlockCrontabPaginationResponse, error)
-	CreateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error)
-	UpdateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error)
-	ChangeBlockCrontabStatus(context.Context, *ChangeStatusByCodePost) (*BlockCrontabResponse, error)
+	// 作者
+	Author(context.Context, *InfoPost) (*AuthorResponse, error)
+	AuthorDetail(context.Context, *InfoPost) (*SimpleAuthorResponse, error)
+	HotAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error)
+	CacheAllAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error)
+	AuthorPagination(context.Context, *PaginationPost) (*AuthorPaginationResponse, error)
+	CreateAuthor(context.Context, *CreateAuthorPost) (*AuthorResponse, error)
+	UpdateAuthor(context.Context, *UpdateAuthorPost) (*AuthorResponse, error)
+	ChangeAuthorStatus(context.Context, *ChangeStatusPost) (*AuthorResponse, error)
+	// 作品
+	Work(context.Context, *InfoPost) (*WorkResponse, error)
+	RecommendWorks(context.Context, *RecommendWorksPost) (*RecommendWorksResponse, error)
+	WorkPagination(context.Context, *PaginationPost) (*WorkPaginationResponse, error)
+	CreateWork(context.Context, *CreateWorkPost) (*WorkResponse, error)
+	UpdateWork(context.Context, *UpdateWorkPost) (*WorkResponse, error)
+	ChangeWorkStatus(context.Context, *ChangeStatusPost) (*WorkResponse, error)
+	// 盲盒
+	BlindBox(context.Context, *InfoPost) (*BlindBoxResponse, error)
+	BlindBoxPagination(context.Context, *PaginationPost) (*BlindBoxPaginationResponse, error)
+	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
+	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
+	StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error)
+	// 合约
+	NFTContract(context.Context, *InfoPost) (*ContractResponse, error)
+	NFTContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
+	CreateNFTContract(context.Context, *CreateContractPost) (*ContractResponse, error)
+	UpdateNFTContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
+	ChangeNFTContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
 	mustEmbedUnimplementedNFTServiceServer()
 }
 
@@ -254,62 +311,77 @@ type NFTServiceServer interface {
 type UnimplementedNFTServiceServer struct {
 }
 
-func (UnimplementedNFTServiceServer) NftToken(context.Context, *InfoPost) (*NFTTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NftToken not implemented")
+func (UnimplementedNFTServiceServer) Author(context.Context, *InfoPost) (*AuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Author not implemented")
 }
-func (UnimplementedNFTServiceServer) NftTokenPagination(context.Context, *PaginationPost) (*NFTTokenPaginationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NftTokenPagination not implemented")
+func (UnimplementedNFTServiceServer) AuthorDetail(context.Context, *InfoPost) (*SimpleAuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthorDetail not implemented")
 }
-func (UnimplementedNFTServiceServer) CreateNftToken(context.Context, *CreateNFTTokenPost) (*NFTTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateNftToken not implemented")
+func (UnimplementedNFTServiceServer) HotAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HotAuthors not implemented")
 }
-func (UnimplementedNFTServiceServer) UpdateNftToken(context.Context, *UpdateNFTTokenPost) (*NFTTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNftToken not implemented")
+func (UnimplementedNFTServiceServer) CacheAllAuthors(context.Context, *EmptyPost) (*HotAuthorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CacheAllAuthors not implemented")
 }
-func (UnimplementedNFTServiceServer) ChangeNftTokenStatus(context.Context, *ChangeStatusPost) (*NFTTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeNftTokenStatus not implemented")
+func (UnimplementedNFTServiceServer) AuthorPagination(context.Context, *PaginationPost) (*AuthorPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthorPagination not implemented")
 }
-func (UnimplementedNFTServiceServer) Contract(context.Context, *InfoPost) (*ContractResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Contract not implemented")
+func (UnimplementedNFTServiceServer) CreateAuthor(context.Context, *CreateAuthorPost) (*AuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthor not implemented")
 }
-func (UnimplementedNFTServiceServer) MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberContractAddress not implemented")
+func (UnimplementedNFTServiceServer) UpdateAuthor(context.Context, *UpdateAuthorPost) (*AuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuthor not implemented")
 }
-func (UnimplementedNFTServiceServer) WorkContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method WorkContractAddress not implemented")
+func (UnimplementedNFTServiceServer) ChangeAuthorStatus(context.Context, *ChangeStatusPost) (*AuthorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeAuthorStatus not implemented")
 }
-func (UnimplementedNFTServiceServer) Contracts(context.Context, *EmptyPost) (*ContractsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Contracts not implemented")
+func (UnimplementedNFTServiceServer) Work(context.Context, *InfoPost) (*WorkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Work not implemented")
 }
-func (UnimplementedNFTServiceServer) ContractPagination(context.Context, *PaginationPost) (*ContractPaginationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ContractPagination not implemented")
+func (UnimplementedNFTServiceServer) RecommendWorks(context.Context, *RecommendWorksPost) (*RecommendWorksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecommendWorks not implemented")
 }
-func (UnimplementedNFTServiceServer) CreateContract(context.Context, *CreateContractPost) (*ContractResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateContract not implemented")
+func (UnimplementedNFTServiceServer) WorkPagination(context.Context, *PaginationPost) (*WorkPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WorkPagination not implemented")
 }
-func (UnimplementedNFTServiceServer) UpdateContract(context.Context, *UpdateContractPost) (*ContractResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateContract not implemented")
+func (UnimplementedNFTServiceServer) CreateWork(context.Context, *CreateWorkPost) (*WorkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWork not implemented")
 }
-func (UnimplementedNFTServiceServer) ChangeContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeContractStatus not implemented")
+func (UnimplementedNFTServiceServer) UpdateWork(context.Context, *UpdateWorkPost) (*WorkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWork not implemented")
 }
-func (UnimplementedNFTServiceServer) BlockCrontab(context.Context, *InfoCodePost) (*BlockCrontabResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BlockCrontab not implemented")
+func (UnimplementedNFTServiceServer) ChangeWorkStatus(context.Context, *ChangeStatusPost) (*WorkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeWorkStatus not implemented")
 }
-func (UnimplementedNFTServiceServer) BlockContracts(context.Context, *EmptyPost) (*BlockCrontabsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BlockContracts not implemented")
+func (UnimplementedNFTServiceServer) BlindBox(context.Context, *InfoPost) (*BlindBoxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBox not implemented")
 }
-func (UnimplementedNFTServiceServer) BlockCrontabPagination(context.Context, *PaginationPost) (*BlockCrontabPaginationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BlockCrontabPagination not implemented")
+func (UnimplementedNFTServiceServer) BlindBoxPagination(context.Context, *PaginationPost) (*BlindBoxPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxPagination not implemented")
 }
-func (UnimplementedNFTServiceServer) CreateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateBlockCrontab not implemented")
+func (UnimplementedNFTServiceServer) CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBlindBox not implemented")
 }
-func (UnimplementedNFTServiceServer) UpdateBlockCrontab(context.Context, *ModifyBlockCrontabPost) (*BlockCrontabResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBlockCrontab not implemented")
+func (UnimplementedNFTServiceServer) UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBlindBox not implemented")
 }
-func (UnimplementedNFTServiceServer) ChangeBlockCrontabStatus(context.Context, *ChangeStatusByCodePost) (*BlockCrontabResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeBlockCrontabStatus not implemented")
+func (UnimplementedNFTServiceServer) StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBox not implemented")
+}
+func (UnimplementedNFTServiceServer) NFTContract(context.Context, *InfoPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NFTContract not implemented")
+}
+func (UnimplementedNFTServiceServer) NFTContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NFTContractAddress not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateNFTContract(context.Context, *CreateContractPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateNFTContract not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateNFTContract(context.Context, *UpdateContractPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNFTContract not implemented")
+}
+func (UnimplementedNFTServiceServer) ChangeNFTContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeNFTContractStatus not implemented")
 }
 func (UnimplementedNFTServiceServer) mustEmbedUnimplementedNFTServiceServer() {}
 
@@ -324,344 +396,434 @@ func RegisterNFTServiceServer(s grpc.ServiceRegistrar, srv NFTServiceServer) {
 	s.RegisterService(&NFTService_ServiceDesc, srv)
 }
 
-func _NFTService_NftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_Author_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).NftToken(ctx, in)
+		return srv.(NFTServiceServer).Author(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/NftToken",
+		FullMethod: "/nft.NFTService/Author",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).NftToken(ctx, req.(*InfoPost))
+		return srv.(NFTServiceServer).Author(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_NftTokenPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_AuthorDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).AuthorDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/AuthorDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).AuthorDetail(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_HotAuthors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).HotAuthors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/HotAuthors",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).HotAuthors(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CacheAllAuthors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CacheAllAuthors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CacheAllAuthors",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CacheAllAuthors(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_AuthorPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PaginationPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).NftTokenPagination(ctx, in)
+		return srv.(NFTServiceServer).AuthorPagination(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/NftTokenPagination",
+		FullMethod: "/nft.NFTService/AuthorPagination",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).NftTokenPagination(ctx, req.(*PaginationPost))
+		return srv.(NFTServiceServer).AuthorPagination(ctx, req.(*PaginationPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_CreateNftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateNFTTokenPost)
+func _NFTService_CreateAuthor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAuthorPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).CreateNftToken(ctx, in)
+		return srv.(NFTServiceServer).CreateAuthor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/CreateNftToken",
+		FullMethod: "/nft.NFTService/CreateAuthor",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).CreateNftToken(ctx, req.(*CreateNFTTokenPost))
+		return srv.(NFTServiceServer).CreateAuthor(ctx, req.(*CreateAuthorPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_UpdateNftToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateNFTTokenPost)
+func _NFTService_UpdateAuthor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAuthorPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).UpdateNftToken(ctx, in)
+		return srv.(NFTServiceServer).UpdateAuthor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/UpdateNftToken",
+		FullMethod: "/nft.NFTService/UpdateAuthor",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).UpdateNftToken(ctx, req.(*UpdateNFTTokenPost))
+		return srv.(NFTServiceServer).UpdateAuthor(ctx, req.(*UpdateAuthorPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_ChangeNftTokenStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_ChangeAuthorStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeStatusPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).ChangeNftTokenStatus(ctx, in)
+		return srv.(NFTServiceServer).ChangeAuthorStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/ChangeNftTokenStatus",
+		FullMethod: "/nft.NFTService/ChangeAuthorStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ChangeNftTokenStatus(ctx, req.(*ChangeStatusPost))
+		return srv.(NFTServiceServer).ChangeAuthorStatus(ctx, req.(*ChangeStatusPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_Contract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_Work_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).Contract(ctx, in)
+		return srv.(NFTServiceServer).Work(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/Contract",
+		FullMethod: "/nft.NFTService/Work",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).Contract(ctx, req.(*InfoPost))
+		return srv.(NFTServiceServer).Work(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_MemberContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyPost)
+func _NFTService_RecommendWorks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecommendWorksPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).MemberContractAddress(ctx, in)
+		return srv.(NFTServiceServer).RecommendWorks(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/MemberContractAddress",
+		FullMethod: "/nft.NFTService/RecommendWorks",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).MemberContractAddress(ctx, req.(*EmptyPost))
+		return srv.(NFTServiceServer).RecommendWorks(ctx, req.(*RecommendWorksPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_WorkContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).WorkContractAddress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/WorkContractAddress",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).WorkContractAddress(ctx, req.(*EmptyPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_Contracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).Contracts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/Contracts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).Contracts(ctx, req.(*EmptyPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_ContractPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_WorkPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PaginationPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).ContractPagination(ctx, in)
+		return srv.(NFTServiceServer).WorkPagination(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/ContractPagination",
+		FullMethod: "/nft.NFTService/WorkPagination",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ContractPagination(ctx, req.(*PaginationPost))
+		return srv.(NFTServiceServer).WorkPagination(ctx, req.(*PaginationPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_CreateContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_CreateWork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateWork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateWork",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateWork(ctx, req.(*CreateWorkPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateWork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateWork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateWork",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateWork(ctx, req.(*UpdateWorkPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ChangeWorkStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ChangeWorkStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ChangeWorkStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ChangeWorkStatus(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBox(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateBlindBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBlindBoxPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateBlindBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateBlindBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateBlindBox(ctx, req.(*CreateBlindBoxPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateBlindBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBlindBoxPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateBlindBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateBlindBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateBlindBox(ctx, req.(*UpdateBlindBoxPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StartBlindBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StartBlindBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StartBlindBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StartBlindBox(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NFTContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NFTContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NFTContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NFTContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NFTContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NFTContractAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NFTContractAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NFTContractAddress(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateNFTContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateContractPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).CreateContract(ctx, in)
+		return srv.(NFTServiceServer).CreateNFTContract(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/CreateContract",
+		FullMethod: "/nft.NFTService/CreateNFTContract",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).CreateContract(ctx, req.(*CreateContractPost))
+		return srv.(NFTServiceServer).CreateNFTContract(ctx, req.(*CreateContractPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_UpdateContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_UpdateNFTContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateContractPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).UpdateContract(ctx, in)
+		return srv.(NFTServiceServer).UpdateNFTContract(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/UpdateContract",
+		FullMethod: "/nft.NFTService/UpdateNFTContract",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).UpdateContract(ctx, req.(*UpdateContractPost))
+		return srv.(NFTServiceServer).UpdateNFTContract(ctx, req.(*UpdateContractPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_ChangeContractStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NFTService_ChangeNFTContractStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeStatusPost)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NFTServiceServer).ChangeContractStatus(ctx, in)
+		return srv.(NFTServiceServer).ChangeNFTContractStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nft.NFTService/ChangeContractStatus",
+		FullMethod: "/nft.NFTService/ChangeNFTContractStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ChangeContractStatus(ctx, req.(*ChangeStatusPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_BlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoCodePost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).BlockCrontab(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/BlockCrontab",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).BlockCrontab(ctx, req.(*InfoCodePost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_BlockContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).BlockContracts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/BlockContracts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).BlockContracts(ctx, req.(*EmptyPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_BlockCrontabPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PaginationPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).BlockCrontabPagination(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/BlockCrontabPagination",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).BlockCrontabPagination(ctx, req.(*PaginationPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_CreateBlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ModifyBlockCrontabPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).CreateBlockCrontab(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/CreateBlockCrontab",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).CreateBlockCrontab(ctx, req.(*ModifyBlockCrontabPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_UpdateBlockCrontab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ModifyBlockCrontabPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).UpdateBlockCrontab(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/UpdateBlockCrontab",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).UpdateBlockCrontab(ctx, req.(*ModifyBlockCrontabPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_ChangeBlockCrontabStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChangeStatusByCodePost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).ChangeBlockCrontabStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/ChangeBlockCrontabStatus",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).ChangeBlockCrontabStatus(ctx, req.(*ChangeStatusByCodePost))
+		return srv.(NFTServiceServer).ChangeNFTContractStatus(ctx, req.(*ChangeStatusPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -674,80 +836,100 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NFTServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "NftToken",
-			Handler:    _NFTService_NftToken_Handler,
+			MethodName: "Author",
+			Handler:    _NFTService_Author_Handler,
 		},
 		{
-			MethodName: "NftTokenPagination",
-			Handler:    _NFTService_NftTokenPagination_Handler,
+			MethodName: "AuthorDetail",
+			Handler:    _NFTService_AuthorDetail_Handler,
 		},
 		{
-			MethodName: "CreateNftToken",
-			Handler:    _NFTService_CreateNftToken_Handler,
+			MethodName: "HotAuthors",
+			Handler:    _NFTService_HotAuthors_Handler,
 		},
 		{
-			MethodName: "UpdateNftToken",
-			Handler:    _NFTService_UpdateNftToken_Handler,
+			MethodName: "CacheAllAuthors",
+			Handler:    _NFTService_CacheAllAuthors_Handler,
 		},
 		{
-			MethodName: "ChangeNftTokenStatus",
-			Handler:    _NFTService_ChangeNftTokenStatus_Handler,
+			MethodName: "AuthorPagination",
+			Handler:    _NFTService_AuthorPagination_Handler,
 		},
 		{
-			MethodName: "Contract",
-			Handler:    _NFTService_Contract_Handler,
+			MethodName: "CreateAuthor",
+			Handler:    _NFTService_CreateAuthor_Handler,
 		},
 		{
-			MethodName: "MemberContractAddress",
-			Handler:    _NFTService_MemberContractAddress_Handler,
+			MethodName: "UpdateAuthor",
+			Handler:    _NFTService_UpdateAuthor_Handler,
 		},
 		{
-			MethodName: "WorkContractAddress",
-			Handler:    _NFTService_WorkContractAddress_Handler,
+			MethodName: "ChangeAuthorStatus",
+			Handler:    _NFTService_ChangeAuthorStatus_Handler,
 		},
 		{
-			MethodName: "Contracts",
-			Handler:    _NFTService_Contracts_Handler,
+			MethodName: "Work",
+			Handler:    _NFTService_Work_Handler,
 		},
 		{
-			MethodName: "ContractPagination",
-			Handler:    _NFTService_ContractPagination_Handler,
+			MethodName: "RecommendWorks",
+			Handler:    _NFTService_RecommendWorks_Handler,
 		},
 		{
-			MethodName: "CreateContract",
-			Handler:    _NFTService_CreateContract_Handler,
+			MethodName: "WorkPagination",
+			Handler:    _NFTService_WorkPagination_Handler,
 		},
 		{
-			MethodName: "UpdateContract",
-			Handler:    _NFTService_UpdateContract_Handler,
+			MethodName: "CreateWork",
+			Handler:    _NFTService_CreateWork_Handler,
 		},
 		{
-			MethodName: "ChangeContractStatus",
-			Handler:    _NFTService_ChangeContractStatus_Handler,
+			MethodName: "UpdateWork",
+			Handler:    _NFTService_UpdateWork_Handler,
 		},
 		{
-			MethodName: "BlockCrontab",
-			Handler:    _NFTService_BlockCrontab_Handler,
+			MethodName: "ChangeWorkStatus",
+			Handler:    _NFTService_ChangeWorkStatus_Handler,
 		},
 		{
-			MethodName: "BlockContracts",
-			Handler:    _NFTService_BlockContracts_Handler,
+			MethodName: "BlindBox",
+			Handler:    _NFTService_BlindBox_Handler,
 		},
 		{
-			MethodName: "BlockCrontabPagination",
-			Handler:    _NFTService_BlockCrontabPagination_Handler,
+			MethodName: "BlindBoxPagination",
+			Handler:    _NFTService_BlindBoxPagination_Handler,
 		},
 		{
-			MethodName: "CreateBlockCrontab",
-			Handler:    _NFTService_CreateBlockCrontab_Handler,
+			MethodName: "CreateBlindBox",
+			Handler:    _NFTService_CreateBlindBox_Handler,
 		},
 		{
-			MethodName: "UpdateBlockCrontab",
-			Handler:    _NFTService_UpdateBlockCrontab_Handler,
+			MethodName: "UpdateBlindBox",
+			Handler:    _NFTService_UpdateBlindBox_Handler,
 		},
 		{
-			MethodName: "ChangeBlockCrontabStatus",
-			Handler:    _NFTService_ChangeBlockCrontabStatus_Handler,
+			MethodName: "StartBlindBox",
+			Handler:    _NFTService_StartBlindBox_Handler,
+		},
+		{
+			MethodName: "NFTContract",
+			Handler:    _NFTService_NFTContract_Handler,
+		},
+		{
+			MethodName: "NFTContractAddress",
+			Handler:    _NFTService_NFTContractAddress_Handler,
+		},
+		{
+			MethodName: "CreateNFTContract",
+			Handler:    _NFTService_CreateNFTContract_Handler,
+		},
+		{
+			MethodName: "UpdateNFTContract",
+			Handler:    _NFTService_UpdateNFTContract_Handler,
+		},
+		{
+			MethodName: "ChangeNFTContractStatus",
+			Handler:    _NFTService_ChangeNFTContractStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package global;
+
+option go_package = "./pb;pb";
+option java_multiple_files = true;
+option java_outer_classname = "global";
+
+/**************** 数据结构 ****************/
+
+// Contract 智能合约
+message Contract {
+  uint64 id             = 1;
+  uint64 type           = 2;
+  string address        = 3;
+  string noise          = 4;
+  string encode_key     = 5;
+  string node           = 6;
+  uint64 interval       = 7;
+  uint64 current        = 8;
+  uint64 next           = 9;
+  uint64 exec           = 10;
+  uint64 check          = 11;
+  uint64 block_interval = 12;
+  uint64 status         = 13;
+  bool   checked        = 14;
+  string created_at     = 15;
+  string updated_at     = 16;
+}
+
+/**************** 请求结构 ****************/
+
+// CreateContractPost 创建合约
+message CreateContractPost {
+  uint64 type           = 2;
+  string address        = 3;
+  string noise          = 4;
+  string encode_key     = 5;
+  string node           = 6;
+  uint64 interval       = 7;
+  uint64 current        = 8;
+  uint64 next           = 9;
+  uint64 check          = 10;
+  uint64 block_interval = 11;
+  uint64 status         = 12;
+}
+
+// UpdateContractPost 更新合约
+message UpdateContractPost {
+  uint64 id             = 1;
+  uint64 type           = 2;
+  string address        = 3;
+  string noise          = 4;
+  string encode_key     = 5;
+  string node           = 6;
+  uint64 interval       = 7;
+  uint64 current        = 8;
+  uint64 next           = 9;
+  uint64 check          = 10;
+  uint64 block_interval = 11;
+  uint64 status         = 12;
+}
+
+/**************** 返回结构 ****************/
+
+// ContractResponse 返回合约
+message ContractResponse {
+  string   message = 1;
+  Contract data    = 2;
+}
+
+// ContractAddressResponse 仅返回 合约地址
+message ContractAddressResponse {
+  string message = 1;
+  string data    = 2;
+}

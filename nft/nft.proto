@@ -5,33 +5,42 @@ package nft;
 option go_package = "./pb;pb";
 
 import "global/global.proto";
-import "nft/nft_token.proto";
-import "nft/contract.proto";
-import "nft/block_crontab.proto";
+import "global/contract.proto";
+import "nft/author.proto";
+import "nft/work.proto";
+import "nft/blind_box.proto";
 
+// NFTService NFT 服务 
 service NFTService {
-  // Token 通证
-  rpc NftToken (global.InfoPost) returns (NFTTokenResponse) {}
-  rpc NftTokenPagination (global.PaginationPost) returns (NFTTokenPaginationResponse) {}
-  rpc CreateNftToken (CreateNFTTokenPost) returns (NFTTokenResponse) {}
-  rpc UpdateNftToken (UpdateNFTTokenPost) returns (NFTTokenResponse) {}
-  rpc ChangeNftTokenStatus (global.ChangeStatusPost) returns (NFTTokenResponse) {}
+  // 作者
+  rpc Author (global.InfoPost) returns (AuthorResponse) {}
+  rpc AuthorDetail (global.InfoPost) returns (SimpleAuthorResponse);
+  rpc HotAuthors (global.EmptyPost) returns (HotAuthorsResponse) {}
+  rpc CacheAllAuthors (global.EmptyPost) returns (HotAuthorsResponse) {}
+  rpc AuthorPagination (global.PaginationPost) returns (AuthorPaginationResponse) {}
+  rpc CreateAuthor (CreateAuthorPost) returns (AuthorResponse) {}
+  rpc UpdateAuthor (UpdateAuthorPost) returns (AuthorResponse) {}
+  rpc ChangeAuthorStatus (global.ChangeStatusPost) returns (AuthorResponse) {}
 
-  // Contract 智能合约
-  rpc Contract (global.InfoPost) returns (ContractResponse) {}
-  rpc MemberContractAddress (global.EmptyPost) returns (ContractAddressResponse) {} // 会员合约地址
-  rpc WorkContractAddress (global.EmptyPost) returns (ContractAddressResponse) {} // 作品合约地址
-  rpc Contracts (global.EmptyPost) returns (ContractsResponse) {}
-  rpc ContractPagination (global.PaginationPost) returns (ContractPaginationResponse) {}
-  rpc CreateContract (CreateContractPost) returns (ContractResponse) {}
-  rpc UpdateContract (UpdateContractPost) returns (ContractResponse) {}
-  rpc ChangeContractStatus (global.ChangeStatusPost) returns (ContractResponse) {}
+  // 作品
+  rpc Work (global.InfoPost) returns (WorkResponse) {}
+  rpc RecommendWorks (RecommendWorksPost) returns (RecommendWorksResponse) {}
+  rpc WorkPagination (global.PaginationPost) returns (WorkPaginationResponse) {}
+  rpc CreateWork (CreateWorkPost) returns (WorkResponse) {}
+  rpc UpdateWork (UpdateWorkPost) returns (WorkResponse) {}
+  rpc ChangeWorkStatus (global.ChangeStatusPost) returns (WorkResponse) {}
 
-  // BlockCrontab 区块扫描 计划任务
-  rpc BlockCrontab (global.InfoCodePost) returns (BlockCrontabResponse) {}
-  rpc BlockContracts (global.EmptyPost) returns (BlockCrontabsResponse) {}
-  rpc BlockCrontabPagination (global.PaginationPost) returns (BlockCrontabPaginationResponse) {}
-  rpc CreateBlockCrontab (ModifyBlockCrontabPost) returns (BlockCrontabResponse) {}
-  rpc UpdateBlockCrontab (ModifyBlockCrontabPost) returns (BlockCrontabResponse) {}
-  rpc ChangeBlockCrontabStatus (global.ChangeStatusByCodePost) returns (BlockCrontabResponse) {}
+  // 盲盒
+  rpc BlindBox (global.InfoPost) returns (BlindBoxResponse) {}
+  rpc BlindBoxPagination (global.PaginationPost) returns (BlindBoxPaginationResponse) {}
+  rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
+  rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
+  rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
+
+  // 合约
+  rpc NFTContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc NFTContractAddress (global.EmptyPost) returns (global.ContractAddressResponse) {} // 会员合约地址
+  rpc CreateNFTContract (global.CreateContractPost) returns (global.ContractResponse) {}
+  rpc UpdateNFTContract (global.UpdateContractPost) returns (global.ContractResponse) {}
+  rpc ChangeNFTContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
 }

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package collect;
+package nft;
 
 option go_package = "./pb;pb";
 
-import "collect/author.proto";
+import "nft/author.proto";
 /**************** 数据结构 ****************/
 
 // Work 作品
@@ -18,7 +18,7 @@ message Work {
   string published_date = 7;
   string serial_num     = 8;
   string series         = 9;
-  uint64 rarity         = 10;
+  int64  rarity         = 10;
   string introduction   = 11;
   string path           = 12;
   uint64 sort           = 13;
@@ -76,7 +76,7 @@ message SimpleWork {
   string       published_date = 6;
   string       serial_num     = 7;
   string       series         = 8;
-  uint64       rarity         = 9;
+  int64        rarity         = 9;
   uint64       status         = 10;
   SimpleAuthor author         = 11;
 }
@@ -98,11 +98,10 @@ message CreateWorkPost {
   string published_date = 7;
   string serial_num     = 8;
   string series         = 9;
-  uint64 rarity         = 10;
+  int64  rarity         = 10;
   string introduction   = 11;
   string path           = 12;
-  uint64 sort           = 13;
-  uint64 cover          = 14;
+  string cover          = 13;
 }
 
 // UpdateWorkPost 更新作品
@@ -116,11 +115,10 @@ message UpdateWorkPost {
   string published_date = 7;
   string serial_num     = 8;
   string series         = 9;
-  uint64 rarity         = 10;
+  int64  rarity         = 10;
   string introduction   = 11;
   string path           = 12;
-  uint64 sort           = 13;
-  uint64 cover          = 14;
+  string cover          = 13;
 }
 
 /**************** 返回结构 ****************/

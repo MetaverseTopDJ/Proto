@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package collect;
+package nft;
 
 option go_package = "./pb;pb";
 
@@ -9,67 +9,71 @@ option go_package = "./pb;pb";
 // Author 作者数据结构
 message Author {
   uint64 id               = 1;
-  uint64 avatar_id        = 2;
+  string avatar           = 2;
   string first_name       = 3;
   string last_name        = 4;
   string title            = 5;
-  string background_out   = 6;
-  string background_inner = 7;
-  bool   hot              = 8;
-  string facebook         = 9;
-  string twitter          = 10;
-  uint64 follower         = 11;
-  uint64 status           = 12;
-  bool   checked          = 13;
-  string created_at       = 14;
-  string updated_at       = 15;
+  string description      = 6;
+  string background_out   = 7;
+  string background_inner = 8;
+  bool   hot              = 9;
+  string facebook         = 10;
+  string twitter          = 11;
+  uint64 follower         = 12;
+  uint64 status           = 13;
+  bool   checked          = 14;
+  string created_at       = 15;
+  string updated_at       = 16;
 }
 
 // SimpleAuthor 返回前端的作者数据
 message SimpleAuthor {
   uint64 id               = 1;
-  string avatar_url       = 2;
+  string avatar           = 2;
   string first_name       = 3;
   string last_name        = 4;
   string title            = 5;
-  string background_out   = 6;
-  string background_inner = 7;
-  bool   hot              = 8;
-  string facebook         = 9;
-  string twitter          = 10;
-  uint64 follower         = 11;
-  uint64 status           = 12;
+  string description      = 6;
+  string background_out   = 7;
+  string background_inner = 8;
+  bool   hot              = 9;
+  string facebook         = 10;
+  string twitter          = 11;
+  uint64 follower         = 12;
+  uint64 status           = 13;
 }
 
 /**************** 请求结构 ****************/
 
 // CreateAuthorPost 创建作者
 message CreateAuthorPost {
-  uint64 avatar_id        = 2;
+  string avatar           = 2;
   string first_name       = 3;
   string last_name        = 4;
   string title            = 5;
-  string background_out   = 6;
-  string background_inner = 7;
-  bool   hot              = 8;
-  string facebook         = 9;
-  string twitter          = 10;
-  uint64 follower         = 11;
+  string description      = 6;
+  string background_out   = 7;
+  string background_inner = 8;
+  bool   hot              = 9;
+  string facebook         = 10;
+  string twitter          = 11;
+  uint64 follower         = 12;
 }
 
 // UpdateAuthorPost 更新作者
 message UpdateAuthorPost {
   uint64 id               = 1;
-  uint64 avatar_id        = 2;
+  string avatar           = 2;
   string first_name       = 3;
   string last_name        = 4;
   string title            = 5;
-  string background_out   = 6;
-  string background_inner = 7;
-  bool   hot              = 8;
-  string facebook         = 9;
-  string twitter          = 10;
-  uint64 follower         = 11;
+  string description      = 6;
+  string background_out   = 7;
+  string background_inner = 8;
+  bool   hot              = 9;
+  string facebook         = 10;
+  string twitter          = 11;
+  uint64 follower         = 12;
 }
 
 /**************** 返回结构 ****************/

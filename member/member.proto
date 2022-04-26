@@ -5,11 +5,13 @@ package member;
 option go_package = "./pb;pb";
 
 import "global/global.proto";
+import "global/contract.proto";
 import "member/avatar.proto";
 import "member/card.proto";
 import "member/member_login.proto";
 import "member/member_card.proto";
 import "member/member_activity.proto";
+import "member/member_contract_event_log.proto";
 import "member/member_pre_sale_white_address.proto";
 
 
@@ -121,6 +123,17 @@ service MemberService {
 
   // 会员卡 活动（App）
   rpc CurrentActivity (global.EmptyPost) returns (CardsResponse) {} // 获取当前活动
+
+  // MemberContract 会员智能合约
+  rpc MemberContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc MemberContractAddress (global.EmptyPost) returns (global.ContractAddressResponse) {} // 会员合约地址
+  rpc CreateMemberContract (global.CreateContractPost) returns (global.ContractResponse) {}
+  rpc UpdateMemberContract (global.UpdateContractPost) returns (global.ContractResponse) {}
+  rpc ChangeMemberContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
+
+  // MemberContractEvent 会员合约 事件日志
+  rpc MemberContractEvent (global.InfoPost) returns (MemberContractEventLogResponse) {}
+  rpc MemberContractEventPagination (global.PaginationPost) returns (MemberContractEventLogPaginationResponse) {}
 
   // 活动白名单
   rpc MemberPreSaleWhiteAddress (global.InfoPost) returns (MemberPreSaleWhiteAddressResponse) {} // 获取白名单列表
