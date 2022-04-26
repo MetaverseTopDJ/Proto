@@ -4,7 +4,6 @@ package nft;
 
 option go_package = "./pb;pb";
 
-import "nft/author.proto";
 /**************** 数据结构 ****************/
 
 // Work 作品
@@ -29,15 +28,18 @@ message Work {
   string updated_at     = 18;
 }
 
-// SimpleWorkDetail 简单的 作品明细
-message SimpleWorkDetail {
-  uint64             id             = 1;
-  string             title          = 2;
-  string             description    = 3;
-  string             published_date = 4;
-  string             serial_num     = 5;
-  string             created_at     = 6;
-  SimpleWorkResource resource       = 7;
+// SimpleWork 简单的 作品返回
+message SimpleWork {
+  uint64 id             = 1;
+  string title          = 2;
+  string sub_title      = 3;
+  string description    = 4;
+  string published_date = 5;
+  string series         = 6;
+  string serial_num     = 7;
+  string rarity         = 8;
+  string cover          = 9;
+  string created_at     = 10;
 }
 
 // SimpleWorkIntroduction 简单的介绍
@@ -67,7 +69,7 @@ message WorkResource {
 }
 
 // SimpleWork 返回前端的数据结构
-message SimpleWork {
+/* message SimpleWork {
   uint64       id             = 1;
   uint64       type           = 2;
   string       title          = 3;
@@ -79,13 +81,20 @@ message SimpleWork {
   int64        rarity         = 9;
   uint64       status         = 10;
   SimpleAuthor author         = 11;
-}
+} */
 
 /**************** 请求结构 ****************/
 
 // RecommendWorksPost 获取推荐作品
 message RecommendWorksPost {
   uint64 num = 1; // 数量
+}
+
+// AuthorWorkPaginationPost 根据 作者获取作品分页
+message AuthorWorkPaginationPost {
+  uint64 author_id = 1;
+  uint64 size      = 2;
+  uint64 page      = 3;
 }
 
 // CreateWorkPost 创建作品
@@ -129,10 +138,26 @@ message WorkResponse {
   Work   data    = 2;
 }
 
+// WorkDetailResponse 返回 作品 详情
+message WorkDetailResponse {
+  string     message = 1;
+  SimpleWork data    = 2;
+}
+
 // RecommendWorksResponse 返回推荐的作品
 message RecommendWorksResponse {
-  string   message               = 1;
-  repeated SimpleWorkDetail data = 2;
+  string   message         = 1;
+  repeated SimpleWork data = 2;
+}
+
+// AuthorWorkPaginationResponse 根据 作者获取作品分页
+message AuthorWorkPaginationResponse {
+  message Works {
+    repeated SimpleWork list = 1;
+    int64    total           = 2;
+  }
+  string message = 1;
+  Works  data    = 2;
 }
 
 // WorkPaginationResponse 返回 分页

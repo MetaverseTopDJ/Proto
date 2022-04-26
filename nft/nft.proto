@@ -24,7 +24,9 @@ service NFTService {
 
   // 作品
   rpc Work (global.InfoPost) returns (WorkResponse) {}
+  rpc WorkDetail(global.InfoPost) returns (WorkDetailResponse) {}
   rpc RecommendWorks (RecommendWorksPost) returns (RecommendWorksResponse) {}
+  rpc AuthorWorkPagination (AuthorWorkPaginationPost) returns (AuthorWorkPaginationResponse) {}
   rpc WorkPagination (global.PaginationPost) returns (WorkPaginationResponse) {}
   rpc CreateWork (CreateWorkPost) returns (WorkResponse) {}
   rpc UpdateWork (UpdateWorkPost) returns (WorkResponse) {}
@@ -32,15 +34,18 @@ service NFTService {
 
   // 盲盒
   rpc BlindBox (global.InfoPost) returns (BlindBoxResponse) {}
+  rpc BlindBoxTop (global.EmptyPost) returns (BlindBoxTopResponse) {}
   rpc BlindBoxPagination (global.PaginationPost) returns (BlindBoxPaginationResponse) {}
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
 
   // 合约
-  rpc NFTContract (global.InfoPost) returns (global.ContractResponse) {}
-  rpc NFTContractAddress (global.EmptyPost) returns (global.ContractAddressResponse) {} // 会员合约地址
-  rpc CreateNFTContract (global.CreateContractPost) returns (global.ContractResponse) {}
-  rpc UpdateNFTContract (global.UpdateContractPost) returns (global.ContractResponse) {}
-  rpc ChangeNFTContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
+  rpc NftContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc NftContracts (global.EmptyPost) returns (global.ContractsResponse) {}
+  rpc NftContractAddress (global.EmptyPost) returns (global.ContractAddressResponse) {} // 会员合约地址
+  rpc NftContractPagination (global.PaginationPost) returns (global.ContractPaginationResponse) {}
+  rpc CreateNftContract (global.CreateContractPost) returns (global.ContractResponse) {}
+  rpc UpdateNftContract (global.UpdateContractPost) returns (global.ContractResponse) {}
+  rpc ChangeNftContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
 }

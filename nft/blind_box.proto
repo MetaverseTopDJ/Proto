@@ -4,6 +4,8 @@ package nft;
 
 option go_package = "./pb;pb";
 
+import "nft/work.proto";
+
 /**************** 数据结构 ****************/
 
 // BlindBox 盲盒
@@ -14,7 +16,7 @@ message BlindBox {
   string description = 4;
   string cover       = 5;
   string series      = 6;
-  uint64 price       = 7;
+  float  price       = 7;
   uint64 decimal     = 8;
   string start_at    = 9;
   string end_at      = 10;
@@ -45,7 +47,43 @@ message BlindBoxIntroduction {
   string updated_at   = 5;
 }
 
+// SimpleBlindBox 前端 盲盒数据
+message SimpleBlindBox {
+  uint64 id           = 1;
+  string title        = 2;
+  string sub_title    = 3;
+  string description  = 4;
+  string introduction = 5;
+  string cover        = 6;
+  string background   = 7;
+  string series       = 8;
+  float  price        = 9;
+  uint64 start_at     = 10;
+  uint64 end_at       = 11;
+  bool   open         = 12;
+  uint64 total        = 13;
+  uint64 remain       = 14;
+  string contract     = 15;
+}
+
+// BlindBoxTop 返回 Top 盲盒
+message BlindBoxTop {
+  SimpleBlindBox box              = 1;
+  repeated       SimpleWork works = 2;
+}
+
 /**************** 请求结构 ****************/
+
+// BlindBoxTop 盲盒首页
+message BlindBoxTopPost {
+  uint64 num = 1;
+}
+
+// BlindBoxDetailPost 盲盒详情
+message BlindBoxDetailPost {
+  uint64 id  = 1;
+  uint64 num = 2;
+}
 
 // PurchaseBlindBoxPost 购买盲盒
 message PurchaseBlindBoxPost {
@@ -60,9 +98,9 @@ message CreateBlindBoxPost {
   string sub_title    = 4;
   string description  = 5;
   string cover        = 6;
-  string series       = 7;
-  uint64 price        = 8;
-  uint64 decimal      = 9;
+  string background   = 7;
+  string series       = 8;
+  float  price        = 9;
   string start_at     = 10;
   string end_at       = 11;
   string introduction = 12;
@@ -76,9 +114,9 @@ message UpdateBlindBoxPost {
   string sub_title    = 4;
   string description  = 5;
   string cover        = 6;
-  string series       = 7;
-  uint64 price        = 8;
-  uint64 decimal      = 9;
+  string background   = 7;
+  string series       = 8;
+  float  price        = 9;
   string start_at     = 10;
   string end_at       = 11;
   string introduction = 12;
@@ -90,6 +128,12 @@ message UpdateBlindBoxPost {
 message BlindBoxResponse {
   string   message = 1;
   BlindBox data    = 2;
+}
+
+// BlindBoxTopResponse 返回 盲盒首页
+message BlindBoxTopResponse {
+  string      message = 1;
+  BlindBoxTop data    = 2;
 }
 
 // BlindBoxDetailResponse 

@@ -69,8 +69,24 @@ message ContractResponse {
   Contract data    = 2;
 }
 
+// ContractsResponse 返回列表
+message ContractsResponse {
+  string   message       = 1;
+  repeated Contract data = 2;
+}
+
 // ContractAddressResponse 仅返回 合约地址
 message ContractAddressResponse {
   string message = 1;
   string data    = 2;
+}
+
+// ContractPaginationResponse 返回 分页
+message ContractPaginationResponse {
+  message Contracts {
+    repeated Contract list = 1;
+    int64    total         = 2;
+  }
+  string    message = 1;
+  Contracts data    = 2;
 }
