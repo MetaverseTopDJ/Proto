@@ -85,6 +85,6 @@ message MessageResponse {
 
 message CheckResponse {
   string Message = 1;
-  bool  Data = 2;
+  bool   Data    = 2;
 }
 

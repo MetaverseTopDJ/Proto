@@ -37,6 +37,8 @@ type MemberServiceClient interface {
 	TopMemberInvitors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*TopMemberInvitorsResponse, error)
 	MemberCards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberCardsResponse, error)
 	MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error)
+	UpdateMemberAvatar(ctx context.Context, in *UpdateMemberAvatarPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
+	UpdateMemberProfile(ctx context.Context, in *UpdateMemberProfilePost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
 	// 会员卡
 	Card(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CardResponse, error)
 	Cards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
@@ -221,6 +223,24 @@ func (c *memberServiceClient) MemberCards(ctx context.Context, in *EmptyPost, op
 func (c *memberServiceClient) MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error) {
 	out := new(MemberPaginationResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) UpdateMemberAvatar(ctx context.Context, in *UpdateMemberAvatarPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error) {
+	out := new(SimpleMemberResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/UpdateMemberAvatar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) UpdateMemberProfile(ctx context.Context, in *UpdateMemberProfilePost, opts ...grpc.CallOption) (*SimpleMemberResponse, error) {
+	out := new(SimpleMemberResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/UpdateMemberProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -511,6 +531,8 @@ type MemberServiceServer interface {
 	TopMemberInvitors(context.Context, *EmptyPost) (*TopMemberInvitorsResponse, error)
 	MemberCards(context.Context, *EmptyPost) (*SimpleMemberCardsResponse, error)
 	MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error)
+	UpdateMemberAvatar(context.Context, *UpdateMemberAvatarPost) (*SimpleMemberResponse, error)
+	UpdateMemberProfile(context.Context, *UpdateMemberProfilePost) (*SimpleMemberResponse, error)
 	// 会员卡
 	Card(context.Context, *InfoPost) (*CardResponse, error)
 	Cards(context.Context, *EmptyPost) (*CardsResponse, error)
@@ -601,6 +623,12 @@ func (UnimplementedMemberServiceServer) MemberCards(context.Context, *EmptyPost)
 }
 func (UnimplementedMemberServiceServer) MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberPagination not implemented")
+}
+func (UnimplementedMemberServiceServer) UpdateMemberAvatar(context.Context, *UpdateMemberAvatarPost) (*SimpleMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberAvatar not implemented")
+}
+func (UnimplementedMemberServiceServer) UpdateMemberProfile(context.Context, *UpdateMemberProfilePost) (*SimpleMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberProfile not implemented")
 }
 func (UnimplementedMemberServiceServer) Card(context.Context, *InfoPost) (*CardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Card not implemented")
@@ -986,6 +1014,42 @@ func _MemberService_MemberPagination_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).MemberPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_UpdateMemberAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberAvatarPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).UpdateMemberAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/UpdateMemberAvatar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).UpdateMemberAvatar(ctx, req.(*UpdateMemberAvatarPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_UpdateMemberProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberProfilePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).UpdateMemberProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/UpdateMemberProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).UpdateMemberProfile(ctx, req.(*UpdateMemberProfilePost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1582,6 +1646,14 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberPagination",
 			Handler:    _MemberService_MemberPagination_Handler,
+		},
+		{
+			MethodName: "UpdateMemberAvatar",
+			Handler:    _MemberService_UpdateMemberAvatar_Handler,
+		},
+		{
+			MethodName: "UpdateMemberProfile",
+			Handler:    _MemberService_UpdateMemberProfile_Handler,
 		},
 		{
 			MethodName: "Card",

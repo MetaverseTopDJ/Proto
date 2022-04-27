@@ -38,7 +38,9 @@ type NFTServiceClient interface {
 	ChangeWorkStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*WorkResponse, error)
 	// 盲盒
 	BlindBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	BlindBoxCount(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxCountResponse, error)
 	BlindBoxTop(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlindBoxTopResponse, error)
+	BlindBoxTopCount(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlindBoxCountResponse, error)
 	BlindBoxPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*BlindBoxPaginationResponse, error)
 	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
@@ -51,6 +53,8 @@ type NFTServiceClient interface {
 	CreateNftContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	UpdateNftContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	ChangeNftContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	// NFT
+	CheckBlindBoxTx(ctx context.Context, in *CheckBlindBoxTxPost, opts ...grpc.CallOption) (*CheckResponse, error)
 }
 
 type nFTServiceClient struct {
@@ -214,9 +218,27 @@ func (c *nFTServiceClient) BlindBox(ctx context.Context, in *InfoPost, opts ...g
 	return out, nil
 }
 
+func (c *nFTServiceClient) BlindBoxCount(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxCountResponse, error) {
+	out := new(BlindBoxCountResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nFTServiceClient) BlindBoxTop(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlindBoxTopResponse, error) {
 	out := new(BlindBoxTopResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxTop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxTopCount(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*BlindBoxCountResponse, error) {
+	out := new(BlindBoxCountResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxTopCount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -322,6 +344,15 @@ func (c *nFTServiceClient) ChangeNftContractStatus(ctx context.Context, in *Chan
 	return out, nil
 }
 
+func (c *nFTServiceClient) CheckBlindBoxTx(ctx context.Context, in *CheckBlindBoxTxPost, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CheckBlindBoxTx", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NFTServiceServer is the server API for NFTService service.
 // All implementations must embed UnimplementedNFTServiceServer
 // for forward compatibility
@@ -346,7 +377,9 @@ type NFTServiceServer interface {
 	ChangeWorkStatus(context.Context, *ChangeStatusPost) (*WorkResponse, error)
 	// 盲盒
 	BlindBox(context.Context, *InfoPost) (*BlindBoxResponse, error)
+	BlindBoxCount(context.Context, *InfoPost) (*BlindBoxCountResponse, error)
 	BlindBoxTop(context.Context, *EmptyPost) (*BlindBoxTopResponse, error)
+	BlindBoxTopCount(context.Context, *EmptyPost) (*BlindBoxCountResponse, error)
 	BlindBoxPagination(context.Context, *PaginationPost) (*BlindBoxPaginationResponse, error)
 	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
 	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
@@ -359,6 +392,8 @@ type NFTServiceServer interface {
 	CreateNftContract(context.Context, *CreateContractPost) (*ContractResponse, error)
 	UpdateNftContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
 	ChangeNftContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
+	// NFT
+	CheckBlindBoxTx(context.Context, *CheckBlindBoxTxPost) (*CheckResponse, error)
 	mustEmbedUnimplementedNFTServiceServer()
 }
 
@@ -417,8 +452,14 @@ func (UnimplementedNFTServiceServer) ChangeWorkStatus(context.Context, *ChangeSt
 func (UnimplementedNFTServiceServer) BlindBox(context.Context, *InfoPost) (*BlindBoxResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBox not implemented")
 }
+func (UnimplementedNFTServiceServer) BlindBoxCount(context.Context, *InfoPost) (*BlindBoxCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxCount not implemented")
+}
 func (UnimplementedNFTServiceServer) BlindBoxTop(context.Context, *EmptyPost) (*BlindBoxTopResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxTop not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxTopCount(context.Context, *EmptyPost) (*BlindBoxCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxTopCount not implemented")
 }
 func (UnimplementedNFTServiceServer) BlindBoxPagination(context.Context, *PaginationPost) (*BlindBoxPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxPagination not implemented")
@@ -452,6 +493,9 @@ func (UnimplementedNFTServiceServer) UpdateNftContract(context.Context, *UpdateC
 }
 func (UnimplementedNFTServiceServer) ChangeNftContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeNftContractStatus not implemented")
+}
+func (UnimplementedNFTServiceServer) CheckBlindBoxTx(context.Context, *CheckBlindBoxTxPost) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckBlindBoxTx not implemented")
 }
 func (UnimplementedNFTServiceServer) mustEmbedUnimplementedNFTServiceServer() {}
 
@@ -772,6 +816,24 @@ func _NFTService_BlindBox_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_BlindBoxCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxCount(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NFTService_BlindBoxTop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmptyPost)
 	if err := dec(in); err != nil {
@@ -786,6 +848,24 @@ func _NFTService_BlindBoxTop_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).BlindBoxTop(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxTopCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxTopCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxTopCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxTopCount(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -988,6 +1068,24 @@ func _NFTService_ChangeNftContractStatus_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_CheckBlindBoxTx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckBlindBoxTxPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CheckBlindBoxTx(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CheckBlindBoxTx",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CheckBlindBoxTx(ctx, req.(*CheckBlindBoxTxPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NFTService_ServiceDesc is the grpc.ServiceDesc for NFTService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1064,8 +1162,16 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NFTService_BlindBox_Handler,
 		},
 		{
+			MethodName: "BlindBoxCount",
+			Handler:    _NFTService_BlindBoxCount_Handler,
+		},
+		{
 			MethodName: "BlindBoxTop",
 			Handler:    _NFTService_BlindBoxTop_Handler,
+		},
+		{
+			MethodName: "BlindBoxTopCount",
+			Handler:    _NFTService_BlindBoxTopCount_Handler,
 		},
 		{
 			MethodName: "BlindBoxPagination",
@@ -1110,6 +1216,10 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeNftContractStatus",
 			Handler:    _NFTService_ChangeNftContractStatus_Handler,
+		},
+		{
+			MethodName: "CheckBlindBoxTx",
+			Handler:    _NFTService_CheckBlindBoxTx_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

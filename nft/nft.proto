@@ -34,7 +34,9 @@ service NFTService {
 
   // 盲盒
   rpc BlindBox (global.InfoPost) returns (BlindBoxResponse) {}
+  rpc BlindBoxCount (global.InfoPost) returns (BlindBoxCountResponse) {} // 返回盲盒剩余数量
   rpc BlindBoxTop (global.EmptyPost) returns (BlindBoxTopResponse) {}
+  rpc BlindBoxTopCount (global.EmptyPost) returns (BlindBoxCountResponse) {} // 返回 首页盲盒剩余数量
   rpc BlindBoxPagination (global.PaginationPost) returns (BlindBoxPaginationResponse) {}
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
@@ -48,4 +50,7 @@ service NFTService {
   rpc CreateNftContract (global.CreateContractPost) returns (global.ContractResponse) {}
   rpc UpdateNftContract (global.UpdateContractPost) returns (global.ContractResponse) {}
   rpc ChangeNftContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
+
+  // NFT
+  rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
 }

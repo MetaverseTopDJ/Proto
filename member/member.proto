@@ -36,9 +36,22 @@ message Member {
 
 /**************** 请求结构 ****************/
 
-// MemberByAddressPost 根据钱包地址，获取会员数据
+// MemberByAddressPost 根据钱包地址，获取会员数据（内部使用）
 message MemberByAddressPost {
   string address = 1;
+}
+
+// UpdateMemberAvatarPost 更新会员头像
+message UpdateMemberAvatarPost {
+  uint64 avatar_id = 1;
+}
+
+// UpdateMemberProfilePost 更新 会员资料
+message UpdateMemberProfilePost {
+  string name     = 1;
+  string email    = 2;
+  string facebook = 3;
+  string twitter  = 4;
 }
 
 /**************** 返回结构 ****************/
@@ -98,6 +111,8 @@ service MemberService {
   rpc TopMemberInvitors (global.EmptyPost) returns (TopMemberInvitorsResponse) {} // 返回 前十邀请
   rpc MemberCards (global.EmptyPost) returns (SimpleMemberCardsResponse) {} // 会员拥有的会员卡
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
+  rpc UpdateMemberAvatar (UpdateMemberAvatarPost) returns (SimpleMemberResponse) {} // 更新会员头像
+  rpc UpdateMemberProfile (UpdateMemberProfilePost) returns (SimpleMemberResponse) {} // 更新会员个人资料
   
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息

@@ -85,6 +85,12 @@ message BlindBoxDetailPost {
   uint64 num = 2;
 }
 
+// CheckBlindBoxTxPost 检查盲盒 交易
+message CheckBlindBoxTxPost {
+  uint64 id   = 1;
+  string hash = 2;
+}
+
 // PurchaseBlindBoxPost 购买盲盒
 message PurchaseBlindBoxPost {
   uint64 id  = 1;
@@ -128,6 +134,16 @@ message UpdateBlindBoxPost {
 message BlindBoxResponse {
   string   message = 1;
   BlindBox data    = 2;
+}
+
+// BlindBoxCountResponse 返回 盲盒剩余数量
+message BlindBoxCountResponse {
+  message Count {
+    uint64 total  = 1;
+    uint64 remain = 2;
+  }
+  string message = 1;
+  Count  data    = 2;
 }
 
 // BlindBoxTopResponse 返回 盲盒首页
