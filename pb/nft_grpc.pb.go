@@ -45,6 +45,13 @@ type NFTServiceClient interface {
 	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	// 集卡
+	Collect(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CollectResponse, error)
+	CollectPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*CollectPaginationResponse, error)
+	CreateCollect(ctx context.Context, in *CreateCollectPost, opts ...grpc.CallOption) (*CollectResponse, error)
+	UpdateCollect(ctx context.Context, in *UpdateCollectPost, opts ...grpc.CallOption) (*CollectResponse, error)
+	ModifyCollect(ctx context.Context, in *ModifyCollectPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	ChangeCollectStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CollectResponse, error)
 	// 合约
 	NftContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	NftContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error)
@@ -281,6 +288,60 @@ func (c *nFTServiceClient) StartBlindBox(ctx context.Context, in *ChangeStatusPo
 	return out, nil
 }
 
+func (c *nFTServiceClient) Collect(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CollectResponse, error) {
+	out := new(CollectResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Collect", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CollectPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*CollectPaginationResponse, error) {
+	out := new(CollectPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CollectPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateCollect(ctx context.Context, in *CreateCollectPost, opts ...grpc.CallOption) (*CollectResponse, error) {
+	out := new(CollectResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateCollect", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateCollect(ctx context.Context, in *UpdateCollectPost, opts ...grpc.CallOption) (*CollectResponse, error) {
+	out := new(CollectResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateCollect", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ModifyCollect(ctx context.Context, in *ModifyCollectPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ModifyCollect", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) ChangeCollectStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CollectResponse, error) {
+	out := new(CollectResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/ChangeCollectStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nFTServiceClient) NftContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
 	out := new(ContractResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/NftContract", in, out, opts...)
@@ -384,6 +445,13 @@ type NFTServiceServer interface {
 	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
 	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
 	StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error)
+	// 集卡
+	Collect(context.Context, *InfoPost) (*CollectResponse, error)
+	CollectPagination(context.Context, *PaginationPost) (*CollectPaginationResponse, error)
+	CreateCollect(context.Context, *CreateCollectPost) (*CollectResponse, error)
+	UpdateCollect(context.Context, *UpdateCollectPost) (*CollectResponse, error)
+	ModifyCollect(context.Context, *ModifyCollectPost) (*ResultResponse, error)
+	ChangeCollectStatus(context.Context, *ChangeStatusPost) (*CollectResponse, error)
 	// 合约
 	NftContract(context.Context, *InfoPost) (*ContractResponse, error)
 	NftContracts(context.Context, *EmptyPost) (*ContractsResponse, error)
@@ -472,6 +540,24 @@ func (UnimplementedNFTServiceServer) UpdateBlindBox(context.Context, *UpdateBlin
 }
 func (UnimplementedNFTServiceServer) StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBox not implemented")
+}
+func (UnimplementedNFTServiceServer) Collect(context.Context, *InfoPost) (*CollectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Collect not implemented")
+}
+func (UnimplementedNFTServiceServer) CollectPagination(context.Context, *PaginationPost) (*CollectPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CollectPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateCollect(context.Context, *CreateCollectPost) (*CollectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCollect not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateCollect(context.Context, *UpdateCollectPost) (*CollectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCollect not implemented")
+}
+func (UnimplementedNFTServiceServer) ModifyCollect(context.Context, *ModifyCollectPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ModifyCollect not implemented")
+}
+func (UnimplementedNFTServiceServer) ChangeCollectStatus(context.Context, *ChangeStatusPost) (*CollectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeCollectStatus not implemented")
 }
 func (UnimplementedNFTServiceServer) NftContract(context.Context, *InfoPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NftContract not implemented")
@@ -942,6 +1028,114 @@ func _NFTService_StartBlindBox_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_Collect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Collect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Collect",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Collect(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CollectPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CollectPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CollectPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CollectPagination(ctx, req.(*PaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateCollect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCollectPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateCollect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateCollect",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateCollect(ctx, req.(*CreateCollectPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateCollect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCollectPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateCollect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateCollect",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateCollect(ctx, req.(*UpdateCollectPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ModifyCollect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyCollectPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ModifyCollect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ModifyCollect",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ModifyCollect(ctx, req.(*ModifyCollectPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_ChangeCollectStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeStatusPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).ChangeCollectStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/ChangeCollectStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).ChangeCollectStatus(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NFTService_NftContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
@@ -1188,6 +1382,30 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartBlindBox",
 			Handler:    _NFTService_StartBlindBox_Handler,
+		},
+		{
+			MethodName: "Collect",
+			Handler:    _NFTService_Collect_Handler,
+		},
+		{
+			MethodName: "CollectPagination",
+			Handler:    _NFTService_CollectPagination_Handler,
+		},
+		{
+			MethodName: "CreateCollect",
+			Handler:    _NFTService_CreateCollect_Handler,
+		},
+		{
+			MethodName: "UpdateCollect",
+			Handler:    _NFTService_UpdateCollect_Handler,
+		},
+		{
+			MethodName: "ModifyCollect",
+			Handler:    _NFTService_ModifyCollect_Handler,
+		},
+		{
+			MethodName: "ChangeCollectStatus",
+			Handler:    _NFTService_ChangeCollectStatus_Handler,
 		},
 		{
 			MethodName: "NftContract",

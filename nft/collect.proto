@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// Collect 集卡活动
+message Collect {
+  uint64 id          = 1;
+  uint64 sort        = 2;
+  string title       = 3;
+  string sub_title   = 4;
+  string description = 5;
+  string banner      = 6;
+  string series      = 7;
+  string start_at    = 8;
+  string end_at      = 9;
+  uint64 status      = 10;
+  bool   check       = 11;
+  string created_at  = 12;
+  string updated_at  = 13;
+}
+
+// CollectReward 集卡奖励
+message CollectReward {
+  uint64 work_id = 1;
+  string cover   = 2;
+}
+
+// CollectRequire 集卡需求
+message CollectRequire {
+  uint64 work_id = 1;
+  string cover   = 2;
+}
+
+// CollectRequireDetail 需求明细
+message CollectRequireDetail {
+  uint64 work_id         = 1;
+  string type            = 2;
+  string series          = 3;
+  string serial_num      = 4;
+  string title           = 5;
+  string sub_title       = 6;
+  string cover           = 7;
+  string rarity          = 8;
+  string published_data  = 9;
+  uint64 published_total = 10;
+}
+
+// SimpleCollect App 返回
+message SimpleCollect {
+  uint64 id          = 1;
+  uint64 sort        = 2;
+  string title       = 3;
+  string sub_title   = 4;
+  string description = 5;
+  string banner      = 6;
+  string series      = 7;
+  string start_at    = 8;
+  string end_at      = 9;
+  bool   open        = 10;
+}
+
+// CollectDetail 集卡明细
+message CollectDetail {}
+
+/**************** 请求结构 ****************/
+
+// CreateCollectPost 创建集卡
+message CreateCollectPost {
+  uint64 sort        = 2;
+  string title       = 3;
+  string sub_title   = 4;
+  string description = 5;
+  string banner      = 6;
+  string series      = 7;
+  string start_at    = 8;
+  string end_at      = 9;
+}
+
+// UpdateCollectPost 更新集卡
+message UpdateCollectPost {
+  uint64 id          = 1;
+  uint64 sort        = 2;
+  string title       = 3;
+  string sub_title   = 4;
+  string description = 5;
+  string banner      = 6;
+  string series      = 7;
+  string start_at    = 8;
+  string end_at      = 9;
+}
+
+// ModifyCollectPost 编辑 集卡内容
+message ModifyCollectPost {
+  uint64   id                = 1;
+  uint64   reward_id         = 2;
+  repeated uint64 require_id = 3;
+}
+
+/**************** 返回结构 ****************/
+
+// CollectResponse 返回集卡数据
+message CollectResponse {
+  string  message = 1;
+  Collect data    = 2;
+}
+
+// CollectPaginationResponse 返回 集卡分页
+message CollectPaginationResponse {
+  message Collects {
+    repeated Collect list = 1;
+    int64    total        = 2;
+  }
+  string   message = 1;
+  Collects data    = 2;
+}

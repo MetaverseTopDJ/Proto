@@ -9,6 +9,7 @@ import "global/contract.proto";
 import "nft/author.proto";
 import "nft/work.proto";
 import "nft/blind_box.proto";
+import "nft/collect.proto";
 
 // NFTService NFT 服务 
 service NFTService {
@@ -41,6 +42,14 @@ service NFTService {
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
+
+  // 集卡
+  rpc Collect (global.InfoPost) returns (CollectResponse) {}
+  rpc CollectPagination (global.PaginationPost) returns (CollectPaginationResponse) {}
+  rpc CreateCollect (CreateCollectPost) returns (CollectResponse) {}
+  rpc UpdateCollect (UpdateCollectPost) returns (CollectResponse) {}
+  rpc ModifyCollect (ModifyCollectPost) returns (global.ResultResponse) {}
+  rpc ChangeCollectStatus (global.ChangeStatusPost) returns (CollectResponse) {}
 
   // 合约
   rpc NftContract (global.InfoPost) returns (global.ContractResponse) {}
