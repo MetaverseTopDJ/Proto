@@ -91,4 +91,6 @@ service NFTService {
   rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
   rpc MemberNftPagination (MemberNftPaginationPost) returns (MemberNftPaginationResponse) {} // 会员 NFT
   rpc NftMemberPagination (NftMemberPaginationPost) returns (NftMemberPaginationResponse) {}
+
+  // 推送版本
 }
