@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+message AddressBlindBoxExchangePost {
+  string address = 1;
+}
+
+/**************** 请求结构 ****************/
+
+/**************** 返回结构 ****************/
+
+// CountBlindBoxExchangeResponse 计算可以免费兑换的盲盒
+message CountBlindBoxExchangeResponse {
+  string message = 1;
+  uint64 data    = 2;
+}
+
+// BlineBoxExchangeResponse 兑换免费盲盒
+message BlindBoxExchangeResponse {
+  message Sign {
+    string signature = 1;
+    uint64 code      = 2;
+    uint64 timestamp = 3;
+  }
+  string message = 1;
+  Sign   data    = 2;
+}

@@ -31,15 +31,44 @@ message Work {
 // SimpleWork 简单的 作品返回
 message SimpleWork {
   uint64 id             = 1;
-  string title          = 2;
-  string sub_title      = 3;
-  string description    = 4;
-  string published_date = 5;
-  string series         = 6;
-  string serial_num     = 7;
-  string rarity         = 8;
-  string cover          = 9;
-  string created_at     = 10;
+  uint64 type           = 2;
+  string title          = 3;
+  string sub_title      = 4;
+  string description    = 5;
+  string published_date = 6;
+  string series         = 7;
+  string serial_num     = 8;
+  string rarity         = 9;
+  string cover          = 10;
+  string path           = 11;
+  string created_at     = 12;
+}
+
+// SimpleWorkAuthor 返回前端的作者数据
+message SimpleWorkAuthor {
+  uint64 id               = 1;
+  string avatar           = 2;
+  string first_name       = 3;
+  string last_name        = 4;
+}
+
+// WorkDetail 作品详情
+message WorkDetail {
+  uint64           id             = 1;
+  uint64           type           = 2;
+  string           title          = 3;
+  string           sub_title      = 4;
+  string           description    = 5;
+  string           introduction   = 6;
+  string           published_date = 7;
+  string           series         = 8;
+  string           serial_num     = 9;
+  string           rarity         = 10;
+  string           cover          = 11;
+  string           path           = 12;
+  string           created_at     = 13;
+  uint64           collectors     = 14;
+  SimpleWorkAuthor author         = 15;
 }
 
 // SimpleWorkIntroduction 简单的介绍
@@ -93,8 +122,9 @@ message RecommendWorksPost {
 // AuthorWorkPaginationPost 根据 作者获取作品分页
 message AuthorWorkPaginationPost {
   uint64 author_id = 1;
-  uint64 size      = 2;
-  uint64 page      = 3;
+  uint64 type      = 2;
+  uint64 size      = 3;
+  uint64 page      = 4;
 }
 
 // CreateWorkPost 创建作品
@@ -141,7 +171,7 @@ message WorkResponse {
 // WorkDetailResponse 返回 作品 详情
 message WorkDetailResponse {
   string     message = 1;
-  SimpleWork data    = 2;
+  WorkDetail data    = 2;
 }
 
 // RecommendWorksResponse 返回推荐的作品

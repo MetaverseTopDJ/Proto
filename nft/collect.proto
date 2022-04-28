@@ -35,6 +35,20 @@ message CollectRequire {
   string cover   = 2;
 }
 
+// CollectRewardDetail 集卡奖励 详情
+message CollectRewardDetail {
+  uint64 work_id         = 1;
+  string type            = 2;
+  string series          = 3;
+  string serial_num      = 4;
+  string title           = 5;
+  string sub_title       = 6;
+  string cover           = 7;
+  string rarity          = 8;
+  string published_date  = 9;
+  uint64 published_total = 10;
+}
+
 // CollectRequireDetail 需求明细
 message CollectRequireDetail {
   uint64 work_id         = 1;
@@ -45,7 +59,7 @@ message CollectRequireDetail {
   string sub_title       = 6;
   string cover           = 7;
   string rarity          = 8;
-  string published_data  = 9;
+  string published_date  = 9;
   uint64 published_total = 10;
 }
 
@@ -58,13 +72,26 @@ message SimpleCollect {
   string description = 5;
   string banner      = 6;
   string series      = 7;
-  string start_at    = 8;
-  string end_at      = 9;
+  uint64 start_at    = 8;
+  uint64 end_at      = 9;
   bool   open        = 10;
+  bool   hold        = 11;
+  uint64 completed   = 12;
+  uint64 status      = 13;
+}
+
+message SimpleCollectDetail {
+  SimpleCollect collect                           = 1;
+  repeated      CollectRewardDetail reward_list   = 2;
+  repeated      CollectRequireDetail require_list = 3;
 }
 
 // CollectDetail 集卡明细
-message CollectDetail {}
+message CollectDetail {
+  SimpleCollect collect                           = 1;
+  repeated      CollectReward reward_list         = 12;
+  repeated      CollectRequireDetail require_list = 13;
+}
 
 /**************** 请求结构 ****************/
 
@@ -108,11 +135,27 @@ message CollectResponse {
   Collect data    = 2;
 }
 
+// CollectDetailResponse 集卡详情
+message CollectDetailResponse {
+  string        message = 1;
+  CollectDetail data    = 2;
+}
+
 // CollectPaginationResponse 返回 集卡分页
 message CollectPaginationResponse {
   message Collects {
     repeated Collect list = 1;
     int64    total        = 2;
+  }
+  string   message = 1;
+  Collects data    = 2;
+}
+
+// SimpleCollectPaginationResponse 返回 前端集卡分页
+message SimpleCollectPaginationResponse {
+  message Collects {
+    repeated SimpleCollectDetail list = 1;
+    int64    total                    = 2;
   }
   string   message = 1;
   Collects data    = 2;

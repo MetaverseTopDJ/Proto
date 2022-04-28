@@ -23,15 +23,16 @@ message Member {
   string name        = 2;
   string description = 3;
   uint64 avatar_id   = 4;
-  string address     = 5;
-  string invite_code = 6;
-  string email       = 7;
-  string facebook    = 8;
-  string twitter     = 9;
-  uint64 status      = 10;
-  bool   checked     = 11;
-  string created_at  = 12;
-  string updated_at  = 13;
+  string avatar      = 5;
+  string address     = 6;
+  string invite_code = 7;
+  string email       = 8;
+  string facebook    = 9;
+  string twitter     = 10;
+  uint64 status      = 11;
+  bool   checked     = 12;
+  string created_at  = 13;
+  string updated_at  = 14;
 }
 
 /**************** 请求结构 ****************/
@@ -113,7 +114,7 @@ service MemberService {
   rpc MemberPagination (global.PaginationPost) returns (MemberPaginationResponse) {}
   rpc UpdateMemberAvatar (UpdateMemberAvatarPost) returns (SimpleMemberResponse) {} // 更新会员头像
   rpc UpdateMemberProfile (UpdateMemberProfilePost) returns (SimpleMemberResponse) {} // 更新会员个人资料
-  
+
   // 会员卡
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
   rpc Cards (global.EmptyPost) returns (CardsResponse) {}
@@ -121,6 +122,8 @@ service MemberService {
   rpc CreateCard (CreateCardPost) returns (CardResponse) {}
   rpc UpdateCard (UpdateCardPost) returns (CardResponse) {}
   rpc ChangeCardStatus (global.ChangeStatusPost) returns (CardResponse) {}
+
+  rpc MemberCardList (global.EmptyPost) returns (MemberCardsResponse) {} // 返回会员卡列表
 
   // 会员卡 活动（Console）
   rpc MemberActivity (global.InfoPost) returns (MemberActivityResponse) {} // 获取会员活动信息

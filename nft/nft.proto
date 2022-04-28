@@ -10,6 +10,19 @@ import "nft/author.proto";
 import "nft/work.proto";
 import "nft/blind_box.proto";
 import "nft/collect.proto";
+import "nft/collect_exchange.proto";
+import "nft/blind_box_exchange.proto";
+import "nft/member_nft.proto";
+
+// CheckExchangePost 检查兑换
+message CheckCollectExchangePost {
+  uint64 code = 1;
+}
+
+// CheckBlindExchangePost 检查兑换
+message CheckBlindExchangePost {
+  uint64 code = 1;
+}
 
 // NFTService NFT 服务 
 service NFTService {
@@ -45,11 +58,25 @@ service NFTService {
 
   // 集卡
   rpc Collect (global.InfoPost) returns (CollectResponse) {}
+  rpc CollectDetail (global.InfoPost) returns (CollectDetailResponse) {} // 集卡明细
   rpc CollectPagination (global.PaginationPost) returns (CollectPaginationResponse) {}
+  rpc SimpleCollectPagination (global.PaginationPost) returns (SimpleCollectPaginationResponse) {} // 前端集卡分页
   rpc CreateCollect (CreateCollectPost) returns (CollectResponse) {}
   rpc UpdateCollect (UpdateCollectPost) returns (CollectResponse) {}
   rpc ModifyCollect (ModifyCollectPost) returns (global.ResultResponse) {}
   rpc ChangeCollectStatus (global.ChangeStatusPost) returns (CollectResponse) {}
+
+  // 免费盲盒
+  rpc BlindBoxExchange (global.InfoPost) returns (BlindBoxExchangeResponse) {}
+  rpc MemberBlindBoxExchange (global.EmptyPost) returns (CountBlindBoxExchangeResponse) {}
+  rpc AddressBlindBoxExchange (AddressBlindBoxExchangePost) returns (CountBlindBoxExchangeResponse) {}
+
+  // 集卡交互
+  rpc GenCollectSnapshot (global.InfoPost) returns (global.ResultResponse) {} // 集卡快照
+  rpc CollectExchange (global.InfoPost) returns (CollectExchangeResponse) {} // 集卡兑换
+
+  rpc CheckCollectExchangeTx (CheckCollectExchangePost) returns (global.CheckResponse) {}
+  rpc CheckBlindBoxExchangeTx (CheckBlindExchangePost) returns (global.CheckResponse) {}
 
   // 合约
   rpc NftContract (global.InfoPost) returns (global.ContractResponse) {}
@@ -62,4 +89,6 @@ service NFTService {
 
   // NFT
   rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
+  rpc MemberNftPagination (MemberNftPaginationPost) returns (MemberNftPaginationResponse) {} // 会员 NFT
+  rpc NftMemberPagination (NftMemberPaginationPost) returns (NftMemberPaginationResponse) {}
 }

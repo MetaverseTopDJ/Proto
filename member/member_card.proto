@@ -12,8 +12,8 @@ message MemberCard {
   uint64 activity_id = 2;
   uint64 creator_id  = 3;
   uint64 owner_id    = 4;
-  uint64 card_id     = 5;
-  uint64 nft_id      = 6;
+  uint64 token_id    = 5;
+  uint64 card_id     = 6;
   uint64 version     = 7;
   uint64 status      = 8;
   string created_at  = 9;
@@ -63,6 +63,12 @@ message UpdateMemberCardPost {}
 
 // MemberCardResponse 会员卡返回
 message MemberCardResponse {}
+
+// MemberCardsResponse 返回 会员卡列表
+message MemberCardsResponse {
+  string   message         = 1;
+  repeated MemberCard data = 2;
+}
 
 // SimpleMemberCardsResponse 返回 会员拥有的会员卡
 message SimpleMemberCardsResponse {

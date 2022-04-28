@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+/**************** 请求结构 ****************/
+
+/**************** 返回结构 ****************/
+
+// CollectExchangeResponse 集卡兑换
+message CollectExchangeResponse {
+  message Sign {
+    string signature = 1;
+    uint64 code      = 2;
+    uint64 timestamp = 3;
+  }
+  string message = 1;
+  Sign   data    = 2;
+}

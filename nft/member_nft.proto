@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// MemberNft 会员 NFT
+message MemberNft {
+  uint64 id             = 1;
+  uint64 type           = 2;
+  string title          = 3;
+  string sub_title      = 4;
+  string description    = 5;
+  string published_date = 6;
+  string serial_num     = 7;
+  string series         = 8;
+  string rarity         = 9;
+  string cover          = 10;
+}
+
+// NftMember 拥有某个 NFT 的会员
+message NftMember {
+  string name       = 1;
+  string avatar     = 2;
+  string address    = 3;
+  uint64 token_id   = 4;
+  string updated_at = 5;
+}
+
+/**************** 请求结构 ****************/
+
+// MemberNftsPost 查询会员的 NFT
+message MemberNftPaginationPost {
+  uint64 type = 1;
+  uint64 page = 2;
+  uint64 size = 3;
+}
+
+// NftMemberPaginationPost 查询 拥有 NFT 的用户
+message NftMemberPaginationPost {
+  uint64 work_id = 1;
+  uint64 page    = 2;
+  uint64 size    = 3;
+}
+
+/**************** 返回结构 ****************/
+
+// MemberNftPaginationResponse 返回 分页
+message MemberNftPaginationResponse {
+  message MemberNfts {
+    repeated MemberNft list = 1;
+    int64    total          = 2;
+  }
+  string     message = 1;
+  MemberNfts data    = 2;
+}
+
+message NftMemberPaginationResponse {
+  message NftMembers {
+    repeated NftMember list = 1;
+    int64    total          = 2;
+  }
+  string     message = 1;
+  NftMembers data    = 2;
+}

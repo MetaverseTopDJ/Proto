@@ -46,6 +46,7 @@ type MemberServiceClient interface {
 	CreateCard(ctx context.Context, in *CreateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
 	UpdateCard(ctx context.Context, in *UpdateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
 	ChangeCardStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CardResponse, error)
+	MemberCardList(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*MemberCardsResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberActivityResponse, error)
 	MemberActivityDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberActivityDetailResponse, error)
@@ -301,6 +302,15 @@ func (c *memberServiceClient) ChangeCardStatus(ctx context.Context, in *ChangeSt
 	return out, nil
 }
 
+func (c *memberServiceClient) MemberCardList(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*MemberCardsResponse, error) {
+	out := new(MemberCardsResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberCardList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) MemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberActivityResponse, error) {
 	out := new(MemberActivityResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberActivity", in, out, opts...)
@@ -540,6 +550,7 @@ type MemberServiceServer interface {
 	CreateCard(context.Context, *CreateCardPost) (*CardResponse, error)
 	UpdateCard(context.Context, *UpdateCardPost) (*CardResponse, error)
 	ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error)
+	MemberCardList(context.Context, *EmptyPost) (*MemberCardsResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(context.Context, *InfoPost) (*MemberActivityResponse, error)
 	MemberActivityDetail(context.Context, *InfoPost) (*MemberActivityDetailResponse, error)
@@ -647,6 +658,9 @@ func (UnimplementedMemberServiceServer) UpdateCard(context.Context, *UpdateCardP
 }
 func (UnimplementedMemberServiceServer) ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeCardStatus not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberCardList(context.Context, *EmptyPost) (*MemberCardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberCardList not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberActivity(context.Context, *InfoPost) (*MemberActivityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberActivity not implemented")
@@ -1158,6 +1172,24 @@ func _MemberService_ChangeCardStatus_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).ChangeCardStatus(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberCardList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberCardList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberCardList(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1678,6 +1710,10 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeCardStatus",
 			Handler:    _MemberService_ChangeCardStatus_Handler,
+		},
+		{
+			MethodName: "MemberCardList",
+			Handler:    _MemberService_MemberCardList_Handler,
 		},
 		{
 			MethodName: "MemberActivity",
