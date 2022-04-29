@@ -17,10 +17,14 @@ message Collect {
   string series      = 7;
   string start_at    = 8;
   string end_at      = 9;
-  uint64 status      = 10;
-  bool   check       = 11;
-  string created_at  = 12;
-  string updated_at  = 13;
+  string start_time  = 10;
+  string end_time    = 11;
+  uint64 status      = 12;
+  bool   check       = 13;
+  string reward      = 14;
+  string require     = 15;
+  string created_at  = 16;
+  string updated_at  = 17;
 }
 
 // CollectReward 集卡奖励
@@ -105,6 +109,8 @@ message CreateCollectPost {
   string series      = 7;
   string start_at    = 8;
   string end_at      = 9;
+  string reward      = 10;
+  string require     = 11;
 }
 
 // UpdateCollectPost 更新集卡
@@ -118,6 +124,8 @@ message UpdateCollectPost {
   string series      = 7;
   string start_at    = 8;
   string end_at      = 9;
+  string reward      = 10;
+  string require     = 11;
 }
 
 // ModifyCollectPost 编辑 集卡内容

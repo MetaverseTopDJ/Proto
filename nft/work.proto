@@ -168,6 +168,12 @@ message WorkResponse {
   Work   data    = 2;
 }
 
+// WorksResponse 列表
+message WorksResponse {
+  string   message   = 1;
+  repeated Work data = 2;
+}
+
 // WorkDetailResponse 返回 作品 详情
 message WorkDetailResponse {
   string     message = 1;

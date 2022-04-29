@@ -26,19 +26,6 @@ message BlindBox {
   string updated_at  = 14;
 }
 
-// BlindBoxContent 盲盒内容
-message BlindBoxContent {
-  uint64 blind_box_id = 1;
-  uint64 work_id      = 2;
-  uint64 rarity       = 3;
-  uint64 probability  = 4;
-  uint64 total        = 5;
-  uint64 remain       = 6;
-  uint64 status       = 7;
-  string created_at   = 8;
-  string updated_at   = 9;
-}
-
 // BlindBoxIntroduction 盲盒介绍
 message BlindBoxIntroduction {
   uint64 blind_box_id = 1;

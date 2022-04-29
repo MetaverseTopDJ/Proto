@@ -10,6 +10,7 @@ import "console/rule.proto";
 import "console/role.proto";
 import "console/user.proto";
 import "console/login.proto";
+import "console/upload.proto";
 
 service ConsoleService {
   /* 菜单管理 */
@@ -50,4 +51,7 @@ service ConsoleService {
   rpc LoginLogPagination (global.PaginationPost) returns (LoginLogPaginationResponse) {} // 登录日志
   rpc Scopes (global.EmptyPost) returns (ScopesResponse) {} // 获取 用户权限
   rpc LogOut (global.EmptyPost) returns (global.Response) {} // 退出登录
+
+  // Upload
+  rpc Upload (stream UploadPost) returns (UploadResponse) {} // 上传文件
 }

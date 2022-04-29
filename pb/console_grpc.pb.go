@@ -56,6 +56,8 @@ type ConsoleServiceClient interface {
 	LoginLogPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*LoginLogPaginationResponse, error)
 	Scopes(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ScopesResponse, error)
 	LogOut(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*Response, error)
+	// Upload
+	Upload(ctx context.Context, opts ...grpc.CallOption) (ConsoleService_UploadClient, error)
 }
 
 type consoleServiceClient struct {
@@ -336,6 +338,40 @@ func (c *consoleServiceClient) LogOut(ctx context.Context, in *EmptyPost, opts .
 	return out, nil
 }
 
+func (c *consoleServiceClient) Upload(ctx context.Context, opts ...grpc.CallOption) (ConsoleService_UploadClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ConsoleService_ServiceDesc.Streams[0], "/console.ConsoleService/Upload", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &consoleServiceUploadClient{stream}
+	return x, nil
+}
+
+type ConsoleService_UploadClient interface {
+	Send(*UploadPost) error
+	CloseAndRecv() (*UploadResponse, error)
+	grpc.ClientStream
+}
+
+type consoleServiceUploadClient struct {
+	grpc.ClientStream
+}
+
+func (x *consoleServiceUploadClient) Send(m *UploadPost) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *consoleServiceUploadClient) CloseAndRecv() (*UploadResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(UploadResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ConsoleServiceServer is the server API for ConsoleService service.
 // All implementations must embed UnimplementedConsoleServiceServer
 // for forward compatibility
@@ -378,6 +414,8 @@ type ConsoleServiceServer interface {
 	LoginLogPagination(context.Context, *PaginationPost) (*LoginLogPaginationResponse, error)
 	Scopes(context.Context, *EmptyPost) (*ScopesResponse, error)
 	LogOut(context.Context, *EmptyPost) (*Response, error)
+	// Upload
+	Upload(ConsoleService_UploadServer) error
 	mustEmbedUnimplementedConsoleServiceServer()
 }
 
@@ -474,6 +512,9 @@ func (UnimplementedConsoleServiceServer) Scopes(context.Context, *EmptyPost) (*S
 }
 func (UnimplementedConsoleServiceServer) LogOut(context.Context, *EmptyPost) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LogOut not implemented")
+}
+func (UnimplementedConsoleServiceServer) Upload(ConsoleService_UploadServer) error {
+	return status.Errorf(codes.Unimplemented, "method Upload not implemented")
 }
 func (UnimplementedConsoleServiceServer) mustEmbedUnimplementedConsoleServiceServer() {}
 
@@ -1028,6 +1069,32 @@ func _ConsoleService_LogOut_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConsoleService_Upload_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ConsoleServiceServer).Upload(&consoleServiceUploadServer{stream})
+}
+
+type ConsoleService_UploadServer interface {
+	SendAndClose(*UploadResponse) error
+	Recv() (*UploadPost, error)
+	grpc.ServerStream
+}
+
+type consoleServiceUploadServer struct {
+	grpc.ServerStream
+}
+
+func (x *consoleServiceUploadServer) SendAndClose(m *UploadResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *consoleServiceUploadServer) Recv() (*UploadPost, error) {
+	m := new(UploadPost)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ConsoleService_ServiceDesc is the grpc.ServiceDesc for ConsoleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1156,6 +1223,12 @@ var ConsoleService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ConsoleService_LogOut_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Upload",
+			Handler:       _ConsoleService_Upload_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "console/console.proto",
 }

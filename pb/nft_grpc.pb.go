@@ -29,6 +29,7 @@ type NFTServiceClient interface {
 	ChangeAuthorStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*AuthorResponse, error)
 	// 作品
 	Work(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*WorkResponse, error)
+	Works(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*WorksResponse, error)
 	WorkDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*WorkDetailResponse, error)
 	RecommendWorks(ctx context.Context, in *RecommendWorksPost, opts ...grpc.CallOption) (*RecommendWorksResponse, error)
 	AuthorWorkPagination(ctx context.Context, in *AuthorWorkPaginationPost, opts ...grpc.CallOption) (*AuthorWorkPaginationResponse, error)
@@ -45,6 +46,12 @@ type NFTServiceClient interface {
 	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	// 盲盒内容
+	BlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*BlindBoxContentResponse, error)
+	BlindBoxContentPagination(ctx context.Context, in *BlindBoxContentPaginationPost, opts ...grpc.CallOption) (*BlindBoxContentPaginationResponse, error)
+	CreateBlindBoxContent(ctx context.Context, in *CreateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	UpdateBlindBoxContent(ctx context.Context, in *UpdateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	RemoveBlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	// 集卡
 	Collect(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CollectResponse, error)
 	CollectDetail(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CollectDetailResponse, error)
@@ -160,6 +167,15 @@ func (c *nFTServiceClient) ChangeAuthorStatus(ctx context.Context, in *ChangeSta
 func (c *nFTServiceClient) Work(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*WorkResponse, error) {
 	out := new(WorkResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/Work", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Works(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*WorksResponse, error) {
+	out := new(WorksResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Works", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -295,6 +311,51 @@ func (c *nFTServiceClient) UpdateBlindBox(ctx context.Context, in *UpdateBlindBo
 func (c *nFTServiceClient) StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
 	out := new(BlindBoxResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/StartBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*BlindBoxContentResponse, error) {
+	out := new(BlindBoxContentResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxContentPagination(ctx context.Context, in *BlindBoxContentPaginationPost, opts ...grpc.CallOption) (*BlindBoxContentPaginationResponse, error) {
+	out := new(BlindBoxContentPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxContentPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateBlindBoxContent(ctx context.Context, in *CreateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateBlindBoxContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateBlindBoxContent(ctx context.Context, in *UpdateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateBlindBoxContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) RemoveBlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/RemoveBlindBoxContent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -541,6 +602,7 @@ type NFTServiceServer interface {
 	ChangeAuthorStatus(context.Context, *ChangeStatusPost) (*AuthorResponse, error)
 	// 作品
 	Work(context.Context, *InfoPost) (*WorkResponse, error)
+	Works(context.Context, *EmptyPost) (*WorksResponse, error)
 	WorkDetail(context.Context, *InfoPost) (*WorkDetailResponse, error)
 	RecommendWorks(context.Context, *RecommendWorksPost) (*RecommendWorksResponse, error)
 	AuthorWorkPagination(context.Context, *AuthorWorkPaginationPost) (*AuthorWorkPaginationResponse, error)
@@ -557,6 +619,12 @@ type NFTServiceServer interface {
 	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
 	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
 	StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error)
+	// 盲盒内容
+	BlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*BlindBoxContentResponse, error)
+	BlindBoxContentPagination(context.Context, *BlindBoxContentPaginationPost) (*BlindBoxContentPaginationResponse, error)
+	CreateBlindBoxContent(context.Context, *CreateBlindBoxContentPost) (*ResultResponse, error)
+	UpdateBlindBoxContent(context.Context, *UpdateBlindBoxContentPost) (*ResultResponse, error)
+	RemoveBlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*ResultResponse, error)
 	// 集卡
 	Collect(context.Context, *InfoPost) (*CollectResponse, error)
 	CollectDetail(context.Context, *InfoPost) (*CollectDetailResponse, error)
@@ -621,6 +689,9 @@ func (UnimplementedNFTServiceServer) ChangeAuthorStatus(context.Context, *Change
 func (UnimplementedNFTServiceServer) Work(context.Context, *InfoPost) (*WorkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Work not implemented")
 }
+func (UnimplementedNFTServiceServer) Works(context.Context, *EmptyPost) (*WorksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Works not implemented")
+}
 func (UnimplementedNFTServiceServer) WorkDetail(context.Context, *InfoPost) (*WorkDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WorkDetail not implemented")
 }
@@ -665,6 +736,21 @@ func (UnimplementedNFTServiceServer) UpdateBlindBox(context.Context, *UpdateBlin
 }
 func (UnimplementedNFTServiceServer) StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBox not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*BlindBoxContentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxContent not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxContentPagination(context.Context, *BlindBoxContentPaginationPost) (*BlindBoxContentPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxContentPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateBlindBoxContent(context.Context, *CreateBlindBoxContentPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBlindBoxContent not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateBlindBoxContent(context.Context, *UpdateBlindBoxContentPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBlindBoxContent not implemented")
+}
+func (UnimplementedNFTServiceServer) RemoveBlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveBlindBoxContent not implemented")
 }
 func (UnimplementedNFTServiceServer) Collect(context.Context, *InfoPost) (*CollectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Collect not implemented")
@@ -912,6 +998,24 @@ func _NFTService_Work_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).Work(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_Works_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Works(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Works",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Works(ctx, req.(*EmptyPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1182,6 +1286,96 @@ func _NFTService_StartBlindBox_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).StartBlindBox(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxContentInfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxContent(ctx, req.(*BlindBoxContentInfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxContentPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxContentPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxContentPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxContentPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxContentPagination(ctx, req.(*BlindBoxContentPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateBlindBoxContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBlindBoxContentPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateBlindBoxContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateBlindBoxContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateBlindBoxContent(ctx, req.(*CreateBlindBoxContentPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateBlindBoxContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBlindBoxContentPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateBlindBoxContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateBlindBoxContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateBlindBoxContent(ctx, req.(*UpdateBlindBoxContentPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_RemoveBlindBoxContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxContentInfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).RemoveBlindBoxContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/RemoveBlindBoxContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).RemoveBlindBoxContent(ctx, req.(*BlindBoxContentInfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1680,6 +1874,10 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NFTService_Work_Handler,
 		},
 		{
+			MethodName: "Works",
+			Handler:    _NFTService_Works_Handler,
+		},
+		{
 			MethodName: "WorkDetail",
 			Handler:    _NFTService_WorkDetail_Handler,
 		},
@@ -1738,6 +1936,26 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartBlindBox",
 			Handler:    _NFTService_StartBlindBox_Handler,
+		},
+		{
+			MethodName: "BlindBoxContent",
+			Handler:    _NFTService_BlindBoxContent_Handler,
+		},
+		{
+			MethodName: "BlindBoxContentPagination",
+			Handler:    _NFTService_BlindBoxContentPagination_Handler,
+		},
+		{
+			MethodName: "CreateBlindBoxContent",
+			Handler:    _NFTService_CreateBlindBoxContent_Handler,
+		},
+		{
+			MethodName: "UpdateBlindBoxContent",
+			Handler:    _NFTService_UpdateBlindBoxContent_Handler,
+		},
+		{
+			MethodName: "RemoveBlindBoxContent",
+			Handler:    _NFTService_RemoveBlindBoxContent_Handler,
 		},
 		{
 			MethodName: "Collect",

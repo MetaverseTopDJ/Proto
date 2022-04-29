@@ -75,7 +75,7 @@ message Response {
 // ResultResponse 返回执行结果
 message ResultResponse {
   string Message = 1;
-  bool   result  = 2;
+  bool   data    = 2;
 }
 
 // MessageResponse 仅返回成功失败消息

@@ -9,6 +9,7 @@ import "global/contract.proto";
 import "nft/author.proto";
 import "nft/work.proto";
 import "nft/blind_box.proto";
+import "nft/blind_box_content.proto";
 import "nft/collect.proto";
 import "nft/collect_exchange.proto";
 import "nft/blind_box_exchange.proto";
@@ -38,6 +39,7 @@ service NFTService {
 
   // 作品
   rpc Work (global.InfoPost) returns (WorkResponse) {}
+  rpc Works (global.EmptyPost) returns (WorksResponse) {}
   rpc WorkDetail(global.InfoPost) returns (WorkDetailResponse) {}
   rpc RecommendWorks (RecommendWorksPost) returns (RecommendWorksResponse) {}
   rpc AuthorWorkPagination (AuthorWorkPaginationPost) returns (AuthorWorkPaginationResponse) {}
@@ -55,6 +57,13 @@ service NFTService {
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
+
+  // 盲盒内容
+  rpc BlindBoxContent (BlindBoxContentInfoPost) returns (BlindBoxContentResponse) {}
+  rpc BlindBoxContentPagination (BlindBoxContentPaginationPost) returns (BlindBoxContentPaginationResponse) {}
+  rpc CreateBlindBoxContent (CreateBlindBoxContentPost) returns (global.ResultResponse) {}
+  rpc UpdateBlindBoxContent (UpdateBlindBoxContentPost) returns (global.ResultResponse) {}
+  rpc RemoveBlindBoxContent (BlindBoxContentInfoPost) returns (global.ResultResponse) {}
 
   // 集卡
   rpc Collect (global.InfoPost) returns (CollectResponse) {}
