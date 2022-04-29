@@ -26,23 +26,23 @@ type Collect struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Sort        uint64 `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
-	Title       string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	SubTitle    string `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
-	Banner      string `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
-	Series      string `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
-	StartAt     string `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt       string `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	StartTime   string `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3" json:"start_time"`
-	EndTime     string `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3" json:"end_time"`
-	Status      uint64 `protobuf:"varint,12,opt,name=status,proto3" json:"status"`
-	Check       bool   `protobuf:"varint,13,opt,name=check,proto3" json:"check"`
-	Reward      string `protobuf:"bytes,14,opt,name=reward,proto3" json:"reward"`
-	Require     string `protobuf:"bytes,15,opt,name=require,proto3" json:"require"`
-	CreatedAt   string `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt   string `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id          uint64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Sort        uint64   `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
+	Title       string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
+	SubTitle    string   `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
+	Description string   `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
+	Banner      string   `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
+	Series      string   `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
+	StartAt     string   `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt       string   `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	StartTime   string   `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3" json:"start_time"`
+	EndTime     string   `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3" json:"end_time"`
+	Status      uint64   `protobuf:"varint,12,opt,name=status,proto3" json:"status"`
+	Check       bool     `protobuf:"varint,13,opt,name=check,proto3" json:"check"`
+	Reward      []uint64 `protobuf:"varint,14,rep,packed,name=reward,proto3" json:"reward"`
+	Require     []uint64 `protobuf:"varint,15,rep,packed,name=require,proto3" json:"require"`
+	CreatedAt   string   `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt   string   `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *Collect) Reset() {
@@ -168,18 +168,18 @@ func (x *Collect) GetCheck() bool {
 	return false
 }
 
-func (x *Collect) GetReward() string {
+func (x *Collect) GetReward() []uint64 {
 	if x != nil {
 		return x.Reward
 	}
-	return ""
+	return nil
 }
 
-func (x *Collect) GetRequire() string {
+func (x *Collect) GetRequire() []uint64 {
 	if x != nil {
 		return x.Require
 	}
-	return ""
+	return nil
 }
 
 func (x *Collect) GetCreatedAt() string {
@@ -825,16 +825,16 @@ type CreateCollectPost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Sort        uint64 `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
-	Title       string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	SubTitle    string `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
-	Banner      string `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
-	Series      string `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
-	StartAt     string `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt       string `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	Reward      string `protobuf:"bytes,10,opt,name=reward,proto3" json:"reward"`
-	Require     string `protobuf:"bytes,11,opt,name=require,proto3" json:"require"`
+	Sort        uint64   `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
+	Title       string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
+	SubTitle    string   `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
+	Description string   `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
+	Banner      string   `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
+	Series      string   `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
+	StartAt     string   `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt       string   `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	Reward      []uint64 `protobuf:"varint,10,rep,packed,name=reward,proto3" json:"reward"`
+	Require     []uint64 `protobuf:"varint,11,rep,packed,name=require,proto3" json:"require"`
 }
 
 func (x *CreateCollectPost) Reset() {
@@ -925,18 +925,18 @@ func (x *CreateCollectPost) GetEndAt() string {
 	return ""
 }
 
-func (x *CreateCollectPost) GetReward() string {
+func (x *CreateCollectPost) GetReward() []uint64 {
 	if x != nil {
 		return x.Reward
 	}
-	return ""
+	return nil
 }
 
-func (x *CreateCollectPost) GetRequire() string {
+func (x *CreateCollectPost) GetRequire() []uint64 {
 	if x != nil {
 		return x.Require
 	}
-	return ""
+	return nil
 }
 
 // UpdateCollectPost 更新集卡
@@ -945,17 +945,17 @@ type UpdateCollectPost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Sort        uint64 `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
-	Title       string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	SubTitle    string `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
-	Banner      string `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
-	Series      string `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
-	StartAt     string `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt       string `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	Reward      string `protobuf:"bytes,10,opt,name=reward,proto3" json:"reward"`
-	Require     string `protobuf:"bytes,11,opt,name=require,proto3" json:"require"`
+	Id          uint64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Sort        uint64   `protobuf:"varint,2,opt,name=sort,proto3" json:"sort"`
+	Title       string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
+	SubTitle    string   `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title"`
+	Description string   `protobuf:"bytes,5,opt,name=description,proto3" json:"description"`
+	Banner      string   `protobuf:"bytes,6,opt,name=banner,proto3" json:"banner"`
+	Series      string   `protobuf:"bytes,7,opt,name=series,proto3" json:"series"`
+	StartAt     string   `protobuf:"bytes,8,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt       string   `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	Reward      []uint64 `protobuf:"varint,10,rep,packed,name=reward,proto3" json:"reward"`
+	Require     []uint64 `protobuf:"varint,11,rep,packed,name=require,proto3" json:"require"`
 }
 
 func (x *UpdateCollectPost) Reset() {
@@ -1053,18 +1053,18 @@ func (x *UpdateCollectPost) GetEndAt() string {
 	return ""
 }
 
-func (x *UpdateCollectPost) GetReward() string {
+func (x *UpdateCollectPost) GetReward() []uint64 {
 	if x != nil {
 		return x.Reward
 	}
-	return ""
+	return nil
 }
 
-func (x *UpdateCollectPost) GetRequire() string {
+func (x *UpdateCollectPost) GetRequire() []uint64 {
 	if x != nil {
 		return x.Require
 	}
-	return ""
+	return nil
 }
 
 // ModifyCollectPost 编辑 集卡内容
@@ -1491,8 +1491,8 @@ var file_nft_collect_proto_rawDesc = []byte{
 	0x74, 0x75, 0x73, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
 	0x73, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x08,
 	0x52, 0x05, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72,
-	0x64, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12,
-	0x18, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09,
+	0x64, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12,
+	0x18, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x18, 0x0f, 0x20, 0x03, 0x28, 0x04,
 	0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x10, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61,
@@ -1601,9 +1601,9 @@ var file_nft_collect_proto_rawDesc = []byte{
 	0x19, 0x0a, 0x08, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x61, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x07, 0x73, 0x74, 0x61, 0x72, 0x74, 0x41, 0x74, 0x12, 0x15, 0x0a, 0x06, 0x65, 0x6e,
 	0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6e, 0x64, 0x41,
-	0x74, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x71,
-	0x75, 0x69, 0x72, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75,
+	0x74, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x18, 0x0a, 0x20, 0x03, 0x28,
+	0x04, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x71,
+	0x75, 0x69, 0x72, 0x65, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x04, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75,
 	0x69, 0x72, 0x65, 0x22, 0xa0, 0x02, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f,
 	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72,
@@ -1620,8 +1620,8 @@ var file_nft_collect_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x74, 0x61, 0x72, 0x74, 0x41, 0x74, 0x12, 0x15, 0x0a,
 	0x06, 0x65, 0x6e, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65,
 	0x6e, 0x64, 0x41, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x18, 0x0a,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12, 0x18, 0x0a, 0x07,
-	0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72,
+	0x20, 0x03, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x12, 0x18, 0x0a, 0x07,
+	0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x04, 0x52, 0x07, 0x72,
 	0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x22, 0x5f, 0x0a, 0x11, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x79,
 	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x72,

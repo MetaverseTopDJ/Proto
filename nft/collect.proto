@@ -8,23 +8,23 @@ option go_package = "./pb;pb";
 
 // Collect 集卡活动
 message Collect {
-  uint64 id          = 1;
-  uint64 sort        = 2;
-  string title       = 3;
-  string sub_title   = 4;
-  string description = 5;
-  string banner      = 6;
-  string series      = 7;
-  string start_at    = 8;
-  string end_at      = 9;
-  string start_time  = 10;
-  string end_time    = 11;
-  uint64 status      = 12;
-  bool   check       = 13;
-  string reward      = 14;
-  string require     = 15;
-  string created_at  = 16;
-  string updated_at  = 17;
+  uint64   id             = 1;
+  uint64   sort           = 2;
+  string   title          = 3;
+  string   sub_title      = 4;
+  string   description    = 5;
+  string   banner         = 6;
+  string   series         = 7;
+  string   start_at       = 8;
+  string   end_at         = 9;
+  string   start_time     = 10;
+  string   end_time       = 11;
+  uint64   status         = 12;
+  bool     check          = 13;
+  repeated uint64 reward  = 14;
+  repeated uint64 require = 15;
+  string   created_at     = 16;
+  string   updated_at     = 17;
 }
 
 // CollectReward 集卡奖励
@@ -101,31 +101,31 @@ message CollectDetail {
 
 // CreateCollectPost 创建集卡
 message CreateCollectPost {
-  uint64 sort        = 2;
-  string title       = 3;
-  string sub_title   = 4;
-  string description = 5;
-  string banner      = 6;
-  string series      = 7;
-  string start_at    = 8;
-  string end_at      = 9;
-  string reward      = 10;
-  string require     = 11;
+  uint64   sort           = 2;
+  string   title          = 3;
+  string   sub_title      = 4;
+  string   description    = 5;
+  string   banner         = 6;
+  string   series         = 7;
+  string   start_at       = 8;
+  string   end_at         = 9;
+  repeated uint64 reward  = 10;
+  repeated uint64 require = 11;
 }
 
 // UpdateCollectPost 更新集卡
 message UpdateCollectPost {
-  uint64 id          = 1;
-  uint64 sort        = 2;
-  string title       = 3;
-  string sub_title   = 4;
-  string description = 5;
-  string banner      = 6;
-  string series      = 7;
-  string start_at    = 8;
-  string end_at      = 9;
-  string reward      = 10;
-  string require     = 11;
+  uint64   id             = 1;
+  uint64   sort           = 2;
+  string   title          = 3;
+  string   sub_title      = 4;
+  string   description    = 5;
+  string   banner         = 6;
+  string   series         = 7;
+  string   start_at       = 8;
+  string   end_at         = 9;
+  repeated uint64 reward  = 10;
+  repeated uint64 require = 11;
 }
 
 // ModifyCollectPost 编辑 集卡内容
