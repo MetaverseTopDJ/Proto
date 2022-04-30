@@ -21,7 +21,7 @@ message Work {
   string introduction   = 11;
   string path           = 12;
   uint64 sort           = 13;
-  uint64 cover          = 14;
+  string cover          = 14;
   uint64 status         = 15;
   bool   checked        = 16;
   string created_at     = 17;
