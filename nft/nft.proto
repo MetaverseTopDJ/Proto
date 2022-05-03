@@ -15,6 +15,80 @@ import "nft/collect_exchange.proto";
 import "nft/blind_box_exchange.proto";
 import "nft/member_nft.proto";
 
+/**************** 数据结构 ****************/
+
+// NFT 信息
+message NFT {
+  uint64                id          = 1;
+  uint64                contract_id = 2;
+  uint64                token_id    = 3;
+  uint64                work_id     = 4;
+  uint64                creator_id  = 5;
+  uint64                owner_id    = 6;
+  string                code        = 7;
+  uint64                version     = 8;
+  string                created_at  = 9;
+  string                updated_at  = 10;
+  global.SimpleContract contract    = 11;
+}
+
+// NFTCreator NFT 铸造信息
+message NFTCreator {
+  uint64                id           = 1;
+  uint64                block_number = 2;
+  string                block_time   = 3;
+  uint64                contract_id  = 4;
+  uint64                token_id     = 5;
+  uint64                member_id    = 6;
+  string                code         = 7;
+  string                hash         = 8;
+  string                address      = 9;
+  global.SimpleContract contract     = 10;
+}
+
+// NFTTransfer NFT 交易信息
+message NFTTransfer {
+  uint64                id           = 1;
+  uint64                block_number = 2;
+  string                block_time   = 3;
+  uint64                contract_id  = 4;
+  uint64                token_id     = 5;
+  string                hash         = 6;
+  uint64                form_id      = 7;
+  string                form         = 8;
+  uint64                to_id        = 9;
+  string                to           = 10;
+  global.SimpleContract contract     = 11;
+}
+
+/**************** 请求结构 ****************/
+
+// NftPaginationPost NFT 分页请求
+message NftPaginationPost {
+  uint64 contract_id = 1;
+  string creator     = 2;
+  string owner       = 3;
+  uint64 page        = 4;
+  uint64 size        = 5;
+}
+
+// NftCreatorPaginationPost NFT 铸造日志 分页请求
+message NftCreatorPaginationPost {
+  uint64 contract_id = 1;
+  string address     = 2;
+  uint64 page        = 3;
+  uint64 size        = 4;
+}
+
+// NftTransferPaginationPost NFT 交易日志 分页请求
+message NftTransferPaginationPost {
+  uint64 contract_id = 1;
+  string from        = 2;
+  string to          = 3;
+  uint64 page        = 4;
+  uint64 size        = 5;
+}
+
 // CheckExchangePost 检查兑换
 message CheckCollectExchangePost {
   uint64 code = 1;
@@ -23,6 +97,44 @@ message CheckCollectExchangePost {
 // CheckBlindExchangePost 检查兑换
 message CheckBlindExchangePost {
   uint64 code = 1;
+}
+
+/**************** 返回结构 ****************/
+
+// NftResponse 返回
+message NFTResponse {
+  string message = 1;
+  NFT    data    = 2;
+}
+
+// NFTPaginationResponse 分页
+message NFTPaginationResponse {
+  message NFTs {
+    repeated NFT list = 1;
+    int64    total    = 2;
+  }
+  string message = 1;
+  NFTs   data    = 2;
+}
+
+// NFTCreatorPaginationResponse 铸造日志 分页
+message NFTCreatorPaginationResponse {
+  message NFTs {
+    repeated NFTCreator list = 1;
+    int64    total           = 2;
+  }
+  string message = 1;
+  NFTs   data    = 2;
+}
+
+// NFTTransferPaginationResponse 交易日志 分页
+message NFTTransferPaginationResponse {
+  message NFTs {
+    repeated NFTTransfer list = 1;
+    int64    total            = 2;
+  }
+  string message = 1;
+  NFTs   data    = 2;
 }
 
 // NFTService NFT 服务 
@@ -100,6 +212,12 @@ service NFTService {
   rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
   rpc MemberNftPagination (MemberNftPaginationPost) returns (MemberNftPaginationResponse) {} // 会员 NFT
   rpc NftMemberPagination (NftMemberPaginationPost) returns (NftMemberPaginationResponse) {}
+
+  // NFT 后台
+  rpc Nft (global.InfoPost) returns (NFTResponse) {}
+  rpc NftPagination (NftPaginationPost) returns (NFTPaginationResponse) {}
+  rpc NftCreatorPagination (NftCreatorPaginationPost) returns (NFTCreatorPaginationResponse) {}
+  rpc NftTransferPagination (NftTransferPaginationPost) returns (NFTTransferPaginationResponse) {}
 
   // 推送版本
 }

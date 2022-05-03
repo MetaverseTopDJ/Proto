@@ -82,6 +82,11 @@ type NFTServiceClient interface {
 	CheckBlindBoxTx(ctx context.Context, in *CheckBlindBoxTxPost, opts ...grpc.CallOption) (*CheckResponse, error)
 	MemberNftPagination(ctx context.Context, in *MemberNftPaginationPost, opts ...grpc.CallOption) (*MemberNftPaginationResponse, error)
 	NftMemberPagination(ctx context.Context, in *NftMemberPaginationPost, opts ...grpc.CallOption) (*NftMemberPaginationResponse, error)
+	// NFT 后台
+	Nft(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTResponse, error)
+	NftPagination(ctx context.Context, in *NftPaginationPost, opts ...grpc.CallOption) (*NFTPaginationResponse, error)
+	NftCreatorPagination(ctx context.Context, in *NftCreatorPaginationPost, opts ...grpc.CallOption) (*NFTCreatorPaginationResponse, error)
+	NftTransferPagination(ctx context.Context, in *NftTransferPaginationPost, opts ...grpc.CallOption) (*NFTTransferPaginationResponse, error)
 }
 
 type nFTServiceClient struct {
@@ -587,6 +592,42 @@ func (c *nFTServiceClient) NftMemberPagination(ctx context.Context, in *NftMembe
 	return out, nil
 }
 
+func (c *nFTServiceClient) Nft(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTResponse, error) {
+	out := new(NFTResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Nft", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) NftPagination(ctx context.Context, in *NftPaginationPost, opts ...grpc.CallOption) (*NFTPaginationResponse, error) {
+	out := new(NFTPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NftPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) NftCreatorPagination(ctx context.Context, in *NftCreatorPaginationPost, opts ...grpc.CallOption) (*NFTCreatorPaginationResponse, error) {
+	out := new(NFTCreatorPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NftCreatorPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) NftTransferPagination(ctx context.Context, in *NftTransferPaginationPost, opts ...grpc.CallOption) (*NFTTransferPaginationResponse, error) {
+	out := new(NFTTransferPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NftTransferPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NFTServiceServer is the server API for NFTService service.
 // All implementations must embed UnimplementedNFTServiceServer
 // for forward compatibility
@@ -655,6 +696,11 @@ type NFTServiceServer interface {
 	CheckBlindBoxTx(context.Context, *CheckBlindBoxTxPost) (*CheckResponse, error)
 	MemberNftPagination(context.Context, *MemberNftPaginationPost) (*MemberNftPaginationResponse, error)
 	NftMemberPagination(context.Context, *NftMemberPaginationPost) (*NftMemberPaginationResponse, error)
+	// NFT 后台
+	Nft(context.Context, *InfoPost) (*NFTResponse, error)
+	NftPagination(context.Context, *NftPaginationPost) (*NFTPaginationResponse, error)
+	NftCreatorPagination(context.Context, *NftCreatorPaginationPost) (*NFTCreatorPaginationResponse, error)
+	NftTransferPagination(context.Context, *NftTransferPaginationPost) (*NFTTransferPaginationResponse, error)
 	mustEmbedUnimplementedNFTServiceServer()
 }
 
@@ -826,6 +872,18 @@ func (UnimplementedNFTServiceServer) MemberNftPagination(context.Context, *Membe
 }
 func (UnimplementedNFTServiceServer) NftMemberPagination(context.Context, *NftMemberPaginationPost) (*NftMemberPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NftMemberPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) Nft(context.Context, *InfoPost) (*NFTResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Nft not implemented")
+}
+func (UnimplementedNFTServiceServer) NftPagination(context.Context, *NftPaginationPost) (*NFTPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NftPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) NftCreatorPagination(context.Context, *NftCreatorPaginationPost) (*NFTCreatorPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NftCreatorPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) NftTransferPagination(context.Context, *NftTransferPaginationPost) (*NFTTransferPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NftTransferPagination not implemented")
 }
 func (UnimplementedNFTServiceServer) mustEmbedUnimplementedNFTServiceServer() {}
 
@@ -1830,6 +1888,78 @@ func _NFTService_NftMemberPagination_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_Nft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Nft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Nft",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Nft(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NftPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NftPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NftPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NftPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NftPagination(ctx, req.(*NftPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NftCreatorPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NftCreatorPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NftCreatorPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NftCreatorPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NftCreatorPagination(ctx, req.(*NftCreatorPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NftTransferPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NftTransferPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NftTransferPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NftTransferPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NftTransferPagination(ctx, req.(*NftTransferPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NFTService_ServiceDesc is the grpc.ServiceDesc for NFTService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2056,6 +2186,22 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NftMemberPagination",
 			Handler:    _NFTService_NftMemberPagination_Handler,
+		},
+		{
+			MethodName: "Nft",
+			Handler:    _NFTService_Nft_Handler,
+		},
+		{
+			MethodName: "NftPagination",
+			Handler:    _NFTService_NftPagination_Handler,
+		},
+		{
+			MethodName: "NftCreatorPagination",
+			Handler:    _NFTService_NftCreatorPagination_Handler,
+		},
+		{
+			MethodName: "NftTransferPagination",
+			Handler:    _NFTService_NftTransferPagination_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -72,6 +72,12 @@ message Response {
   map<string, string> Data = 2;
 }
 
+// IDResponse 返回ID
+message IDResponse {
+  string Message = 1;
+  uint64 data    = 2;
+}
+
 // ResultResponse 返回执行结果
 message ResultResponse {
   string Message = 1;

@@ -15,17 +15,18 @@ message Work {
   string sub_title      = 5;
   string description    = 6;
   string published_date = 7;
-  string serial_num     = 8;
-  string series         = 9;
-  int64  rarity         = 10;
-  string introduction   = 11;
-  string path           = 12;
-  uint64 sort           = 13;
-  string cover          = 14;
-  uint64 status         = 15;
-  bool   checked        = 16;
-  string created_at     = 17;
-  string updated_at     = 18;
+  string published_time = 8;
+  string serial_num     = 9;
+  string series         = 10;
+  int64  rarity         = 11;
+  string introduction   = 12;
+  string path           = 13;
+  uint64 sort           = 14;
+  string cover          = 15;
+  uint64 status         = 16;
+  bool   checked        = 17;
+  string created_at     = 18;
+  string updated_at     = 19;
 }
 
 // SimpleWork 简单的 作品返回

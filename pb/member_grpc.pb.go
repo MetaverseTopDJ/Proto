@@ -33,6 +33,7 @@ type MemberServiceClient interface {
 	// 会员
 	Member(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberResponse, error)
 	MemberInfo(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
+	MemberInfoByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error)
 	MemberByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error)
 	TopMemberInvitors(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*TopMemberInvitorsResponse, error)
 	MemberCards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberCardsResponse, error)
@@ -188,6 +189,15 @@ func (c *memberServiceClient) Member(ctx context.Context, in *InfoPost, opts ...
 func (c *memberServiceClient) MemberInfo(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error) {
 	out := new(SimpleMemberResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberInfoByAddress(ctx context.Context, in *MemberByAddressPost, opts ...grpc.CallOption) (*MemberResponse, error) {
+	out := new(MemberResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberInfoByAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -537,6 +547,7 @@ type MemberServiceServer interface {
 	// 会员
 	Member(context.Context, *InfoPost) (*MemberResponse, error)
 	MemberInfo(context.Context, *EmptyPost) (*SimpleMemberResponse, error)
+	MemberInfoByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error)
 	MemberByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error)
 	TopMemberInvitors(context.Context, *EmptyPost) (*TopMemberInvitorsResponse, error)
 	MemberCards(context.Context, *EmptyPost) (*SimpleMemberCardsResponse, error)
@@ -622,6 +633,9 @@ func (UnimplementedMemberServiceServer) Member(context.Context, *InfoPost) (*Mem
 }
 func (UnimplementedMemberServiceServer) MemberInfo(context.Context, *EmptyPost) (*SimpleMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberInfo not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberInfoByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberInfoByAddress not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberByAddress(context.Context, *MemberByAddressPost) (*MemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberByAddress not implemented")
@@ -956,6 +970,24 @@ func _MemberService_MemberInfo_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).MemberInfo(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberInfoByAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberByAddressPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberInfoByAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberInfoByAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberInfoByAddress(ctx, req.(*MemberByAddressPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1662,6 +1694,10 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberInfo",
 			Handler:    _MemberService_MemberInfo_Handler,
+		},
+		{
+			MethodName: "MemberInfoByAddress",
+			Handler:    _MemberService_MemberInfoByAddress_Handler,
 		},
 		{
 			MethodName: "MemberByAddress",

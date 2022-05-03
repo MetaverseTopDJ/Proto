@@ -19,6 +19,28 @@ message BlindBoxContent {
   string updated_at   = 9;
 }
 
+// BlindBoxContentItem 盲盒内容分页 展示的信息
+message BlindBoxContentItem {
+  uint64              blind_box_id = 1;
+  uint64              work_id      = 2;
+  uint64              rarity       = 3;
+  float               probability  = 4;
+  uint64              total        = 5;
+  uint64              remain       = 6;
+  uint64              status       = 7;
+  string              created_at   = 8;
+  string              updated_at   = 9;
+  BlindBoxContentWork work         = 10;
+}
+
+// BlindBoxContentWork 盲盒内容展示的 作品信息
+message BlindBoxContentWork {
+  uint64 id        = 1;
+  uint64 type      = 2;
+  string title     = 3;
+  string sub_title = 4;
+}
+
 /**************** 请求结构 ****************/
 
 // BlindBoxContentInfoPost 获取盲盒内容
@@ -38,7 +60,7 @@ message BlindBoxContentPaginationPost {
 message CreateBlindBoxContentPost {
   uint64 blind_box_id = 1;
   uint64 work_id      = 2;
-  float  probability = 3;
+  float  probability  = 3;
   uint64 total        = 4;
   uint64 remain       = 5;
 }
@@ -63,8 +85,8 @@ message BlindBoxContentResponse {
 // BlindBoxContentPaginationResponse 返回列表
 message BlindBoxContentPaginationResponse {
   message BlindBoxContents {
-    repeated BlindBoxContent list = 1;
-    int64    total                = 2;
+    repeated BlindBoxContentItem list = 1;
+    int64    total                    = 2;
   }
   string           message = 1;
   BlindBoxContents data    = 2;

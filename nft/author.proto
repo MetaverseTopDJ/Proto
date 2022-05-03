@@ -41,6 +41,7 @@ message SimpleAuthor {
   string twitter          = 11;
   uint64 follower         = 12;
   uint64 status           = 13;
+  int64  work_num         = 14;
 }
 
 /**************** 请求结构 ****************/

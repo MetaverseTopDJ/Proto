@@ -108,6 +108,7 @@ service MemberService {
   // 会员
   rpc Member (global.InfoPost) returns (MemberResponse) {}
   rpc MemberInfo (global.EmptyPost) returns (SimpleMemberResponse) {} // 前端获取会员信息
+  rpc MemberInfoByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据会员地址，返回会员
   rpc MemberByAddress (MemberByAddressPost) returns (MemberResponse) {} // 根据钱包地址获取会员数据，没有则创建会员
   rpc TopMemberInvitors (global.EmptyPost) returns (TopMemberInvitorsResponse) {} // 返回 前十邀请
   rpc MemberCards (global.EmptyPost) returns (SimpleMemberCardsResponse) {} // 会员拥有的会员卡
@@ -115,7 +116,7 @@ service MemberService {
   rpc UpdateMemberAvatar (UpdateMemberAvatarPost) returns (SimpleMemberResponse) {} // 更新会员头像
   rpc UpdateMemberProfile (UpdateMemberProfilePost) returns (SimpleMemberResponse) {} // 更新会员个人资料
 
-  // 会员卡
+  // 会员卡·
   rpc Card (global.InfoPost) returns (CardResponse) {} // 获取会员卡信息
   rpc Cards (global.EmptyPost) returns (CardsResponse) {}
   rpc CardPagination (global.PaginationPost) returns (CardPaginationResponse) {}
