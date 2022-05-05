@@ -9,6 +9,7 @@ import "global/contract.proto";
 import "nft/author.proto";
 import "nft/work.proto";
 import "nft/blind_box.proto";
+import "nft/blind_box_stage.proto";
 import "nft/blind_box_content.proto";
 import "nft/blind_box_white_address.proto";
 import "nft/collect.proto";
@@ -179,6 +180,13 @@ service NFTService {
   rpc CreateBlindBoxContent (CreateBlindBoxContentPost) returns (global.ResultResponse) {}
   rpc UpdateBlindBoxContent (UpdateBlindBoxContentPost) returns (global.ResultResponse) {}
   rpc RemoveBlindBoxContent (BlindBoxContentInfoPost) returns (global.ResultResponse) {}
+
+  // 盲盒阶段
+  rpc BlindBoxStage (BlindBoxStagePost) returns (BlindBoxStageResponse) {}
+  rpc BlindBoxStages (global.InfoPost) returns (BlindBoxStagesResponse) {}
+  rpc CreateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
+  rpc UpdateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
+  rpc RemoveBlindBoxStage (BlindBoxStagePost) returns (global.ResultResponse) {}
 
   // 盲盒白名单
   rpc BlindBoxWhiteAddressPagination (BlindBoxWhiteAddressPaginationPost) returns (BlindBoxWhiteAddressPaginationResponse) {}

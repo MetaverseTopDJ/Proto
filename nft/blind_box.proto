@@ -11,20 +11,21 @@ import "nft/work.proto";
 // BlindBox 盲盒
 message BlindBox {
   uint64 id          = 1;
-  string title       = 2;
-  string sub_title   = 3;
-  string description = 4;
-  string cover       = 5;
-  string background  = 6;
-  string series      = 7;
-  float  price       = 8;
-  uint64 decimal     = 9;
-  string start_at    = 10;
-  string end_at      = 11;
-  bool   top         = 12;
-  uint64 status      = 13;
-  string created_at  = 14;
-  string updated_at  = 15;
+  uint64 contract_id = 2;
+  string title       = 3;
+  string sub_title   = 4;
+  string description = 5;
+  string cover       = 6;
+  string background  = 7;
+  string series      = 8;
+  float  price       = 9;
+  uint64 decimal     = 10;
+  string start_at    = 11;
+  string end_at      = 12;
+  bool   top         = 13;
+  uint64 status      = 14;
+  string created_at  = 15;
+  string updated_at  = 16;
 }
 
 // BlindBoxIntroduction 盲盒介绍

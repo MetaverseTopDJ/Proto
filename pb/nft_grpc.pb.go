@@ -54,6 +54,12 @@ type NFTServiceClient interface {
 	CreateBlindBoxContent(ctx context.Context, in *CreateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	UpdateBlindBoxContent(ctx context.Context, in *UpdateBlindBoxContentPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	RemoveBlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	// 盲盒阶段
+	BlindBoxStage(ctx context.Context, in *BlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error)
+	BlindBoxStages(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxStagesResponse, error)
+	CreateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error)
+	UpdateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error)
+	RemoveBlindBoxStage(ctx context.Context, in *BlindBoxStagePost, opts ...grpc.CallOption) (*ResultResponse, error)
 	// 盲盒白名单
 	BlindBoxWhiteAddressPagination(ctx context.Context, in *BlindBoxWhiteAddressPaginationPost, opts ...grpc.CallOption) (*BlindBoxWhiteAddressPaginationResponse, error)
 	CreateBlindBoxWhiteAddress(ctx context.Context, in *CreateBlindBoxWhiteAddressPost, opts ...grpc.CallOption) (*ResultResponse, error)
@@ -391,6 +397,51 @@ func (c *nFTServiceClient) RemoveBlindBoxContent(ctx context.Context, in *BlindB
 	return out, nil
 }
 
+func (c *nFTServiceClient) BlindBoxStage(ctx context.Context, in *BlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error) {
+	out := new(BlindBoxStageResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxStages(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxStagesResponse, error) {
+	out := new(BlindBoxStagesResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxStages", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CreateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error) {
+	out := new(BlindBoxStageResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CreateBlindBoxStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) UpdateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error) {
+	out := new(BlindBoxStageResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/UpdateBlindBoxStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) RemoveBlindBoxStage(ctx context.Context, in *BlindBoxStagePost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/RemoveBlindBoxStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nFTServiceClient) BlindBoxWhiteAddressPagination(ctx context.Context, in *BlindBoxWhiteAddressPaginationPost, opts ...grpc.CallOption) (*BlindBoxWhiteAddressPaginationResponse, error) {
 	out := new(BlindBoxWhiteAddressPaginationResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxWhiteAddressPagination", in, out, opts...)
@@ -719,6 +770,12 @@ type NFTServiceServer interface {
 	CreateBlindBoxContent(context.Context, *CreateBlindBoxContentPost) (*ResultResponse, error)
 	UpdateBlindBoxContent(context.Context, *UpdateBlindBoxContentPost) (*ResultResponse, error)
 	RemoveBlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*ResultResponse, error)
+	// 盲盒阶段
+	BlindBoxStage(context.Context, *BlindBoxStagePost) (*BlindBoxStageResponse, error)
+	BlindBoxStages(context.Context, *InfoPost) (*BlindBoxStagesResponse, error)
+	CreateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error)
+	UpdateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error)
+	RemoveBlindBoxStage(context.Context, *BlindBoxStagePost) (*ResultResponse, error)
 	// 盲盒白名单
 	BlindBoxWhiteAddressPagination(context.Context, *BlindBoxWhiteAddressPaginationPost) (*BlindBoxWhiteAddressPaginationResponse, error)
 	CreateBlindBoxWhiteAddress(context.Context, *CreateBlindBoxWhiteAddressPost) (*ResultResponse, error)
@@ -860,6 +917,21 @@ func (UnimplementedNFTServiceServer) UpdateBlindBoxContent(context.Context, *Upd
 }
 func (UnimplementedNFTServiceServer) RemoveBlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*ResultResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveBlindBoxContent not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxStage(context.Context, *BlindBoxStagePost) (*BlindBoxStageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxStage not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxStages(context.Context, *InfoPost) (*BlindBoxStagesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxStages not implemented")
+}
+func (UnimplementedNFTServiceServer) CreateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBlindBoxStage not implemented")
+}
+func (UnimplementedNFTServiceServer) UpdateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBlindBoxStage not implemented")
+}
+func (UnimplementedNFTServiceServer) RemoveBlindBoxStage(context.Context, *BlindBoxStagePost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveBlindBoxStage not implemented")
 }
 func (UnimplementedNFTServiceServer) BlindBoxWhiteAddressPagination(context.Context, *BlindBoxWhiteAddressPaginationPost) (*BlindBoxWhiteAddressPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxWhiteAddressPagination not implemented")
@@ -1542,6 +1614,96 @@ func _NFTService_RemoveBlindBoxContent_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).RemoveBlindBoxContent(ctx, req.(*BlindBoxContentInfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxStagePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxStage(ctx, req.(*BlindBoxStagePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxStages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxStages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxStages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxStages(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CreateBlindBoxStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyBlindBoxStagePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CreateBlindBoxStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CreateBlindBoxStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CreateBlindBoxStage(ctx, req.(*ModifyBlindBoxStagePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_UpdateBlindBoxStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyBlindBoxStagePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).UpdateBlindBoxStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/UpdateBlindBoxStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).UpdateBlindBoxStage(ctx, req.(*ModifyBlindBoxStagePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_RemoveBlindBoxStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxStagePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).RemoveBlindBoxStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/RemoveBlindBoxStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).RemoveBlindBoxStage(ctx, req.(*BlindBoxStagePost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2256,6 +2418,26 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveBlindBoxContent",
 			Handler:    _NFTService_RemoveBlindBoxContent_Handler,
+		},
+		{
+			MethodName: "BlindBoxStage",
+			Handler:    _NFTService_BlindBoxStage_Handler,
+		},
+		{
+			MethodName: "BlindBoxStages",
+			Handler:    _NFTService_BlindBoxStages_Handler,
+		},
+		{
+			MethodName: "CreateBlindBoxStage",
+			Handler:    _NFTService_CreateBlindBoxStage_Handler,
+		},
+		{
+			MethodName: "UpdateBlindBoxStage",
+			Handler:    _NFTService_UpdateBlindBoxStage_Handler,
+		},
+		{
+			MethodName: "RemoveBlindBoxStage",
+			Handler:    _NFTService_RemoveBlindBoxStage_Handler,
 		},
 		{
 			MethodName: "BlindBoxWhiteAddressPagination",

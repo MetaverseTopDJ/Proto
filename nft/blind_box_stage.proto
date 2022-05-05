@@ -12,12 +12,40 @@ message BlindBoxStage {
   uint64 type         = 2;
   string start_at     = 3;
   string end_at       = 4;
-  uint64 limit        = 5;
-  string created_at   = 6;
-  string updated_at   = 7;
+  string start_time   = 5;
+  string end_time     = 6;
+  uint64 limit        = 7;
+  string created_at   = 8;
+  string updated_at   = 9;
 }
 
 /**************** 请求结构 ****************/
 
+// BlindBoxStagePost Info 参数
+message BlindBoxStagePost {
+  uint64 blind_box_id = 1;
+  uint64 type         = 2;
+}
+
+// ModifyBlindBoxStagePost 创建 / 更新 阶段
+message ModifyBlindBoxStagePost {
+  uint64 blind_box_id = 1;
+  uint64 type         = 2;
+  string start_at     = 3;
+  string end_at       = 4;
+  uint64 limit        = 5;
+}
 
 /**************** 返回结构 ****************/
+
+// BlindBoxStageResponse 返回 信息
+message BlindBoxStageResponse {
+  string        message = 1;
+  BlindBoxStage data    = 2;
+}
+
+// BlindBoxStagesResponse 返回列表
+message BlindBoxStagesResponse {
+  string   message            = 1;
+  repeated BlindBoxStage data = 2;
+}
