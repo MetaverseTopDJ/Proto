@@ -20,12 +20,10 @@ message BlindBox {
   string series      = 8;
   float  price       = 9;
   uint64 decimal     = 10;
-  string start_at    = 11;
-  string end_at      = 12;
-  bool   top         = 13;
-  uint64 status      = 14;
-  string created_at  = 15;
-  string updated_at  = 16;
+  bool   top         = 11;
+  uint64 status      = 12;
+  string created_at  = 13;
+  string updated_at  = 14;
 }
 
 // BlindBoxIntroduction 盲盒介绍
@@ -39,20 +37,22 @@ message BlindBoxIntroduction {
 // SimpleBlindBox 前端 盲盒数据
 message SimpleBlindBox {
   uint64 id           = 1;
-  string title        = 2;
-  string sub_title    = 3;
-  string description  = 4;
-  string introduction = 5;
-  string cover        = 6;
-  string background   = 7;
-  string series       = 8;
-  float  price        = 9;
-  uint64 start_at     = 10;
-  uint64 end_at       = 11;
-  bool   open         = 12;
-  uint64 total        = 13;
-  uint64 remain       = 14;
-  string contract     = 15;
+  uint64 type         = 2;
+  string title        = 3;
+  string sub_title    = 4;
+  string description  = 5;
+  string introduction = 6;
+  string cover        = 7;
+  string background   = 8;
+  string series       = 9;
+  float  price        = 10;
+  uint64 start_at     = 11;
+  uint64 end_at       = 12;
+  uint64 limit        = 13;
+  bool   open         = 14;
+  uint64 total        = 15;
+  uint64 remain       = 16;
+  string contract     = 17;
 }
 
 // BlindBoxTop 返回 Top 盲盒

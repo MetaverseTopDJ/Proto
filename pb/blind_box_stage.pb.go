@@ -380,6 +380,117 @@ func (x *BlindBoxStagesResponse) GetData() []*BlindBoxStage {
 	return nil
 }
 
+// BlindBoxStagePaginationResponse 返回分页
+type BlindBoxStagePaginationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string                                  `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *BlindBoxStagePaginationResponse_Stages `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *BlindBoxStagePaginationResponse) Reset() {
+	*x = BlindBoxStagePaginationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_stage_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxStagePaginationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxStagePaginationResponse) ProtoMessage() {}
+
+func (x *BlindBoxStagePaginationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_stage_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxStagePaginationResponse.ProtoReflect.Descriptor instead.
+func (*BlindBoxStagePaginationResponse) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_stage_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *BlindBoxStagePaginationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BlindBoxStagePaginationResponse) GetData() *BlindBoxStagePaginationResponse_Stages {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type BlindBoxStagePaginationResponse_Stages struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	List  []*BlindBoxStage `protobuf:"bytes,1,rep,name=list,proto3" json:"list"`
+	Total int64            `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+}
+
+func (x *BlindBoxStagePaginationResponse_Stages) Reset() {
+	*x = BlindBoxStagePaginationResponse_Stages{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_stage_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxStagePaginationResponse_Stages) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxStagePaginationResponse_Stages) ProtoMessage() {}
+
+func (x *BlindBoxStagePaginationResponse_Stages) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_stage_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxStagePaginationResponse_Stages.ProtoReflect.Descriptor instead.
+func (*BlindBoxStagePaginationResponse_Stages) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_stage_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *BlindBoxStagePaginationResponse_Stages) GetList() []*BlindBoxStage {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *BlindBoxStagePaginationResponse_Stages) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_nft_blind_box_stage_proto protoreflect.FileDescriptor
 
 var file_nft_blind_box_stage_proto_rawDesc = []byte{
@@ -427,8 +538,20 @@ var file_nft_blind_box_stage_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x26, 0x0a, 0x04,
 	0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x6e, 0x66, 0x74,
 	0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x74, 0x61, 0x67, 0x65, 0x52, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x61, 0x74, 0x61, 0x22, 0xc4, 0x01, 0x0a, 0x1f, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f,
+	0x78, 0x53, 0x74, 0x61, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x12, 0x3f, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x2b, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53,
+	0x74, 0x61, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x74, 0x61, 0x67, 0x65, 0x73, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x1a, 0x46, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x67, 0x65, 0x73, 0x12, 0x26, 0x0a,
+	0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x6e, 0x66,
+	0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x74, 0x61, 0x67, 0x65, 0x52,
+	0x04, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x09, 0x5a, 0x07, 0x2e,
+	0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -443,22 +566,26 @@ func file_nft_blind_box_stage_proto_rawDescGZIP() []byte {
 	return file_nft_blind_box_stage_proto_rawDescData
 }
 
-var file_nft_blind_box_stage_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_nft_blind_box_stage_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_nft_blind_box_stage_proto_goTypes = []interface{}{
-	(*BlindBoxStage)(nil),           // 0: nft.BlindBoxStage
-	(*BlindBoxStagePost)(nil),       // 1: nft.BlindBoxStagePost
-	(*ModifyBlindBoxStagePost)(nil), // 2: nft.ModifyBlindBoxStagePost
-	(*BlindBoxStageResponse)(nil),   // 3: nft.BlindBoxStageResponse
-	(*BlindBoxStagesResponse)(nil),  // 4: nft.BlindBoxStagesResponse
+	(*BlindBoxStage)(nil),                          // 0: nft.BlindBoxStage
+	(*BlindBoxStagePost)(nil),                      // 1: nft.BlindBoxStagePost
+	(*ModifyBlindBoxStagePost)(nil),                // 2: nft.ModifyBlindBoxStagePost
+	(*BlindBoxStageResponse)(nil),                  // 3: nft.BlindBoxStageResponse
+	(*BlindBoxStagesResponse)(nil),                 // 4: nft.BlindBoxStagesResponse
+	(*BlindBoxStagePaginationResponse)(nil),        // 5: nft.BlindBoxStagePaginationResponse
+	(*BlindBoxStagePaginationResponse_Stages)(nil), // 6: nft.BlindBoxStagePaginationResponse.Stages
 }
 var file_nft_blind_box_stage_proto_depIdxs = []int32{
 	0, // 0: nft.BlindBoxStageResponse.data:type_name -> nft.BlindBoxStage
 	0, // 1: nft.BlindBoxStagesResponse.data:type_name -> nft.BlindBoxStage
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 2: nft.BlindBoxStagePaginationResponse.data:type_name -> nft.BlindBoxStagePaginationResponse.Stages
+	0, // 3: nft.BlindBoxStagePaginationResponse.Stages.list:type_name -> nft.BlindBoxStage
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_nft_blind_box_stage_proto_init() }
@@ -527,6 +654,30 @@ func file_nft_blind_box_stage_proto_init() {
 				return nil
 			}
 		}
+		file_nft_blind_box_stage_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxStagePaginationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_stage_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxStagePaginationResponse_Stages); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -534,7 +685,7 @@ func file_nft_blind_box_stage_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_nft_blind_box_stage_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -184,6 +184,7 @@ service NFTService {
   // 盲盒阶段
   rpc BlindBoxStage (BlindBoxStagePost) returns (BlindBoxStageResponse) {}
   rpc BlindBoxStages (global.InfoPost) returns (BlindBoxStagesResponse) {}
+  rpc BlindBoxStagePagination (global.InfoPost) returns (BlindBoxStagePaginationResponse) {}
   rpc CreateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
   rpc UpdateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
   rpc RemoveBlindBoxStage (BlindBoxStagePost) returns (global.ResultResponse) {}

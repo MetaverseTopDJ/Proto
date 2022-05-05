@@ -49,3 +49,13 @@ message BlindBoxStagesResponse {
   string   message            = 1;
   repeated BlindBoxStage data = 2;
 }
+
+// BlindBoxStagePaginationResponse 返回分页
+message BlindBoxStagePaginationResponse {
+  message Stages {
+    repeated BlindBoxStage list = 1;
+    int64    total              = 2;
+  }
+  string message = 1;
+  Stages data    = 2;
+}
