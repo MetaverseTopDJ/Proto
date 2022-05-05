@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package nft;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// BlindBoxStage 盲盒阶段
+message BlindBoxStage {
+  uint64 blind_box_id = 1;
+  uint64 type         = 2;
+  string start_at     = 3;
+  string end_at       = 4;
+  uint64 limit        = 5;
+  string created_at   = 6;
+  string updated_at   = 7;
+}
+
+/**************** 请求结构 ****************/
+
+
+/**************** 返回结构 ****************/

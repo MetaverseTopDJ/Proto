@@ -60,6 +60,12 @@ message BlindBoxTop {
   repeated       SimpleWork works = 2;
 }
 
+// BlindBoxDetail 返回 盲盒详情
+message BlindBoxDetail {
+  SimpleBlindBox box              = 1;
+  repeated       SimpleWork works = 2;
+}
+
 /**************** 请求结构 ****************/
 
 // BlindBoxTop 盲盒首页
@@ -140,8 +146,11 @@ message BlindBoxTopResponse {
   BlindBoxTop data    = 2;
 }
 
-// BlindBoxDetailResponse 
-message BlindBoxDetailResponse {}
+// BlindBoxDetailResponse 返回 盲盒详情
+message BlindBoxDetailResponse {
+  string         message = 1;
+  BlindBoxDetail data    = 2;
+}
 
 // BlindBoxPaginationResponse 返回 分页
 message BlindBoxPaginationResponse {

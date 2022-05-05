@@ -468,6 +468,62 @@ func (x *BlindBoxTop) GetWorks() []*SimpleWork {
 	return nil
 }
 
+// BlindBoxDetail 返回 盲盒详情
+type BlindBoxDetail struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Box   *SimpleBlindBox `protobuf:"bytes,1,opt,name=box,proto3" json:"box"`
+	Works []*SimpleWork   `protobuf:"bytes,2,rep,name=works,proto3" json:"works"`
+}
+
+func (x *BlindBoxDetail) Reset() {
+	*x = BlindBoxDetail{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxDetail) ProtoMessage() {}
+
+func (x *BlindBoxDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxDetail.ProtoReflect.Descriptor instead.
+func (*BlindBoxDetail) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BlindBoxDetail) GetBox() *SimpleBlindBox {
+	if x != nil {
+		return x.Box
+	}
+	return nil
+}
+
+func (x *BlindBoxDetail) GetWorks() []*SimpleWork {
+	if x != nil {
+		return x.Works
+	}
+	return nil
+}
+
 // BlindBoxTop 盲盒首页
 type BlindBoxTopPost struct {
 	state         protoimpl.MessageState
@@ -480,7 +536,7 @@ type BlindBoxTopPost struct {
 func (x *BlindBoxTopPost) Reset() {
 	*x = BlindBoxTopPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[4]
+		mi := &file_nft_blind_box_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -493,7 +549,7 @@ func (x *BlindBoxTopPost) String() string {
 func (*BlindBoxTopPost) ProtoMessage() {}
 
 func (x *BlindBoxTopPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[4]
+	mi := &file_nft_blind_box_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +562,7 @@ func (x *BlindBoxTopPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxTopPost.ProtoReflect.Descriptor instead.
 func (*BlindBoxTopPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{4}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *BlindBoxTopPost) GetNum() uint64 {
@@ -529,7 +585,7 @@ type BlindBoxDetailPost struct {
 func (x *BlindBoxDetailPost) Reset() {
 	*x = BlindBoxDetailPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[5]
+		mi := &file_nft_blind_box_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -542,7 +598,7 @@ func (x *BlindBoxDetailPost) String() string {
 func (*BlindBoxDetailPost) ProtoMessage() {}
 
 func (x *BlindBoxDetailPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[5]
+	mi := &file_nft_blind_box_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -555,7 +611,7 @@ func (x *BlindBoxDetailPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxDetailPost.ProtoReflect.Descriptor instead.
 func (*BlindBoxDetailPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{5}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BlindBoxDetailPost) GetId() uint64 {
@@ -585,7 +641,7 @@ type CheckBlindBoxTxPost struct {
 func (x *CheckBlindBoxTxPost) Reset() {
 	*x = CheckBlindBoxTxPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[6]
+		mi := &file_nft_blind_box_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -598,7 +654,7 @@ func (x *CheckBlindBoxTxPost) String() string {
 func (*CheckBlindBoxTxPost) ProtoMessage() {}
 
 func (x *CheckBlindBoxTxPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[6]
+	mi := &file_nft_blind_box_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -611,7 +667,7 @@ func (x *CheckBlindBoxTxPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckBlindBoxTxPost.ProtoReflect.Descriptor instead.
 func (*CheckBlindBoxTxPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{6}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CheckBlindBoxTxPost) GetId() uint64 {
@@ -641,7 +697,7 @@ type PurchaseBlindBoxPost struct {
 func (x *PurchaseBlindBoxPost) Reset() {
 	*x = PurchaseBlindBoxPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[7]
+		mi := &file_nft_blind_box_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -654,7 +710,7 @@ func (x *PurchaseBlindBoxPost) String() string {
 func (*PurchaseBlindBoxPost) ProtoMessage() {}
 
 func (x *PurchaseBlindBoxPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[7]
+	mi := &file_nft_blind_box_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +723,7 @@ func (x *PurchaseBlindBoxPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseBlindBoxPost.ProtoReflect.Descriptor instead.
 func (*PurchaseBlindBoxPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{7}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PurchaseBlindBoxPost) GetId() uint64 {
@@ -706,7 +762,7 @@ type CreateBlindBoxPost struct {
 func (x *CreateBlindBoxPost) Reset() {
 	*x = CreateBlindBoxPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[8]
+		mi := &file_nft_blind_box_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -719,7 +775,7 @@ func (x *CreateBlindBoxPost) String() string {
 func (*CreateBlindBoxPost) ProtoMessage() {}
 
 func (x *CreateBlindBoxPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[8]
+	mi := &file_nft_blind_box_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -732,7 +788,7 @@ func (x *CreateBlindBoxPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBlindBoxPost.ProtoReflect.Descriptor instead.
 func (*CreateBlindBoxPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{8}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateBlindBoxPost) GetContractId() uint64 {
@@ -835,7 +891,7 @@ type UpdateBlindBoxPost struct {
 func (x *UpdateBlindBoxPost) Reset() {
 	*x = UpdateBlindBoxPost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[9]
+		mi := &file_nft_blind_box_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -848,7 +904,7 @@ func (x *UpdateBlindBoxPost) String() string {
 func (*UpdateBlindBoxPost) ProtoMessage() {}
 
 func (x *UpdateBlindBoxPost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[9]
+	mi := &file_nft_blind_box_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -861,7 +917,7 @@ func (x *UpdateBlindBoxPost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBlindBoxPost.ProtoReflect.Descriptor instead.
 func (*UpdateBlindBoxPost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{9}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateBlindBoxPost) GetId() uint64 {
@@ -961,7 +1017,7 @@ type BlindBoxResponse struct {
 func (x *BlindBoxResponse) Reset() {
 	*x = BlindBoxResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[10]
+		mi := &file_nft_blind_box_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -974,7 +1030,7 @@ func (x *BlindBoxResponse) String() string {
 func (*BlindBoxResponse) ProtoMessage() {}
 
 func (x *BlindBoxResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[10]
+	mi := &file_nft_blind_box_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -987,7 +1043,7 @@ func (x *BlindBoxResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{10}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *BlindBoxResponse) GetMessage() string {
@@ -1017,7 +1073,7 @@ type BlindBoxCountResponse struct {
 func (x *BlindBoxCountResponse) Reset() {
 	*x = BlindBoxCountResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[11]
+		mi := &file_nft_blind_box_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1030,7 +1086,7 @@ func (x *BlindBoxCountResponse) String() string {
 func (*BlindBoxCountResponse) ProtoMessage() {}
 
 func (x *BlindBoxCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[11]
+	mi := &file_nft_blind_box_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1043,7 +1099,7 @@ func (x *BlindBoxCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxCountResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxCountResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{11}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *BlindBoxCountResponse) GetMessage() string {
@@ -1073,7 +1129,7 @@ type BlindBoxTopResponse struct {
 func (x *BlindBoxTopResponse) Reset() {
 	*x = BlindBoxTopResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[12]
+		mi := &file_nft_blind_box_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1086,7 +1142,7 @@ func (x *BlindBoxTopResponse) String() string {
 func (*BlindBoxTopResponse) ProtoMessage() {}
 
 func (x *BlindBoxTopResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[12]
+	mi := &file_nft_blind_box_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1099,7 +1155,7 @@ func (x *BlindBoxTopResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxTopResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxTopResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{12}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BlindBoxTopResponse) GetMessage() string {
@@ -1116,17 +1172,20 @@ func (x *BlindBoxTopResponse) GetData() *BlindBoxTop {
 	return nil
 }
 
-// BlindBoxDetailResponse
+// BlindBoxDetailResponse 返回 盲盒详情
 type BlindBoxDetailResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Message string          `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *BlindBoxDetail `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
 }
 
 func (x *BlindBoxDetailResponse) Reset() {
 	*x = BlindBoxDetailResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[13]
+		mi := &file_nft_blind_box_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1139,7 +1198,7 @@ func (x *BlindBoxDetailResponse) String() string {
 func (*BlindBoxDetailResponse) ProtoMessage() {}
 
 func (x *BlindBoxDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[13]
+	mi := &file_nft_blind_box_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1211,21 @@ func (x *BlindBoxDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxDetailResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxDetailResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{13}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *BlindBoxDetailResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BlindBoxDetailResponse) GetData() *BlindBoxDetail {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 // BlindBoxPaginationResponse 返回 分页
@@ -1168,7 +1241,7 @@ type BlindBoxPaginationResponse struct {
 func (x *BlindBoxPaginationResponse) Reset() {
 	*x = BlindBoxPaginationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[14]
+		mi := &file_nft_blind_box_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1181,7 +1254,7 @@ func (x *BlindBoxPaginationResponse) String() string {
 func (*BlindBoxPaginationResponse) ProtoMessage() {}
 
 func (x *BlindBoxPaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[14]
+	mi := &file_nft_blind_box_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1194,7 +1267,7 @@ func (x *BlindBoxPaginationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxPaginationResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxPaginationResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{14}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BlindBoxPaginationResponse) GetMessage() string {
@@ -1223,7 +1296,7 @@ type BlindBoxCountResponse_Count struct {
 func (x *BlindBoxCountResponse_Count) Reset() {
 	*x = BlindBoxCountResponse_Count{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[15]
+		mi := &file_nft_blind_box_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1236,7 +1309,7 @@ func (x *BlindBoxCountResponse_Count) String() string {
 func (*BlindBoxCountResponse_Count) ProtoMessage() {}
 
 func (x *BlindBoxCountResponse_Count) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[15]
+	mi := &file_nft_blind_box_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1322,7 @@ func (x *BlindBoxCountResponse_Count) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxCountResponse_Count.ProtoReflect.Descriptor instead.
 func (*BlindBoxCountResponse_Count) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{11, 0}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *BlindBoxCountResponse_Count) GetTotal() uint64 {
@@ -1278,7 +1351,7 @@ type BlindBoxPaginationResponse_BlindBoxs struct {
 func (x *BlindBoxPaginationResponse_BlindBoxs) Reset() {
 	*x = BlindBoxPaginationResponse_BlindBoxs{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_proto_msgTypes[16]
+		mi := &file_nft_blind_box_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1291,7 +1364,7 @@ func (x *BlindBoxPaginationResponse_BlindBoxs) String() string {
 func (*BlindBoxPaginationResponse_BlindBoxs) ProtoMessage() {}
 
 func (x *BlindBoxPaginationResponse_BlindBoxs) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_proto_msgTypes[16]
+	mi := &file_nft_blind_box_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1304,7 +1377,7 @@ func (x *BlindBoxPaginationResponse_BlindBoxs) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use BlindBoxPaginationResponse_BlindBoxs.ProtoReflect.Descriptor instead.
 func (*BlindBoxPaginationResponse_BlindBoxs) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_proto_rawDescGZIP(), []int{14, 0}
+	return file_nft_blind_box_proto_rawDescGZIP(), []int{15, 0}
 }
 
 func (x *BlindBoxPaginationResponse_BlindBoxs) GetList() []*BlindBox {
@@ -1391,6 +1464,12 @@ var file_nft_blind_box_proto_rawDesc = []byte{
 	0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x52, 0x03, 0x62, 0x6f, 0x78, 0x12, 0x25, 0x0a,
 	0x05, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x6e,
 	0x66, 0x74, 0x2e, 0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x57, 0x6f, 0x72, 0x6b, 0x52, 0x05, 0x77,
+	0x6f, 0x72, 0x6b, 0x73, 0x22, 0x5e, 0x0a, 0x0e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78,
+	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x25, 0x0a, 0x03, 0x62, 0x6f, 0x78, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65,
+	0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x52, 0x03, 0x62, 0x6f, 0x78, 0x12, 0x25, 0x0a,
+	0x05, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x6e,
+	0x66, 0x74, 0x2e, 0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x57, 0x6f, 0x72, 0x6b, 0x52, 0x05, 0x77,
 	0x6f, 0x72, 0x6b, 0x73, 0x22, 0x23, 0x0a, 0x0f, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78,
 	0x54, 0x6f, 0x70, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6e, 0x75, 0x6d, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x04, 0x52, 0x03, 0x6e, 0x75, 0x6d, 0x22, 0x36, 0x0a, 0x12, 0x42, 0x6c, 0x69,
@@ -1466,22 +1545,26 @@ var file_nft_blind_box_proto_rawDesc = []byte{
 	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
 	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x24, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e,
-	0x64, 0x42, 0x6f, 0x78, 0x54, 0x6f, 0x70, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x18, 0x0a,
+	0x64, 0x42, 0x6f, 0x78, 0x54, 0x6f, 0x70, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x5b, 0x0a,
 	0x16, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xbb, 0x01, 0x0a, 0x1a, 0x42, 0x6c, 0x69, 0x6e,
-	0x64, 0x42, 0x6f, 0x78, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x12, 0x3d, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29,
-	0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x50, 0x61, 0x67,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
-	0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a,
-	0x44, 0x0a, 0x09, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x73, 0x12, 0x21, 0x0a, 0x04,
-	0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x6e, 0x66, 0x74,
-	0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x12,
-	0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05,
-	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x12, 0x27, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x13, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x44, 0x65,
+	0x74, 0x61, 0x69, 0x6c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xbb, 0x01, 0x0a, 0x1a, 0x42,
+	0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x12, 0x3d, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x29, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78,
+	0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x73, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x1a, 0x44, 0x0a, 0x09, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x73, 0x12,
+	0x21, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e,
+	0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x52, 0x04, 0x6c, 0x69,
+	0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62,
+	0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1496,40 +1579,44 @@ func file_nft_blind_box_proto_rawDescGZIP() []byte {
 	return file_nft_blind_box_proto_rawDescData
 }
 
-var file_nft_blind_box_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_nft_blind_box_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_nft_blind_box_proto_goTypes = []interface{}{
 	(*BlindBox)(nil),                             // 0: nft.BlindBox
 	(*BlindBoxIntroduction)(nil),                 // 1: nft.BlindBoxIntroduction
 	(*SimpleBlindBox)(nil),                       // 2: nft.SimpleBlindBox
 	(*BlindBoxTop)(nil),                          // 3: nft.BlindBoxTop
-	(*BlindBoxTopPost)(nil),                      // 4: nft.BlindBoxTopPost
-	(*BlindBoxDetailPost)(nil),                   // 5: nft.BlindBoxDetailPost
-	(*CheckBlindBoxTxPost)(nil),                  // 6: nft.CheckBlindBoxTxPost
-	(*PurchaseBlindBoxPost)(nil),                 // 7: nft.PurchaseBlindBoxPost
-	(*CreateBlindBoxPost)(nil),                   // 8: nft.CreateBlindBoxPost
-	(*UpdateBlindBoxPost)(nil),                   // 9: nft.UpdateBlindBoxPost
-	(*BlindBoxResponse)(nil),                     // 10: nft.BlindBoxResponse
-	(*BlindBoxCountResponse)(nil),                // 11: nft.BlindBoxCountResponse
-	(*BlindBoxTopResponse)(nil),                  // 12: nft.BlindBoxTopResponse
-	(*BlindBoxDetailResponse)(nil),               // 13: nft.BlindBoxDetailResponse
-	(*BlindBoxPaginationResponse)(nil),           // 14: nft.BlindBoxPaginationResponse
-	(*BlindBoxCountResponse_Count)(nil),          // 15: nft.BlindBoxCountResponse.Count
-	(*BlindBoxPaginationResponse_BlindBoxs)(nil), // 16: nft.BlindBoxPaginationResponse.BlindBoxs
-	(*SimpleWork)(nil),                           // 17: nft.SimpleWork
+	(*BlindBoxDetail)(nil),                       // 4: nft.BlindBoxDetail
+	(*BlindBoxTopPost)(nil),                      // 5: nft.BlindBoxTopPost
+	(*BlindBoxDetailPost)(nil),                   // 6: nft.BlindBoxDetailPost
+	(*CheckBlindBoxTxPost)(nil),                  // 7: nft.CheckBlindBoxTxPost
+	(*PurchaseBlindBoxPost)(nil),                 // 8: nft.PurchaseBlindBoxPost
+	(*CreateBlindBoxPost)(nil),                   // 9: nft.CreateBlindBoxPost
+	(*UpdateBlindBoxPost)(nil),                   // 10: nft.UpdateBlindBoxPost
+	(*BlindBoxResponse)(nil),                     // 11: nft.BlindBoxResponse
+	(*BlindBoxCountResponse)(nil),                // 12: nft.BlindBoxCountResponse
+	(*BlindBoxTopResponse)(nil),                  // 13: nft.BlindBoxTopResponse
+	(*BlindBoxDetailResponse)(nil),               // 14: nft.BlindBoxDetailResponse
+	(*BlindBoxPaginationResponse)(nil),           // 15: nft.BlindBoxPaginationResponse
+	(*BlindBoxCountResponse_Count)(nil),          // 16: nft.BlindBoxCountResponse.Count
+	(*BlindBoxPaginationResponse_BlindBoxs)(nil), // 17: nft.BlindBoxPaginationResponse.BlindBoxs
+	(*SimpleWork)(nil),                           // 18: nft.SimpleWork
 }
 var file_nft_blind_box_proto_depIdxs = []int32{
 	2,  // 0: nft.BlindBoxTop.box:type_name -> nft.SimpleBlindBox
-	17, // 1: nft.BlindBoxTop.works:type_name -> nft.SimpleWork
-	0,  // 2: nft.BlindBoxResponse.data:type_name -> nft.BlindBox
-	15, // 3: nft.BlindBoxCountResponse.data:type_name -> nft.BlindBoxCountResponse.Count
-	3,  // 4: nft.BlindBoxTopResponse.data:type_name -> nft.BlindBoxTop
-	16, // 5: nft.BlindBoxPaginationResponse.data:type_name -> nft.BlindBoxPaginationResponse.BlindBoxs
-	0,  // 6: nft.BlindBoxPaginationResponse.BlindBoxs.list:type_name -> nft.BlindBox
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	18, // 1: nft.BlindBoxTop.works:type_name -> nft.SimpleWork
+	2,  // 2: nft.BlindBoxDetail.box:type_name -> nft.SimpleBlindBox
+	18, // 3: nft.BlindBoxDetail.works:type_name -> nft.SimpleWork
+	0,  // 4: nft.BlindBoxResponse.data:type_name -> nft.BlindBox
+	16, // 5: nft.BlindBoxCountResponse.data:type_name -> nft.BlindBoxCountResponse.Count
+	3,  // 6: nft.BlindBoxTopResponse.data:type_name -> nft.BlindBoxTop
+	4,  // 7: nft.BlindBoxDetailResponse.data:type_name -> nft.BlindBoxDetail
+	17, // 8: nft.BlindBoxPaginationResponse.data:type_name -> nft.BlindBoxPaginationResponse.BlindBoxs
+	0,  // 9: nft.BlindBoxPaginationResponse.BlindBoxs.list:type_name -> nft.BlindBox
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_nft_blind_box_proto_init() }
@@ -1588,7 +1675,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxTopPost); i {
+			switch v := v.(*BlindBoxDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1600,7 +1687,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxDetailPost); i {
+			switch v := v.(*BlindBoxTopPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1612,7 +1699,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CheckBlindBoxTxPost); i {
+			switch v := v.(*BlindBoxDetailPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1624,7 +1711,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PurchaseBlindBoxPost); i {
+			switch v := v.(*CheckBlindBoxTxPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1636,7 +1723,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateBlindBoxPost); i {
+			switch v := v.(*PurchaseBlindBoxPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1648,7 +1735,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateBlindBoxPost); i {
+			switch v := v.(*CreateBlindBoxPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1660,7 +1747,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxResponse); i {
+			switch v := v.(*UpdateBlindBoxPost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1672,7 +1759,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxCountResponse); i {
+			switch v := v.(*BlindBoxResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1684,7 +1771,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxTopResponse); i {
+			switch v := v.(*BlindBoxCountResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1696,7 +1783,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxDetailResponse); i {
+			switch v := v.(*BlindBoxTopResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1708,7 +1795,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxPaginationResponse); i {
+			switch v := v.(*BlindBoxDetailResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1720,7 +1807,7 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxCountResponse_Count); i {
+			switch v := v.(*BlindBoxPaginationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1732,6 +1819,18 @@ func file_nft_blind_box_proto_init() {
 			}
 		}
 		file_nft_blind_box_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxCountResponse_Count); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BlindBoxPaginationResponse_BlindBoxs); i {
 			case 0:
 				return &v.state
@@ -1750,7 +1849,7 @@ func file_nft_blind_box_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_nft_blind_box_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -10,6 +10,7 @@ import "nft/author.proto";
 import "nft/work.proto";
 import "nft/blind_box.proto";
 import "nft/blind_box_content.proto";
+import "nft/blind_box_white_address.proto";
 import "nft/collect.proto";
 import "nft/collect_exchange.proto";
 import "nft/blind_box_exchange.proto";
@@ -165,6 +166,7 @@ service NFTService {
   rpc BlindBoxCount (global.InfoPost) returns (BlindBoxCountResponse) {} // 返回盲盒剩余数量
   rpc BlindBoxTop (global.EmptyPost) returns (BlindBoxTopResponse) {}
   rpc BlindBoxTopCount (global.EmptyPost) returns (BlindBoxCountResponse) {} // 返回 首页盲盒剩余数量
+  rpc BlindBoxDetail (BlindBoxDetailPost) returns (BlindBoxDetailResponse) {} // 返回盲盒详情
   rpc BlindBoxPagination (global.PaginationPost) returns (BlindBoxPaginationResponse) {}
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
@@ -176,6 +178,11 @@ service NFTService {
   rpc CreateBlindBoxContent (CreateBlindBoxContentPost) returns (global.ResultResponse) {}
   rpc UpdateBlindBoxContent (UpdateBlindBoxContentPost) returns (global.ResultResponse) {}
   rpc RemoveBlindBoxContent (BlindBoxContentInfoPost) returns (global.ResultResponse) {}
+
+  // 盲盒白名单
+  rpc BlindBoxWhiteAddressPagination (BlindBoxWhiteAddressPaginationPost) returns (BlindBoxWhiteAddressPaginationResponse) {}
+  rpc CreateBlindBoxWhiteAddress (CreateBlindBoxWhiteAddressPost) returns (global.ResultResponse) {}
+  rpc RemoveBlindBoxWhiteAddress (RemoveBlindBoxWhiteAddressPost) returns (global.ResultResponse) {}
 
   // 集卡
   rpc Collect (global.InfoPost) returns (CollectResponse) {}
