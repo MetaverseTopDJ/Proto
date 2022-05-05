@@ -63,8 +63,9 @@ message CollectRequireDetail {
   string sub_title       = 6;
   string cover           = 7;
   string rarity          = 8;
-  string published_date  = 9;
-  uint64 published_total = 10;
+  bool   have            = 9;
+  string published_date  = 10;
+  uint64 published_total = 11;
 }
 
 // SimpleCollect App 返回
