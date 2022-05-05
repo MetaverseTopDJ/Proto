@@ -9,15 +9,16 @@ option go_package = "./pb;pb";
 // MemberNft 会员 NFT
 message MemberNft {
   uint64 id             = 1;
-  uint64 type           = 2;
-  string title          = 3;
-  string sub_title      = 4;
-  string description    = 5;
-  string published_date = 6;
-  string serial_num     = 7;
-  string series         = 8;
-  string rarity         = 9;
-  string cover          = 10;
+  uint64 work_id        = 2;
+  uint64 type           = 3;
+  string title          = 4;
+  string sub_title      = 5;
+  string description    = 6;
+  string published_date = 7;
+  string serial_num     = 8;
+  string series         = 9;
+  string rarity         = 10;
+  string cover          = 11;
 }
 
 // NftMember 拥有某个 NFT 的会员
