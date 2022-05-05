@@ -130,6 +130,12 @@ message BlindBoxResponse {
   BlindBox data    = 2;
 }
 
+// BlindBoxesResponse 返回 盲盒列表
+message BlindBoxesResponse {
+  string   message       = 1;
+  repeated BlindBox data = 2;
+}
+
 // BlindBoxCountResponse 返回 盲盒剩余数量
 message BlindBoxCountResponse {
   message Count {

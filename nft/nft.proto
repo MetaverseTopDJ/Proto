@@ -163,6 +163,7 @@ service NFTService {
 
   // 盲盒
   rpc BlindBox (global.InfoPost) returns (BlindBoxResponse) {}
+  rpc BlindBoxes (global.EmptyPost) returns (BlindBoxesResponse) {} // 返回 盲盒列表
   rpc BlindBoxCount (global.InfoPost) returns (BlindBoxCountResponse) {} // 返回盲盒剩余数量
   rpc BlindBoxTop (BlindBoxTopPost) returns (BlindBoxTopResponse) {}
   rpc BlindBoxTopCount (global.EmptyPost) returns (BlindBoxCountResponse) {} // 返回 首页盲盒剩余数量
