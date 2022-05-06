@@ -229,6 +229,20 @@ service NFTService {
   rpc UpdateNftContract (global.UpdateContractPost) returns (global.ContractResponse) {}
   rpc ChangeNftContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
 
+  // 合约操作
+
+  rpc BlindBoxContracts (global.EmptyPost) returns (global.ContractsResponse) {}
+  rpc StartBlindBoxContract (global.EmptyPost) returns (global.ResultResponse) {}
+  rpc StopBlindBoxContract (global.EmptyPost) returns (global.ResultResponse) {}
+
+  rpc NoteContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc StartNoteContract (global.InfoPost) returns (global.ResultResponse) {}
+  rpc StopNoteContract (global.InfoPost) returns (global.ResultResponse) {}
+
+  rpc TicketContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc StartTicketContract (global.InfoPost) returns (global.ResultResponse) {}
+  rpc StopTicketContract (global.InfoPost) returns (global.ResultResponse) {}
+
   // NFT
   rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
   rpc MemberNftPagination (MemberNftPaginationPost) returns (MemberNftPaginationResponse) {} // 会员 NFT

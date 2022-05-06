@@ -94,6 +94,15 @@ type NFTServiceClient interface {
 	CreateNftContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	UpdateNftContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	ChangeNftContractStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	BlindBoxContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error)
+	StartBlindBoxContract(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	StopBlindBoxContract(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	NoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	StartNoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	StopNoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	TicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	StartTicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	StopTicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	// NFT
 	CheckBlindBoxTx(ctx context.Context, in *CheckBlindBoxTxPost, opts ...grpc.CallOption) (*CheckResponse, error)
 	MemberNftPagination(ctx context.Context, in *MemberNftPaginationPost, opts ...grpc.CallOption) (*MemberNftPaginationResponse, error)
@@ -698,6 +707,87 @@ func (c *nFTServiceClient) ChangeNftContractStatus(ctx context.Context, in *Chan
 	return out, nil
 }
 
+func (c *nFTServiceClient) BlindBoxContracts(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractsResponse, error) {
+	out := new(ContractsResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxContracts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StartBlindBoxContract(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StartBlindBoxContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StopBlindBoxContract(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StopBlindBoxContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) NoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/NoteContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StartNoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StartNoteContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StopNoteContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StopNoteContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) TicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error) {
+	out := new(ContractResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/TicketContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StartTicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StartTicketContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) StopTicketContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/StopTicketContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nFTServiceClient) CheckBlindBoxTx(ctx context.Context, in *CheckBlindBoxTxPost, opts ...grpc.CallOption) (*CheckResponse, error) {
 	out := new(CheckResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/CheckBlindBoxTx", in, out, opts...)
@@ -841,6 +931,15 @@ type NFTServiceServer interface {
 	CreateNftContract(context.Context, *CreateContractPost) (*ContractResponse, error)
 	UpdateNftContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
 	ChangeNftContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error)
+	BlindBoxContracts(context.Context, *EmptyPost) (*ContractsResponse, error)
+	StartBlindBoxContract(context.Context, *EmptyPost) (*ResultResponse, error)
+	StopBlindBoxContract(context.Context, *EmptyPost) (*ResultResponse, error)
+	NoteContract(context.Context, *InfoPost) (*ContractResponse, error)
+	StartNoteContract(context.Context, *InfoPost) (*ResultResponse, error)
+	StopNoteContract(context.Context, *InfoPost) (*ResultResponse, error)
+	TicketContract(context.Context, *InfoPost) (*ContractResponse, error)
+	StartTicketContract(context.Context, *InfoPost) (*ResultResponse, error)
+	StopTicketContract(context.Context, *InfoPost) (*ResultResponse, error)
 	// NFT
 	CheckBlindBoxTx(context.Context, *CheckBlindBoxTxPost) (*CheckResponse, error)
 	MemberNftPagination(context.Context, *MemberNftPaginationPost) (*MemberNftPaginationResponse, error)
@@ -1051,6 +1150,33 @@ func (UnimplementedNFTServiceServer) UpdateNftContract(context.Context, *UpdateC
 }
 func (UnimplementedNFTServiceServer) ChangeNftContractStatus(context.Context, *ChangeStatusPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeNftContractStatus not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxContracts(context.Context, *EmptyPost) (*ContractsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxContracts not implemented")
+}
+func (UnimplementedNFTServiceServer) StartBlindBoxContract(context.Context, *EmptyPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBoxContract not implemented")
+}
+func (UnimplementedNFTServiceServer) StopBlindBoxContract(context.Context, *EmptyPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopBlindBoxContract not implemented")
+}
+func (UnimplementedNFTServiceServer) NoteContract(context.Context, *InfoPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NoteContract not implemented")
+}
+func (UnimplementedNFTServiceServer) StartNoteContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartNoteContract not implemented")
+}
+func (UnimplementedNFTServiceServer) StopNoteContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopNoteContract not implemented")
+}
+func (UnimplementedNFTServiceServer) TicketContract(context.Context, *InfoPost) (*ContractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TicketContract not implemented")
+}
+func (UnimplementedNFTServiceServer) StartTicketContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartTicketContract not implemented")
+}
+func (UnimplementedNFTServiceServer) StopTicketContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopTicketContract not implemented")
 }
 func (UnimplementedNFTServiceServer) CheckBlindBoxTx(context.Context, *CheckBlindBoxTxPost) (*CheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckBlindBoxTx not implemented")
@@ -2256,6 +2382,168 @@ func _NFTService_ChangeNftContractStatus_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_BlindBoxContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxContracts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxContracts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxContracts(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StartBlindBoxContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StartBlindBoxContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StartBlindBoxContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StartBlindBoxContract(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StopBlindBoxContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StopBlindBoxContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StopBlindBoxContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StopBlindBoxContract(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_NoteContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).NoteContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/NoteContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).NoteContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StartNoteContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StartNoteContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StartNoteContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StartNoteContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StopNoteContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StopNoteContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StopNoteContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StopNoteContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_TicketContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).TicketContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/TicketContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).TicketContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StartTicketContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StartTicketContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StartTicketContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StartTicketContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_StopTicketContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).StopTicketContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/StopTicketContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).StopTicketContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NFTService_CheckBlindBoxTx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckBlindBoxTxPost)
 	if err := dec(in); err != nil {
@@ -2648,6 +2936,42 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeNftContractStatus",
 			Handler:    _NFTService_ChangeNftContractStatus_Handler,
+		},
+		{
+			MethodName: "BlindBoxContracts",
+			Handler:    _NFTService_BlindBoxContracts_Handler,
+		},
+		{
+			MethodName: "StartBlindBoxContract",
+			Handler:    _NFTService_StartBlindBoxContract_Handler,
+		},
+		{
+			MethodName: "StopBlindBoxContract",
+			Handler:    _NFTService_StopBlindBoxContract_Handler,
+		},
+		{
+			MethodName: "NoteContract",
+			Handler:    _NFTService_NoteContract_Handler,
+		},
+		{
+			MethodName: "StartNoteContract",
+			Handler:    _NFTService_StartNoteContract_Handler,
+		},
+		{
+			MethodName: "StopNoteContract",
+			Handler:    _NFTService_StopNoteContract_Handler,
+		},
+		{
+			MethodName: "TicketContract",
+			Handler:    _NFTService_TicketContract_Handler,
+		},
+		{
+			MethodName: "StartTicketContract",
+			Handler:    _NFTService_StartTicketContract_Handler,
+		},
+		{
+			MethodName: "StopTicketContract",
+			Handler:    _NFTService_StopTicketContract_Handler,
 		},
 		{
 			MethodName: "CheckBlindBoxTx",

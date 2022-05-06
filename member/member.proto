@@ -145,6 +145,8 @@ service MemberService {
 
   // MemberContract 会员智能合约
   rpc MemberContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc StartMemberContract (global.InfoPost) returns (global.ResultResponse) {}
+  rpc StopMemberContract (global.InfoPost) returns (global.ResultResponse) {}
   rpc MemberContractAddress (global.EmptyPost) returns (global.ContractAddressResponse) {} // 会员合约地址
   rpc CreateMemberContract (global.CreateContractPost) returns (global.ContractResponse) {}
   rpc UpdateMemberContract (global.UpdateContractPost) returns (global.ContractResponse) {}

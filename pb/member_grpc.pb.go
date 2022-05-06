@@ -40,7 +40,7 @@ type MemberServiceClient interface {
 	MemberPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*MemberPaginationResponse, error)
 	UpdateMemberAvatar(ctx context.Context, in *UpdateMemberAvatarPost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
 	UpdateMemberProfile(ctx context.Context, in *UpdateMemberProfilePost, opts ...grpc.CallOption) (*SimpleMemberResponse, error)
-	// 会员卡
+	// 会员卡·
 	Card(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CardResponse, error)
 	Cards(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
 	CardPagination(ctx context.Context, in *PaginationPost, opts ...grpc.CallOption) (*CardPaginationResponse, error)
@@ -64,6 +64,8 @@ type MemberServiceClient interface {
 	CurrentActivity(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CardsResponse, error)
 	// MemberContract 会员智能合约
 	MemberContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ContractResponse, error)
+	StartMemberContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	StopMemberContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error)
 	CreateMemberContract(ctx context.Context, in *CreateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
 	UpdateMemberContract(ctx context.Context, in *UpdateContractPost, opts ...grpc.CallOption) (*ContractResponse, error)
@@ -429,6 +431,24 @@ func (c *memberServiceClient) MemberContract(ctx context.Context, in *InfoPost, 
 	return out, nil
 }
 
+func (c *memberServiceClient) StartMemberContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/StartMemberContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) StopMemberContract(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/StopMemberContract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberServiceClient) MemberContractAddress(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*ContractAddressResponse, error) {
 	out := new(ContractAddressResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/MemberContractAddress", in, out, opts...)
@@ -554,7 +574,7 @@ type MemberServiceServer interface {
 	MemberPagination(context.Context, *PaginationPost) (*MemberPaginationResponse, error)
 	UpdateMemberAvatar(context.Context, *UpdateMemberAvatarPost) (*SimpleMemberResponse, error)
 	UpdateMemberProfile(context.Context, *UpdateMemberProfilePost) (*SimpleMemberResponse, error)
-	// 会员卡
+	// 会员卡·
 	Card(context.Context, *InfoPost) (*CardResponse, error)
 	Cards(context.Context, *EmptyPost) (*CardsResponse, error)
 	CardPagination(context.Context, *PaginationPost) (*CardPaginationResponse, error)
@@ -578,6 +598,8 @@ type MemberServiceServer interface {
 	CurrentActivity(context.Context, *EmptyPost) (*CardsResponse, error)
 	// MemberContract 会员智能合约
 	MemberContract(context.Context, *InfoPost) (*ContractResponse, error)
+	StartMemberContract(context.Context, *InfoPost) (*ResultResponse, error)
+	StopMemberContract(context.Context, *InfoPost) (*ResultResponse, error)
 	MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error)
 	CreateMemberContract(context.Context, *CreateContractPost) (*ContractResponse, error)
 	UpdateMemberContract(context.Context, *UpdateContractPost) (*ContractResponse, error)
@@ -711,6 +733,12 @@ func (UnimplementedMemberServiceServer) CurrentActivity(context.Context, *EmptyP
 }
 func (UnimplementedMemberServiceServer) MemberContract(context.Context, *InfoPost) (*ContractResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberContract not implemented")
+}
+func (UnimplementedMemberServiceServer) StartMemberContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartMemberContract not implemented")
+}
+func (UnimplementedMemberServiceServer) StopMemberContract(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopMemberContract not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberContractAddress(context.Context, *EmptyPost) (*ContractAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberContractAddress not implemented")
@@ -1442,6 +1470,42 @@ func _MemberService_MemberContract_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_StartMemberContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).StartMemberContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/StartMemberContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).StartMemberContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_StopMemberContract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).StopMemberContract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/StopMemberContract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).StopMemberContract(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MemberService_MemberContractAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmptyPost)
 	if err := dec(in); err != nil {
@@ -1798,6 +1862,14 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberContract",
 			Handler:    _MemberService_MemberContract_Handler,
+		},
+		{
+			MethodName: "StartMemberContract",
+			Handler:    _MemberService_StartMemberContract_Handler,
+		},
+		{
+			MethodName: "StopMemberContract",
+			Handler:    _MemberService_StopMemberContract_Handler,
 		},
 		{
 			MethodName: "MemberContractAddress",
