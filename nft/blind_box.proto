@@ -128,8 +128,10 @@ message UpdateBlindBoxPost {
 // PurchaseBlindBoxResponse 白名单购买盲盒
 message PurchaseBlindBoxResponse {
   message Sign {
-    string signature = 1;
-    uint64 timestamp = 2;
+    string contract  = 1;
+    string address   = 2;
+    string signature = 3;
+    uint64 timestamp = 4;
   }
   string message = 1;
   Sign   data    = 2;
