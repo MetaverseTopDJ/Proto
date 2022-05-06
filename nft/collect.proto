@@ -21,7 +21,7 @@ message Collect {
   string   end_time       = 11;
   uint64   status         = 12;
   bool     check          = 13;
-  repeated uint64 reward  = 14;
+  uint64   reward         = 14;
   repeated uint64 require = 15;
   string   created_at     = 16;
   string   updated_at     = 17;
@@ -86,15 +86,15 @@ message SimpleCollect {
 }
 
 message SimpleCollectDetail {
-  SimpleCollect collect                           = 1;
-  repeated      CollectRewardDetail reward_list   = 2;
-  repeated      CollectRequireDetail require_list = 3;
+  SimpleCollect       collect                           = 1;
+  CollectRewardDetail reward                            = 2;
+  repeated            CollectRequireDetail require_list = 3;
 }
 
 // CollectDetail 集卡明细
 message CollectDetail {
   SimpleCollect collect                           = 1;
-  repeated      CollectReward reward_list         = 12;
+  CollectReward reward                            = 12;
   repeated      CollectRequireDetail require_list = 13;
 }
 
@@ -110,7 +110,7 @@ message CreateCollectPost {
   string   series         = 7;
   string   start_at       = 8;
   string   end_at         = 9;
-  repeated uint64 reward  = 10;
+  uint64   reward         = 10;
   repeated uint64 require = 11;
 }
 
@@ -125,7 +125,7 @@ message UpdateCollectPost {
   string   series         = 7;
   string   start_at       = 8;
   string   end_at         = 9;
-  repeated uint64 reward  = 10;
+  uint64   reward         = 10;
   repeated uint64 require = 11;
 }
 
