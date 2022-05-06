@@ -125,6 +125,16 @@ message UpdateBlindBoxPost {
 
 /**************** 返回结构 ****************/
 
+// PurchaseBlindBoxResponse 白名单购买盲盒
+message PurchaseBlindBoxResponse {
+  message Sign {
+    string signature = 1;
+    uint64 timestamp = 2;
+  }
+  string message = 1;
+  Sign   data    = 2;
+}
+
 // BlindBoxResponse 返回 盲盒基础信息
 message BlindBoxResponse {
   string   message = 1;

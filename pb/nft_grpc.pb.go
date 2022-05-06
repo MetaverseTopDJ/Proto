@@ -48,6 +48,9 @@ type NFTServiceClient interface {
 	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	// 前端盲盒交互
+	CheckBlindBoxStage(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CheckBlindBoxStageResponse, error)
+	PurchaseBlindBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*PurchaseBlindBoxResponse, error)
 	// 盲盒内容
 	BlindBoxContent(ctx context.Context, in *BlindBoxContentInfoPost, opts ...grpc.CallOption) (*BlindBoxContentResponse, error)
 	BlindBoxContentPagination(ctx context.Context, in *BlindBoxContentPaginationPost, opts ...grpc.CallOption) (*BlindBoxContentPaginationResponse, error)
@@ -347,6 +350,24 @@ func (c *nFTServiceClient) UpdateBlindBox(ctx context.Context, in *UpdateBlindBo
 func (c *nFTServiceClient) StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
 	out := new(BlindBoxResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/StartBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CheckBlindBoxStage(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CheckBlindBoxStageResponse, error) {
+	out := new(CheckBlindBoxStageResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CheckBlindBoxStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) PurchaseBlindBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*PurchaseBlindBoxResponse, error) {
+	out := new(PurchaseBlindBoxResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/PurchaseBlindBox", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -774,6 +795,9 @@ type NFTServiceServer interface {
 	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
 	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
 	StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error)
+	// 前端盲盒交互
+	CheckBlindBoxStage(context.Context, *InfoPost) (*CheckBlindBoxStageResponse, error)
+	PurchaseBlindBox(context.Context, *InfoPost) (*PurchaseBlindBoxResponse, error)
 	// 盲盒内容
 	BlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*BlindBoxContentResponse, error)
 	BlindBoxContentPagination(context.Context, *BlindBoxContentPaginationPost) (*BlindBoxContentPaginationResponse, error)
@@ -913,6 +937,12 @@ func (UnimplementedNFTServiceServer) UpdateBlindBox(context.Context, *UpdateBlin
 }
 func (UnimplementedNFTServiceServer) StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBox not implemented")
+}
+func (UnimplementedNFTServiceServer) CheckBlindBoxStage(context.Context, *InfoPost) (*CheckBlindBoxStageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckBlindBoxStage not implemented")
+}
+func (UnimplementedNFTServiceServer) PurchaseBlindBox(context.Context, *InfoPost) (*PurchaseBlindBoxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PurchaseBlindBox not implemented")
 }
 func (UnimplementedNFTServiceServer) BlindBoxContent(context.Context, *BlindBoxContentInfoPost) (*BlindBoxContentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxContent not implemented")
@@ -1538,6 +1568,42 @@ func _NFTService_StartBlindBox_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).StartBlindBox(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CheckBlindBoxStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CheckBlindBoxStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CheckBlindBoxStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CheckBlindBoxStage(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_PurchaseBlindBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).PurchaseBlindBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/PurchaseBlindBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).PurchaseBlindBox(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2430,6 +2496,14 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartBlindBox",
 			Handler:    _NFTService_StartBlindBox_Handler,
+		},
+		{
+			MethodName: "CheckBlindBoxStage",
+			Handler:    _NFTService_CheckBlindBoxStage_Handler,
+		},
+		{
+			MethodName: "PurchaseBlindBox",
+			Handler:    _NFTService_PurchaseBlindBox_Handler,
 		},
 		{
 			MethodName: "BlindBoxContent",

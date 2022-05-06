@@ -44,6 +44,12 @@ message BlindBoxStageResponse {
   BlindBoxStage data    = 2;
 }
 
+// CheckBlindBoxStageResponse 检查 盲盒阶段
+message CheckBlindBoxStageResponse {
+  string message = 1;
+  uint64 data    = 2;
+}
+
 // BlindBoxStagesResponse 返回列表
 message BlindBoxStagesResponse {
   string   message            = 1;

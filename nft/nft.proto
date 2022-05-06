@@ -174,6 +174,10 @@ service NFTService {
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
 
+  // 前端盲盒交互
+  rpc CheckBlindBoxStage (global.InfoPost) returns (CheckBlindBoxStageResponse) {} // 检查盲盒阶段
+  rpc PurchaseBlindBox(global.InfoPost) returns (PurchaseBlindBoxResponse) {} // 白名单购买盲盒
+
   // 盲盒内容
   rpc BlindBoxContent (BlindBoxContentInfoPost) returns (BlindBoxContentResponse) {}
   rpc BlindBoxContentPagination (BlindBoxContentPaginationPost) returns (BlindBoxContentPaginationResponse) {}
