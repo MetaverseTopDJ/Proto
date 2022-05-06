@@ -176,7 +176,7 @@ service NFTService {
 
   // 前端盲盒交互
   rpc CheckBlindBoxStage (global.InfoPost) returns (CheckBlindBoxStageResponse) {} // 检查盲盒阶段
-  rpc PurchaseBlindBox(global.InfoPost) returns (PurchaseBlindBoxResponse) {} // 白名单购买盲盒
+  rpc PurchaseBlindBox(PurchaseBlindBoxPost) returns (PurchaseBlindBoxResponse) {} // 白名单购买盲盒
 
   // 盲盒内容
   rpc BlindBoxContent (BlindBoxContentInfoPost) returns (BlindBoxContentResponse) {}

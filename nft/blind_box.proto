@@ -130,8 +130,10 @@ message PurchaseBlindBoxResponse {
   message Sign {
     string contract  = 1;
     string address   = 2;
-    string signature = 3;
-    uint64 timestamp = 4;
+    uint64 price     = 3;
+    uint64 num       = 4;
+    string signature = 5;
+    uint64 timestamp = 6;
   }
   string message = 1;
   Sign   data    = 2;
