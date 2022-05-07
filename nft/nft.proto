@@ -106,6 +106,7 @@ message CheckCollectExchangePost {
 // CheckBlindExchangePost 检查兑换
 message CheckBlindExchangePost {
   uint64 code = 1;
+  uint64 num  = 2;
 }
 
 /**************** 返回结构 ****************/
@@ -211,6 +212,19 @@ service NFTService {
   rpc UpdateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
   rpc RemoveBlindBoxStage (BlindBoxStagePost) returns (global.ResultResponse) {}
 
+  // 免费盲盒
+  rpc BlindBoxExchange (global.InfoPost) returns (BlindBoxExchangeResponse) {}
+  rpc MemberBlindBoxExchange (global.EmptyPost) returns (CountBlindBoxExchangeResponse) {}
+  rpc AddressBlindBoxExchange (AddressBlindBoxExchangePost) returns (CountBlindBoxExchangeResponse) {}
+
+  // 免费盲盒快照
+  rpc GenBlindBoxSnapshot(global.InfoPost) returns (global.ResultResponse) {}
+  rpc DelBlindBoxSnapshot(global.InfoPost) returns (global.ResultResponse) {}
+  rpc GenBlindBoxExchange(global.InfoPost) returns (global.ResultResponse) {}
+  rpc DelBlindBoxExchange(global.InfoPost) returns (global.ResultResponse) {}
+  rpc BlindBoxSnapshotPagination (BlindBoxSnapshotPaginationPost) returns (BlindBoxSnapshotPaginationResponse) {}
+  rpc BlindBoxExchangePagination (BlindBoxExchangePaginationPost) returns (BlindBoxExchangePaginationResponse) {}
+
   // 盲盒白名单
   rpc BlindBoxWhiteAddressPagination (BlindBoxWhiteAddressPaginationPost) returns (BlindBoxWhiteAddressPaginationResponse) {}
   rpc CreateBlindBoxWhiteAddress (CreateBlindBoxWhiteAddressPost) returns (global.ResultResponse) {}
@@ -226,13 +240,15 @@ service NFTService {
   rpc ModifyCollect (ModifyCollectPost) returns (global.ResultResponse) {}
   rpc ChangeCollectStatus (global.ChangeStatusPost) returns (CollectResponse) {}
 
-  // 免费盲盒
-  rpc BlindBoxExchange (global.InfoPost) returns (BlindBoxExchangeResponse) {}
-  rpc MemberBlindBoxExchange (global.EmptyPost) returns (CountBlindBoxExchangeResponse) {}
-  rpc AddressBlindBoxExchange (AddressBlindBoxExchangePost) returns (CountBlindBoxExchangeResponse) {}
+  // 集卡快照
+  rpc GenCollectSnapshot(global.InfoPost) returns (global.ResultResponse) {}
+  rpc DelCollectSnapshot(global.InfoPost) returns (global.ResultResponse) {}
+  rpc GenCollectExchange(global.InfoPost) returns (global.ResultResponse) {}
+  rpc DelCollectExchange(global.InfoPost) returns (global.ResultResponse) {}
+  rpc CollectSnapshotPagination (CollectSnapshotPaginationPost) returns (CollectSnapshotPaginationResponse) {}
+  rpc CollectExchangePagination (CollectExchangePaginationPost) returns (CollectExchangePaginationResponse) {}
 
   // 集卡交互
-  rpc GenCollectSnapshot (global.InfoPost) returns (global.ResultResponse) {} // 集卡快照
   rpc CollectExchange (global.InfoPost) returns (CollectExchangeResponse) {} // 集卡兑换
 
   rpc CheckCollectExchangeTx (CheckCollectExchangePost) returns (global.CheckResponse) {}

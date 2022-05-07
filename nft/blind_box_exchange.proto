@@ -6,11 +6,54 @@ option go_package = "./pb;pb";
 
 /**************** 数据结构 ****************/
 
+// BlindBoxSnapshot 免费盲盒快照
+message BlindBoxSnapshot {
+  uint64 blind_box_id = 1;
+  uint64 card_id      = 2;
+  uint64 token_id     = 3;
+  uint64 member_id    = 4;
+  uint64 status       = 5;
+  string created_at   = 6;
+  string updated_at   = 7;
+}
+
+// BlindBoxExchange 免费盲盒兑换
+message BlindBoxExchange {
+  uint64 id           = 1;
+  uint64 contract_id  = 2;
+  uint64 blind_box_id = 3;
+  uint64 member_id    = 4;
+  string address      = 5;
+  string code         = 6;
+  string signature    = 7;
+  string end_at       = 8;
+  uint64 status       = 9;
+  string created_at   = 10;
+  string updated_at   = 11;
+}
+
+/**************** 请求结构 ****************/
+
+// AddressBlindBoxExchangePost 根据地址查询兑换资格
 message AddressBlindBoxExchangePost {
   string address = 1;
 }
 
-/**************** 请求结构 ****************/
+// BlindBoxSnapshotPaginationPost 快照分页
+message BlindBoxSnapshotPaginationPost {
+  uint64 blind_box_id = 1;
+  string address      = 2;
+  uint64 page         = 3;
+  uint64 size         = 4;
+}
+
+// BlindBoxExchangePaginationPost 兑换分页
+message BlindBoxExchangePaginationPost {
+  uint64 blind_box_id = 1;
+  string address      = 2;
+  uint64 page         = 3;
+  uint64 size         = 4;
+}
 
 /**************** 返回结构 ****************/
 
@@ -29,4 +72,24 @@ message BlindBoxExchangeResponse {
   }
   string message = 1;
   Sign   data    = 2;
+}
+
+// BlindBoxSnapshotPaginationResponse 快照分页
+message BlindBoxSnapshotPaginationResponse {
+  message Snapshots {
+    repeated BlindBoxSnapshot list = 1;
+    int64    total                 = 2;
+  }
+  string    message = 1;
+  Snapshots data    = 2;
+}
+
+// BlindBoxExchangePaginationResponse 兑换分页
+message BlindBoxExchangePaginationResponse {
+  message Exchanges {
+    repeated BlindBoxExchange list = 1;
+    int64    total                 = 2;
+  }
+  string    message = 1;
+  Exchanges data    = 2;
 }

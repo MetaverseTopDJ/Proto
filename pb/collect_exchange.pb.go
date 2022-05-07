@@ -20,6 +20,390 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// CollectSnapshot 集卡快照
+type CollectSnapshot struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectId uint64 `protobuf:"varint,1,opt,name=collect_id,json=collectId,proto3" json:"collect_id"`
+	NftId     uint64 `protobuf:"varint,2,opt,name=nft_id,json=nftId,proto3" json:"nft_id"`
+	TokenId   uint64 `protobuf:"varint,3,opt,name=token_id,json=tokenId,proto3" json:"token_id"`
+	WorkId    uint64 `protobuf:"varint,4,opt,name=work_id,json=workId,proto3" json:"work_id"`
+	MemberId  uint64 `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Status    uint64 `protobuf:"varint,6,opt,name=status,proto3" json:"status"`
+	CreatedAt string `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+}
+
+func (x *CollectSnapshot) Reset() {
+	*x = CollectSnapshot{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectSnapshot) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectSnapshot) ProtoMessage() {}
+
+func (x *CollectSnapshot) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectSnapshot.ProtoReflect.Descriptor instead.
+func (*CollectSnapshot) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CollectSnapshot) GetCollectId() uint64 {
+	if x != nil {
+		return x.CollectId
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetNftId() uint64 {
+	if x != nil {
+		return x.NftId
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetTokenId() uint64 {
+	if x != nil {
+		return x.TokenId
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetWorkId() uint64 {
+	if x != nil {
+		return x.WorkId
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetMemberId() uint64 {
+	if x != nil {
+		return x.MemberId
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetStatus() uint64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *CollectSnapshot) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *CollectSnapshot) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+// CollectExchange 集卡兑换
+type CollectExchange struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	CollectId uint64 `protobuf:"varint,2,opt,name=collect_id,json=collectId,proto3" json:"collect_id"`
+	NftId     uint64 `protobuf:"varint,3,opt,name=nft_id,json=nftId,proto3" json:"nft_id"`
+	TokenId   uint64 `protobuf:"varint,4,opt,name=token_id,json=tokenId,proto3" json:"token_id"`
+	MemberId  uint64 `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Address   string `protobuf:"bytes,6,opt,name=address,proto3" json:"address"`
+	Code      string `protobuf:"bytes,7,opt,name=code,proto3" json:"code"`
+	Signature string `protobuf:"bytes,8,opt,name=signature,proto3" json:"signature"`
+	EndAt     string `protobuf:"bytes,9,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	Status    uint64 `protobuf:"varint,10,opt,name=status,proto3" json:"status"`
+	CreatedAt string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+}
+
+func (x *CollectExchange) Reset() {
+	*x = CollectExchange{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectExchange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectExchange) ProtoMessage() {}
+
+func (x *CollectExchange) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectExchange.ProtoReflect.Descriptor instead.
+func (*CollectExchange) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CollectExchange) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetCollectId() uint64 {
+	if x != nil {
+		return x.CollectId
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetNftId() uint64 {
+	if x != nil {
+		return x.NftId
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetTokenId() uint64 {
+	if x != nil {
+		return x.TokenId
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetMemberId() uint64 {
+	if x != nil {
+		return x.MemberId
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *CollectExchange) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *CollectExchange) GetSignature() string {
+	if x != nil {
+		return x.Signature
+	}
+	return ""
+}
+
+func (x *CollectExchange) GetEndAt() string {
+	if x != nil {
+		return x.EndAt
+	}
+	return ""
+}
+
+func (x *CollectExchange) GetStatus() uint64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *CollectExchange) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *CollectExchange) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+// CollectSnapshotPaginationPost 快照分页
+type CollectSnapshotPaginationPost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectId uint64 `protobuf:"varint,1,opt,name=collect_id,json=collectId,proto3" json:"collect_id"`
+	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address"`
+	Page      uint64 `protobuf:"varint,3,opt,name=page,proto3" json:"page"`
+	Size      uint64 `protobuf:"varint,4,opt,name=size,proto3" json:"size"`
+}
+
+func (x *CollectSnapshotPaginationPost) Reset() {
+	*x = CollectSnapshotPaginationPost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectSnapshotPaginationPost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectSnapshotPaginationPost) ProtoMessage() {}
+
+func (x *CollectSnapshotPaginationPost) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectSnapshotPaginationPost.ProtoReflect.Descriptor instead.
+func (*CollectSnapshotPaginationPost) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CollectSnapshotPaginationPost) GetCollectId() uint64 {
+	if x != nil {
+		return x.CollectId
+	}
+	return 0
+}
+
+func (x *CollectSnapshotPaginationPost) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *CollectSnapshotPaginationPost) GetPage() uint64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *CollectSnapshotPaginationPost) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+// CollectExchangePaginationPost 兑换分页
+type CollectExchangePaginationPost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectId uint64 `protobuf:"varint,1,opt,name=collect_id,json=collectId,proto3" json:"collect_id"`
+	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address"`
+	Page      uint64 `protobuf:"varint,3,opt,name=page,proto3" json:"page"`
+	Size      uint64 `protobuf:"varint,4,opt,name=size,proto3" json:"size"`
+}
+
+func (x *CollectExchangePaginationPost) Reset() {
+	*x = CollectExchangePaginationPost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectExchangePaginationPost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectExchangePaginationPost) ProtoMessage() {}
+
+func (x *CollectExchangePaginationPost) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectExchangePaginationPost.ProtoReflect.Descriptor instead.
+func (*CollectExchangePaginationPost) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CollectExchangePaginationPost) GetCollectId() uint64 {
+	if x != nil {
+		return x.CollectId
+	}
+	return 0
+}
+
+func (x *CollectExchangePaginationPost) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *CollectExchangePaginationPost) GetPage() uint64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *CollectExchangePaginationPost) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
 // CollectExchangeResponse 集卡兑换
 type CollectExchangeResponse struct {
 	state         protoimpl.MessageState
@@ -33,7 +417,7 @@ type CollectExchangeResponse struct {
 func (x *CollectExchangeResponse) Reset() {
 	*x = CollectExchangeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_collect_exchange_proto_msgTypes[0]
+		mi := &file_nft_collect_exchange_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -46,7 +430,7 @@ func (x *CollectExchangeResponse) String() string {
 func (*CollectExchangeResponse) ProtoMessage() {}
 
 func (x *CollectExchangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_collect_exchange_proto_msgTypes[0]
+	mi := &file_nft_collect_exchange_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +443,7 @@ func (x *CollectExchangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectExchangeResponse.ProtoReflect.Descriptor instead.
 func (*CollectExchangeResponse) Descriptor() ([]byte, []int) {
-	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{0}
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CollectExchangeResponse) GetMessage() string {
@@ -70,6 +454,118 @@ func (x *CollectExchangeResponse) GetMessage() string {
 }
 
 func (x *CollectExchangeResponse) GetData() *CollectExchangeResponse_Sign {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// CollectSnapshotPaginationResponse 快照分页
+type CollectSnapshotPaginationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string                                       `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *CollectSnapshotPaginationResponse_Snapshots `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *CollectSnapshotPaginationResponse) Reset() {
+	*x = CollectSnapshotPaginationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectSnapshotPaginationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectSnapshotPaginationResponse) ProtoMessage() {}
+
+func (x *CollectSnapshotPaginationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectSnapshotPaginationResponse.ProtoReflect.Descriptor instead.
+func (*CollectSnapshotPaginationResponse) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CollectSnapshotPaginationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *CollectSnapshotPaginationResponse) GetData() *CollectSnapshotPaginationResponse_Snapshots {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// CollectExchangePaginationResponse 兑换分页
+type CollectExchangePaginationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string                                       `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *CollectExchangePaginationResponse_Exchanges `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *CollectExchangePaginationResponse) Reset() {
+	*x = CollectExchangePaginationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectExchangePaginationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectExchangePaginationResponse) ProtoMessage() {}
+
+func (x *CollectExchangePaginationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectExchangePaginationResponse.ProtoReflect.Descriptor instead.
+func (*CollectExchangePaginationResponse) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CollectExchangePaginationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *CollectExchangePaginationResponse) GetData() *CollectExchangePaginationResponse_Exchanges {
 	if x != nil {
 		return x.Data
 	}
@@ -89,7 +585,7 @@ type CollectExchangeResponse_Sign struct {
 func (x *CollectExchangeResponse_Sign) Reset() {
 	*x = CollectExchangeResponse_Sign{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_collect_exchange_proto_msgTypes[1]
+		mi := &file_nft_collect_exchange_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -102,7 +598,7 @@ func (x *CollectExchangeResponse_Sign) String() string {
 func (*CollectExchangeResponse_Sign) ProtoMessage() {}
 
 func (x *CollectExchangeResponse_Sign) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_collect_exchange_proto_msgTypes[1]
+	mi := &file_nft_collect_exchange_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -115,7 +611,7 @@ func (x *CollectExchangeResponse_Sign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectExchangeResponse_Sign.ProtoReflect.Descriptor instead.
 func (*CollectExchangeResponse_Sign) Descriptor() ([]byte, []int) {
-	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{0, 0}
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *CollectExchangeResponse_Sign) GetSignature() string {
@@ -139,25 +635,214 @@ func (x *CollectExchangeResponse_Sign) GetTimestamp() uint64 {
 	return 0
 }
 
+type CollectSnapshotPaginationResponse_Snapshots struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	List  []*CollectSnapshot `protobuf:"bytes,1,rep,name=list,proto3" json:"list"`
+	Total int64              `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+}
+
+func (x *CollectSnapshotPaginationResponse_Snapshots) Reset() {
+	*x = CollectSnapshotPaginationResponse_Snapshots{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectSnapshotPaginationResponse_Snapshots) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectSnapshotPaginationResponse_Snapshots) ProtoMessage() {}
+
+func (x *CollectSnapshotPaginationResponse_Snapshots) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectSnapshotPaginationResponse_Snapshots.ProtoReflect.Descriptor instead.
+func (*CollectSnapshotPaginationResponse_Snapshots) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *CollectSnapshotPaginationResponse_Snapshots) GetList() []*CollectSnapshot {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *CollectSnapshotPaginationResponse_Snapshots) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type CollectExchangePaginationResponse_Exchanges struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	List  []*CollectExchange `protobuf:"bytes,1,rep,name=list,proto3" json:"list"`
+	Total int64              `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+}
+
+func (x *CollectExchangePaginationResponse_Exchanges) Reset() {
+	*x = CollectExchangePaginationResponse_Exchanges{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_collect_exchange_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectExchangePaginationResponse_Exchanges) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectExchangePaginationResponse_Exchanges) ProtoMessage() {}
+
+func (x *CollectExchangePaginationResponse_Exchanges) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_collect_exchange_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectExchangePaginationResponse_Exchanges.ProtoReflect.Descriptor instead.
+func (*CollectExchangePaginationResponse_Exchanges) Descriptor() ([]byte, []int) {
+	return file_nft_collect_exchange_proto_rawDescGZIP(), []int{6, 0}
+}
+
+func (x *CollectExchangePaginationResponse_Exchanges) GetList() []*CollectExchange {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *CollectExchangePaginationResponse_Exchanges) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_nft_collect_exchange_proto protoreflect.FileDescriptor
 
 var file_nft_collect_exchange_proto_rawDesc = []byte{
 	0x0a, 0x1a, 0x6e, 0x66, 0x74, 0x2f, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x65, 0x78,
 	0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x03, 0x6e, 0x66,
-	0x74, 0x22, 0xc2, 0x01, 0x0a, 0x17, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63,
-	0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a,
-	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x35, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x43, 0x6f, 0x6c, 0x6c,
-	0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a, 0x56,
-	0x0a, 0x04, 0x53, 0x69, 0x67, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74,
-	0x75, 0x72, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61,
-	0x74, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65,
-	0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x74, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70,
-	0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x22, 0xee, 0x01, 0x0a, 0x0f, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x53, 0x6e, 0x61,
+	0x70, 0x73, 0x68, 0x6f, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65,
+	0x63, 0x74, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x6e, 0x66, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x6e, 0x66, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x77, 0x6f, 0x72, 0x6b, 0x5f, 0x69,
+	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x77, 0x6f, 0x72, 0x6b, 0x49, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x08, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06,
+	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f,
+	0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61,
+	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x41, 0x74, 0x22, 0xc8, 0x02, 0x0a, 0x0f, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78,
+	0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x6e, 0x66, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x6e, 0x66, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08,
+	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07,
+	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6d, 0x62, 0x65,
+	0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6d, 0x65, 0x6d, 0x62,
+	0x65, 0x72, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12,
+	0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x63, 0x6f,
+	0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
+	0x12, 0x15, 0x0a, 0x06, 0x65, 0x6e, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x65, 0x6e, 0x64, 0x41, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0b, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d,
+	0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0c, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x80, 0x01,
+	0x0a, 0x1d, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f,
+	0x74, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x73, 0x74, 0x12,
+	0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x18,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04,
+	0x73, 0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65,
+	0x22, 0x80, 0x01, 0x0a, 0x1d, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68,
+	0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f,
+	0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x49,
+	0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x70,
+	0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12,
+	0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x73,
+	0x69, 0x7a, 0x65, 0x22, 0xc2, 0x01, 0x0a, 0x17, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45,
+	0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x35, 0x0a, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x43, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x1a, 0x56, 0x0a, 0x04, 0x53, 0x69, 0x67, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e,
+	0x61, 0x74, 0x75, 0x72, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67,
+	0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69,
+	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x74,
+	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0xd0, 0x01, 0x0a, 0x21, 0x43, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x50, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x44, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x43, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x50, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53,
+	0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a, 0x4b,
+	0x0a, 0x09, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x73, 0x12, 0x28, 0x0a, 0x04, 0x6c,
+	0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6e, 0x66, 0x74, 0x2e,
+	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x52,
+	0x04, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0xd0, 0x01, 0x0a, 0x21,
+	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50,
+	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x44, 0x0a, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x6e, 0x66, 0x74, 0x2e,
+	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50,
+	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x1a, 0x4b, 0x0a, 0x09, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x12, 0x28,
+	0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6e,
+	0x66, 0x74, 0x2e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e,
+	0x67, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61,
+	0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x09,
+	0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -172,18 +857,30 @@ func file_nft_collect_exchange_proto_rawDescGZIP() []byte {
 	return file_nft_collect_exchange_proto_rawDescData
 }
 
-var file_nft_collect_exchange_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_nft_collect_exchange_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_nft_collect_exchange_proto_goTypes = []interface{}{
-	(*CollectExchangeResponse)(nil),      // 0: nft.CollectExchangeResponse
-	(*CollectExchangeResponse_Sign)(nil), // 1: nft.CollectExchangeResponse.Sign
+	(*CollectSnapshot)(nil),                             // 0: nft.CollectSnapshot
+	(*CollectExchange)(nil),                             // 1: nft.CollectExchange
+	(*CollectSnapshotPaginationPost)(nil),               // 2: nft.CollectSnapshotPaginationPost
+	(*CollectExchangePaginationPost)(nil),               // 3: nft.CollectExchangePaginationPost
+	(*CollectExchangeResponse)(nil),                     // 4: nft.CollectExchangeResponse
+	(*CollectSnapshotPaginationResponse)(nil),           // 5: nft.CollectSnapshotPaginationResponse
+	(*CollectExchangePaginationResponse)(nil),           // 6: nft.CollectExchangePaginationResponse
+	(*CollectExchangeResponse_Sign)(nil),                // 7: nft.CollectExchangeResponse.Sign
+	(*CollectSnapshotPaginationResponse_Snapshots)(nil), // 8: nft.CollectSnapshotPaginationResponse.Snapshots
+	(*CollectExchangePaginationResponse_Exchanges)(nil), // 9: nft.CollectExchangePaginationResponse.Exchanges
 }
 var file_nft_collect_exchange_proto_depIdxs = []int32{
-	1, // 0: nft.CollectExchangeResponse.data:type_name -> nft.CollectExchangeResponse.Sign
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 0: nft.CollectExchangeResponse.data:type_name -> nft.CollectExchangeResponse.Sign
+	8, // 1: nft.CollectSnapshotPaginationResponse.data:type_name -> nft.CollectSnapshotPaginationResponse.Snapshots
+	9, // 2: nft.CollectExchangePaginationResponse.data:type_name -> nft.CollectExchangePaginationResponse.Exchanges
+	0, // 3: nft.CollectSnapshotPaginationResponse.Snapshots.list:type_name -> nft.CollectSnapshot
+	1, // 4: nft.CollectExchangePaginationResponse.Exchanges.list:type_name -> nft.CollectExchange
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_nft_collect_exchange_proto_init() }
@@ -193,7 +890,7 @@ func file_nft_collect_exchange_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_nft_collect_exchange_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CollectExchangeResponse); i {
+			switch v := v.(*CollectSnapshot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -205,7 +902,103 @@ func file_nft_collect_exchange_proto_init() {
 			}
 		}
 		file_nft_collect_exchange_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectExchange); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectSnapshotPaginationPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectExchangePaginationPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectExchangeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectSnapshotPaginationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectExchangePaginationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CollectExchangeResponse_Sign); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectSnapshotPaginationResponse_Snapshots); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_collect_exchange_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectExchangePaginationResponse_Exchanges); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -223,7 +1016,7 @@ func file_nft_collect_exchange_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_nft_collect_exchange_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

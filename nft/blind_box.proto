@@ -85,6 +85,7 @@ message BlindBoxDetailPost {
 message CheckBlindBoxTxPost {
   uint64 id   = 1;
   string hash = 2;
+  uint64 num  = 3;
 }
 
 // PurchaseBlindBoxPost 购买盲盒

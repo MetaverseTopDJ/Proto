@@ -20,6 +20,231 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// BlindBoxSnapshot 免费盲盒快照
+type BlindBoxSnapshot struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BlindBoxId uint64 `protobuf:"varint,1,opt,name=blind_box_id,json=blindBoxId,proto3" json:"blind_box_id"`
+	CardId     uint64 `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	TokenId    uint64 `protobuf:"varint,3,opt,name=token_id,json=tokenId,proto3" json:"token_id"`
+	MemberId   uint64 `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Status     uint64 `protobuf:"varint,5,opt,name=status,proto3" json:"status"`
+	CreatedAt  string `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt  string `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+}
+
+func (x *BlindBoxSnapshot) Reset() {
+	*x = BlindBoxSnapshot{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxSnapshot) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxSnapshot) ProtoMessage() {}
+
+func (x *BlindBoxSnapshot) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxSnapshot.ProtoReflect.Descriptor instead.
+func (*BlindBoxSnapshot) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *BlindBoxSnapshot) GetBlindBoxId() uint64 {
+	if x != nil {
+		return x.BlindBoxId
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshot) GetCardId() uint64 {
+	if x != nil {
+		return x.CardId
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshot) GetTokenId() uint64 {
+	if x != nil {
+		return x.TokenId
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshot) GetMemberId() uint64 {
+	if x != nil {
+		return x.MemberId
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshot) GetStatus() uint64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshot) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *BlindBoxSnapshot) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+// BlindBoxExchange 免费盲盒兑换
+type BlindBoxExchange struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id         uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	ContractId uint64 `protobuf:"varint,2,opt,name=contract_id,json=contractId,proto3" json:"contract_id"`
+	BlindBoxId uint64 `protobuf:"varint,3,opt,name=blind_box_id,json=blindBoxId,proto3" json:"blind_box_id"`
+	MemberId   uint64 `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Address    string `protobuf:"bytes,5,opt,name=address,proto3" json:"address"`
+	Code       string `protobuf:"bytes,6,opt,name=code,proto3" json:"code"`
+	Signature  string `protobuf:"bytes,7,opt,name=signature,proto3" json:"signature"`
+	EndAt      string `protobuf:"bytes,8,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	Status     uint64 `protobuf:"varint,9,opt,name=status,proto3" json:"status"`
+	CreatedAt  string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt  string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+}
+
+func (x *BlindBoxExchange) Reset() {
+	*x = BlindBoxExchange{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxExchange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxExchange) ProtoMessage() {}
+
+func (x *BlindBoxExchange) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxExchange.ProtoReflect.Descriptor instead.
+func (*BlindBoxExchange) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *BlindBoxExchange) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *BlindBoxExchange) GetContractId() uint64 {
+	if x != nil {
+		return x.ContractId
+	}
+	return 0
+}
+
+func (x *BlindBoxExchange) GetBlindBoxId() uint64 {
+	if x != nil {
+		return x.BlindBoxId
+	}
+	return 0
+}
+
+func (x *BlindBoxExchange) GetMemberId() uint64 {
+	if x != nil {
+		return x.MemberId
+	}
+	return 0
+}
+
+func (x *BlindBoxExchange) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *BlindBoxExchange) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *BlindBoxExchange) GetSignature() string {
+	if x != nil {
+		return x.Signature
+	}
+	return ""
+}
+
+func (x *BlindBoxExchange) GetEndAt() string {
+	if x != nil {
+		return x.EndAt
+	}
+	return ""
+}
+
+func (x *BlindBoxExchange) GetStatus() uint64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *BlindBoxExchange) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *BlindBoxExchange) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+// AddressBlindBoxExchangePost 根据地址查询兑换资格
 type AddressBlindBoxExchangePost struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -31,7 +256,7 @@ type AddressBlindBoxExchangePost struct {
 func (x *AddressBlindBoxExchangePost) Reset() {
 	*x = AddressBlindBoxExchangePost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_exchange_proto_msgTypes[0]
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +269,7 @@ func (x *AddressBlindBoxExchangePost) String() string {
 func (*AddressBlindBoxExchangePost) ProtoMessage() {}
 
 func (x *AddressBlindBoxExchangePost) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_exchange_proto_msgTypes[0]
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +282,7 @@ func (x *AddressBlindBoxExchangePost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressBlindBoxExchangePost.ProtoReflect.Descriptor instead.
 func (*AddressBlindBoxExchangePost) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{0}
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddressBlindBoxExchangePost) GetAddress() string {
@@ -65,6 +290,150 @@ func (x *AddressBlindBoxExchangePost) GetAddress() string {
 		return x.Address
 	}
 	return ""
+}
+
+// BlindBoxSnapshotPaginationPost 快照分页
+type BlindBoxSnapshotPaginationPost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BlindBoxId uint64 `protobuf:"varint,1,opt,name=blind_box_id,json=blindBoxId,proto3" json:"blind_box_id"`
+	Address    string `protobuf:"bytes,2,opt,name=address,proto3" json:"address"`
+	Page       uint64 `protobuf:"varint,3,opt,name=page,proto3" json:"page"`
+	Size       uint64 `protobuf:"varint,4,opt,name=size,proto3" json:"size"`
+}
+
+func (x *BlindBoxSnapshotPaginationPost) Reset() {
+	*x = BlindBoxSnapshotPaginationPost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxSnapshotPaginationPost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxSnapshotPaginationPost) ProtoMessage() {}
+
+func (x *BlindBoxSnapshotPaginationPost) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxSnapshotPaginationPost.ProtoReflect.Descriptor instead.
+func (*BlindBoxSnapshotPaginationPost) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *BlindBoxSnapshotPaginationPost) GetBlindBoxId() uint64 {
+	if x != nil {
+		return x.BlindBoxId
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshotPaginationPost) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *BlindBoxSnapshotPaginationPost) GetPage() uint64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BlindBoxSnapshotPaginationPost) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+// BlindBoxExchangePaginationPost 兑换分页
+type BlindBoxExchangePaginationPost struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BlindBoxId uint64 `protobuf:"varint,1,opt,name=blind_box_id,json=blindBoxId,proto3" json:"blind_box_id"`
+	Address    string `protobuf:"bytes,2,opt,name=address,proto3" json:"address"`
+	Page       uint64 `protobuf:"varint,3,opt,name=page,proto3" json:"page"`
+	Size       uint64 `protobuf:"varint,4,opt,name=size,proto3" json:"size"`
+}
+
+func (x *BlindBoxExchangePaginationPost) Reset() {
+	*x = BlindBoxExchangePaginationPost{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxExchangePaginationPost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxExchangePaginationPost) ProtoMessage() {}
+
+func (x *BlindBoxExchangePaginationPost) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxExchangePaginationPost.ProtoReflect.Descriptor instead.
+func (*BlindBoxExchangePaginationPost) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BlindBoxExchangePaginationPost) GetBlindBoxId() uint64 {
+	if x != nil {
+		return x.BlindBoxId
+	}
+	return 0
+}
+
+func (x *BlindBoxExchangePaginationPost) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *BlindBoxExchangePaginationPost) GetPage() uint64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BlindBoxExchangePaginationPost) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
 }
 
 // CountBlindBoxExchangeResponse 计算可以免费兑换的盲盒
@@ -80,7 +449,7 @@ type CountBlindBoxExchangeResponse struct {
 func (x *CountBlindBoxExchangeResponse) Reset() {
 	*x = CountBlindBoxExchangeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_exchange_proto_msgTypes[1]
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -93,7 +462,7 @@ func (x *CountBlindBoxExchangeResponse) String() string {
 func (*CountBlindBoxExchangeResponse) ProtoMessage() {}
 
 func (x *CountBlindBoxExchangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_exchange_proto_msgTypes[1]
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +475,7 @@ func (x *CountBlindBoxExchangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountBlindBoxExchangeResponse.ProtoReflect.Descriptor instead.
 func (*CountBlindBoxExchangeResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{1}
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CountBlindBoxExchangeResponse) GetMessage() string {
@@ -136,7 +505,7 @@ type BlindBoxExchangeResponse struct {
 func (x *BlindBoxExchangeResponse) Reset() {
 	*x = BlindBoxExchangeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_exchange_proto_msgTypes[2]
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -149,7 +518,7 @@ func (x *BlindBoxExchangeResponse) String() string {
 func (*BlindBoxExchangeResponse) ProtoMessage() {}
 
 func (x *BlindBoxExchangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_exchange_proto_msgTypes[2]
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +531,7 @@ func (x *BlindBoxExchangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxExchangeResponse.ProtoReflect.Descriptor instead.
 func (*BlindBoxExchangeResponse) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{2}
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BlindBoxExchangeResponse) GetMessage() string {
@@ -173,6 +542,118 @@ func (x *BlindBoxExchangeResponse) GetMessage() string {
 }
 
 func (x *BlindBoxExchangeResponse) GetData() *BlindBoxExchangeResponse_Sign {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// BlindBoxSnapshotPaginationResponse 快照分页
+type BlindBoxSnapshotPaginationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string                                        `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *BlindBoxSnapshotPaginationResponse_Snapshots `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *BlindBoxSnapshotPaginationResponse) Reset() {
+	*x = BlindBoxSnapshotPaginationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxSnapshotPaginationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxSnapshotPaginationResponse) ProtoMessage() {}
+
+func (x *BlindBoxSnapshotPaginationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxSnapshotPaginationResponse.ProtoReflect.Descriptor instead.
+func (*BlindBoxSnapshotPaginationResponse) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BlindBoxSnapshotPaginationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BlindBoxSnapshotPaginationResponse) GetData() *BlindBoxSnapshotPaginationResponse_Snapshots {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// BlindBoxExchangePaginationResponse 兑换分页
+type BlindBoxExchangePaginationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string                                        `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    *BlindBoxExchangePaginationResponse_Exchanges `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *BlindBoxExchangePaginationResponse) Reset() {
+	*x = BlindBoxExchangePaginationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxExchangePaginationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxExchangePaginationResponse) ProtoMessage() {}
+
+func (x *BlindBoxExchangePaginationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxExchangePaginationResponse.ProtoReflect.Descriptor instead.
+func (*BlindBoxExchangePaginationResponse) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BlindBoxExchangePaginationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BlindBoxExchangePaginationResponse) GetData() *BlindBoxExchangePaginationResponse_Exchanges {
 	if x != nil {
 		return x.Data
 	}
@@ -192,7 +673,7 @@ type BlindBoxExchangeResponse_Sign struct {
 func (x *BlindBoxExchangeResponse_Sign) Reset() {
 	*x = BlindBoxExchangeResponse_Sign{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_nft_blind_box_exchange_proto_msgTypes[3]
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -205,7 +686,7 @@ func (x *BlindBoxExchangeResponse_Sign) String() string {
 func (*BlindBoxExchangeResponse_Sign) ProtoMessage() {}
 
 func (x *BlindBoxExchangeResponse_Sign) ProtoReflect() protoreflect.Message {
-	mi := &file_nft_blind_box_exchange_proto_msgTypes[3]
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -218,7 +699,7 @@ func (x *BlindBoxExchangeResponse_Sign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlindBoxExchangeResponse_Sign.ProtoReflect.Descriptor instead.
 func (*BlindBoxExchangeResponse_Sign) Descriptor() ([]byte, []int) {
-	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{2, 0}
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{6, 0}
 }
 
 func (x *BlindBoxExchangeResponse_Sign) GetSignature() string {
@@ -242,34 +723,221 @@ func (x *BlindBoxExchangeResponse_Sign) GetTimestamp() uint64 {
 	return 0
 }
 
+type BlindBoxSnapshotPaginationResponse_Snapshots struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	List  []*BlindBoxSnapshot `protobuf:"bytes,1,rep,name=list,proto3" json:"list"`
+	Total int64               `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+}
+
+func (x *BlindBoxSnapshotPaginationResponse_Snapshots) Reset() {
+	*x = BlindBoxSnapshotPaginationResponse_Snapshots{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxSnapshotPaginationResponse_Snapshots) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxSnapshotPaginationResponse_Snapshots) ProtoMessage() {}
+
+func (x *BlindBoxSnapshotPaginationResponse_Snapshots) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxSnapshotPaginationResponse_Snapshots.ProtoReflect.Descriptor instead.
+func (*BlindBoxSnapshotPaginationResponse_Snapshots) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *BlindBoxSnapshotPaginationResponse_Snapshots) GetList() []*BlindBoxSnapshot {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *BlindBoxSnapshotPaginationResponse_Snapshots) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type BlindBoxExchangePaginationResponse_Exchanges struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	List  []*BlindBoxExchange `protobuf:"bytes,1,rep,name=list,proto3" json:"list"`
+	Total int64               `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+}
+
+func (x *BlindBoxExchangePaginationResponse_Exchanges) Reset() {
+	*x = BlindBoxExchangePaginationResponse_Exchanges{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_nft_blind_box_exchange_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlindBoxExchangePaginationResponse_Exchanges) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlindBoxExchangePaginationResponse_Exchanges) ProtoMessage() {}
+
+func (x *BlindBoxExchangePaginationResponse_Exchanges) ProtoReflect() protoreflect.Message {
+	mi := &file_nft_blind_box_exchange_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlindBoxExchangePaginationResponse_Exchanges.ProtoReflect.Descriptor instead.
+func (*BlindBoxExchangePaginationResponse_Exchanges) Descriptor() ([]byte, []int) {
+	return file_nft_blind_box_exchange_proto_rawDescGZIP(), []int{8, 0}
+}
+
+func (x *BlindBoxExchangePaginationResponse_Exchanges) GetList() []*BlindBoxExchange {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *BlindBoxExchangePaginationResponse_Exchanges) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_nft_blind_box_exchange_proto protoreflect.FileDescriptor
 
 var file_nft_blind_box_exchange_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x6e, 0x66, 0x74, 0x2f, 0x62, 0x6c, 0x69, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x78, 0x5f,
 	0x65, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x03,
-	0x6e, 0x66, 0x74, 0x22, 0x37, 0x0a, 0x1b, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0x6c,
-	0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x6f,
-	0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x4d, 0x0a, 0x1d,
-	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63,
-	0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a,
-	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xc4, 0x01, 0x0a, 0x18,
-	0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x12, 0x36, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x22, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45,
-	0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
-	0x53, 0x69, 0x67, 0x6e, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a, 0x56, 0x0a, 0x04, 0x53, 0x69,
-	0x67, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
-	0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04,
-	0x63, 0x6f, 0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
-	0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
-	0x6d, 0x70, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x66, 0x74, 0x22, 0xdb, 0x01, 0x0a, 0x10, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78,
+	0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x12, 0x20, 0x0a, 0x0c, 0x62, 0x6c, 0x69, 0x6e,
+	0x64, 0x5f, 0x62, 0x6f, 0x78, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a,
+	0x62, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x61,
+	0x72, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x63, 0x61, 0x72,
+	0x64, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x49, 0x64, 0x12, 0x1b,
+	0x0a, 0x09, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x08, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x73,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61,
+	0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41,
+	0x74, 0x22, 0xbb, 0x02, 0x0a, 0x10, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78,
+	0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
+	0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x63, 0x6f, 0x6e,
+	0x74, 0x72, 0x61, 0x63, 0x74, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0c, 0x62, 0x6c, 0x69, 0x6e, 0x64,
+	0x5f, 0x62, 0x6f, 0x78, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x62,
+	0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6d,
+	0x62, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6d, 0x65,
+	0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x63, 0x6f, 0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72,
+	0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75,
+	0x72, 0x65, 0x12, 0x15, 0x0a, 0x06, 0x65, 0x6e, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x65, 0x6e, 0x64, 0x41, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18,
+	0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0b,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22,
+	0x37, 0x0a, 0x1b, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42,
+	0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x18,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x84, 0x01, 0x0a, 0x1e, 0x42, 0x6c, 0x69,
+	0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x50, 0x61, 0x67,
+	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x0c, 0x62,
+	0x6c, 0x69, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x78, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x0a, 0x62, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x49, 0x64, 0x12, 0x18, 0x0a,
+	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73,
+	0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x22,
+	0x84, 0x01, 0x0a, 0x1e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68,
+	0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f,
+	0x73, 0x74, 0x12, 0x20, 0x0a, 0x0c, 0x62, 0x6c, 0x69, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x78, 0x5f,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x62, 0x6c, 0x69, 0x6e, 0x64, 0x42,
+	0x6f, 0x78, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12,
+	0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x70, 0x61,
+	0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x22, 0x4d, 0x0a, 0x1d, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x42,
+	0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xc4, 0x01, 0x0a, 0x18, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42,
+	0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x6e, 0x66, 0x74,
+	0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x52, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x1a, 0x56, 0x0a, 0x04, 0x53, 0x69, 0x67, 0x6e, 0x12, 0x1c, 0x0a, 0x09,
+	0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f,
+	0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x1c,
+	0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0xd3, 0x01, 0x0a,
+	0x22, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f,
+	0x74, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x45, 0x0a,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x31, 0x2e, 0x6e, 0x66,
+	0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68,
+	0x6f, 0x74, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x73, 0x52, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x1a, 0x4c, 0x0a, 0x09, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74,
+	0x73, 0x12, 0x29, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x15, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x53, 0x6e,
+	0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05,
+	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74,
+	0x61, 0x6c, 0x22, 0xd3, 0x01, 0x0a, 0x22, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78, 0x45,
+	0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x12, 0x45, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x31, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e, 0x64, 0x42, 0x6f, 0x78,
+	0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61,
+	0x6e, 0x67, 0x65, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a, 0x4c, 0x0a, 0x09, 0x45, 0x78,
+	0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x12, 0x29, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6e, 0x66, 0x74, 0x2e, 0x42, 0x6c, 0x69, 0x6e,
+	0x64, 0x42, 0x6f, 0x78, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x04, 0x6c, 0x69,
+	0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62,
+	0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -284,20 +952,32 @@ func file_nft_blind_box_exchange_proto_rawDescGZIP() []byte {
 	return file_nft_blind_box_exchange_proto_rawDescData
 }
 
-var file_nft_blind_box_exchange_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_nft_blind_box_exchange_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_nft_blind_box_exchange_proto_goTypes = []interface{}{
-	(*AddressBlindBoxExchangePost)(nil),   // 0: nft.AddressBlindBoxExchangePost
-	(*CountBlindBoxExchangeResponse)(nil), // 1: nft.CountBlindBoxExchangeResponse
-	(*BlindBoxExchangeResponse)(nil),      // 2: nft.BlindBoxExchangeResponse
-	(*BlindBoxExchangeResponse_Sign)(nil), // 3: nft.BlindBoxExchangeResponse.Sign
+	(*BlindBoxSnapshot)(nil),                             // 0: nft.BlindBoxSnapshot
+	(*BlindBoxExchange)(nil),                             // 1: nft.BlindBoxExchange
+	(*AddressBlindBoxExchangePost)(nil),                  // 2: nft.AddressBlindBoxExchangePost
+	(*BlindBoxSnapshotPaginationPost)(nil),               // 3: nft.BlindBoxSnapshotPaginationPost
+	(*BlindBoxExchangePaginationPost)(nil),               // 4: nft.BlindBoxExchangePaginationPost
+	(*CountBlindBoxExchangeResponse)(nil),                // 5: nft.CountBlindBoxExchangeResponse
+	(*BlindBoxExchangeResponse)(nil),                     // 6: nft.BlindBoxExchangeResponse
+	(*BlindBoxSnapshotPaginationResponse)(nil),           // 7: nft.BlindBoxSnapshotPaginationResponse
+	(*BlindBoxExchangePaginationResponse)(nil),           // 8: nft.BlindBoxExchangePaginationResponse
+	(*BlindBoxExchangeResponse_Sign)(nil),                // 9: nft.BlindBoxExchangeResponse.Sign
+	(*BlindBoxSnapshotPaginationResponse_Snapshots)(nil), // 10: nft.BlindBoxSnapshotPaginationResponse.Snapshots
+	(*BlindBoxExchangePaginationResponse_Exchanges)(nil), // 11: nft.BlindBoxExchangePaginationResponse.Exchanges
 }
 var file_nft_blind_box_exchange_proto_depIdxs = []int32{
-	3, // 0: nft.BlindBoxExchangeResponse.data:type_name -> nft.BlindBoxExchangeResponse.Sign
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	9,  // 0: nft.BlindBoxExchangeResponse.data:type_name -> nft.BlindBoxExchangeResponse.Sign
+	10, // 1: nft.BlindBoxSnapshotPaginationResponse.data:type_name -> nft.BlindBoxSnapshotPaginationResponse.Snapshots
+	11, // 2: nft.BlindBoxExchangePaginationResponse.data:type_name -> nft.BlindBoxExchangePaginationResponse.Exchanges
+	0,  // 3: nft.BlindBoxSnapshotPaginationResponse.Snapshots.list:type_name -> nft.BlindBoxSnapshot
+	1,  // 4: nft.BlindBoxExchangePaginationResponse.Exchanges.list:type_name -> nft.BlindBoxExchange
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_nft_blind_box_exchange_proto_init() }
@@ -307,7 +987,7 @@ func file_nft_blind_box_exchange_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_nft_blind_box_exchange_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddressBlindBoxExchangePost); i {
+			switch v := v.(*BlindBoxSnapshot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -319,7 +999,7 @@ func file_nft_blind_box_exchange_proto_init() {
 			}
 		}
 		file_nft_blind_box_exchange_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CountBlindBoxExchangeResponse); i {
+			switch v := v.(*BlindBoxExchange); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -331,7 +1011,7 @@ func file_nft_blind_box_exchange_proto_init() {
 			}
 		}
 		file_nft_blind_box_exchange_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BlindBoxExchangeResponse); i {
+			switch v := v.(*AddressBlindBoxExchangePost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -343,7 +1023,103 @@ func file_nft_blind_box_exchange_proto_init() {
 			}
 		}
 		file_nft_blind_box_exchange_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxSnapshotPaginationPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxExchangePaginationPost); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CountBlindBoxExchangeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxExchangeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxSnapshotPaginationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxExchangePaginationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BlindBoxExchangeResponse_Sign); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxSnapshotPaginationResponse_Snapshots); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_nft_blind_box_exchange_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlindBoxExchangePaginationResponse_Exchanges); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -361,7 +1137,7 @@ func file_nft_blind_box_exchange_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_nft_blind_box_exchange_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

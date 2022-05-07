@@ -68,6 +68,17 @@ type NFTServiceClient interface {
 	CreateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error)
 	UpdateBlindBoxStage(ctx context.Context, in *ModifyBlindBoxStagePost, opts ...grpc.CallOption) (*BlindBoxStageResponse, error)
 	RemoveBlindBoxStage(ctx context.Context, in *BlindBoxStagePost, opts ...grpc.CallOption) (*ResultResponse, error)
+	// 免费盲盒
+	BlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxExchangeResponse, error)
+	MemberBlindBoxExchange(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error)
+	AddressBlindBoxExchange(ctx context.Context, in *AddressBlindBoxExchangePost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error)
+	// 免费盲盒快照
+	GenBlindBoxSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	DelBlindBoxSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	GenBlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	DelBlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	BlindBoxSnapshotPagination(ctx context.Context, in *BlindBoxSnapshotPaginationPost, opts ...grpc.CallOption) (*BlindBoxSnapshotPaginationResponse, error)
+	BlindBoxExchangePagination(ctx context.Context, in *BlindBoxExchangePaginationPost, opts ...grpc.CallOption) (*BlindBoxExchangePaginationResponse, error)
 	// 盲盒白名单
 	BlindBoxWhiteAddressPagination(ctx context.Context, in *BlindBoxWhiteAddressPaginationPost, opts ...grpc.CallOption) (*BlindBoxWhiteAddressPaginationResponse, error)
 	CreateBlindBoxWhiteAddress(ctx context.Context, in *CreateBlindBoxWhiteAddressPost, opts ...grpc.CallOption) (*ResultResponse, error)
@@ -81,12 +92,14 @@ type NFTServiceClient interface {
 	UpdateCollect(ctx context.Context, in *UpdateCollectPost, opts ...grpc.CallOption) (*CollectResponse, error)
 	ModifyCollect(ctx context.Context, in *ModifyCollectPost, opts ...grpc.CallOption) (*ResultResponse, error)
 	ChangeCollectStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CollectResponse, error)
-	// 免费盲盒
-	BlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxExchangeResponse, error)
-	MemberBlindBoxExchange(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error)
-	AddressBlindBoxExchange(ctx context.Context, in *AddressBlindBoxExchangePost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error)
-	// 集卡交互
+	// 集卡快照
 	GenCollectSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	DelCollectSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	GenCollectExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	DelCollectExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error)
+	CollectSnapshotPagination(ctx context.Context, in *CollectSnapshotPaginationPost, opts ...grpc.CallOption) (*CollectSnapshotPaginationResponse, error)
+	CollectExchangePagination(ctx context.Context, in *CollectExchangePaginationPost, opts ...grpc.CallOption) (*CollectExchangePaginationResponse, error)
+	// 集卡交互
 	CollectExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CollectExchangeResponse, error)
 	CheckCollectExchangeTx(ctx context.Context, in *CheckCollectExchangePost, opts ...grpc.CallOption) (*CheckResponse, error)
 	CheckBlindBoxExchangeTx(ctx context.Context, in *CheckBlindExchangePost, opts ...grpc.CallOption) (*CheckResponse, error)
@@ -513,6 +526,87 @@ func (c *nFTServiceClient) RemoveBlindBoxStage(ctx context.Context, in *BlindBox
 	return out, nil
 }
 
+func (c *nFTServiceClient) BlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxExchangeResponse, error) {
+	out := new(BlindBoxExchangeResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) MemberBlindBoxExchange(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error) {
+	out := new(CountBlindBoxExchangeResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/MemberBlindBoxExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) AddressBlindBoxExchange(ctx context.Context, in *AddressBlindBoxExchangePost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error) {
+	out := new(CountBlindBoxExchangeResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/AddressBlindBoxExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) GenBlindBoxSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/GenBlindBoxSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) DelBlindBoxSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/DelBlindBoxSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) GenBlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/GenBlindBoxExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) DelBlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/DelBlindBoxExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxSnapshotPagination(ctx context.Context, in *BlindBoxSnapshotPaginationPost, opts ...grpc.CallOption) (*BlindBoxSnapshotPaginationResponse, error) {
+	out := new(BlindBoxSnapshotPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxSnapshotPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) BlindBoxExchangePagination(ctx context.Context, in *BlindBoxExchangePaginationPost, opts ...grpc.CallOption) (*BlindBoxExchangePaginationResponse, error) {
+	out := new(BlindBoxExchangePaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxExchangePagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nFTServiceClient) BlindBoxWhiteAddressPagination(ctx context.Context, in *BlindBoxWhiteAddressPaginationPost, opts ...grpc.CallOption) (*BlindBoxWhiteAddressPaginationResponse, error) {
 	out := new(BlindBoxWhiteAddressPaginationResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxWhiteAddressPagination", in, out, opts...)
@@ -612,36 +706,54 @@ func (c *nFTServiceClient) ChangeCollectStatus(ctx context.Context, in *ChangeSt
 	return out, nil
 }
 
-func (c *nFTServiceClient) BlindBoxExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*BlindBoxExchangeResponse, error) {
-	out := new(BlindBoxExchangeResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/BlindBoxExchange", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) MemberBlindBoxExchange(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error) {
-	out := new(CountBlindBoxExchangeResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/MemberBlindBoxExchange", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nFTServiceClient) AddressBlindBoxExchange(ctx context.Context, in *AddressBlindBoxExchangePost, opts ...grpc.CallOption) (*CountBlindBoxExchangeResponse, error) {
-	out := new(CountBlindBoxExchangeResponse)
-	err := c.cc.Invoke(ctx, "/nft.NFTService/AddressBlindBoxExchange", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *nFTServiceClient) GenCollectSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
 	out := new(ResultResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/GenCollectSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) DelCollectSnapshot(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/DelCollectSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) GenCollectExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/GenCollectExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) DelCollectExchange(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*ResultResponse, error) {
+	out := new(ResultResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/DelCollectExchange", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CollectSnapshotPagination(ctx context.Context, in *CollectSnapshotPaginationPost, opts ...grpc.CallOption) (*CollectSnapshotPaginationResponse, error) {
+	out := new(CollectSnapshotPaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CollectSnapshotPagination", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) CollectExchangePagination(ctx context.Context, in *CollectExchangePaginationPost, opts ...grpc.CallOption) (*CollectExchangePaginationResponse, error) {
+	out := new(CollectExchangePaginationResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/CollectExchangePagination", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -936,6 +1048,17 @@ type NFTServiceServer interface {
 	CreateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error)
 	UpdateBlindBoxStage(context.Context, *ModifyBlindBoxStagePost) (*BlindBoxStageResponse, error)
 	RemoveBlindBoxStage(context.Context, *BlindBoxStagePost) (*ResultResponse, error)
+	// 免费盲盒
+	BlindBoxExchange(context.Context, *InfoPost) (*BlindBoxExchangeResponse, error)
+	MemberBlindBoxExchange(context.Context, *EmptyPost) (*CountBlindBoxExchangeResponse, error)
+	AddressBlindBoxExchange(context.Context, *AddressBlindBoxExchangePost) (*CountBlindBoxExchangeResponse, error)
+	// 免费盲盒快照
+	GenBlindBoxSnapshot(context.Context, *InfoPost) (*ResultResponse, error)
+	DelBlindBoxSnapshot(context.Context, *InfoPost) (*ResultResponse, error)
+	GenBlindBoxExchange(context.Context, *InfoPost) (*ResultResponse, error)
+	DelBlindBoxExchange(context.Context, *InfoPost) (*ResultResponse, error)
+	BlindBoxSnapshotPagination(context.Context, *BlindBoxSnapshotPaginationPost) (*BlindBoxSnapshotPaginationResponse, error)
+	BlindBoxExchangePagination(context.Context, *BlindBoxExchangePaginationPost) (*BlindBoxExchangePaginationResponse, error)
 	// 盲盒白名单
 	BlindBoxWhiteAddressPagination(context.Context, *BlindBoxWhiteAddressPaginationPost) (*BlindBoxWhiteAddressPaginationResponse, error)
 	CreateBlindBoxWhiteAddress(context.Context, *CreateBlindBoxWhiteAddressPost) (*ResultResponse, error)
@@ -949,12 +1072,14 @@ type NFTServiceServer interface {
 	UpdateCollect(context.Context, *UpdateCollectPost) (*CollectResponse, error)
 	ModifyCollect(context.Context, *ModifyCollectPost) (*ResultResponse, error)
 	ChangeCollectStatus(context.Context, *ChangeStatusPost) (*CollectResponse, error)
-	// 免费盲盒
-	BlindBoxExchange(context.Context, *InfoPost) (*BlindBoxExchangeResponse, error)
-	MemberBlindBoxExchange(context.Context, *EmptyPost) (*CountBlindBoxExchangeResponse, error)
-	AddressBlindBoxExchange(context.Context, *AddressBlindBoxExchangePost) (*CountBlindBoxExchangeResponse, error)
-	// 集卡交互
+	// 集卡快照
 	GenCollectSnapshot(context.Context, *InfoPost) (*ResultResponse, error)
+	DelCollectSnapshot(context.Context, *InfoPost) (*ResultResponse, error)
+	GenCollectExchange(context.Context, *InfoPost) (*ResultResponse, error)
+	DelCollectExchange(context.Context, *InfoPost) (*ResultResponse, error)
+	CollectSnapshotPagination(context.Context, *CollectSnapshotPaginationPost) (*CollectSnapshotPaginationResponse, error)
+	CollectExchangePagination(context.Context, *CollectExchangePaginationPost) (*CollectExchangePaginationResponse, error)
+	// 集卡交互
 	CollectExchange(context.Context, *InfoPost) (*CollectExchangeResponse, error)
 	CheckCollectExchangeTx(context.Context, *CheckCollectExchangePost) (*CheckResponse, error)
 	CheckBlindBoxExchangeTx(context.Context, *CheckBlindExchangePost) (*CheckResponse, error)
@@ -1120,6 +1245,33 @@ func (UnimplementedNFTServiceServer) UpdateBlindBoxStage(context.Context, *Modif
 func (UnimplementedNFTServiceServer) RemoveBlindBoxStage(context.Context, *BlindBoxStagePost) (*ResultResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveBlindBoxStage not implemented")
 }
+func (UnimplementedNFTServiceServer) BlindBoxExchange(context.Context, *InfoPost) (*BlindBoxExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) MemberBlindBoxExchange(context.Context, *EmptyPost) (*CountBlindBoxExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBlindBoxExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) AddressBlindBoxExchange(context.Context, *AddressBlindBoxExchangePost) (*CountBlindBoxExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddressBlindBoxExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) GenBlindBoxSnapshot(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenBlindBoxSnapshot not implemented")
+}
+func (UnimplementedNFTServiceServer) DelBlindBoxSnapshot(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelBlindBoxSnapshot not implemented")
+}
+func (UnimplementedNFTServiceServer) GenBlindBoxExchange(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenBlindBoxExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) DelBlindBoxExchange(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelBlindBoxExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxSnapshotPagination(context.Context, *BlindBoxSnapshotPaginationPost) (*BlindBoxSnapshotPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxSnapshotPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) BlindBoxExchangePagination(context.Context, *BlindBoxExchangePaginationPost) (*BlindBoxExchangePaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxExchangePagination not implemented")
+}
 func (UnimplementedNFTServiceServer) BlindBoxWhiteAddressPagination(context.Context, *BlindBoxWhiteAddressPaginationPost) (*BlindBoxWhiteAddressPaginationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxWhiteAddressPagination not implemented")
 }
@@ -1153,17 +1305,23 @@ func (UnimplementedNFTServiceServer) ModifyCollect(context.Context, *ModifyColle
 func (UnimplementedNFTServiceServer) ChangeCollectStatus(context.Context, *ChangeStatusPost) (*CollectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeCollectStatus not implemented")
 }
-func (UnimplementedNFTServiceServer) BlindBoxExchange(context.Context, *InfoPost) (*BlindBoxExchangeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BlindBoxExchange not implemented")
-}
-func (UnimplementedNFTServiceServer) MemberBlindBoxExchange(context.Context, *EmptyPost) (*CountBlindBoxExchangeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberBlindBoxExchange not implemented")
-}
-func (UnimplementedNFTServiceServer) AddressBlindBoxExchange(context.Context, *AddressBlindBoxExchangePost) (*CountBlindBoxExchangeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddressBlindBoxExchange not implemented")
-}
 func (UnimplementedNFTServiceServer) GenCollectSnapshot(context.Context, *InfoPost) (*ResultResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenCollectSnapshot not implemented")
+}
+func (UnimplementedNFTServiceServer) DelCollectSnapshot(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelCollectSnapshot not implemented")
+}
+func (UnimplementedNFTServiceServer) GenCollectExchange(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenCollectExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) DelCollectExchange(context.Context, *InfoPost) (*ResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelCollectExchange not implemented")
+}
+func (UnimplementedNFTServiceServer) CollectSnapshotPagination(context.Context, *CollectSnapshotPaginationPost) (*CollectSnapshotPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CollectSnapshotPagination not implemented")
+}
+func (UnimplementedNFTServiceServer) CollectExchangePagination(context.Context, *CollectExchangePaginationPost) (*CollectExchangePaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CollectExchangePagination not implemented")
 }
 func (UnimplementedNFTServiceServer) CollectExchange(context.Context, *InfoPost) (*CollectExchangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CollectExchange not implemented")
@@ -2030,6 +2188,168 @@ func _NFTService_RemoveBlindBoxStage_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NFTService_BlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxExchange(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_MemberBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).MemberBlindBoxExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/MemberBlindBoxExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).MemberBlindBoxExchange(ctx, req.(*EmptyPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_AddressBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddressBlindBoxExchangePost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).AddressBlindBoxExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/AddressBlindBoxExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).AddressBlindBoxExchange(ctx, req.(*AddressBlindBoxExchangePost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_GenBlindBoxSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).GenBlindBoxSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/GenBlindBoxSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).GenBlindBoxSnapshot(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_DelBlindBoxSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).DelBlindBoxSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/DelBlindBoxSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).DelBlindBoxSnapshot(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_GenBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).GenBlindBoxExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/GenBlindBoxExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).GenBlindBoxExchange(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_DelBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).DelBlindBoxExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/DelBlindBoxExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).DelBlindBoxExchange(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxSnapshotPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxSnapshotPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxSnapshotPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxSnapshotPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxSnapshotPagination(ctx, req.(*BlindBoxSnapshotPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_BlindBoxExchangePagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlindBoxExchangePaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).BlindBoxExchangePagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/BlindBoxExchangePagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).BlindBoxExchangePagination(ctx, req.(*BlindBoxExchangePaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NFTService_BlindBoxWhiteAddressPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BlindBoxWhiteAddressPaginationPost)
 	if err := dec(in); err != nil {
@@ -2228,60 +2548,6 @@ func _NFTService_ChangeCollectStatus_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NFTService_BlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).BlindBoxExchange(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/BlindBoxExchange",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).BlindBoxExchange(ctx, req.(*InfoPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_MemberBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyPost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).MemberBlindBoxExchange(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/MemberBlindBoxExchange",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).MemberBlindBoxExchange(ctx, req.(*EmptyPost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NFTService_AddressBlindBoxExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddressBlindBoxExchangePost)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NFTServiceServer).AddressBlindBoxExchange(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nft.NFTService/AddressBlindBoxExchange",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NFTServiceServer).AddressBlindBoxExchange(ctx, req.(*AddressBlindBoxExchangePost))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _NFTService_GenCollectSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InfoPost)
 	if err := dec(in); err != nil {
@@ -2296,6 +2562,96 @@ func _NFTService_GenCollectSnapshot_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).GenCollectSnapshot(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_DelCollectSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).DelCollectSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/DelCollectSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).DelCollectSnapshot(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_GenCollectExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).GenCollectExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/GenCollectExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).GenCollectExchange(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_DelCollectExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).DelCollectExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/DelCollectExchange",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).DelCollectExchange(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CollectSnapshotPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CollectSnapshotPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CollectSnapshotPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CollectSnapshotPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CollectSnapshotPagination(ctx, req.(*CollectSnapshotPaginationPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_CollectExchangePagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CollectExchangePaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).CollectExchangePagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/CollectExchangePagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).CollectExchangePagination(ctx, req.(*CollectExchangePaginationPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2948,6 +3304,42 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NFTService_RemoveBlindBoxStage_Handler,
 		},
 		{
+			MethodName: "BlindBoxExchange",
+			Handler:    _NFTService_BlindBoxExchange_Handler,
+		},
+		{
+			MethodName: "MemberBlindBoxExchange",
+			Handler:    _NFTService_MemberBlindBoxExchange_Handler,
+		},
+		{
+			MethodName: "AddressBlindBoxExchange",
+			Handler:    _NFTService_AddressBlindBoxExchange_Handler,
+		},
+		{
+			MethodName: "GenBlindBoxSnapshot",
+			Handler:    _NFTService_GenBlindBoxSnapshot_Handler,
+		},
+		{
+			MethodName: "DelBlindBoxSnapshot",
+			Handler:    _NFTService_DelBlindBoxSnapshot_Handler,
+		},
+		{
+			MethodName: "GenBlindBoxExchange",
+			Handler:    _NFTService_GenBlindBoxExchange_Handler,
+		},
+		{
+			MethodName: "DelBlindBoxExchange",
+			Handler:    _NFTService_DelBlindBoxExchange_Handler,
+		},
+		{
+			MethodName: "BlindBoxSnapshotPagination",
+			Handler:    _NFTService_BlindBoxSnapshotPagination_Handler,
+		},
+		{
+			MethodName: "BlindBoxExchangePagination",
+			Handler:    _NFTService_BlindBoxExchangePagination_Handler,
+		},
+		{
 			MethodName: "BlindBoxWhiteAddressPagination",
 			Handler:    _NFTService_BlindBoxWhiteAddressPagination_Handler,
 		},
@@ -2992,20 +3384,28 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NFTService_ChangeCollectStatus_Handler,
 		},
 		{
-			MethodName: "BlindBoxExchange",
-			Handler:    _NFTService_BlindBoxExchange_Handler,
-		},
-		{
-			MethodName: "MemberBlindBoxExchange",
-			Handler:    _NFTService_MemberBlindBoxExchange_Handler,
-		},
-		{
-			MethodName: "AddressBlindBoxExchange",
-			Handler:    _NFTService_AddressBlindBoxExchange_Handler,
-		},
-		{
 			MethodName: "GenCollectSnapshot",
 			Handler:    _NFTService_GenCollectSnapshot_Handler,
+		},
+		{
+			MethodName: "DelCollectSnapshot",
+			Handler:    _NFTService_DelCollectSnapshot_Handler,
+		},
+		{
+			MethodName: "GenCollectExchange",
+			Handler:    _NFTService_GenCollectExchange_Handler,
+		},
+		{
+			MethodName: "DelCollectExchange",
+			Handler:    _NFTService_DelCollectExchange_Handler,
+		},
+		{
+			MethodName: "CollectSnapshotPagination",
+			Handler:    _NFTService_CollectSnapshotPagination_Handler,
+		},
+		{
+			MethodName: "CollectExchangePagination",
+			Handler:    _NFTService_CollectExchangePagination_Handler,
 		},
 		{
 			MethodName: "CollectExchange",

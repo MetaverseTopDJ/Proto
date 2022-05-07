@@ -6,7 +6,51 @@ option go_package = "./pb;pb";
 
 /**************** 数据结构 ****************/
 
+// CollectSnapshot 集卡快照
+message CollectSnapshot {
+  uint64 collect_id = 1;
+  uint64 nft_id     = 2;
+  uint64 token_id   = 3;
+  uint64 work_id    = 4;
+  uint64 member_id  = 5;
+  uint64 status     = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+// CollectExchange 集卡兑换
+message CollectExchange {
+  uint64 id         = 1;
+  uint64 collect_id = 2;
+  uint64 nft_id     = 3;
+  uint64 token_id   = 4;
+  uint64 member_id  = 5;
+  string address    = 6;
+  string code       = 7;
+  string signature  = 8;
+  string end_at     = 9;
+  uint64 status     = 10;
+  string created_at = 11;
+  string updated_at = 12;
+}
+
 /**************** 请求结构 ****************/
+
+// CollectSnapshotPaginationPost 快照分页
+message CollectSnapshotPaginationPost {
+  uint64 collect_id = 1;
+  string address    = 2;
+  uint64 page       = 3;
+  uint64 size       = 4;
+}
+
+// CollectExchangePaginationPost 兑换分页
+message CollectExchangePaginationPost {
+  uint64 collect_id = 1;
+  string address    = 2;
+  uint64 page       = 3;
+  uint64 size       = 4;
+}
 
 /**************** 返回结构 ****************/
 
@@ -19,4 +63,24 @@ message CollectExchangeResponse {
   }
   string message = 1;
   Sign   data    = 2;
+}
+
+// CollectSnapshotPaginationResponse 快照分页
+message CollectSnapshotPaginationResponse {
+  message Snapshots {
+    repeated CollectSnapshot list = 1;
+    int64    total                = 2;
+  }
+  string    message = 1;
+  Snapshots data    = 2;
+}
+
+// CollectExchangePaginationResponse 兑换分页
+message CollectExchangePaginationResponse {
+  message Exchanges {
+    repeated CollectExchange list = 1;
+    int64    total                = 2;
+  }
+  string    message = 1;
+  Exchanges data    = 2;
 }
