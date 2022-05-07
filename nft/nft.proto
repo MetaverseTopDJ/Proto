@@ -63,6 +63,13 @@ message NFTTransfer {
   global.SimpleContract contract     = 11;
 }
 
+// NFTContent NFT Metadata 
+message NFTContent {
+  uint64 contract_id = 1;
+  uint64 token_id    = 2;
+  string content     = 3;
+}
+
 /**************** 请求结构 ****************/
 
 // NftPaginationPost NFT 分页请求
@@ -107,6 +114,12 @@ message CheckBlindExchangePost {
 message NFTResponse {
   string message = 1;
   NFT    data    = 2;
+}
+
+// NFTContentResponse 返回 NFT 内容
+message NFTContentResponse {
+  string     message = 1;
+  NFTContent data    = 2;
 }
 
 // NFTPaginationResponse 分页
@@ -173,6 +186,11 @@ service NFTService {
   rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
   rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
+
+  // 盲盒 Metadata
+  rpc MysteryBox (global.InfoPost) returns (NFTContentResponse) {}
+  rpc Note (global.InfoPost) returns (NFTContentResponse) {}
+  rpc Ticket (global.InfoPost) returns (NFTContentResponse) {}
 
   // 前端盲盒交互
   rpc CheckBlindBoxStage (global.InfoPost) returns (CheckBlindBoxStageResponse) {} // 检查盲盒阶段

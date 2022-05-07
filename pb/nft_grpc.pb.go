@@ -48,6 +48,10 @@ type NFTServiceClient interface {
 	CreateBlindBox(ctx context.Context, in *CreateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	UpdateBlindBox(ctx context.Context, in *UpdateBlindBoxPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
 	StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error)
+	// 盲盒 Metadata
+	MysteryBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error)
+	Note(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error)
+	Ticket(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error)
 	// 前端盲盒交互
 	CheckBlindBoxStage(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*CheckBlindBoxStageResponse, error)
 	PurchaseBlindBox(ctx context.Context, in *PurchaseBlindBoxPost, opts ...grpc.CallOption) (*PurchaseBlindBoxResponse, error)
@@ -359,6 +363,33 @@ func (c *nFTServiceClient) UpdateBlindBox(ctx context.Context, in *UpdateBlindBo
 func (c *nFTServiceClient) StartBlindBox(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*BlindBoxResponse, error) {
 	out := new(BlindBoxResponse)
 	err := c.cc.Invoke(ctx, "/nft.NFTService/StartBlindBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) MysteryBox(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error) {
+	out := new(NFTContentResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/MysteryBox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Note(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error) {
+	out := new(NFTContentResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Note", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nFTServiceClient) Ticket(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*NFTContentResponse, error) {
+	out := new(NFTContentResponse)
+	err := c.cc.Invoke(ctx, "/nft.NFTService/Ticket", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -885,6 +916,10 @@ type NFTServiceServer interface {
 	CreateBlindBox(context.Context, *CreateBlindBoxPost) (*BlindBoxResponse, error)
 	UpdateBlindBox(context.Context, *UpdateBlindBoxPost) (*BlindBoxResponse, error)
 	StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error)
+	// 盲盒 Metadata
+	MysteryBox(context.Context, *InfoPost) (*NFTContentResponse, error)
+	Note(context.Context, *InfoPost) (*NFTContentResponse, error)
+	Ticket(context.Context, *InfoPost) (*NFTContentResponse, error)
 	// 前端盲盒交互
 	CheckBlindBoxStage(context.Context, *InfoPost) (*CheckBlindBoxStageResponse, error)
 	PurchaseBlindBox(context.Context, *PurchaseBlindBoxPost) (*PurchaseBlindBoxResponse, error)
@@ -1036,6 +1071,15 @@ func (UnimplementedNFTServiceServer) UpdateBlindBox(context.Context, *UpdateBlin
 }
 func (UnimplementedNFTServiceServer) StartBlindBox(context.Context, *ChangeStatusPost) (*BlindBoxResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartBlindBox not implemented")
+}
+func (UnimplementedNFTServiceServer) MysteryBox(context.Context, *InfoPost) (*NFTContentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MysteryBox not implemented")
+}
+func (UnimplementedNFTServiceServer) Note(context.Context, *InfoPost) (*NFTContentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Note not implemented")
+}
+func (UnimplementedNFTServiceServer) Ticket(context.Context, *InfoPost) (*NFTContentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ticket not implemented")
 }
 func (UnimplementedNFTServiceServer) CheckBlindBoxStage(context.Context, *InfoPost) (*CheckBlindBoxStageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckBlindBoxStage not implemented")
@@ -1694,6 +1738,60 @@ func _NFTService_StartBlindBox_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NFTServiceServer).StartBlindBox(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_MysteryBox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).MysteryBox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/MysteryBox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).MysteryBox(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_Note_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Note(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Note",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Note(ctx, req.(*InfoPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NFTService_Ticket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NFTServiceServer).Ticket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nft.NFTService/Ticket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NFTServiceServer).Ticket(ctx, req.(*InfoPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2784,6 +2882,18 @@ var NFTService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartBlindBox",
 			Handler:    _NFTService_StartBlindBox_Handler,
+		},
+		{
+			MethodName: "MysteryBox",
+			Handler:    _NFTService_MysteryBox_Handler,
+		},
+		{
+			MethodName: "Note",
+			Handler:    _NFTService_Note_Handler,
+		},
+		{
+			MethodName: "Ticket",
+			Handler:    _NFTService_Ticket_Handler,
 		},
 		{
 			MethodName: "CheckBlindBoxStage",
