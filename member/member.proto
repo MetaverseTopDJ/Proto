@@ -124,6 +124,7 @@ service MemberService {
   rpc UpdateCard (UpdateCardPost) returns (CardResponse) {}
   rpc ChangeCardStatus (global.ChangeStatusPost) returns (CardResponse) {}
 
+  rpc MemberCardPagination (MemberCardPaginationPost) returns (MemberCardPaginationResponse) {} // 会员和会员卡关系
   rpc MemberCardList (global.EmptyPost) returns (MemberCardsResponse) {} // 返回会员卡列表
 
   // 会员卡 活动（Console）

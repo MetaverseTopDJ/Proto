@@ -47,6 +47,7 @@ type MemberServiceClient interface {
 	CreateCard(ctx context.Context, in *CreateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
 	UpdateCard(ctx context.Context, in *UpdateCardPost, opts ...grpc.CallOption) (*CardResponse, error)
 	ChangeCardStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CardResponse, error)
+	MemberCardPagination(ctx context.Context, in *MemberCardPaginationPost, opts ...grpc.CallOption) (*MemberCardPaginationResponse, error)
 	MemberCardList(ctx context.Context, in *EmptyPost, opts ...grpc.CallOption) (*MemberCardsResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(ctx context.Context, in *InfoPost, opts ...grpc.CallOption) (*MemberActivityResponse, error)
@@ -308,6 +309,15 @@ func (c *memberServiceClient) UpdateCard(ctx context.Context, in *UpdateCardPost
 func (c *memberServiceClient) ChangeCardStatus(ctx context.Context, in *ChangeStatusPost, opts ...grpc.CallOption) (*CardResponse, error) {
 	out := new(CardResponse)
 	err := c.cc.Invoke(ctx, "/member.MemberService/ChangeCardStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberServiceClient) MemberCardPagination(ctx context.Context, in *MemberCardPaginationPost, opts ...grpc.CallOption) (*MemberCardPaginationResponse, error) {
+	out := new(MemberCardPaginationResponse)
+	err := c.cc.Invoke(ctx, "/member.MemberService/MemberCardPagination", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -581,6 +591,7 @@ type MemberServiceServer interface {
 	CreateCard(context.Context, *CreateCardPost) (*CardResponse, error)
 	UpdateCard(context.Context, *UpdateCardPost) (*CardResponse, error)
 	ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error)
+	MemberCardPagination(context.Context, *MemberCardPaginationPost) (*MemberCardPaginationResponse, error)
 	MemberCardList(context.Context, *EmptyPost) (*MemberCardsResponse, error)
 	// 会员卡 活动（Console）
 	MemberActivity(context.Context, *InfoPost) (*MemberActivityResponse, error)
@@ -694,6 +705,9 @@ func (UnimplementedMemberServiceServer) UpdateCard(context.Context, *UpdateCardP
 }
 func (UnimplementedMemberServiceServer) ChangeCardStatus(context.Context, *ChangeStatusPost) (*CardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeCardStatus not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberCardPagination(context.Context, *MemberCardPaginationPost) (*MemberCardPaginationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberCardPagination not implemented")
 }
 func (UnimplementedMemberServiceServer) MemberCardList(context.Context, *EmptyPost) (*MemberCardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberCardList not implemented")
@@ -1232,6 +1246,24 @@ func _MemberService_ChangeCardStatus_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MemberServiceServer).ChangeCardStatus(ctx, req.(*ChangeStatusPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberService_MemberCardPagination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberCardPaginationPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberCardPagination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/member.MemberService/MemberCardPagination",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberCardPagination(ctx, req.(*MemberCardPaginationPost))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1810,6 +1842,10 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeCardStatus",
 			Handler:    _MemberService_ChangeCardStatus_Handler,
+		},
+		{
+			MethodName: "MemberCardPagination",
+			Handler:    _MemberService_MemberCardPagination_Handler,
 		},
 		{
 			MethodName: "MemberCardList",

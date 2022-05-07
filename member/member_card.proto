@@ -32,6 +32,15 @@ message SimpleMemberCard {
 
 /**************** 请求结构 ****************/
 
+// MemberCardPaginationPost 分页参数
+message MemberCardPaginationPost {
+  uint64 card_id = 1;
+  string creator = 2;
+  string owner   = 3;
+  uint64 page    = 4;
+  uint64 size    = 5;
+}
+
 // MemberCardCreatePost 会员卡 铸造参数
 message MemberCardCreatePost {
   uint64 contract_id  = 1;
@@ -68,6 +77,16 @@ message MemberCardResponse {}
 message MemberCardsResponse {
   string   message         = 1;
   repeated MemberCard data = 2;
+}
+
+// MemberCardPaginationResponse 返回 分页
+message MemberCardPaginationResponse {
+  message Cards {
+    repeated MemberCard list = 1;
+    int64    total           = 2;
+  }
+  string message = 1;
+  Cards  data    = 2;
 }
 
 // SimpleMemberCardsResponse 返回 会员拥有的会员卡
