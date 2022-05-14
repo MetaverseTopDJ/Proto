@@ -37,7 +37,32 @@ message SimpleContract {
   string address = 4;
 }
 
+// RelationContract 关联的智能合约信息
+message RelationContract {
+  uint64 id      = 1;
+  uint64 type    = 2;
+  string name    = 3;
+  string address = 4;
+}
+
 /**************** 请求结构 ****************/
+
+// GenUniqueCodePost
+message GenUniqueCodePost {
+  uint64 contract_id = 1;
+}
+
+// GenUniqueCodesPost
+message GenUniqueCodesPost {
+  uint64 contract_id = 1;
+  uint64 length      = 2;
+}
+
+// CheckTransactionByHashPost 检查交易结果
+message CheckTransactionByHashPost {
+  uint64 id   = 1;
+  string hash = 2;
+}
 
 // CreateContractPost 创建合约
 message CreateContractPost {

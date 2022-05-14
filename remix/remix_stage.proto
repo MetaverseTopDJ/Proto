@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// RemixStage 互动阶段
+message RemixStage {
+  uint64 remix_id   = 1;
+  uint64 type       = 2;
+  string start_at   = 3;
+  string end_at     = 4;
+  string start_time = 5;
+  string end_time   = 6;
+  uint64 limit      = 7;
+  string created_at = 8;
+  string updated_at = 9;
+}
+
+/**************** 请求结构 ****************/
+
+// RemixStagePost Info 参数
+message RemixStagePost {
+  uint64 remix_id = 1;
+  uint64 type     = 2;
+}
+
+// ModifyRemixStagePost 创建 / 更新 阶段
+message ModifyRemixStagePost {
+  uint64 remix_id = 1;
+  uint64 type     = 2;
+  string start_at = 3;
+  string end_at   = 4;
+  uint64 limit    = 5;
+}
+
+/**************** 返回结构 ****************/
+
+// RemixStageResponse 返回 信息
+message RemixStageResponse {
+  string     message = 1;
+  RemixStage data    = 2;
+}
+
+// CheckRemixStageResponse 检查 盲盒阶段
+message CheckRemixStageResponse {
+  string message = 1;
+  uint64 data    = 2;
+}
+
+// RemixStagesResponse 返回列表
+message RemixStagesResponse {
+  string   message         = 1;
+  repeated RemixStage data = 2;
+}
+
+// RemixStagePaginationResponse 返回分页
+message RemixStagePaginationResponse {
+  message Stages {
+    repeated RemixStage list = 1;
+    int64    total           = 2;
+  }
+  string message = 1;
+  Stages data    = 2;
+}

@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+import "remix/remix_relation.proto";
+
+/**************** 数据结构 ****************/
+
+message RemixWork {
+  uint64        id           = 1;
+  uint64        remix_id     = 2;
+  uint64        type         = 3;
+  string        title        = 4;
+  string        sub_title    = 5;
+  string        description  = 6;
+  uint64        rarity       = 7;
+  string        cover        = 8;
+  string        path         = 9;
+  string        remix        = 10;
+  uint64        used         = 11;
+  uint64        status       = 12;
+  bool          checked      = 13;
+  string        created_at   = 14;
+  string        updated_at   = 15;
+  RelationRemix remix_info   = 16;
+}
+
+/**************** 请求结构 ****************/
+
+// DoRemixWorkPost 处理混合作品
+message DoRemixWorkPost{
+  uint64 contract_id = 1;
+  string hash        = 2;
+}
+
+// RemixWorkPaginationPost 作品分页
+message RemixWorkPaginationPost {
+  uint64 remix_id = 1;
+  uint64 page     = 2;
+  uint64 size     = 3;
+}
+
+// CreateRemixWorkPost 创建 互动作品
+message CreateRemixWorkPost {
+  uint64 remix_id     = 2;
+  uint64 type         = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  uint64 rarity       = 7;
+  string cover        = 8;
+  string path         = 9;
+}
+
+// UpdateRemixWorkPost 更新 互动作品
+message UpdateRemixWorkPost {
+  uint64 id           = 1;
+  uint64 remix_id     = 2;
+  uint64 type         = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  uint64 rarity       = 7;
+  string cover        = 8;
+  string path         = 9;
+}
+
+/**************** 返回结构 ****************/
+
+// RemixWorkResponse 返回
+message RemixWorkResponse {
+  string    message = 1;
+  RemixWork data    = 2;
+}
+
+// RemixWorksResponse 返回
+message RemixWorksResponse {
+  string   message        = 1;
+  repeated RemixWork data = 2;
+}
+
+// RemixWorkPaginationResponse 返回分页
+message RemixWorkPaginationResponse {
+  message Works {
+    repeated RemixWork list = 1;
+    int64    total          = 2;
+  }
+  string message = 1;
+  Works  data    = 2;
+}
+

@@ -6,61 +6,28 @@ option go_package = "./pb;pb";
 
 import "global/global.proto";
 import "global/contract.proto";
-import "nft/author.proto";
-import "nft/work.proto";
-import "nft/blind_box.proto";
-import "nft/blind_box_stage.proto";
-import "nft/blind_box_content.proto";
-import "nft/blind_box_white_address.proto";
-import "nft/collect.proto";
-import "nft/collect_exchange.proto";
-import "nft/blind_box_exchange.proto";
+import "nft/nft_creator.proto";
+import "nft/nft_transfer.proto";
 import "nft/member_nft.proto";
+import "nft/signature.proto";
 
 /**************** 数据结构 ****************/
 
 // NFT 信息
 message NFT {
-  uint64                id          = 1;
-  uint64                contract_id = 2;
-  uint64                token_id    = 3;
-  uint64                work_id     = 4;
-  uint64                creator_id  = 5;
-  uint64                owner_id    = 6;
-  string                code        = 7;
-  uint64                version     = 8;
-  string                created_at  = 9;
-  string                updated_at  = 10;
-  global.SimpleContract contract    = 11;
-}
-
-// NFTCreator NFT 铸造信息
-message NFTCreator {
-  uint64                id           = 1;
-  uint64                block_number = 2;
-  string                block_time   = 3;
-  uint64                contract_id  = 4;
-  uint64                token_id     = 5;
-  uint64                member_id    = 6;
-  string                code         = 7;
-  string                hash         = 8;
-  string                address      = 9;
-  global.SimpleContract contract     = 10;
-}
-
-// NFTTransfer NFT 交易信息
-message NFTTransfer {
-  uint64                id           = 1;
-  uint64                block_number = 2;
-  string                block_time   = 3;
-  uint64                contract_id  = 4;
-  uint64                token_id     = 5;
-  string                hash         = 6;
-  uint64                form_id      = 7;
-  string                form         = 8;
-  uint64                to_id        = 9;
-  string                to           = 10;
-  global.SimpleContract contract     = 11;
+  uint64                  id          = 1;
+  uint64                  contract_id = 2;
+  uint64                  token_id    = 3;
+  uint64                  work_id     = 4;
+  uint64                  creator_id  = 5;
+  uint64                  owner_id    = 6;
+  uint64                  code        = 7;
+  string                  price       = 8;
+  string                  symbol      = 9;
+  uint64                  version     = 10;
+  string                  created_at  = 11;
+  string                  updated_at  = 12;
+  global.RelationContract contract    = 13;
 }
 
 // NFTContent NFT Metadata 
@@ -72,28 +39,23 @@ message NFTContent {
 
 /**************** 请求结构 ****************/
 
+// CountWorkCollectorPost 计算作品收藏者人数
+message CountWorkCollectorPost {
+  uint64 contract_id = 1;
+  uint64 work_id     = 2;
+}
+
+// MemberWorkPost 会员拥有的 Work
+message MemberWorkPost {
+  uint64 contract_id = 1;
+  uint64 owner_id    = 2;
+}
+
 // NftPaginationPost NFT 分页请求
 message NftPaginationPost {
   uint64 contract_id = 1;
   string creator     = 2;
   string owner       = 3;
-  uint64 page        = 4;
-  uint64 size        = 5;
-}
-
-// NftCreatorPaginationPost NFT 铸造日志 分页请求
-message NftCreatorPaginationPost {
-  uint64 contract_id = 1;
-  string address     = 2;
-  uint64 page        = 3;
-  uint64 size        = 4;
-}
-
-// NftTransferPaginationPost NFT 交易日志 分页请求
-message NftTransferPaginationPost {
-  uint64 contract_id = 1;
-  string from        = 2;
-  string to          = 3;
   uint64 page        = 4;
   uint64 size        = 5;
 }
@@ -133,126 +95,14 @@ message NFTPaginationResponse {
   NFTs   data    = 2;
 }
 
-// NFTCreatorPaginationResponse 铸造日志 分页
-message NFTCreatorPaginationResponse {
-  message NFTs {
-    repeated NFTCreator list = 1;
-    int64    total           = 2;
-  }
-  string message = 1;
-  NFTs   data    = 2;
-}
-
-// NFTTransferPaginationResponse 交易日志 分页
-message NFTTransferPaginationResponse {
-  message NFTs {
-    repeated NFTTransfer list = 1;
-    int64    total            = 2;
-  }
-  string message = 1;
-  NFTs   data    = 2;
-}
-
 // NFTService NFT 服务 
 service NFTService {
-  // 作者
-  rpc Author (global.InfoPost) returns (AuthorResponse) {}
-  rpc AuthorDetail (global.InfoPost) returns (SimpleAuthorResponse);
-  rpc HotAuthors (global.EmptyPost) returns (HotAuthorsResponse) {}
-  rpc CacheAllAuthors (global.EmptyPost) returns (HotAuthorsResponse) {}
-  rpc AuthorPagination (global.PaginationPost) returns (AuthorPaginationResponse) {}
-  rpc CreateAuthor (CreateAuthorPost) returns (AuthorResponse) {}
-  rpc UpdateAuthor (UpdateAuthorPost) returns (AuthorResponse) {}
-  rpc ChangeAuthorStatus (global.ChangeStatusPost) returns (AuthorResponse) {}
-
-  // 作品
-  rpc Work (global.InfoPost) returns (WorkResponse) {}
-  rpc Works (global.EmptyPost) returns (WorksResponse) {}
-  rpc WorkDetail(global.InfoPost) returns (WorkDetailResponse) {}
-  rpc RecommendWorks (RecommendWorksPost) returns (RecommendWorksResponse) {}
-  rpc AuthorWorkPagination (AuthorWorkPaginationPost) returns (AuthorWorkPaginationResponse) {}
-  rpc WorkPagination (global.PaginationPost) returns (WorkPaginationResponse) {}
-  rpc CreateWork (CreateWorkPost) returns (WorkResponse) {}
-  rpc UpdateWork (UpdateWorkPost) returns (WorkResponse) {}
-  rpc ChangeWorkStatus (global.ChangeStatusPost) returns (WorkResponse) {}
-
-  // 盲盒
-  rpc BlindBox (global.InfoPost) returns (BlindBoxResponse) {}
-  rpc BlindBoxes (global.EmptyPost) returns (BlindBoxesResponse) {} // 返回 盲盒列表
-  rpc BlindBoxCount (global.InfoPost) returns (BlindBoxCountResponse) {} // 返回盲盒剩余数量
-  rpc BlindBoxTop (BlindBoxTopPost) returns (BlindBoxTopResponse) {}
-  rpc BlindBoxTopCount (global.EmptyPost) returns (BlindBoxCountResponse) {} // 返回 首页盲盒剩余数量
-  rpc BlindBoxDetail (BlindBoxDetailPost) returns (BlindBoxDetailResponse) {} // 返回盲盒详情
-  rpc BlindBoxPagination (global.PaginationPost) returns (BlindBoxPaginationResponse) {}
-  rpc CreateBlindBox (CreateBlindBoxPost) returns (BlindBoxResponse) {}
-  rpc UpdateBlindBox (UpdateBlindBoxPost) returns (BlindBoxResponse) {}
-  rpc StartBlindBox (global.ChangeStatusPost) returns (BlindBoxResponse) {} // 开启盲盒
 
   // 盲盒 Metadata
   rpc MysteryBox (global.InfoPost) returns (NFTContentResponse) {}
   rpc Note (global.InfoPost) returns (NFTContentResponse) {}
   rpc Ticket (global.InfoPost) returns (NFTContentResponse) {}
-
-  // 前端盲盒交互
-  rpc CheckBlindBoxStage (global.InfoPost) returns (CheckBlindBoxStageResponse) {} // 检查盲盒阶段
-  rpc PurchaseBlindBox(PurchaseBlindBoxPost) returns (PurchaseBlindBoxResponse) {} // 白名单购买盲盒
-
-  // 盲盒内容
-  rpc BlindBoxContent (BlindBoxContentInfoPost) returns (BlindBoxContentResponse) {}
-  rpc BlindBoxContentPagination (BlindBoxContentPaginationPost) returns (BlindBoxContentPaginationResponse) {}
-  rpc CreateBlindBoxContent (CreateBlindBoxContentPost) returns (global.ResultResponse) {}
-  rpc UpdateBlindBoxContent (UpdateBlindBoxContentPost) returns (global.ResultResponse) {}
-  rpc RemoveBlindBoxContent (BlindBoxContentInfoPost) returns (global.ResultResponse) {}
-
-  // 盲盒阶段
-  rpc BlindBoxStage (BlindBoxStagePost) returns (BlindBoxStageResponse) {}
-  rpc BlindBoxStages (global.InfoPost) returns (BlindBoxStagesResponse) {}
-  rpc BlindBoxStagePagination (global.InfoPost) returns (BlindBoxStagePaginationResponse) {}
-  rpc CreateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
-  rpc UpdateBlindBoxStage (ModifyBlindBoxStagePost) returns (BlindBoxStageResponse) {}
-  rpc RemoveBlindBoxStage (BlindBoxStagePost) returns (global.ResultResponse) {}
-
-  // 免费盲盒
-  rpc BlindBoxExchange (global.InfoPost) returns (BlindBoxExchangeResponse) {}
-  rpc MemberBlindBoxExchange (global.EmptyPost) returns (CountBlindBoxExchangeResponse) {}
-  rpc AddressBlindBoxExchange (AddressBlindBoxExchangePost) returns (CountBlindBoxExchangeResponse) {}
-
-  // 免费盲盒快照
-  rpc GenBlindBoxSnapshot(global.InfoPost) returns (global.ResultResponse) {}
-  rpc DelBlindBoxSnapshot(global.InfoPost) returns (global.ResultResponse) {}
-  rpc GenBlindBoxExchange(global.InfoPost) returns (global.ResultResponse) {}
-  rpc DelBlindBoxExchange(global.InfoPost) returns (global.ResultResponse) {}
-  rpc BlindBoxSnapshotPagination (BlindBoxSnapshotPaginationPost) returns (BlindBoxSnapshotPaginationResponse) {}
-  rpc BlindBoxExchangePagination (BlindBoxExchangePaginationPost) returns (BlindBoxExchangePaginationResponse) {}
-
-  // 盲盒白名单
-  rpc BlindBoxWhiteAddressPagination (BlindBoxWhiteAddressPaginationPost) returns (BlindBoxWhiteAddressPaginationResponse) {}
-  rpc CreateBlindBoxWhiteAddress (CreateBlindBoxWhiteAddressPost) returns (global.ResultResponse) {}
-  rpc RemoveBlindBoxWhiteAddress (RemoveBlindBoxWhiteAddressPost) returns (global.ResultResponse) {}
-
-  // 集卡
-  rpc Collect (global.InfoPost) returns (CollectResponse) {}
-  rpc CollectDetail (global.InfoPost) returns (CollectDetailResponse) {} // 集卡明细
-  rpc CollectPagination (global.PaginationPost) returns (CollectPaginationResponse) {}
-  rpc SimpleCollectPagination (global.PaginationPost) returns (SimpleCollectPaginationResponse) {} // 前端集卡分页
-  rpc CreateCollect (CreateCollectPost) returns (CollectResponse) {}
-  rpc UpdateCollect (UpdateCollectPost) returns (CollectResponse) {}
-  rpc ModifyCollect (ModifyCollectPost) returns (global.ResultResponse) {}
-  rpc ChangeCollectStatus (global.ChangeStatusPost) returns (CollectResponse) {}
-
-  // 集卡快照
-  rpc GenCollectSnapshot(global.InfoPost) returns (global.ResultResponse) {}
-  rpc DelCollectSnapshot(global.InfoPost) returns (global.ResultResponse) {}
-  rpc GenCollectExchange(global.InfoPost) returns (global.ResultResponse) {}
-  rpc DelCollectExchange(global.InfoPost) returns (global.ResultResponse) {}
-  rpc CollectSnapshotPagination (CollectSnapshotPaginationPost) returns (CollectSnapshotPaginationResponse) {}
-  rpc CollectExchangePagination (CollectExchangePaginationPost) returns (CollectExchangePaginationResponse) {}
-
-  // 集卡交互
-  rpc CollectExchange (global.InfoPost) returns (CollectExchangeResponse) {} // 集卡兑换
-
-  rpc CheckCollectExchangeTx (CheckCollectExchangePost) returns (global.CheckResponse) {}
-  rpc CheckBlindBoxExchangeTx (CheckBlindExchangePost) returns (global.CheckResponse) {}
+  rpc RemixInfo (global.InfoPost) returns (NFTContentResponse) {}
 
   // 合约
   rpc NftContract (global.InfoPost) returns (global.ContractResponse) {}
@@ -262,6 +112,15 @@ service NFTService {
   rpc CreateNftContract (global.CreateContractPost) returns (global.ContractResponse) {}
   rpc UpdateNftContract (global.UpdateContractPost) returns (global.ContractResponse) {}
   rpc ChangeNftContractStatus (global.ChangeStatusPost) returns (global.ContractResponse) {}
+
+  // 合约 辅助功能
+  rpc GenUniqueCode (global.GenUniqueCodePost) returns (global.NumberResponse) {}
+  rpc GenUniqueCodes (global.GenUniqueCodesPost) returns (global.NumbersResponse) {}
+  rpc BlindBoxSignature (BlindBoxSignPost) returns (SignatureResponse) {}
+  rpc RemixSignature (RemixSignPost) returns (SignatureResponse) {}
+  rpc CollectSignature (CollectSignPost) returns (SignatureResponse) {}
+
+  rpc CheckTransactionByHash(global.CheckTransactionByHashPost) returns (global.ResultResponse) {} // 检查交易结果
 
   // 合约操作
 
@@ -278,15 +137,20 @@ service NFTService {
   rpc StopTicketContract (global.InfoPost) returns (global.ResultResponse) {}
 
   // NFT
-  rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
+  // rpc CheckBlindBoxTx (CheckBlindBoxTxPost) returns (global.CheckResponse) {} // 检查盲盒交易
   rpc MemberNftPagination (MemberNftPaginationPost) returns (MemberNftPaginationResponse) {} // 会员 NFT
   rpc NftMemberPagination (NftMemberPaginationPost) returns (NftMemberPaginationResponse) {}
 
   // NFT 后台
   rpc Nft (global.InfoPost) returns (NFTResponse) {}
+  rpc NftPrice (global.InfoPost) returns (global.ResultResponse) {}
+  rpc CountWorkCollector (CountWorkCollectorPost) returns (global.CountResponse) {}
+  rpc MemberWorkIDs (MemberWorkPost) returns (global.IDsResponse) {} // 会员拥有的 Work 集合
+  rpc MemberCollectWorkIDs (MemberWorkPost) returns (global.IDsResponse) {} // 会员拥有的 Work 集合 去重
   rpc NftPagination (NftPaginationPost) returns (NFTPaginationResponse) {}
   rpc NftCreatorPagination (NftCreatorPaginationPost) returns (NFTCreatorPaginationResponse) {}
   rpc NftTransferPagination (NftTransferPaginationPost) returns (NFTTransferPaginationResponse) {}
 
-  // 推送版本
+  rpc CheckCollectExchangeTx (CheckCollectExchangePost) returns (global.CheckResponse) {}
+  rpc CheckBlindBoxExchangeTx (CheckBlindExchangePost) returns (global.CheckResponse) {}
 }

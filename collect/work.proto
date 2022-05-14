@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nft;
+package collect;
 
 option go_package = "./pb;pb";
 
@@ -9,24 +9,25 @@ option go_package = "./pb;pb";
 // Work 作品
 message Work {
   uint64 id             = 1;
-  uint64 author_id      = 2;
-  uint64 type           = 3;
-  string title          = 4;
-  string sub_title      = 5;
-  string description    = 6;
-  string published_date = 7;
-  string published_time = 8;
-  string serial_num     = 9;
-  string series         = 10;
-  int64  rarity         = 11;
-  string introduction   = 12;
-  string path           = 13;
-  uint64 sort           = 14;
-  string cover          = 15;
-  uint64 status         = 16;
-  bool   checked        = 17;
-  string created_at     = 18;
-  string updated_at     = 19;
+  uint64 contract_id    = 2;
+  uint64 author_id      = 3;
+  uint64 type           = 4;
+  string title          = 5;
+  string sub_title      = 6;
+  string description    = 7;
+  string published_date = 8;
+  string published_time = 9;
+  string serial_num     = 10;
+  string series         = 11;
+  int64  rarity         = 12;
+  string introduction   = 13;
+  string path           = 14;
+  uint64 sort           = 15;
+  string cover          = 16;
+  uint64 status         = 17;
+  bool   checked        = 18;
+  string created_at     = 19;
+  string updated_at     = 20;
 }
 
 // SimpleWork 简单的 作品返回
@@ -115,6 +116,12 @@ message WorkResource {
 
 /**************** 请求结构 ****************/
 
+// WorkByTypePost 根据 类型获取 Work
+message WorkByTypePost {
+  uint64 contract_id = 1;
+  uint64 type        = 2;
+}
+
 // RecommendWorksPost 获取推荐作品
 message RecommendWorksPost {
   uint64 num = 1; // 数量
@@ -130,35 +137,37 @@ message AuthorWorkPaginationPost {
 
 // CreateWorkPost 创建作品
 message CreateWorkPost {
-  uint64 author_id      = 2;
-  uint64 type           = 3;
-  string title          = 4;
-  string sub_title      = 5;
-  string description    = 6;
-  string published_date = 7;
-  string serial_num     = 8;
-  string series         = 9;
-  int64  rarity         = 10;
-  string introduction   = 11;
-  string path           = 12;
-  string cover          = 13;
+  uint64 contract_id    = 2;
+  uint64 author_id      = 3;
+  uint64 type           = 4;
+  string title          = 5;
+  string sub_title      = 6;
+  string description    = 7;
+  string published_date = 8;
+  string serial_num     = 9;
+  string series         = 10;
+  int64  rarity         = 11;
+  string introduction   = 12;
+  string path           = 13;
+  string cover          = 14;
 }
 
 // UpdateWorkPost 更新作品
 message UpdateWorkPost {
   uint64 id             = 1;
-  uint64 author_id      = 2;
-  uint64 type           = 3;
-  string title          = 4;
-  string sub_title      = 5;
-  string description    = 6;
-  string published_date = 7;
-  string serial_num     = 8;
-  string series         = 9;
-  int64  rarity         = 10;
-  string introduction   = 11;
-  string path           = 12;
-  string cover          = 13;
+  uint64 contract_id    = 2;
+  uint64 author_id      = 3;
+  uint64 type           = 4;
+  string title          = 5;
+  string sub_title      = 6;
+  string description    = 7;
+  string published_date = 8;
+  string serial_num     = 9;
+  string series         = 10;
+  int64  rarity         = 11;
+  string introduction   = 12;
+  string path           = 13;
+  string cover          = 14;
 }
 
 /**************** 返回结构 ****************/

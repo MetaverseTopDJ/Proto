@@ -1,0 +1,224 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+import "global/global.proto";
+import "global/contract.proto";
+import "remix/remix_work.proto";
+import "remix/remix_stage.proto";
+import "remix/remix_exchange.proto";
+import "remix/remix_white_address.proto";
+
+/**************** 数据结构 ****************/
+
+message Remix {
+  uint64 id           = 1;
+  uint64 contract_id  = 2;
+  string series       = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  string introduction = 7;
+  string cover        = 8;
+  string background   = 9;
+  uint64 price        = 10;
+  uint64 decimal      = 11;
+  bool   top          = 12;
+  uint64 status       = 13;
+  string created_at   = 14;
+  string updated_at   = 15;
+}
+
+// VaildRemix 返回有效的互动
+message VaildRemix {
+  uint64 id           = 1;
+  uint64 contract_id  = 2;
+  string series       = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  string introduction = 7;
+  string cover        = 8;
+  string background   = 9;
+  uint64 price        = 10;
+  uint64 decimal      = 11;
+  uint64 start_at     = 12;
+  uint64 end_at       = 13;
+  bool   open         = 14;
+  bool   free         = 15;
+  uint64 total        = 16;
+  uint64 remain       = 17;
+  string contract     = 18;
+}
+
+/**************** 请求结构 ****************/
+
+// OpenseaAssetPost 获取 Opensea 上的资产
+message OpenseaAssetPost {
+  string contract = 1;
+  uint64 token    = 2;
+}
+
+// RemixMintPost 互动 Mint
+message RemixMintPost {
+  string contract    = 1;
+  uint64 token       = 2;
+}
+
+// CheckRemixMintPost 检查 Mint 结果
+message CheckRemixMintPost {
+  uint64 code     = 1;
+  string hash     = 2;
+}
+
+// RemixPost 创建 互动
+message CreateRemixPost {
+  uint64 contract_id  = 2;
+  string series       = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  string introduction = 7;
+  string cover        = 8;
+  string background   = 9;
+  uint64 price        = 10;
+  uint64 decimal      = 11;
+  bool   top          = 12;
+}
+
+// UpdateRemixPost 更新 互动
+message UpdateRemixPost {
+  uint64 id           = 1;
+  uint64 contract_id  = 2;
+  string series       = 3;
+  string title        = 4;
+  string sub_title    = 5;
+  string description  = 6;
+  string introduction = 7;
+  string cover        = 8;
+  string background   = 9;
+  uint64 price        = 10;
+  uint64 decimal      = 11;
+  bool   top          = 12;
+}
+
+/**************** 返回结构 ****************/
+
+// OpenseaAssetResponse 检查资产返回
+message CheckOpenseaAssetResponse {
+  message Asset {
+    bool   mint  = 1;
+    string token = 2;
+    string URL   = 3;
+  }
+  string message = 1;
+  Asset  data    = 2;
+}
+
+// PreRemixMintResponse 返回 预先 Mint 数据
+message PreRemixMintResponse {
+  message PreMint {
+    uint64 price   = 1;
+    uint64 decimal = 2;
+    bool   free    = 3;
+  }
+  string  message = 1;
+  PreMint data    = 2;
+}
+
+// RemixSignatureResponse 免费 Mint 返回
+message RemixSignatureResponse {
+  message Sign {
+    string contract  = 1;
+    string address   = 2;
+    uint64 code      = 3;
+    uint64 price     = 4;
+    uint64 num       = 5;
+    string signature = 6;
+    uint64 timestamp = 7;
+  }
+  string message = 1;
+  Sign   data    = 2;
+}
+
+// RemixResponse 返回
+message RemixResponse {
+  string message = 1;
+  Remix  data    = 2;
+}
+
+// VaildRemixResponse 返回有效的 联动
+message VaildRemixResponse {
+  string     message = 1;
+  VaildRemix data    = 2;
+}
+
+// RemixsResponse 返回 列表
+message RemixsResponse {
+  string   message         = 1;
+  repeated Remix data = 2;
+}
+
+// RemixPaginationResponse 返回 分页
+message RemixPaginationResponse {
+  message Remixs {
+    repeated Remix list = 1;
+    int64 total = 2;
+  }
+  string message = 1;
+  Remixs data    = 2;
+}
+
+// RemixService 实现服务接口
+service RemixService {
+
+  // 互动
+  rpc CheckRemixOpenseaAsset(OpenseaAssetPost) returns (CheckOpenseaAssetResponse) {}
+  rpc PreRemixMint (global.EmptyPost) returns (PreRemixMintResponse) {} // Mint 预览
+  rpc RemixFreeMint (RemixMintPost) returns (RemixSignatureResponse) {} // 免费 Mint
+  rpc RemixMint (RemixMintPost) returns (global.ResultResponse) {} // Mint
+  rpc CheckRemixMint (CheckRemixMintPost) returns (global.ResultResponse) {} // 检查 Mint 结果
+
+  // 互动
+  rpc Remix (global.InfoPost) returns (RemixResponse) {}
+  rpc VaildRemix (global.EmptyPost) returns (VaildRemixResponse) {}
+  rpc RemixByContract (global.InfoPost) returns (RemixResponse) {}
+  rpc TopRemix (global.EmptyPost) returns (RemixResponse) {}
+  rpc Remixs (global.InfoPost) returns (RemixsResponse) {}
+  rpc RemixPagination (global.PaginationPost) returns (RemixPaginationResponse) {}
+  rpc CreateRemix (CreateRemixPost) returns (RemixResponse) {}
+  rpc UpdateRemix (UpdateRemixPost) returns (RemixResponse) {}
+
+  // 互动资源
+  rpc RemixWork (global.InfoPost) returns (RemixWorkResponse) {}
+  rpc DoRemixWork (DoRemixWorkPost) returns (RemixWorkResponse) {}
+  rpc UseWork (global.InfoPost) returns (global.ResultResponse) {} // 消耗掉 Work
+  rpc RemixWorkPagination (RemixWorkPaginationPost) returns (RemixWorkPaginationResponse) {}
+  rpc CreateRemixWork (CreateRemixWorkPost) returns (RemixWorkResponse) {}
+  rpc UpdateRemixWork (UpdateRemixWorkPost) returns (RemixWorkResponse) {}
+
+  // 互动兑换记录
+  rpc RemixExchangePagination (RemixExchangePaginationPost) returns (RemixExchangePaginationResponse) {}
+
+  // 互动白名单
+  rpc RemixWhiteAddressPagination (RemixWhiteAddressPaginationPost) returns (RemixWhiteAddressPaginationResponse) {}
+  rpc CreateRemixWhiteAddress (CreateRemixWhiteAddressPost) returns (global.ResultResponse) {}
+  rpc RemoveRemixWhiteAddress (RemoveRemixWhiteAddressPost) returns (global.ResultResponse) {}
+
+  // 互动阶段
+  rpc BlindBoxStage (RemixStagePost) returns (RemixStageResponse) {}
+  rpc BlindBoxStages (global.InfoPost) returns (RemixStagesResponse) {}
+  rpc BlindBoxStagePagination (global.InfoPost) returns (RemixStagePaginationResponse) {}
+  rpc CreateBlindBoxStage (ModifyRemixStagePost) returns (RemixStageResponse) {}
+  rpc UpdateBlindBoxStage (ModifyRemixStagePost) returns (RemixStageResponse) {}
+  rpc RemoveBlindBoxStage (RemixStagePost) returns (global.ResultResponse) {}
+
+  // 互动合约
+  rpc RemixContract (global.InfoPost) returns (global.ContractResponse) {}
+  rpc RemixContracts (global.EmptyPost) returns (global.ContractsResponse) {}
+  rpc RemixContractPagination (global.PaginationPost) returns (global.ContractPaginationResponse) {}
+  rpc CreateRemixContract (global.CreateContractPost) returns (global.ContractResponse) {}
+  rpc UpdateRemixContract (global.UpdateContractPost) returns (global.ContractResponse) {}
+}

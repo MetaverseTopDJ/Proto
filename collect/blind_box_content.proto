@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nft;
+package collect;
 
 option go_package = "./pb;pb";
 

@@ -159,7 +159,7 @@ type InfoCodePost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code string `protobuf:"bytes,1,opt,name=Code,proto3" json:"Code"`
+	Code uint64 `protobuf:"varint,1,opt,name=Code,proto3" json:"Code"`
 }
 
 func (x *InfoCodePost) Reset() {
@@ -194,11 +194,11 @@ func (*InfoCodePost) Descriptor() ([]byte, []int) {
 	return file_global_global_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *InfoCodePost) GetCode() string {
+func (x *InfoCodePost) GetCode() uint64 {
 	if x != nil {
 		return x.Code
 	}
-	return ""
+	return 0
 }
 
 type KeywordPost struct {
@@ -668,6 +668,230 @@ func (x *Response) GetData() map[string]string {
 	return nil
 }
 
+// StringResponse 返回 字符串
+type StringResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    string `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *StringResponse) Reset() {
+	*x = StringResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StringResponse) ProtoMessage() {}
+
+func (x *StringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StringResponse.ProtoReflect.Descriptor instead.
+func (*StringResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *StringResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *StringResponse) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+// StringsResponse 返回 字符串数组
+type StringsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string   `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    []string `protobuf:"bytes,2,rep,name=data,proto3" json:"data"`
+}
+
+func (x *StringsResponse) Reset() {
+	*x = StringsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StringsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StringsResponse) ProtoMessage() {}
+
+func (x *StringsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StringsResponse.ProtoReflect.Descriptor instead.
+func (*StringsResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *StringsResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *StringsResponse) GetData() []string {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// NumberResponse 返回 整数
+type NumberResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    uint64 `protobuf:"varint,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *NumberResponse) Reset() {
+	*x = NumberResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NumberResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NumberResponse) ProtoMessage() {}
+
+func (x *NumberResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NumberResponse.ProtoReflect.Descriptor instead.
+func (*NumberResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *NumberResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *NumberResponse) GetData() uint64 {
+	if x != nil {
+		return x.Data
+	}
+	return 0
+}
+
+// NumbersResponse 返回 整数 数组
+type NumbersResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string   `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    []uint64 `protobuf:"varint,2,rep,packed,name=data,proto3" json:"data"`
+}
+
+func (x *NumbersResponse) Reset() {
+	*x = NumbersResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NumbersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NumbersResponse) ProtoMessage() {}
+
+func (x *NumbersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NumbersResponse.ProtoReflect.Descriptor instead.
+func (*NumbersResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *NumbersResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *NumbersResponse) GetData() []uint64 {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 // IDResponse 返回ID
 type IDResponse struct {
 	state         protoimpl.MessageState
@@ -681,7 +905,7 @@ type IDResponse struct {
 func (x *IDResponse) Reset() {
 	*x = IDResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_global_global_proto_msgTypes[12]
+		mi := &file_global_global_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -694,7 +918,7 @@ func (x *IDResponse) String() string {
 func (*IDResponse) ProtoMessage() {}
 
 func (x *IDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_global_global_proto_msgTypes[12]
+	mi := &file_global_global_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +931,7 @@ func (x *IDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IDResponse.ProtoReflect.Descriptor instead.
 func (*IDResponse) Descriptor() ([]byte, []int) {
-	return file_global_global_proto_rawDescGZIP(), []int{12}
+	return file_global_global_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *IDResponse) GetMessage() string {
@@ -724,6 +948,62 @@ func (x *IDResponse) GetData() uint64 {
 	return 0
 }
 
+// IDsResponse 返回 ID 集合
+type IDsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string   `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    []uint64 `protobuf:"varint,2,rep,packed,name=data,proto3" json:"data"`
+}
+
+func (x *IDsResponse) Reset() {
+	*x = IDsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IDsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IDsResponse) ProtoMessage() {}
+
+func (x *IDsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IDsResponse.ProtoReflect.Descriptor instead.
+func (*IDsResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *IDsResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *IDsResponse) GetData() []uint64 {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 // ResultResponse 返回执行结果
 type ResultResponse struct {
 	state         protoimpl.MessageState
@@ -737,7 +1017,7 @@ type ResultResponse struct {
 func (x *ResultResponse) Reset() {
 	*x = ResultResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_global_global_proto_msgTypes[13]
+		mi := &file_global_global_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -750,7 +1030,7 @@ func (x *ResultResponse) String() string {
 func (*ResultResponse) ProtoMessage() {}
 
 func (x *ResultResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_global_global_proto_msgTypes[13]
+	mi := &file_global_global_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -763,7 +1043,7 @@ func (x *ResultResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResultResponse.ProtoReflect.Descriptor instead.
 func (*ResultResponse) Descriptor() ([]byte, []int) {
-	return file_global_global_proto_rawDescGZIP(), []int{13}
+	return file_global_global_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ResultResponse) GetMessage() string {
@@ -780,6 +1060,62 @@ func (x *ResultResponse) GetData() bool {
 	return false
 }
 
+// CountResponse 返回 总数
+type CountResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	Data    int64  `protobuf:"varint,2,opt,name=data,proto3" json:"data"`
+}
+
+func (x *CountResponse) Reset() {
+	*x = CountResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_global_global_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountResponse) ProtoMessage() {}
+
+func (x *CountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_global_global_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountResponse.ProtoReflect.Descriptor instead.
+func (*CountResponse) Descriptor() ([]byte, []int) {
+	return file_global_global_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *CountResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *CountResponse) GetData() int64 {
+	if x != nil {
+		return x.Data
+	}
+	return 0
+}
+
 // MessageResponse 仅返回成功失败消息
 type MessageResponse struct {
 	state         protoimpl.MessageState
@@ -792,7 +1128,7 @@ type MessageResponse struct {
 func (x *MessageResponse) Reset() {
 	*x = MessageResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_global_global_proto_msgTypes[14]
+		mi := &file_global_global_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -805,7 +1141,7 @@ func (x *MessageResponse) String() string {
 func (*MessageResponse) ProtoMessage() {}
 
 func (x *MessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_global_global_proto_msgTypes[14]
+	mi := &file_global_global_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -818,7 +1154,7 @@ func (x *MessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageResponse.ProtoReflect.Descriptor instead.
 func (*MessageResponse) Descriptor() ([]byte, []int) {
-	return file_global_global_proto_rawDescGZIP(), []int{14}
+	return file_global_global_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *MessageResponse) GetMessage() string {
@@ -840,7 +1176,7 @@ type CheckResponse struct {
 func (x *CheckResponse) Reset() {
 	*x = CheckResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_global_global_proto_msgTypes[15]
+		mi := &file_global_global_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -853,7 +1189,7 @@ func (x *CheckResponse) String() string {
 func (*CheckResponse) ProtoMessage() {}
 
 func (x *CheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_global_global_proto_msgTypes[15]
+	mi := &file_global_global_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -866,7 +1202,7 @@ func (x *CheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckResponse.ProtoReflect.Descriptor instead.
 func (*CheckResponse) Descriptor() ([]byte, []int) {
-	return file_global_global_proto_rawDescGZIP(), []int{15}
+	return file_global_global_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CheckResponse) GetMessage() string {
@@ -894,7 +1230,7 @@ var file_global_global_proto_rawDesc = []byte{
 	0x79, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x4b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x03, 0x4b, 0x65, 0x79, 0x22, 0x22, 0x0a, 0x0c, 0x49, 0x6e, 0x66, 0x6f, 0x43,
 	0x6f, 0x64, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x22, 0x27, 0x0a, 0x0b, 0x4b,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x22, 0x27, 0x0a, 0x0b, 0x4b,
 	0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x4b, 0x65,
 	0x79, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x4b, 0x65, 0x79,
 	0x77, 0x6f, 0x72, 0x64, 0x22, 0x32, 0x0a, 0x08, 0x44, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74,
@@ -935,23 +1271,47 @@ var file_global_global_proto_rawDesc = []byte{
 	0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02,
-	0x38, 0x01, 0x22, 0x3a, 0x0a, 0x0a, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
-	0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3e,
-	0x0a, 0x0e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
-	0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x2b,
-	0x0a, 0x0f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x3d, 0x0a, 0x0d, 0x43,
-	0x68, 0x65, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x4d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x42, 0x13, 0x42, 0x06, 0x67, 0x6c,
-	0x6f, 0x62, 0x61, 0x6c, 0x50, 0x01, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x38, 0x01, 0x22, 0x3e, 0x0a, 0x0e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x22, 0x3f, 0x0a, 0x0f, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
+	0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x22, 0x3e, 0x0a, 0x0e, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
+	0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x22, 0x3f, 0x0a, 0x0f, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x22, 0x3a, 0x0a, 0x0a, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x22, 0x3b, 0x0a, 0x0b, 0x49, 0x44, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3e, 0x0a,
+	0x0e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3d, 0x0a,
+	0x0d, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x2b, 0x0a, 0x0f,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x3d, 0x0a, 0x0d, 0x43, 0x68, 0x65,
+	0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x4d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x42, 0x13, 0x42, 0x06, 0x67, 0x6c, 0x6f, 0x62,
+	0x61, 0x6c, 0x50, 0x01, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x62, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -966,7 +1326,7 @@ func file_global_global_proto_rawDescGZIP() []byte {
 	return file_global_global_proto_rawDescData
 }
 
-var file_global_global_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_global_global_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_global_global_proto_goTypes = []interface{}{
 	(*EmptyPost)(nil),              // 0: global.EmptyPost
 	(*InfoPost)(nil),               // 1: global.InfoPost
@@ -980,14 +1340,20 @@ var file_global_global_proto_goTypes = []interface{}{
 	(*ChangeStatusByKeyPost)(nil),  // 9: global.ChangeStatusByKeyPost
 	(*ChangeStatusByCodePost)(nil), // 10: global.ChangeStatusByCodePost
 	(*Response)(nil),               // 11: global.Response
-	(*IDResponse)(nil),             // 12: global.IDResponse
-	(*ResultResponse)(nil),         // 13: global.ResultResponse
-	(*MessageResponse)(nil),        // 14: global.MessageResponse
-	(*CheckResponse)(nil),          // 15: global.CheckResponse
-	nil,                            // 16: global.Response.DataEntry
+	(*StringResponse)(nil),         // 12: global.StringResponse
+	(*StringsResponse)(nil),        // 13: global.StringsResponse
+	(*NumberResponse)(nil),         // 14: global.NumberResponse
+	(*NumbersResponse)(nil),        // 15: global.NumbersResponse
+	(*IDResponse)(nil),             // 16: global.IDResponse
+	(*IDsResponse)(nil),            // 17: global.IDsResponse
+	(*ResultResponse)(nil),         // 18: global.ResultResponse
+	(*CountResponse)(nil),          // 19: global.CountResponse
+	(*MessageResponse)(nil),        // 20: global.MessageResponse
+	(*CheckResponse)(nil),          // 21: global.CheckResponse
+	nil,                            // 22: global.Response.DataEntry
 }
 var file_global_global_proto_depIdxs = []int32{
-	16, // 0: global.Response.Data:type_name -> global.Response.DataEntry
+	22, // 0: global.Response.Data:type_name -> global.Response.DataEntry
 	1,  // [1:1] is the sub-list for method output_type
 	1,  // [1:1] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
@@ -1146,7 +1512,7 @@ func file_global_global_proto_init() {
 			}
 		}
 		file_global_global_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*IDResponse); i {
+			switch v := v.(*StringResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1158,7 +1524,7 @@ func file_global_global_proto_init() {
 			}
 		}
 		file_global_global_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResultResponse); i {
+			switch v := v.(*StringsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1170,7 +1536,7 @@ func file_global_global_proto_init() {
 			}
 		}
 		file_global_global_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageResponse); i {
+			switch v := v.(*NumberResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1182,6 +1548,78 @@ func file_global_global_proto_init() {
 			}
 		}
 		file_global_global_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NumbersResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IDResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IDsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ResultResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CountResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MessageResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_global_global_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CheckResponse); i {
 			case 0:
 				return &v.state
@@ -1200,7 +1638,7 @@ func file_global_global_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_global_global_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

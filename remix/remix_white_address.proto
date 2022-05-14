@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// RemixWhiteAddress 盲盒白名单
+message RemixWhiteAddress {
+  message Remix {
+    uint64 id    = 1;
+    string title = 2;
+  }
+  uint64 remix_id   = 1;
+  uint64 member_id  = 2;
+  string address    = 3;
+  uint64 status     = 4;
+  bool   checked    = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  Remix  remix      = 8;
+}
+
+/**************** 请求结构 ****************/
+
+// RemixWhiteAddressPaginationPost 盲盒白名单分页参数
+message RemixWhiteAddressPaginationPost {
+  uint64 remix_id = 1;
+  string address  = 2;
+  uint64 page     = 3;
+  uint64 size     = 4;
+}
+
+// CreateRemixWhiteAddressPost 新增白名单
+message CreateRemixWhiteAddressPost {
+  uint64 remix_id  = 1;
+  string addresses = 2;
+}
+
+// RemoveRemixWhiteAddressPost 移除白名单
+message RemoveRemixWhiteAddressPost {
+  uint64 remix_id  = 1;
+  uint64 member_id = 2;
+}
+
+/**************** 返回结构 ****************/
+
+// RemixWhiteAddressPaginationResponse 盲盒白名单分页
+message RemixWhiteAddressPaginationResponse {
+  message WhiteAddresses {
+    repeated RemixWhiteAddress list = 1;
+    int64    total                  = 2;
+  }
+  string         message = 1;
+  WhiteAddresses data    = 2;
+}

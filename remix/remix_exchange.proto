@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+import "global/contract.proto";
+import "remix/remix_relation.proto";
+
+/**************** 数据结构 ****************/
+
+// RemixExchange 互动兑换
+message RemixExchange {
+  uint64                  id          = 1;
+  uint64                  contract_id = 2;
+  uint64                  remix_id    = 3;
+  uint64                  member_id   = 4;
+  string                  code        = 5;
+  string                  signature   = 6;
+  string                  end_at      = 7;
+  uint64                  status      = 8;
+  string                  created_at  = 9;
+  string                  updated_at  = 10;
+  global.RelationContract contract    = 11;
+  RelationRemix           remix       = 12;
+}
+
+/**************** 请求结构 ****************/
+
+// RemixExchangePaginationPost 请求分页
+message RemixExchangePaginationPost {
+  uint64 remix_id = 1;
+  uint64 page     = 2;
+  uint64 size     = 3;
+}
+
+/**************** 返回结构 ****************/
+
+// RemixExchangePaginationResponse 返回 分页
+message RemixExchangePaginationResponse {
+  message Exchanges {
+    repeated RemixExchange list = 1;
+    int64    total                   = 2;
+  }
+  string    message = 1;
+  Exchanges data    = 2;
+}

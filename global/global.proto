@@ -21,7 +21,7 @@ message InfoKeyPost {
 }
 
 message InfoCodePost {
-  string Code = 1;
+  uint64 Code = 1;
 }
 
 message KeywordPost {
@@ -72,16 +72,52 @@ message Response {
   map<string, string> Data = 2;
 }
 
+// StringResponse 返回 字符串
+message StringResponse {
+  string message = 1;
+  string data    = 2;
+}
+
+// StringsResponse 返回 字符串数组
+message StringsResponse {
+  string   message     = 1;
+  repeated string data = 2;
+}
+
+// NumberResponse 返回 整数
+message NumberResponse {
+  string message = 1;
+  uint64 data    = 2;
+}
+
+// NumbersResponse 返回 整数 数组
+message NumbersResponse {
+  string   message     = 1;
+  repeated uint64 data = 2;
+}
+
 // IDResponse 返回ID
 message IDResponse {
   string Message = 1;
   uint64 data    = 2;
 }
 
+// IDsResponse 返回 ID 集合
+message IDsResponse {
+  string   message     = 1;
+  repeated uint64 data = 2;
+}
+
 // ResultResponse 返回执行结果
 message ResultResponse {
   string Message = 1;
   bool   data    = 2;
+}
+
+// CountResponse 返回 总数
+message CountResponse {
+  string message = 1;
+  int64  data    = 2;
 }
 
 // MessageResponse 仅返回成功失败消息

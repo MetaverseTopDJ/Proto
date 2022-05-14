@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nft;
+package collect;
 
 option go_package = "./pb;pb";
 
@@ -24,7 +24,7 @@ message BlindBoxExchange {
   uint64 blind_box_id = 3;
   uint64 member_id    = 4;
   string address      = 5;
-  string code         = 6;
+  uint64 code         = 6;
   string signature    = 7;
   string end_at       = 8;
   uint64 status       = 9;
@@ -61,17 +61,6 @@ message BlindBoxExchangePaginationPost {
 message CountBlindBoxExchangeResponse {
   string message = 1;
   uint64 data    = 2;
-}
-
-// BlineBoxExchangeResponse 兑换免费盲盒
-message BlindBoxExchangeResponse {
-  message Sign {
-    string signature = 1;
-    uint64 code      = 2;
-    uint64 timestamp = 3;
-  }
-  string message = 1;
-  Sign   data    = 2;
 }
 
 // BlindBoxSnapshotPaginationResponse 快照分页

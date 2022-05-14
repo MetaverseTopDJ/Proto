@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package nft;
+package collect;
 
 option go_package = "./pb;pb";
 
-import "nft/work.proto";
+import "collect/work.proto";
 
 /**************** 数据结构 ****************/
 
@@ -88,12 +88,6 @@ message CheckBlindBoxTxPost {
   uint64 num  = 3;
 }
 
-// PurchaseBlindBoxPost 购买盲盒
-message PurchaseBlindBoxPost {
-  uint64 id  = 1;
-  uint64 num = 2;
-}
-
 // CreateBlindBoxPost 创建盲盒
 message CreateBlindBoxPost {
   uint64 contract_id  = 2;
@@ -128,20 +122,6 @@ message UpdateBlindBoxPost {
 }
 
 /**************** 返回结构 ****************/
-
-// PurchaseBlindBoxResponse 白名单购买盲盒
-message PurchaseBlindBoxResponse {
-  message Sign {
-    string contract  = 1;
-    string address   = 2;
-    uint64 price     = 3;
-    uint64 num       = 4;
-    string signature = 5;
-    uint64 timestamp = 6;
-  }
-  string message = 1;
-  Sign   data    = 2;
-}
 
 // BlindBoxResponse 返回 盲盒基础信息
 message BlindBoxResponse {

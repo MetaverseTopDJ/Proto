@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package collect;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// BlindBoxSignature 盲盒签名
+message BlindBoxSignature {
+  string contract  = 1;
+  string address   = 2;
+  uint64 code      = 3;
+  uint64 price     = 4;
+  uint64 num       = 5;
+  string signature = 6;
+  uint64 timestamp = 7;
+}
+
+// CollectSignature 集卡签名
+message CollectSignature {
+  string contract  = 1;
+  string address   = 2;
+  uint64 code      = 3;
+  string signature = 4;
+  uint64 timestamp = 5;
+}
+
+/**************** 请求结构 ****************/
+
+// PurchaseBlindBoxPost 盲盒签名传参
+message BlindBoxSignaturePost {
+  uint64 id  = 1;
+  uint64 num = 2;
+}
+
+/**************** 返回结构 ****************/
+
+// BlindBoxSignatureResponse 返回盲盒签名
+message BlindBoxSignatureResponse {
+  string            message = 1;
+  BlindBoxSignature data    = 2;
+}
+
+// CollectSignatureResponse 返回 集卡签名
+message CollectSignatureResponse {
+  string           message = 1;
+  CollectSignature data    = 2;
+}

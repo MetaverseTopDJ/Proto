@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package remix;
+
+option go_package = "./pb;pb";
+
+/**************** 数据结构 ****************/
+
+// RelationRemix 关联的 互动
+message RelationRemix {
+  uint64 id    = 1;
+  string title = 2;
+}
